@@ -1,0 +1,18 @@
+还是使用了前辈的EMG处理模块emg_interface
+
+
+visualize_recording 使用方式
+# 列出所有 recording
+python visualize_recording.py --list
+
+# 打印摘要（不弹窗）
+python visualize_recording.py -r recording_20260701_212500 --summary
+
+# 交互式浏览（帧图像 + EMG 4 通道 + 时间线，←/→ 或滑条切帧）
+python visualize_recording.py -r recording_20260701_212500
+
+# 静态总览图（角度 + EMG 全程曲线）
+python visualize_recording.py -r recording_20260701_212500 --overview
+
+# 保存总览图
+python visualize_recording.py -r recording_20260701_212500 --overview --save overview.png

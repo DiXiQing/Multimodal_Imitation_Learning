@@ -108,7 +108,7 @@ def serial_send(cmd):
     global arduino_ser
 
     if arduino_ser is not None:
-        arduino_ser.write(cmd.encode())
+        arduino_ser.write((cmd+"\n").encode())
 
 
 # ─────────────────────── EMG Reader Thread (BITalino) ───────────────────────
@@ -175,6 +175,12 @@ def run_camera(save_frames: bool, output_dir: str, csv_path: str):
     fps = cap.get(cv2.CAP_PROP_FPS) or 30
     print(f"[Camera] Opened, {int(cap.get(3))}x{int(cap.get(4))}, FPS~{fps:.1f}")
 
+    # 视频录制
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    video_path = os.path.join(output_dir, f"video_{datetime.now().strftime('%Y%m%d_%H%M%S')}.mp4")
+    video_writer = cv2.VideoWriter(video_path, fourcc, 20.0, (640, 480))
+    print(f"[Recording] Video → {video_path}")
+
     frames_dir = os.path.join(output_dir, "frames")
     emg_dir    = os.path.join(output_dir, "emg")
     if save_frames:
@@ -214,7 +220,7 @@ def run_camera(save_frames: bool, output_dir: str, csv_path: str):
             activity = ch1 + ch2 + ch3 + ch4
 
             # 判断动作
-            if activity < 0.15:
+            if activity < 0.18:
                 action = "KEEP"
 
             elif ch2 > ch3:
@@ -264,7 +270,7 @@ def run_camera(save_frames: bool, output_dir: str, csv_path: str):
                     (10, 220),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 165, 0), 2)
                     
-
+        video_writer.write(frame)
         cv2.imshow("Multimodal Recorder", frame)
 
         # Save frame image
@@ -286,7 +292,7 @@ def run_camera(save_frames: bool, output_dir: str, csv_path: str):
             frame_file,
             emg_file,
             1 if state.is_valid else 0,
-        ] + emg_snap.flatten().tolist())
+        ])
 
         frame_idx += 1
 
@@ -302,6 +308,7 @@ def run_camera(save_frames: bool, output_dir: str, csv_path: str):
             print(f"[Record] Valid segment END - Frame #{frame_idx}")
 
     cap.release()
+    video_writer.release()
     cv2.destroyAllWindows()
     csv_file.close()
     print(f"\n[Done] CSV     → {csv_path}")
@@ -344,7 +351,9 @@ def main():
         return
 
     run_id     = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = args.output or f"recording_{run_id}"
+    backup_dir = r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData"
+    os.makedirs(backup_dir, exist_ok=True)
+    output_dir = args.output or os.path.join(backup_dir, f"recording_{run_id}")
     os.makedirs(output_dir, exist_ok=True)
     csv_path   = os.path.join(output_dir, f"data_{run_id}.csv")
 
