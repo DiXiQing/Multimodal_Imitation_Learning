@@ -28,13 +28,15 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (启用3D投影)
 
 
 # ─────────────────────── 配置 ───────────────────────
-
-INPUT_CSV   = r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\Middle\2\merged_data.csv"   # 输入文件路径
+INPUT_CSV   = r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\Small\2\merged_data.csv"   # 输入文件路径
+TRIAL_NAME  = "small_trial2"   # 给这组数据起个名字,比如 large_trial1 / medium_trial2 等
 TIME_COL    = "t_video"            # 时间列名 (merged_data.csv用 t_video, 原始acc用 time_s)
 ACCEL_COL   = "ax"                 # 用哪个轴做积分 (只能用分轴的ax/ay/az,不能用mag——mag恒正,积分没有意义)
-OUT_CSV     = os.path.join(os.path.dirname(INPUT_CSV), "velocity_detrend.csv")
-OUT_PATH    = os.path.join(os.path.dirname(INPUT_CSV), "velocity_detrend.png")
-OUT_3D_PATH = os.path.join(os.path.dirname(INPUT_CSV), "surface_3d_velocity.png")
+OUT_CSV     = os.path.join(os.path.dirname(INPUT_CSV), f"velocity_detrend_{TRIAL_NAME}.csv")
+OUT_PATH    = os.path.join(os.path.dirname(INPUT_CSV), f"velocity_detrend_{TRIAL_NAME}.png")
+OUT_3D_PATH = os.path.join(os.path.dirname(INPUT_CSV), f"surface_3d_{TRIAL_NAME}.png")
+PLOT_TITLE = f"{TRIAL_NAME} - Width vs Area vs Velocity"   # 你想要的标题
+PLOT_TITLE_2D = f"{TRIAL_NAME} - Area / Width / Velocity over time"
 # ─────────────────────────────────────────────────
 
 
@@ -100,7 +102,7 @@ def fit_quadratic_surface(x, y, z):
     return coeffs, surface_fn, r2
 
 
-def plot_3d_surface_velocity(area, v_detrend, dist, t, out_path):
+def plot_3d_surface_velocity(area, v_detrend, dist, t, out_path, title=None):
     coeffs, surface_fn, r2 = fit_quadratic_surface(area, v_detrend, dist)
     print(f"[拟合] area-velocity-aperture 曲面 R² = {r2:.3f}")
 
@@ -116,9 +118,11 @@ def plot_3d_surface_velocity(area, v_detrend, dist, t, out_path):
     ax3d.plot_surface(xg, yg, zg, alpha=0.25, color="gray")
 
     ax3d.set_xlabel("Target Area (px^2)")
-    ax3d.set_ylabel("Velocity v_detrend (m/s)")
-    ax3d.set_zlabel("Finger Aperture (px)")
-    ax3d.set_title(f"Aperture vs Area vs Velocity (surface fit R²={r2:.2f})")
+    ax3d.set_ylabel("Velocity (m/s)")
+    ax3d.set_zlabel("Finger Width (px)")
+
+    final_title = title if title else f"Aperture vs Area vs Velocity (surface fit R²={r2:.2f})"
+    ax3d.set_title(final_title)
 
     plt.tight_layout()
     plt.savefig(out_path, dpi=150)
@@ -140,16 +144,16 @@ def main():
 
     axs[0].plot(t, extra.get("cube_area", []), color="tab:red")
     axs[0].set_ylabel("Target Area (px^2)")
-    axs[0].set_title("Area / Aperture / Velocity over time")
+    axs[0].set_title(PLOT_TITLE_2D)
     axs[0].grid(alpha=0.3)
 
     axs[1].plot(t, extra.get("finger_dist", []), color="tab:blue")
-    axs[1].set_ylabel("Finger Aperture (px)")
+    axs[1].set_ylabel("Finger Width (px)")
     axs[1].grid(alpha=0.3)
 
     axs[2].plot(t, v_detrend, color="tab:purple", linewidth=2)
     axs[2].axhline(0, color="black", linewidth=0.5)
-    axs[2].set_ylabel("Velocity v_detrend (m/s)")
+    axs[2].set_ylabel("Velocity (m/s)")
     axs[2].set_xlabel("time (s)")
     axs[2].grid(alpha=0.3)
 
@@ -159,7 +163,7 @@ def main():
     print(f"[已保存] {OUT_PATH}")
 
     if "cube_area" in extra and "finger_dist" in extra:
-        plot_3d_surface_velocity(extra["cube_area"], v_detrend, extra["finger_dist"], t, OUT_3D_PATH)
+        plot_3d_surface_velocity(extra["cube_area"], v_detrend, extra["finger_dist"], t, OUT_3D_PATH, title=PLOT_TITLE)
     else:
         print("[提示] 输入数据没有 cube_area/finger_dist 列,跳过三维曲面图(用merged_data.csv作为输入即可)")
 
