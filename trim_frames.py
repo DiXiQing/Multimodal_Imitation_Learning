@@ -34,16 +34,15 @@ import csv
 # ============================================================
 
 TRIAL_DIR = (
-    r"C:\MineApp\Code\Multimodal_Imitation_Learning"
-    r"\Data\BackupData\large_trial3"
+    r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\TRIAL_20260829_003841"
 )
 
 # 删除 frame <= START_FRAME
-START_FRAME = 196
+START_FRAME = 126
 
 # 删除 frame >= END_FRAME
 # 如果不删除后面的 frame，设置为 None
-END_FRAME = 308
+END_FRAME = 265
 
 
 # ============================================================

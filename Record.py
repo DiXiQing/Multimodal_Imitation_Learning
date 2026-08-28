@@ -48,12 +48,14 @@ import cv2
 import numpy as np
 from bleak import BleakClient
 
+from datetime import datetime
+
 
 # ============================================================
 # 配置
 # ============================================================
 
-TRIAL_NAME = "large_trial3"
+TRIAL_NAME = f"TRIAL_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 BACKUP_DIR = r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData"
 
@@ -105,7 +107,7 @@ CALIB_SECONDS = 2.0
 # Camera
 # ============================================================
 
-CAMERA_INDEX = 1
+CAMERA_INDEX = 0
 
 FRAME_W = 640
 FRAME_H = 480

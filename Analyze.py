@@ -41,8 +41,7 @@ import mediapipe as mp
 # ============================================================
 
 TRIAL_DIR = (
-    r"C:\MineApp\Code\Multimodal_Imitation_Learning"
-    r"\Data\BackupData\large_trial3"
+    r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\TRIAL_20260829_003841"
 )
 
 FRAME_DIR = os.path.join(
