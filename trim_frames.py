@@ -34,15 +34,15 @@ import csv
 # ============================================================
 
 TRIAL_DIR = (
-    r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\TRIAL_20260829_003841"
+    r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\TRIAL_20260829_003924"
 )
 
 # 删除 frame <= START_FRAME
-START_FRAME = 126
+START_FRAME = 10
 
 # 删除 frame >= END_FRAME
 # 如果不删除后面的 frame，设置为 None
-END_FRAME = 265
+END_FRAME = 150
 
 
 # ============================================================
@@ -547,26 +547,6 @@ def main():
     )
 
     print()
-
-    confirm = input(
-        '请输入 DELETE 确认：'
-    )
-
-
-    if confirm != "DELETE":
-
-        print()
-
-        print(
-            "已取消。"
-        )
-
-        print(
-            "没有修改任何数据。"
-        )
-
-        return
-
 
     # ========================================================
     # 删除 JPG
