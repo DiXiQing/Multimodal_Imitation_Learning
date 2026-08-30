@@ -1,5 +1,5 @@
 """
-test_imu_velocity_realtime.py
+IMUTest.py
 
 WT9011DCL-BT50
 Real-Time Acceleration -> Velocity Test
@@ -805,12 +805,7 @@ if __name__ == "__main__":
         )
 
     except Exception as e:
-
+        import traceback
         print()
-        print(
-            f"[Fatal Error] {e}"
-        )
-
-        print()
-
-        save_csv()
+        print(f"[BLE] Error: {type(e).__name__}: {e}")
+        traceback.print_exc()
