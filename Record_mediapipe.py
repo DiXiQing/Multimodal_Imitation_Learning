@@ -46,6 +46,7 @@ import os
 
 import cv2
 import numpy as np
+import mediapipe as mp
 from bleak import BleakClient
 
 from datetime import datetime
@@ -64,10 +65,8 @@ OUTPUT_DIR = os.path.join(
     TRIAL_NAME
 )
 
-FRAME_DIR = os.path.join(
-    OUTPUT_DIR,
-    "frames"
-)
+FRAME_DIR = os.path.join(OUTPUT_DIR, "frames")
+VIDEO_PATH = os.path.join(OUTPUT_DIR, "recorded_video.mp4")
 
 
 # ============================================================
@@ -107,10 +106,10 @@ CALIB_SECONDS = 2.0
 # Camera
 # ============================================================
 
-CAMERA_INDEX = 1
+CAMERA_INDEX = 0
 
 FRAME_W = 640
-FRAME_H = 480
+FRAME_H = 800
 
 TARGET_FPS = 30.0
 
@@ -118,14 +117,13 @@ CAP_BACKEND = cv2.CAP_DSHOW
 
 
 # ============================================================
-# Blue Finger Markers
+# MediaPipe Hand Detection
 # ============================================================
 
-# OpenCV HSV 色相范围为 0~179。参数可根据现场光线微调。
-BLUE_LOWER = np.array([90, 80, 50], dtype=np.uint8)
-BLUE_UPPER = np.array([130, 255, 255], dtype=np.uint8)
-BLUE_MIN_AREA = 100
-BLUE_KERNEL = np.ones((5, 5), dtype=np.uint8)
+mp_hands = mp.solutions.hands
+mp_draw = mp.solutions.drawing_utils
+THUMB_TIP = 4
+INDEX_TIP = 8
 
 
 # ============================================================
@@ -133,8 +131,9 @@ BLUE_KERNEL = np.ones((5, 5), dtype=np.uint8)
 # ============================================================
 
 BLACK_LOWER = np.array([0, 0, 0], dtype=np.uint8)
-BLACK_UPPER = np.array([180, 255, 80], dtype=np.uint8)
+BLACK_UPPER = np.array([180, 120, 60], dtype=np.uint8)
 MIN_CUBE_AREA = 3000
+MIN_FILL_RATIO = 0.30
 BLACK_KERNEL = np.ones((5, 5), dtype=np.uint8)
 
 
@@ -316,44 +315,24 @@ def extract_imu_packets(data):
 
 
 # ============================================================
-# Blue Marker Detection
+# MediaPipe Finger Width Detection
 # ============================================================
 
-def detect_finger_width(frame):
+def detect_finger_width(frame, hands):
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    result = hands.process(rgb)
 
-    """
-    检测面积最大的两个蓝色标记，并计算它们的中心点距离。
+    if not result.multi_hand_landmarks:
+        return 0.0, None, None, None
 
-    返回：
-        finger_width: 两中心点的像素距离；不足两个标记时为 0.0
-        points: 两个中心点；不足两个标记时为空列表
-    """
-
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, BLUE_LOWER, BLUE_UPPER)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, BLUE_KERNEL)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, BLUE_KERNEL)
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    contours = [contour for contour in contours if cv2.contourArea(contour) >= BLUE_MIN_AREA]
-    contours = sorted(contours, key=cv2.contourArea, reverse=True)[:2]
-
-    if len(contours) != 2:
-        return 0.0, []
-
-    points = []
-
-    for contour in contours:
-        moments = cv2.moments(contour)
-
-        if moments["m00"] == 0:
-            return 0.0, []
-
-        cx = int(moments["m10"] / moments["m00"])
-        cy = int(moments["m01"] / moments["m00"])
-        points.append((cx, cy))
-
-    finger_width = float(np.linalg.norm(np.array(points[0], dtype=float) - np.array(points[1], dtype=float)))
-    return finger_width, points
+    lm = result.multi_hand_landmarks[0]
+    h, w = frame.shape[:2]
+    thumb = lm.landmark[THUMB_TIP]
+    index = lm.landmark[INDEX_TIP]
+    thumb_point = (int(thumb.x * w), int(thumb.y * h))
+    index_point = (int(index.x * w), int(index.y * h))
+    finger_width = float(np.linalg.norm(np.array(thumb_point, dtype=float) - np.array(index_point, dtype=float)))
+    return finger_width, thumb_point, index_point, lm
 
 
 # ============================================================
@@ -367,16 +346,29 @@ def detect_cube(frame):
     black = cv2.morphologyEx(black, cv2.MORPH_CLOSE, BLACK_KERNEL)
     contours, _ = cv2.findContours(black, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    if not contours:
+    candidates = []
+
+    for contour in contours:
+        contour_area = float(cv2.contourArea(contour))
+        if contour_area < MIN_CUBE_AREA:
+            continue
+
+        x, y, w, h = cv2.boundingRect(contour)
+        bbox_area = float(w * h)
+        if bbox_area <= 0:
+            continue
+
+        fill_ratio = contour_area / bbox_area
+        if fill_ratio < MIN_FILL_RATIO:
+            continue
+
+        candidates.append((bbox_area, x, y, w, h))
+
+    if not candidates:
         return 0.0, None
 
-    contour = max(contours, key=cv2.contourArea)
-    area = float(cv2.contourArea(contour))
-
-    if area < MIN_CUBE_AREA:
-        return 0.0, None
-
-    return area, cv2.boundingRect(contour)
+    bbox_area, x, y, w, h = max(candidates, key=lambda item: item[0])
+    return bbox_area, (x, y, w, h)
 
 
 # ============================================================
@@ -403,63 +395,33 @@ def record():
     # Camera
     # ========================================================
 
-    cap = cv2.VideoCapture(
-        CAMERA_INDEX,
-        CAP_BACKEND
-    )
+    cap = cv2.VideoCapture(CAMERA_INDEX, CAP_BACKEND)
 
     if not cap.isOpened():
-
-        print(
-            "[Camera] 打不开摄像头"
-        )
-
+        print("[Camera] 打不开摄像头")
         state.running = False
-
         return
 
-    cap.set(
-        cv2.CAP_PROP_FRAME_WIDTH,
-        FRAME_W
-    )
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_W)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_H)
+    cap.set(cv2.CAP_PROP_FPS, TARGET_FPS)
 
-    cap.set(
-        cv2.CAP_PROP_FRAME_HEIGHT,
-        FRAME_H
-    )
-
-    cap.set(
-        cv2.CAP_PROP_FPS,
-        TARGET_FPS
-    )
-
-    actual_w = int(
-        cap.get(
-            cv2.CAP_PROP_FRAME_WIDTH
-        )
-    )
-
-    actual_h = int(
-        cap.get(
-            cv2.CAP_PROP_FRAME_HEIGHT
-        )
-    )
-
-    actual_fps = cap.get(
-        cv2.CAP_PROP_FPS
-    )
+    actual_w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    actual_h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    actual_fps = cap.get(cv2.CAP_PROP_FPS)
 
     print()
-    print(
-        f"[Camera] "
-        f"{actual_w} x {actual_h}"
-    )
+    print(f"[Camera] {actual_w} x {actual_h}")
+    print(f"[Camera] reported FPS = {actual_fps:.2f}")
 
-    print(
-        f"[Camera] reported FPS = "
-        f"{actual_fps:.2f}"
-    )
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    video_writer = cv2.VideoWriter(VIDEO_PATH, fourcc, TARGET_FPS, (actual_w, actual_h))
+    if not video_writer.isOpened():
+        print("[Video] 无法创建视频文件")
+        cap.release()
+        return
 
+    hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.3, min_tracking_confidence=0.3)
 
     # ========================================================
     # CSV
@@ -712,9 +674,7 @@ def record():
                 # ------------------------------------------------
 
                 print()
-                print(
-                    "[IMU] 静止校准中..."
-                )
+                print("[IMU] 静止校准中...")
 
                 print(
                     f"[IMU] 请保持设备静止 "
@@ -806,9 +766,7 @@ def record():
                     pass
 
 
-                print(
-                    "[IMU] Disconnected"
-                )
+                print("[IMU] Disconnected")
 
 
         except Exception as e:
@@ -982,7 +940,7 @@ def record():
             # 不足两个蓝色标记时 finger_width = 0
             # ------------------------------------------------
 
-            finger_width, blue_points = detect_finger_width(frame)
+            finger_width, thumb_point, index_point, hand_landmarks = detect_finger_width(frame, hands)
             object_area, object_box = detect_cube(frame)
 
 
@@ -1016,11 +974,11 @@ def record():
                 ax, ay, az = state.latest_acc
                 mag = state.latest_mag
 
-            if len(blue_points) == 2:
-                blue_p1, blue_p2 = blue_points
-                cv2.circle(display, blue_p1, 8, (0, 255, 0), -1)
-                cv2.circle(display, blue_p2, 8, (0, 255, 0), -1)
-                cv2.line(display, blue_p1, blue_p2, (0, 255, 255), 2)
+            if hand_landmarks is not None:
+                mp_draw.draw_landmarks(display, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                cv2.circle(display, thumb_point, 8, (255, 0, 0), -1)
+                cv2.circle(display, index_point, 8, (0, 0, 255), -1)
+                cv2.line(display, thumb_point, index_point, (0, 255, 255), 2)
 
             if object_box is not None:
                 x, y, bw, bh = object_box
@@ -1102,15 +1060,13 @@ def record():
             object_color = (0, 255, 0) if object_area > 0 else (0, 0, 255)
             cv2.putText(display, f"object_area={object_area:.0f} px^2", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.6, object_color, 2)
 
-            # 保存已经画好检测结果的画面，而不是原始 frame
+            # 保存已经画好检测结果的 JPG 和视频
             success = cv2.imwrite(frame_path, display)
             if not success:
                 print(f"[Camera] JPG 保存失败: {frame_name}")
 
-            cv2.imshow(
-                "Reach-to-Grasp Recorder",
-                display
-            )
+            video_writer.write(display)
+            cv2.imshow("Reach-to-Grasp Recorder", display)
 
 
             # ------------------------------------------------
@@ -1165,8 +1121,9 @@ def record():
         # Camera cleanup
         # ====================================================
 
+        hands.close()
+        video_writer.release()
         cap.release()
-
         cv2.destroyAllWindows()
 
 
@@ -1247,13 +1204,9 @@ def record():
             f"{imu_csv_path}"
         )
 
-        print(
-            f"Frames        : "
-            f"{FRAME_DIR}"
-        )
-
+        print(f"Frames        : {FRAME_DIR}")
+        print(f"Video         : {VIDEO_PATH}")
         print()
-
         print("=" * 70)
 
 
@@ -1284,13 +1237,9 @@ def main():
 
     print()
 
-    print(
-        "程序启动后将自动开始录制"
-    )
+    print("程序启动后将自动开始录制")
 
-    print(
-        "按 Q 结束录制"
-    )
+    print("按 Q 结束录制")
 
     print()
 

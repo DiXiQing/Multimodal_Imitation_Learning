@@ -1,442 +1,125 @@
-import asyncio
-import time
-from bleak import BleakClient
-
-
-# ============================================================
-# WT9011DCL-BT50
-# ============================================================
-
-IMU_ADDRESS = "D8:76:A8:5D:CC:CF"
-
-# BLE characteristic
-WRITE_UUID = "0000ffe9-0000-1000-8000-00805f9a34fb"
-NOTIFY_UUID = "0000ffe4-0000-1000-8000-00805f9a34fb"
-
-
-# ============================================================
-# WT9011DCL commands
-# ============================================================
-
-# Unlock configuration
-UNLOCK_CMD = bytes([
-    0xFF,
-    0xAA,
-    0x69,
-    0x88,
-    0xB5
-])
-
-# Set output rate
-#
-# Register:
-#   0x03 = RRATE
-#
-# Value:
-#   0x08 = 50 Hz
-#
-SET_50HZ_CMD = bytes([
-    0xFF,
-    0xAA,
-    0x03,
-    0x08,
-    0x00
-])
-
-# Save configuration
-SAVE_CMD = bytes([
-    0xFF,
-    0xAA,
-    0x00,
-    0x00,
-    0x00
-])
-
-
-# ============================================================
-# Helper
-# ============================================================
-
-def print_hex(name, data):
-
-    print(
-        f"{name}: "
-        + " ".join(
-            f"{x:02X}" for x in data
-        )
-    )
-
-
-# ============================================================
-# Step 1
-# 设置 50 Hz
-# ============================================================
-
-async def set_50hz():
-
-    print()
-    print("=" * 70)
-    print("WT9011DCL-BT50 - Set Output Rate")
-    print("=" * 70)
-
-    print()
-    print(f"Device : {IMU_ADDRESS}")
-    print(f"WRITE  : {WRITE_UUID}")
-    print()
-
-    try:
-
-        async with BleakClient(
-            IMU_ADDRESS
-        ) as client:
-
-            print(
-                f"[BLE] Connected: "
-                f"{client.is_connected}"
-            )
-
-            # ------------------------------------------------
-            # 1. Unlock
-            # ------------------------------------------------
-
-            print()
-            print("[1/3] Unlock configuration")
-
-            print_hex(
-                "TX",
-                UNLOCK_CMD
-            )
-
-            await client.write_gatt_char(
-                WRITE_UUID,
-                UNLOCK_CMD,
-                response=True
-            )
-
-            await asyncio.sleep(0.1)
-
-            # ------------------------------------------------
-            # 2. Set 50 Hz
-            # ------------------------------------------------
-
-            print()
-            print("[2/3] Set output rate = 50 Hz")
-
-            print_hex(
-                "TX",
-                SET_50HZ_CMD
-            )
-
-            await client.write_gatt_char(
-                WRITE_UUID,
-                SET_50HZ_CMD,
-                response=True
-            )
-
-            await asyncio.sleep(0.1)
-
-            # ------------------------------------------------
-            # 3. Save
-            # ------------------------------------------------
-
-            print()
-            print("[3/3] Save configuration")
-
-            print_hex(
-                "TX",
-                SAVE_CMD
-            )
-
-            await client.write_gatt_char(
-                WRITE_UUID,
-                SAVE_CMD,
-                response=True
-            )
-
-            await asyncio.sleep(0.5)
-
-            print()
-            print("=" * 70)
-            print("设置命令发送完成")
-            print("=" * 70)
-
-            print()
-            print("Output rate:")
-            print("    50 Hz")
-
-            print()
-            print(
-                "设备配置已经保存。"
-            )
-
-            print()
-            print(
-                "接下来将重新连接设备，"
-                "实际测量 BLE 输出频率。"
-            )
-
-            return True
-
-    except Exception as e:
-
-        print()
-        print("=" * 70)
-        print("设置失败")
-        print("=" * 70)
-
-        print(
-            f"Error: {e}"
-        )
-
-        return False
-
-
-# ============================================================
-# Step 2
-# 实际测试 IMU 输出频率
-# ============================================================
-
-async def test_frequency():
-
-    print()
-    print("=" * 70)
-    print("Testing actual IMU output frequency")
-    print("=" * 70)
-
-    print()
-
-    sample_count = 0
-
-    timestamps = []
-
-    start_time = None
-
-    test_duration = 5.0
-
-    # --------------------------------------------------------
-    # Notification callback
-    # --------------------------------------------------------
-
-    def notification_handler(
-        sender,
-        data
-    ):
-
-        nonlocal sample_count
-        nonlocal start_time
-
-        # WT9011DCL 普通数据包
-        #
-        # 你的原程序使用 0x55 0x61
-        #
-
-        if len(data) < 2:
-            return
-
-        if data[0] != 0x55:
-            return
-
-        if data[1] != 0x61:
-            return
-
-        ts = time.perf_counter()
-
-        if start_time is None:
-
-            start_time = ts
-
-        timestamps.append(ts)
-
-        sample_count += 1
-
-    try:
-
-        async with BleakClient(
-            IMU_ADDRESS
-        ) as client:
-
-            print(
-                f"[BLE] Connected: "
-                f"{client.is_connected}"
-            )
-
-            await client.start_notify(
-                NOTIFY_UUID,
-                notification_handler
-            )
-
-            print()
-            print(
-                f"开始统计 {test_duration:.1f} 秒..."
-            )
-
-            # ------------------------------------------------
-            # 等待数据
-            # ------------------------------------------------
-
-            await asyncio.sleep(
-                test_duration
-            )
-
-            await client.stop_notify(
-                NOTIFY_UUID
-            )
-
-            print()
-            print("=" * 70)
-            print("Frequency Test Result")
-            print("=" * 70)
-
-            print()
-            print(
-                f"Samples received : "
-                f"{sample_count}"
-            )
-
-            print(
-                f"Test duration    : "
-                f"{test_duration:.2f} s"
-            )
-
-            measured_fps = (
-                sample_count /
-                test_duration
-            )
-
-            print(
-                f"Measured rate    : "
-                f"{measured_fps:.2f} Hz"
-            )
-
-            # ------------------------------------------------
-            # 更准确的时间间隔
-            # ------------------------------------------------
-
-            if len(timestamps) >= 2:
-
-                intervals = [
-                    timestamps[i + 1]
-                    - timestamps[i]
-                    for i in range(
-                        len(timestamps) - 1
-                    )
-                ]
-
-                mean_interval = (
-                    sum(intervals) /
-                    len(intervals)
-                )
-
-                actual_rate = (
-                    1.0 /
-                    mean_interval
-                )
-
-                print(
-                    f"Mean interval    : "
-                    f"{mean_interval * 1000:.2f} ms"
-                )
-
-                print(
-                    f"Interval rate    : "
-                    f"{actual_rate:.2f} Hz"
-                )
-
-            print()
-
-            # ------------------------------------------------
-            # 判断
-            # ------------------------------------------------
-
-            if (
-                45.0
-                <= measured_fps
-                <= 55.0
-            ):
-
-                print(
-                    "✓ IMU 输出频率确认约为 50 Hz"
-                )
-
-            else:
-
-                print(
-                    "⚠ 实际频率不是 50 Hz"
-                )
-
-                print(
-                    "请把上面的结果发给我。"
-                )
-
-    except Exception as e:
-
-        print()
-        print("=" * 70)
-        print("频率测试失败")
-        print("=" * 70)
-
-        print(
-            f"Error: {e}"
-        )
-
-
-# ============================================================
-# Main
-# ============================================================
-
-async def main():
-
-    print()
-    print("=" * 70)
-    print("WT9011DCL-BT50 IMU Rate Configuration")
-    print("=" * 70)
-
-    print()
-    print("目标输出频率: 50 Hz")
-    print()
-
-    # --------------------------------------------------------
-    # 设置
-    # --------------------------------------------------------
-
-    success = await set_50hz()
-
-    if not success:
-
-        print()
-        print(
-            "设置失败，程序结束。"
-        )
-
+import cv2
+import numpy as np
+import mediapipe as mp
+
+# ─────── 配置 ───────
+IMAGE_PATH = r"d:\Code\D\Poster2.jpg"  # ⚠️ 请替换
+
+# 黑色方块的HSV范围 (如果方块反光有点发灰，可以把最后的80改成120)
+BLACK_LOWER = np.array([0, 0, 0])
+BLACK_UPPER = np.array([180, 255, 80])
+
+MIN_CUBE_AREA = 3000   # 最小面积
+AR_MIN, AR_MAX = 0.6, 1.6  # 长宽比范围：接近1才像正方形/方块
+MIN_SOLIDITY = 0.85        # 实心度：方块是实心的，绑带和手套通常有很多缝隙
+
+mp_hands = mp.solutions.hands
+mp_draw = mp.solutions.drawing_utils
+THUMB_TIP = 4
+INDEX_TIP = 8
+# ────────────────────
+
+def detect_cube(image):
+    """找像“方块”的黑色轮廓，排除长条状的设备"""
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsv, BLACK_LOWER, BLACK_UPPER)
+    
+    kernel = np.ones((5,5), np.uint8)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    
+    cnts, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not cnts:
+        return 0, None
+
+    best_area = 0
+    best_box = None
+
+    for c in cnts:
+        area = cv2.contourArea(c)
+        if area < MIN_CUBE_AREA:
+            continue
+        
+        x, y, w, h = cv2.boundingRect(c)
+        aspect_ratio = float(w) / h
+        
+        # 1. 过滤长条状物体（设备绑带、手环通常是长条的）
+        if aspect_ratio < AR_MIN or aspect_ratio > AR_MAX:
+            continue
+            
+        # 2. 过滤实心度低的物体（带缝隙的绑带）
+        hull = cv2.convexHull(c)
+        hull_area = cv2.contourArea(hull)
+        if hull_area == 0:
+            continue
+        solidity = area / hull_area
+        if solidity < MIN_SOLIDITY:
+            continue
+
+        # 选最大的那个符合条件的方块
+        if area > best_area:
+            best_area = area
+            best_box = (x, y, w, h)
+
+    return best_area, best_box
+
+
+def main():
+    img = cv2.imread(IMAGE_PATH)
+    if img is None:
+        print(f"[Error] 无法读取图片: {IMAGE_PATH}")
         return
 
-    # --------------------------------------------------------
-    # 等待设备保存配置
-    # --------------------------------------------------------
+    h, w, _ = img.shape
 
-    print()
-    print(
-        "等待设备保存配置..."
-    )
+    # ─────── 1. 找方块并画红框 ───────
+    area, box = detect_cube(img)
+    if box is not None:
+        x, y, bw, bh = box
+        cv2.rectangle(img, (x, y), (x+bw, y+bh), (0, 0, 255), 3)
+        cv2.putText(img, f"Area: {int(area)} px^2", (x, y-10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        print(f"检测到方块，面积为: {int(area)} 像素")
+    else:
+        print("未检测到方块，请调整光照或MIN_CUBE_AREA参数")
 
-    await asyncio.sleep(2.0)
+    # ─────── 2. 测手部距离 ───────
+    with mp_hands.Hands(static_image_mode=True,
+                        max_num_hands=1,
+                        min_detection_confidence=0.5) as hands:
+        
+        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = hands.process(img_rgb)
 
-    # --------------------------------------------------------
-    # 测试
-    # --------------------------------------------------------
+        if results.multi_hand_landmarks:
+            lm = results.multi_hand_landmarks[0]
+            thumb = lm.landmark[THUMB_TIP]
+            index = lm.landmark[INDEX_TIP]
+            
+            tp = (int(thumb.x * w), int(thumb.y * h))
+            ip = (int(index.x * w), int(index.y * h))
 
-    await test_frequency()
+            dist = float(np.linalg.norm(np.array(tp) - np.array(ip)))
 
-    print()
-    print("=" * 70)
-    print("程序结束")
-    print("=" * 70)
+            cv2.circle(img, tp, 10, (255, 0, 0), -1)
+            cv2.circle(img, ip, 10, (0, 0, 255), -1)
+            cv2.line(img, tp, ip, (0, 255, 255), 2)
+            
+            cv2.putText(img, f"Finger Dist: {int(dist)} px", (10, 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+            
+            mp_draw.draw_landmarks(img, lm, mp_hands.HAND_CONNECTIONS)
+        else:
+            print("未检测到手部")
 
+    # ─────── 3. 显示保存 ───────
+    cv2.imshow("Result", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-# ============================================================
-# Run
-# ============================================================
+    output_path = IMAGE_PATH.rsplit(".", 1)[0] + "_fixed.png"
+    cv2.imwrite(output_path, img)
+    print(f"[Saved] 结果已保存到: {output_path}")
 
 if __name__ == "__main__":
-
-    asyncio.run(main())
+    main()

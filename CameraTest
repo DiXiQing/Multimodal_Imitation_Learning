@@ -23,7 +23,7 @@ import numpy as np
 import mediapipe as mp
 
 # ─────── 配置 ───────
-CAMERA_INDEX = 0
+CAMERA_INDEX = 1
 CAP_BACKEND  = cv2.CAP_DSHOW
 FRAME_W, FRAME_H = 640, 480
 

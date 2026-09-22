@@ -4,12 +4,12 @@ analyze_grasp_frames.py
 功能：
 1. 从 frames/ 读取 Camera JPG
 2. 从 camera.csv 读取 frame + t_camera
-3. MediaPipe 检测手部
-4. 使用拇指尖(4)和食指尖(8)计算 Finger Width
-5. 使用黑色区域检测 Object Area
+3. 从 camera.csv 直接读取录制阶段得到的 Finger Width
+4. 从 camera.csv 直接读取录制阶段得到的 Object Area
+5. 不再重复进行 MediaPipe / 黑色物体检测
 6. 从 imu.csv 读取加速度,按时间戳对齐到每一帧,再做积分+去漂移求速度
 7. 生成带标注的视频
-8. 生成 grasp_data.csv (含 velocity 列)
+8. 生成 grasp_data.csv (含同步后的 ax/ay/az/mag/velocity)
 9. 生成 Area + Finger Width + Velocity 曲线
 10. 生成 Object Area / Velocity / Finger Width 三维曲面图
 
@@ -42,7 +42,6 @@ import csv
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import mediapipe as mp
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (启用3D投影)
 
 
@@ -51,7 +50,7 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (启用3D投影)
 # ============================================================
 
 TRIAL_DIR = (
-    r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\TRIAL_20260829_003924"
+    r"Data\BackupData\TRIAL_20260919_133940"
 )
 
 FRAME_DIR = os.path.join(TRIAL_DIR, "frames")
@@ -68,65 +67,12 @@ ACCEL_AXIS = "ax"
 
 TARGET_FPS = 30.0
 
-
 # ============================================================
-# 黑色物体检测
-# ============================================================
-
-BLACK_LOWER = np.array([0, 0, 0])
-BLACK_UPPER = np.array([180, 255, 80])
-MIN_CUBE_AREA = 3000
-
-
-# ============================================================
-# MediaPipe
+# Manual Frame Crop
 # ============================================================
 
-mp_hands = mp.solutions.hands
-mp_draw = mp.solutions.drawing_utils
-
-K = np.ones((5, 5), np.uint8)
-
-THUMB_TIP = 4
-INDEX_TIP = 8
-
-
-# ============================================================
-# Detect black object
-# ============================================================
-
-def detect_cube(frame):
-    """
-    检测黑色物体。
-
-    返回：
-        area : object area
-        box  : (x, y, w, h)
-
-    如果没有检测到：
-        area = 0
-        box = None
-    """
-
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    black = cv2.inRange(hsv, BLACK_LOWER, BLACK_UPPER)
-
-    black = cv2.morphologyEx(black, cv2.MORPH_OPEN, K)
-    black = cv2.morphologyEx(black, cv2.MORPH_CLOSE, K)
-
-    contours, _ = cv2.findContours(black, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    if not contours:
-        return 0, None
-
-    contour = max(contours, key=cv2.contourArea)
-    area = cv2.contourArea(contour)
-
-    if area < MIN_CUBE_AREA:
-        return 0, None
-
-    box = cv2.boundingRect(contour)
-    return area, box
+FRAME_START = 120
+FRAME_END = 170
 
 
 # ============================================================
@@ -148,7 +94,9 @@ def load_camera_csv():
             try:
                 frame_idx = int(row["frame"])
                 t_camera = float(row["t_camera"])
-                camera_data.append({"frame": frame_idx, "t_camera": t_camera})
+                finger_width = float(row["finger_width"])
+                object_area = float(row["object_area"])
+                camera_data.append({"frame": frame_idx, "t_camera": t_camera, "finger_width": finger_width, "object_area": object_area})
             except Exception as e:
                 print(f"[Warning] camera.csv 数据读取失败: {row}")
                 print(e)
@@ -295,39 +243,57 @@ def main():
     # ========================================================
 
     camera_data = load_camera_csv()
-    if camera_data is None:
-        return
-    if len(camera_data) == 0:
+    if camera_data is None or len(camera_data) == 0:
         print("[Error] camera.csv 没有数据")
         return
 
     print(f"[Camera CSV] {len(camera_data)} frames")
 
     # ========================================================
-    # Load IMU CSV + 同步到每一帧
+    # Manual crop by frame
+    # ========================================================
+
+    camera_data = [row for row in camera_data if FRAME_START <= row["frame"] <= FRAME_END]
+
+    if len(camera_data) == 0:
+        print(f"[Error] Frame {FRAME_START} ~ {FRAME_END} 范围内没有 Camera 数据")
+        return
+
+    print(f"[Crop] Frame {FRAME_START} ~ {FRAME_END}")
+    print(f"[Crop] 保留 Camera {len(camera_data)} frames")
+
+    crop_start_time = camera_data[0]["t_camera"]
+    crop_end_time = camera_data[-1]["t_camera"]
+
+    # ========================================================
+    # Load IMU CSV + crop by camera timestamps
     # ========================================================
 
     imu_data = load_imu_csv()
     has_imu = imu_data is not None and len(imu_data["t"]) > 0
 
     if has_imu:
-        print(f"[IMU CSV] {len(imu_data['t'])} 点, "
-              f"时长 {imu_data['t'][-1] - imu_data['t'][0]:.2f}s")
+        print(f"[IMU CSV] {len(imu_data['t'])} 点, 时长 {imu_data['t'][-1] - imu_data['t'][0]:.2f}s")
+
+        imu_mask = (imu_data["t"] >= crop_start_time) & (imu_data["t"] <= crop_end_time)
+        for key in ["t", "ax", "ay", "az", "mag"]:
+            imu_data[key] = imu_data[key][imu_mask]
+
+        if len(imu_data["t"]) < 2:
+            print("[Error] 裁剪后 IMU 数据不足")
+            return
+
+        print(f"[Crop] 保留 IMU {len(imu_data['t'])} samples")
 
         t_camera_array = np.array([row["t_camera"] for row in camera_data])
         synced_imu = sync_imu_to_camera(imu_data, t_camera_array)
 
-        # 用整段trial的IMU原始序列做积分(不是插值后的每帧值!),
-        # 插值只用于后面按帧对齐velocity,积分要用IMU自己原始的高分辨率时间轴,
-        # 否则会因为camera帧率比IMU低而丢失积分精度。
         v_raw, v_detrend, _ = integrate_and_detrend(imu_data["t"], imu_data[ACCEL_AXIS])
-        # 把逐IMU采样点算出的 v_detrend,再插值对齐回每一帧camera的时间
         velocity_per_frame = np.interp(t_camera_array, imu_data["t"], v_detrend)
 
-        print(f"[积分] 用 {ACCEL_AXIS} 轴积分, "
-              f"去漂移后速度范围: {v_detrend.min():.3f} ~ {v_detrend.max():.3f} m/s")
+        print(f"[积分] 用 {ACCEL_AXIS} 轴积分, 去漂移后速度范围: {v_detrend.min():.3f} ~ {v_detrend.max():.3f} m/s")
     else:
-        print("[提示] 没有找到imu.csv或数据为空,跳过速度计算")
+        print("[提示] 没有找到 imu.csv 或数据为空，跳过速度计算")
         synced_imu = None
         velocity_per_frame = None
 
@@ -356,6 +322,7 @@ def main():
     output_plot = os.path.join(TRIAL_DIR, "grasp_curve.png")
     output_scatter = os.path.join(TRIAL_DIR, "area_vs_finger_width.png")
     output_3d = os.path.join(TRIAL_DIR, "area_velocity_width_3d.png")
+    output_accel = os.path.join(TRIAL_DIR, "acceleration_curve.png")
 
     # ========================================================
     # Video Writer
@@ -369,17 +336,6 @@ def main():
         return
 
     # ========================================================
-    # MediaPipe
-    # ========================================================
-
-    hands = mp_hands.Hands(
-        static_image_mode=False,
-        max_num_hands=1,
-        min_detection_confidence=0.3,
-        min_tracking_confidence=0.3,
-    )
-
-    # ========================================================
     # Result data
     # ========================================================
 
@@ -388,7 +344,7 @@ def main():
     areas = []
     finger_widths = []
     velocities = []
-    hand_detected_count = 0
+    finger_detected_count = 0
     object_detected_count = 0
 
     total_frames = len(camera_data)
@@ -413,59 +369,29 @@ def main():
 
         vis = frame.copy()
 
-        # ── Object detection ──
-        area, box = detect_cube(frame)
+        # 直接使用录制阶段已经保存到 camera.csv 的视觉检测结果
+        finger_width = row["finger_width"]
+        area = row["object_area"]
+
+        if finger_width > 0:
+            finger_detected_count += 1
         if area > 0:
             object_detected_count += 1
 
-        # ── Hand detection ──
-        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        result = hands.process(rgb)
-
-        finger_width = 0.0
-
-        if result.multi_hand_landmarks:
-            hand_detected_count += 1
-            lm = result.multi_hand_landmarks[0]
-
-            thumb = lm.landmark[THUMB_TIP]
-            index = lm.landmark[INDEX_TIP]
-
-            thumb_point = np.array([thumb.x * w, thumb.y * h])
-            index_point = np.array([index.x * w, index.y * h])
-
-            finger_width = float(np.linalg.norm(thumb_point - index_point))
-
-            mp_draw.draw_landmarks(vis, lm, mp_hands.HAND_CONNECTIONS)
-            cv2.circle(vis, tuple(thumb_point.astype(int)), 8, (255, 0, 0), -1)
-            cv2.circle(vis, tuple(index_point.astype(int)), 8, (0, 0, 255), -1)
-            cv2.line(vis, tuple(thumb_point.astype(int)), tuple(index_point.astype(int)),
-                     (0, 255, 255), 2)
-
-        # ── Draw object ──
-        if box is not None:
-            x, y, bw, bh = box
-            cv2.rectangle(vis, (x, y), (x + bw, y + bh), (0, 0, 255), 2)
-            cv2.putText(vis, f"Object area: {area:.0f} px^2", (x, max(25, y - 10)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 0, 255), 2)
-
         # ── Text overlay ──
-        cv2.putText(vis, f"Frame: {frame_idx}", (10, 30),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
-
-        finger_text = (f"Finger width: {finger_width:.1f} px"
-                       if finger_width > 0 else "Finger width: N/A")
-        cv2.putText(vis, finger_text, (10, 85),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 200, 255), 1)
-
-        area_text = (f"Object area: {area:.0f} px^2" if area > 0 else "Object area: N/A")
-        cv2.putText(vis, area_text, (10, 115),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 2)
+        cv2.putText(vis, f"Frame: {frame_idx}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (255, 255, 255), 2)
+        finger_text = f"Finger width: {finger_width:.1f} px" if finger_width > 0 else "Finger width: N/A"
+        cv2.putText(vis, finger_text, (10, 85), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 200, 255), 1)
+        area_text = f"Object area: {area:.0f} px^2" if area > 0 else "Object area: N/A"
+        cv2.putText(vis, area_text, (10, 115), cv2.FONT_HERSHEY_SIMPLEX, 0.65, (0, 255, 0), 2)
 
         velocity_val = float(velocity_per_frame[process_idx]) if has_imu else None
+        ax_val = float(synced_imu["ax"][process_idx]) if has_imu else None
+        ay_val = float(synced_imu["ay"][process_idx]) if has_imu else None
+        az_val = float(synced_imu["az"][process_idx]) if has_imu else None
+        mag_val = float(synced_imu["mag"][process_idx]) if has_imu else None
         if has_imu:
-            cv2.putText(vis, f"Velocity: {velocity_val:.3f} m/s", (10, 145),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 200, 0), 2)
+            cv2.putText(vis, f"Velocity: {velocity_val:.3f} m/s", (10, 145), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 200, 0), 2)
 
         video_writer.write(vis)
 
@@ -475,6 +401,10 @@ def main():
             "t_camera": t_camera,
             "finger_width": finger_width,
             "object_area": area,
+            "ax": ax_val,
+            "ay": ay_val,
+            "az": az_val,
+            "mag": mag_val,
             "velocity": velocity_val,
         }
         result_data.append(row_data)
@@ -494,7 +424,6 @@ def main():
     print()
 
     video_writer.release()
-    hands.close()
 
     # ========================================================
     # Save CSV
@@ -502,15 +431,12 @@ def main():
 
     with open(output_csv, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["frame", "t_camera", "finger_width", "object_area", "velocity"])
+        writer.writerow(["frame", "t_camera", "finger_width", "object_area", "ax", "ay", "az", "mag", "velocity"])
         for row in result_data:
-            writer.writerow([
-                row["frame"],
-                f'{row["t_camera"]:.9f}',
-                f'{row["finger_width"]:.3f}' if row["finger_width"] > 0 else "",
-                f'{row["object_area"]:.3f}' if row["object_area"] > 0 else "",
-                f'{row["velocity"]:.6f}' if row["velocity"] is not None else "",
-            ])
+            writer.writerow([row["frame"], f'{row["t_camera"]:.9f}', f'{row["finger_width"]:.3f}', f'{row["object_area"]:.3f}',
+                             f'{row["ax"]:.6f}' if row["ax"] is not None else "", f'{row["ay"]:.6f}' if row["ay"] is not None else "",
+                             f'{row["az"]:.6f}' if row["az"] is not None else "", f'{row["mag"]:.6f}' if row["mag"] is not None else "",
+                             f'{row["velocity"]:.6f}' if row["velocity"] is not None else ""])
 
     # ========================================================
     # Print statistics
@@ -522,13 +448,13 @@ def main():
     print("=" * 70)
     print()
     print(f"总 Camera frames       : {total_frames}")
-    print(f"检测到手的 frames      : {hand_detected_count}")
+    print(f"检测到手指标记的 frames  : {finger_detected_count}")
     print(f"检测到物体的 frames    : {object_detected_count}")
     print(f"手 + 物体 (+速度) 同时检测 : {len(valid_frames)}")
 
     if total_frames > 0:
         print()
-        print(f"Hand detection rate    : {hand_detected_count / total_frames * 100:.1f}%")
+        print(f"Finger detection rate  : {finger_detected_count / total_frames * 100:.1f}%")
         print(f"Object detection rate  : {object_detected_count / total_frames * 100:.1f}%")
         print(f"Both detection rate    : {len(valid_frames) / total_frames * 100:.1f}%")
 
@@ -538,25 +464,33 @@ def main():
 
     if len(valid_frames) >= 2:
 
-        valid_frames_np = np.array(valid_frames)
-        areas_np = np.array(areas)
-        finger_widths_np = np.array(finger_widths)
+        frames_np = np.array([row["frame"] for row in result_data])
+
+        areas_time = np.array([
+            row["object_area"] if row["object_area"] > 0 else np.nan
+            for row in result_data
+        ])
+
+        finger_widths_time = np.array([
+            row["finger_width"] if row["finger_width"] > 0 else np.nan
+            for row in result_data
+        ])
 
         n_rows = 3 if has_imu else 2
         fig, axs = plt.subplots(n_rows, 1, figsize=(14, 4 * n_rows), sharex=True)
 
-        axs[0].plot(valid_frames_np, areas_np, "r-o", markersize=3)
+        axs[0].plot(frames_np, areas_time, "r-", linewidth=1.5)
         axs[0].set_ylabel("Object Area (px²)")
         axs[0].set_title("Object Area / Finger Width" + (" / Velocity" if has_imu else "") + " over Time")
         axs[0].grid(True, alpha=0.3)
 
-        axs[1].plot(valid_frames_np, finger_widths_np, "b-o", markersize=3)
+        axs[1].plot(frames_np, finger_widths_time, "b-", linewidth=1.5)
         axs[1].set_ylabel("Finger Width (px)")
         axs[1].grid(True, alpha=0.3)
 
         if has_imu:
-            velocities_np = np.array(velocities)
-            axs[2].plot(valid_frames_np, velocities_np, "-o", color="tab:purple", markersize=3)
+            velocity_time = np.array([row["velocity"] for row in result_data])
+            axs[2].plot(frames_np, velocity_time, "-", linewidth=1.5)
             axs[2].axhline(0, color="black", linewidth=0.5)
             axs[2].set_ylabel("Velocity (m/s)")
             axs[2].set_xlabel("Frame")
@@ -568,18 +502,10 @@ def main():
         plt.savefig(output_plot, dpi=150)
         plt.close(fig)
 
-        # ── 2D scatter: Area vs Finger Width (保留原来的) ──
-        fig2, ax = plt.subplots(figsize=(8, 6))
-        scatter = ax.scatter(areas_np, finger_widths_np, c=valid_frames_np, cmap="viridis", s=30)
-        ax.set_xlabel("Object Area (px²)")
-        ax.set_ylabel("Finger Width (px)")
-        ax.set_title("Object Area vs Finger Width")
-        ax.grid(True, alpha=0.3)
-        fig2.colorbar(scatter, ax=ax, label="Frame")
-        fig2.tight_layout()
-        plt.savefig(output_scatter, dpi=150)
-        plt.close(fig2)
-
+        valid_frames_np = np.array(valid_frames)
+        areas_np = np.array(areas)
+        finger_widths_np = np.array(finger_widths)
+        
         print()
         print(f"[Saved] 曲线:")
         print(output_plot)
@@ -622,6 +548,45 @@ def main():
         print()
         print("[Warning] 同时检测到手、物体(+速度)的有效帧太少")
         print("无法生成可靠的曲线。")
+
+    # ========================================================
+    # Save acceleration curve (ax / ay / az / magnitude)
+    # ========================================================
+
+    if has_imu:
+        frames_acc = np.array([row["frame"] for row in result_data])
+        ax_time = np.array([row["ax"] for row in result_data])
+        ay_time = np.array([row["ay"] for row in result_data])
+        az_time = np.array([row["az"] for row in result_data])
+        mag_time = np.array([row["mag"] for row in result_data])
+
+        fig_acc, axs_acc = plt.subplots(4, 1, figsize=(14, 12), sharex=True)
+
+        axs_acc[0].plot(frames_acc, ax_time, linewidth=1.5)
+        axs_acc[0].set_ylabel("Ax (m/s²)")
+        axs_acc[0].grid(True, alpha=0.3)
+
+        axs_acc[1].plot(frames_acc, ay_time, linewidth=1.5)
+        axs_acc[1].set_ylabel("Ay (m/s²)")
+        axs_acc[1].grid(True, alpha=0.3)
+
+        axs_acc[2].plot(frames_acc, az_time, linewidth=1.5)
+        axs_acc[2].set_ylabel("Az (m/s²)")
+        axs_acc[2].grid(True, alpha=0.3)
+
+        axs_acc[3].plot(frames_acc, mag_time, linewidth=1.5)
+        axs_acc[3].set_ylabel("Magnitude (m/s²)")
+        axs_acc[3].set_xlabel("Frame")
+        axs_acc[3].grid(True, alpha=0.3)
+
+        fig_acc.suptitle("3-Axis Acceleration and Magnitude")
+        fig_acc.tight_layout()
+        plt.savefig(output_accel, dpi=150)
+        plt.close(fig_acc)
+
+        print()
+        print(f"[Saved] 加速度曲线:")
+        print(output_accel)
 
     # ========================================================
     # Final output
