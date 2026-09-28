@@ -13,7 +13,8 @@ record_reach_to_grasp.py
 9. 按 Q 结束整个录制
 10. 不使用 valid 字段
 11. 录制阶段保存完整 IMU 原始数据
-12. 后处理阶段再将 IMU 50 Hz 重采样到 30 Hz
+12. 实时低通滤波并对三轴加速度做梯形积分
+13. 后处理阶段再将 IMU 50 Hz 重采样到 30 Hz
 
 输出：
 
@@ -34,7 +35,7 @@ frame,t_camera,finger_width
 
 imu.csv:
 
-imu_index,t_imu,ax,ay,az,mag
+imu_index,t_imu,ax,ay,az,mag,vx,vy,vz,velocity
 """
 
 import asyncio
@@ -56,7 +57,7 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Red_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 BACKUP_DIR = r"Data\BackupData"
 
@@ -101,6 +102,9 @@ GRAVITY = 9.81
 
 CALIB_SECONDS = 2.0
 
+# 与 Analyze.py 相同的因果低通参数。实时积分没有终点漂移修正。
+REALTIME_LPF_ALPHA = 0.15
+
 
 # ============================================================
 # Camera
@@ -127,14 +131,67 @@ INDEX_TIP = 8
 
 
 # ============================================================
-# Black Object Detection
+# Object Color Detection
 # ============================================================
 
-BLACK_LOWER = np.array([0, 0, 0], dtype=np.uint8)
-BLACK_UPPER = np.array([180, 120, 60], dtype=np.uint8)
-MIN_CUBE_AREA = 3000
+# 只改这个单词："red"、"black" 或 "blue"
+OBJECT_COLOR = "red"
+
+# OpenCV HSV 范围。红色跨越色相轴首尾，因此需要两个范围。
+OBJECT_HSV_RANGES = {
+    "red": [
+        (
+            np.array([0, 160, 50], dtype=np.uint8),
+            np.array([8, 255, 255], dtype=np.uint8),
+        ),
+        (
+            np.array([172, 160, 50], dtype=np.uint8),
+            np.array([180, 255, 255], dtype=np.uint8),
+        ),
+    ],
+    "black": [
+        (
+            np.array([0, 0, 0], dtype=np.uint8),
+            np.array([180, 120, 60], dtype=np.uint8),
+        ),
+    ],
+    "blue": [
+        (
+            np.array([90, 80, 50], dtype=np.uint8),
+            np.array([135, 255, 255], dtype=np.uint8),
+        ),
+    ],
+}
+
+OBJECT_BOX_COLORS = {
+    "red": (0, 0, 255),
+    "black": (255, 255, 255),
+    "blue": (255, 0, 0),
+}
+
+# 彩色物体在远处的轮廓较小；黑色需要较高阈值以过滤阴影。
+OBJECT_MIN_CONTOUR_AREA = {
+    "red": 500.0,
+    "black": 3000.0,
+    "blue": 800.0,
+}
+
+OBJECT_COLOR = OBJECT_COLOR.strip().lower()
+if OBJECT_COLOR not in OBJECT_HSV_RANGES:
+    raise ValueError(
+        f"OBJECT_COLOR must be red, black, or blue; got {OBJECT_COLOR!r}"
+    )
+
+MIN_CUBE_AREA = OBJECT_MIN_CONTOUR_AREA[OBJECT_COLOR]
 MIN_FILL_RATIO = 0.30
-BLACK_KERNEL = np.ones((5, 5), dtype=np.uint8)
+OBJECT_KERNEL = np.ones((5, 5), dtype=np.uint8)
+
+# 红色容易与皮肤重叠，因此额外使用形状和亮度过滤。
+RED_MIN_FILL_RATIO = 0.50
+RED_MIN_SOLIDITY = 0.75
+RED_MIN_ASPECT_RATIO = 0.65
+RED_MAX_ASPECT_RATIO = 1.35
+RED_MAX_MEAN_VALUE = 130.0
 
 
 # ============================================================
@@ -171,6 +228,25 @@ class SharedState:
         self.latest_mag = 0.0
 
         self.latest_imu_ts = None
+
+        # 实时速度积分状态
+        self.filtered_acc = [
+            0.0,
+            0.0,
+            0.0
+        ]
+
+        self.previous_filtered_acc = None
+
+        self.realtime_velocity = [
+            0.0,
+            0.0,
+            0.0
+        ]
+
+        self.latest_velocity = 0.0
+
+        self.integration_ts = None
 
 
 state = SharedState()
@@ -336,15 +412,19 @@ def detect_finger_width(frame, hands):
 
 
 # ============================================================
-# Black Object Detection
+# Selected Color Object Detection
 # ============================================================
 
 def detect_cube(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    black = cv2.inRange(hsv, BLACK_LOWER, BLACK_UPPER)
-    black = cv2.morphologyEx(black, cv2.MORPH_OPEN, BLACK_KERNEL)
-    black = cv2.morphologyEx(black, cv2.MORPH_CLOSE, BLACK_KERNEL)
-    contours, _ = cv2.findContours(black, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
+
+    for lower, upper in OBJECT_HSV_RANGES[OBJECT_COLOR]:
+        mask = cv2.bitwise_or(mask, cv2.inRange(hsv, lower, upper))
+
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, OBJECT_KERNEL)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, OBJECT_KERNEL)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     candidates = []
 
@@ -361,6 +441,32 @@ def detect_cube(frame):
         fill_ratio = contour_area / bbox_area
         if fill_ratio < MIN_FILL_RATIO:
             continue
+
+        if OBJECT_COLOR == "red":
+            aspect_ratio = w / float(h)
+            if not (
+                RED_MIN_ASPECT_RATIO
+                <= aspect_ratio
+                <= RED_MAX_ASPECT_RATIO
+            ):
+                continue
+
+            if fill_ratio < RED_MIN_FILL_RATIO:
+                continue
+
+            hull_area = float(cv2.contourArea(cv2.convexHull(contour)))
+            if hull_area <= 0:
+                continue
+
+            solidity = contour_area / hull_area
+            if solidity < RED_MIN_SOLIDITY:
+                continue
+
+            contour_mask = np.zeros(mask.shape, dtype=np.uint8)
+            cv2.drawContours(contour_mask, [contour], -1, 255, -1)
+            mean_value = cv2.mean(hsv, mask=contour_mask)[2]
+            if mean_value > RED_MAX_MEAN_VALUE:
+                continue
 
         candidates.append((bbox_area, x, y, w, h))
 
@@ -472,7 +578,11 @@ def record():
         "ax",
         "ay",
         "az",
-        "mag"
+        "mag",
+        "vx",
+        "vy",
+        "vz",
+        "velocity"
     ])
 
 
@@ -617,9 +727,64 @@ def record():
                     net[2] ** 2
                 ) ** 0.5
 
+                # ------------------------------------------------
+                # 实时三轴速度积分
+                #
+                # 低通滤波和梯形积分与 Analyze.py 的积分前半段一致。
+                # 实时阶段不知道动作终点，因此不做终点漂移修正。
+                # ------------------------------------------------
+
+                filtered_acc = [
+                    REALTIME_LPF_ALPHA * net[i]
+                    +
+                    (1.0 - REALTIME_LPF_ALPHA) * state.filtered_acc[i]
+                    for i in range(3)
+                ]
+
+                if (
+                    state.integration_ts is not None
+                    and
+                    state.previous_filtered_acc is not None
+                ):
+
+                    dt = ts - state.integration_ts
+
+                    if 0.0 < dt <= 0.2:
+
+                        state.realtime_velocity = [
+                            state.realtime_velocity[i]
+                            +
+                            0.5
+                            *
+                            (
+                                state.previous_filtered_acc[i]
+                                +
+                                filtered_acc[i]
+                            )
+                            *
+                            dt
+                            for i in range(3)
+                        ]
+
+                state.filtered_acc = filtered_acc
+                state.previous_filtered_acc = filtered_acc.copy()
+                state.integration_ts = ts
+
+                vx, vy, vz = state.realtime_velocity
+
+                velocity = (
+                    vx ** 2
+                    +
+                    vy ** 2
+                    +
+                    vz ** 2
+                ) ** 0.5
+
                 state.latest_acc = net
 
                 state.latest_mag = mag
+
+                state.latest_velocity = velocity
 
                 state.latest_imu_ts = ts
 
@@ -636,7 +801,11 @@ def record():
                     net[0],
                     net[1],
                     net[2],
-                    mag
+                    mag,
+                    vx,
+                    vy,
+                    vz,
+                    velocity
                 ])
 
                 imu_counter += 1
@@ -726,6 +895,13 @@ def record():
                         ]
 
                     state.calibrating = False
+
+                    # 从校准结束后的第一个 IMU 样本开始积分。
+                    state.filtered_acc = [0.0, 0.0, 0.0]
+                    state.previous_filtered_acc = None
+                    state.realtime_velocity = [0.0, 0.0, 0.0]
+                    state.latest_velocity = 0.0
+                    state.integration_ts = None
 
 
                 print()
@@ -973,6 +1149,7 @@ def record():
             with state.lock:
                 ax, ay, az = state.latest_acc
                 mag = state.latest_mag
+                velocity = state.latest_velocity
 
             if hand_landmarks is not None:
                 mp_draw.draw_landmarks(display, hand_landmarks, mp_hands.HAND_CONNECTIONS)
@@ -982,7 +1159,13 @@ def record():
 
             if object_box is not None:
                 x, y, bw, bh = object_box
-                cv2.rectangle(display, (x, y), (x + bw, y + bh), (0, 255, 0), 2)
+                cv2.rectangle(
+                    display,
+                    (x, y),
+                    (x + bw, y + bh),
+                    OBJECT_BOX_COLORS[OBJECT_COLOR],
+                    2,
+                )
 
             cv2.putText(
                 display,
@@ -1054,11 +1237,29 @@ def record():
                 2
             )
 
+            cv2.putText(
+                display,
+                f"velocity={velocity:.3f} m/s",
+                (10, 240),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (255, 255, 255),
+                2
+            )
+
             finger_color = (0, 255, 255) if finger_width > 0 else (0, 0, 255)
-            cv2.putText(display, f"finger_width={finger_width:.1f} px", (10, 240), cv2.FONT_HERSHEY_SIMPLEX, 0.6, finger_color, 2)
+            cv2.putText(display, f"finger_width={finger_width:.1f} px", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.6, finger_color, 2)
 
             object_color = (0, 255, 0) if object_area > 0 else (0, 0, 255)
-            cv2.putText(display, f"object_area={object_area:.0f} px^2", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.6, object_color, 2)
+            cv2.putText(
+                display,
+                f"{OBJECT_COLOR}_area={object_area:.0f} px^2",
+                (10, 300),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                object_color,
+                2,
+            )
 
             # 保存已经画好检测结果的 JPG 和视频
             success = cv2.imwrite(frame_path, display)

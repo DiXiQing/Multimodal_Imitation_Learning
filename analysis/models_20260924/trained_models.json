@@ -1,0 +1,79 @@
+{
+  "area_only": {
+    "input_columns": [
+      "object_area"
+    ],
+    "basis": [
+      "object_area"
+    ],
+    "raw_mean": [
+      12875.016326530613
+    ],
+    "raw_scale": [
+      7057.387942226244
+    ],
+    "intercept": 158.2032979591837,
+    "coefficients": [
+      17.5629925766632
+    ],
+    "ridge_alpha": 1.0
+  },
+  "area_velocity": {
+    "input_columns": [
+      "object_area",
+      "velocity"
+    ],
+    "basis": [
+      "object_area",
+      "velocity"
+    ],
+    "raw_mean": [
+      12875.016326530613,
+      0.03977501020408164
+    ],
+    "raw_scale": [
+      7057.387942226244,
+      0.11122731308206181
+    ],
+    "intercept": 158.20329795918374,
+    "coefficients": [
+      18.45332172865828,
+      -10.876771490695614
+    ],
+    "ridge_alpha": 1.0
+  },
+  "area_acceleration": {
+    "input_columns": [
+      "object_area",
+      "ax",
+      "ay",
+      "az"
+    ],
+    "basis": [
+      "object_area",
+      "ax",
+      "ay",
+      "az"
+    ],
+    "raw_mean": [
+      12875.016326530613,
+      0.0880139612244898,
+      -1.3765049714285718,
+      -0.24445624081632655
+    ],
+    "raw_scale": [
+      7057.387942226244,
+      0.7199489750295974,
+      1.3222241085600146,
+      0.47262583852382223
+    ],
+    "intercept": 158.20329795918366,
+    "coefficients": [
+      7.89408445839122,
+      -13.408493471720437,
+      -7.332550671060546,
+      -18.630597946546
+    ],
+    "ridge_alpha": 1.0
+  }
+}

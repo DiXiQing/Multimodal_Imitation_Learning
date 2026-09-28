@@ -56,32 +56,35 @@ def load_data(csv_path: str) -> pd.DataFrame:
 
 # ---------- 图1: 三联时间序列 ----------
 
-def plot_time_series(
-    df: pd.DataFrame,
-    title: str = "Area / Width / Velocity over time",
-    save_path: str | None = None,
-):
-    fig, axes = plt.subplots(3, 1, figsize=(6.5, 6), sharex=True)
+def plot_time_series(df: pd.DataFrame, title: str = "Area / Width / Velocity over time", save_path: str | None = None):
+    fig, axes = plt.subplots(3, 1, figsize=(6.5, 7), sharex=True)
 
-    axes[0].plot(df["time_s"], df["target_area_px2"], color="crimson", linewidth=1.6)
-    axes[0].set_ylabel("Target Area (px^2)")
+    axes[0].plot(df["time_s"], df["target_area_px2"], color="darkgreen", linewidth=2.5)
+    axes[0].plot(df["time_s"], df["target_area_px2"], color="darkgreen", linewidth=2.5, label="Object size")
+    axes[0].legend(loc="upper left", fontsize=14, frameon=False)
+    axes[0].set_ylabel("Object Size\n(px^2)", fontsize=14)
 
-    axes[1].plot(df["time_s"], df["finger_width_px"], color="#1f77a4", linewidth=1.6)
-    axes[1].set_ylabel("Finger Width (px)")
+    axes[1].plot(df["time_s"], df["finger_width_px"], color="navy", linewidth=2.5)
+    axes[1].plot(df["time_s"], df["finger_width_px"], color="navy", linewidth=2.5, label="Fingertip aperture")
+    axes[1].legend(loc="upper left", fontsize=14, frameon=False)
+    axes[1].set_ylabel("Fingertip Aperture\n(px)", fontsize=14)
 
-    axes[2].plot(df["time_s"], df["velocity_mps"], color="#7b52ab", linewidth=1.6)
-    axes[2].set_ylabel("Velocity (m/s)")
-    axes[2].set_xlabel("time (s)")
+    axes[2].plot(df["time_s"], df["velocity_mps"], color="firebrick", linewidth=2.5)
+    axes[2].plot(df["time_s"], df["velocity_mps"], color="firebrick", linewidth=2.5, label="Hand velocity")
+    axes[2].legend(loc="upper left", fontsize=14, frameon=False)
+    axes[2].set_ylabel("Hand Velocity\n(m/s)", fontsize=14)
+    axes[2].set_xlabel("Time (s)", fontsize=14)
 
     for ax in axes:
+        ax.tick_params(axis="both", labelsize=12)
         ax.grid(True, alpha=0.3)
 
-    fig.suptitle(title)
-    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.tight_layout()
 
     if save_path:
-        fig.savefig(save_path, dpi=150)
+        fig.savefig(save_path, dpi=300, bbox_inches="tight")
         print(f"saved: {save_path}")
+
     return fig
 
 
@@ -131,13 +134,17 @@ def plot_3d_surface(
     ax.plot_surface(XI, YI, ZI, color="gray", alpha=0.35, linewidth=0, antialiased=True)
     sc = ax.scatter(x, y, z, c=t, cmap="viridis", s=25, depthshade=True)
 
-    ax.set_xlabel("Object Size (px^2)")
-    ax.set_ylabel("Velocity (mm/s)")
-    ax.set_zlabel("Finger Aperture (px)")
-    # ax.set_title(f"{title}  (surface fit R\u00b2={r2:.2f})")
+    ax.set_xlabel("Object size", fontsize=16, labelpad=12)
+    ax.set_ylabel("Hand velocity", fontsize=16, labelpad=12)
+    ax.set_zlabel("Fingertip aperture", fontsize=16, labelpad=12)
+
+    ax.tick_params(axis="x", labelsize=12)
+    ax.tick_params(axis="y", labelsize=12)
+    ax.tick_params(axis="z", labelsize=12)
 
     cbar = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.1)
-    cbar.set_label("time (s)")
+    cbar.set_label("Time (s)", fontsize=14)
+    cbar.ax.tick_params(labelsize=11)
 
     fig.tight_layout()
 
