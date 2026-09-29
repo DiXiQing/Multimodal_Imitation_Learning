@@ -59,7 +59,10 @@ from datetime import datetime
 
 TRIAL_NAME = f"TRIAL_Red_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
-BACKUP_DIR = r"Data\BackupData"
+# 只改这个单词："red"、"black" 或 "blue"
+OBJECT_COLOR = "red"
+
+BACKUP_DIR = r"Data\BackupData\Ma"
 
 OUTPUT_DIR = os.path.join(
     BACKUP_DIR,
@@ -133,9 +136,6 @@ INDEX_TIP = 8
 # ============================================================
 # Object Color Detection
 # ============================================================
-
-# 只改这个单词："red"、"black" 或 "blue"
-OBJECT_COLOR = "red"
 
 # OpenCV HSV 范围。红色跨越色相轴首尾，因此需要两个范围。
 OBJECT_HSV_RANGES = {
