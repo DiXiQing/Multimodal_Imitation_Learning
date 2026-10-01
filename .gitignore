@@ -1,4 +1,19 @@
+# Python cache
+__pycache__/
+*.py[cod]
 *.npy
-*.jpg
-Data/
-*.mp4
+
+# Data 中只保留 CSV，忽略图片、视频和压缩包
+Data/**/*.jpg
+Data/**/*.jpeg
+Data/**/*.png
+Data/**/*.bmp
+Data/**/*.webp
+Data/**/*.gif
+Data/**/*.tif
+Data/**/*.tiff
+Data/**/*.mp4
+Data/**/*.avi
+Data/**/*.mov
+Data/**/*.mkv
+Data/**/*.zip
