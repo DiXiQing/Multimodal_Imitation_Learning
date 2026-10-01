@@ -12,9 +12,9 @@ import pandas as pd
 
 # Default settings: edit these for the next experiment.
 TRIAL_DIR = Path(
-    r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\Ma\TRIAL_Red_20260928_203236"
+    r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\D\TRIAL_Red_20260929_111119"
 )
-REPAIR_RANGES = [(790, 797)]  # Inclusive frame ranges.
+REPAIR_RANGES = [(78, 83)]  # Inclusive frame ranges.
 JITTER_RATIO = 0.015  # About 1.5% detector fluctuation inside repaired ranges.
 MIN_JITTER_PX = 6.0
 MAX_JITTER_PX = 30.0

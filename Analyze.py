@@ -28,11 +28,11 @@ import pandas as pd
 # ============================================================
 
 TRIAL_DIR = Path(
-    r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData"
-    r"\Ma\TRIAL_Red_20260928_203236"
+    r"D:\Code\Multimodal_Imitation_Learning\Data"
+    r"\Validation\D\T1\TRIAL_Black_20260929_104825"
 )
-FRAME_START = 791
-FRAME_END = 818
+FRAME_START = 42
+FRAME_END = 97
 
 LPF_ALPHA = 0.15
 

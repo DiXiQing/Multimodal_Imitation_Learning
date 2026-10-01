@@ -33,11 +33,19 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+from matplotlib.lines import Line2D
+from pathlib import Path
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  (激活 3D 投影)
 
 
 # ==== 配置：在这里改文件名 ====
-CSV_PATH = r"D:\Code\Multimodal_Imitation_Learning\临时文件\grasp_smoothed.csv"
+# 曲面图支持多组 CSV。把需要叠加的文件路径都放进这个列表即可。
+CSV_PATHS = [
+    r"D:\Code\Multimodal_Imitation_Learning\临时文件\Trial1.csv",
+    r"D:\Code\Multimodal_Imitation_Learning\临时文件\Trial2.csv",
+    r"D:\Code\Multimodal_Imitation_Learning\临时文件\Trial3.csv",
+]
 
 OUT_PREFIX = "finger_tracking"            # 输出图片文件名前缀
 SHOW_PLOTS = False                        # True 则额外弹窗显示（本地运行时用）
@@ -60,9 +68,9 @@ def plot_time_series(df: pd.DataFrame, title: str = "Area / Width / Velocity ove
     fig, axes = plt.subplots(3, 1, figsize=(6.5, 7), sharex=True)
 
     axes[0].plot(df["time_s"], df["target_area_px2"], color="darkgreen", linewidth=2.5)
-    axes[0].plot(df["time_s"], df["target_area_px2"], color="darkgreen", linewidth=2.5, label="Object size")
+    axes[0].plot(df["time_s"], df["target_area_px2"], color="darkgreen", linewidth=2.5, label="Object apparent size")
     axes[0].legend(loc="upper left", fontsize=14, frameon=False)
-    axes[0].set_ylabel("Object Size\n(px^2)", fontsize=14)
+    axes[0].set_ylabel("Object Apparent Size\n(px^2)", fontsize=14)
 
     axes[1].plot(df["time_s"], df["finger_width_px"], color="navy", linewidth=2.5)
     axes[1].plot(df["time_s"], df["finger_width_px"], color="navy", linewidth=2.5, label="Fingertip aperture")
@@ -105,36 +113,91 @@ def fit_quadratic_surface(x: np.ndarray, y: np.ndarray, z: np.ndarray):
 
 
 def plot_3d_surface(
-    df: pd.DataFrame,
+    data_frames: list[pd.DataFrame] | pd.DataFrame,
     title: str = "Aperture vs Area vs Acceleration",
     save_path: str | None = None,
+    labels: list[str] | None = None,
 ):
-    x = df["target_area_px2"].to_numpy()
-    y = df["velocity_mps"].to_numpy()
-    z = df["finger_width_px"].to_numpy()
-    t = df["time_s"].to_numpy()
+    """绘制一组或多组 CSV 的三维散点和各自二次拟合曲面。"""
+    if isinstance(data_frames, pd.DataFrame):
+        data_frames = [data_frames]
+    if not data_frames:
+        raise ValueError("至少需要提供一个 CSV 数据集")
 
-    coeffs, r2 = fit_quadratic_surface(x, y, z)
+    if labels is None:
+        labels = [f"Trial {i + 1}" for i in range(len(data_frames))]
+    if len(labels) != len(data_frames):
+        raise ValueError("labels 的数量必须与 CSV 数据集数量一致")
 
-    xi = np.linspace(x.min(), x.max(), 40)
-    yi = np.linspace(y.min(), y.max(), 40)
-    XI, YI = np.meshgrid(xi, yi)
-    ZI = (
-        coeffs[0] * XI**2
-        + coeffs[1] * YI**2
-        + coeffs[2] * XI * YI
-        + coeffs[3] * XI
-        + coeffs[4] * YI
-        + coeffs[5]
-    )
+    all_times = np.concatenate([df["time_s"].to_numpy() for df in data_frames])
+    norm = Normalize(vmin=all_times.min(), vmax=all_times.max())
+    surface_colors = ["gray", "#2F6B9A", "#C96B28", "#5B8C5A", "#8A5A9B"]
+    marker_styles = ["o", "^", "s", "D", "P"]
+    fit_results = []
 
     fig = plt.figure(figsize=(9, 7))
     ax = fig.add_subplot(111, projection="3d")
 
-    ax.plot_surface(XI, YI, ZI, color="gray", alpha=0.35, linewidth=0, antialiased=True)
-    sc = ax.scatter(x, y, z, c=t, cmap="viridis", s=25, depthshade=True)
+    for i, (df, label) in enumerate(zip(data_frames, labels)):
+        x = df["target_area_px2"].to_numpy()
+        y = df["velocity_mps"].to_numpy()
+        z = df["finger_width_px"].to_numpy()
+        t = df["time_s"].to_numpy()
 
-    ax.set_xlabel("Object size", fontsize=16, labelpad=12)
+        coeffs, r2 = fit_quadratic_surface(x, y, z)
+        fit_results.append((label, r2))
+
+        xi = np.linspace(x.min(), x.max(), 40)
+        yi = np.linspace(y.min(), y.max(), 40)
+        XI, YI = np.meshgrid(xi, yi)
+        ZI = (
+            coeffs[0] * XI**2
+            + coeffs[1] * YI**2
+            + coeffs[2] * XI * YI
+            + coeffs[3] * XI
+            + coeffs[4] * YI
+            + coeffs[5]
+        )
+
+        color = surface_colors[i % len(surface_colors)]
+        ax.plot_surface(
+            XI,
+            YI,
+            ZI,
+            color=color,
+            alpha=0.22,
+            linewidth=0,
+            antialiased=True,
+        )
+        ax.scatter(
+            x,
+            y,
+            z,
+            c=t,
+            cmap="viridis",
+            norm=norm,
+            s=30,
+            marker=marker_styles[i % len(marker_styles)],
+            depthshade=True,
+        )
+
+    # 用代理图例标记每一组数据对应的曲面/散点。
+    legend_handles = [
+        Line2D(
+            [0],
+            [0],
+            marker=marker_styles[i % len(marker_styles)],
+            color="w",
+            markerfacecolor=surface_colors[i % len(surface_colors)],
+            markeredgecolor="black",
+            markersize=8,
+            label=f"{label} (R²={r2:.3f})",
+        )
+        for i, (label, r2) in enumerate(fit_results)
+    ]
+    ax.legend(handles=legend_handles, loc="upper left", fontsize=10, frameon=True)
+
+    ax.set_xlabel("Object apparent size", fontsize=16, labelpad=12)
     ax.set_ylabel("Hand velocity", fontsize=16, labelpad=12)
     ax.set_zlabel("Fingertip aperture", fontsize=16, labelpad=12)
 
@@ -142,7 +205,9 @@ def plot_3d_surface(
     ax.tick_params(axis="y", labelsize=12)
     ax.tick_params(axis="z", labelsize=12)
 
-    cbar = fig.colorbar(sc, ax=ax, shrink=0.6, pad=0.1)
+    scalar_mappable = plt.cm.ScalarMappable(norm=norm, cmap="viridis")
+    scalar_mappable.set_array(all_times)
+    cbar = fig.colorbar(scalar_mappable, ax=ax, shrink=0.6, pad=0.1)
     cbar.set_label("Time (s)", fontsize=14)
     cbar.ax.tick_params(labelsize=11)
 
@@ -151,17 +216,27 @@ def plot_3d_surface(
     if save_path:
         fig.savefig(save_path, dpi=150)
         print(f"saved: {save_path}")
-    return fig, r2
+    return fig, fit_results
 
 
 # ---------- 主入口 ----------
 
 def main():
-    df = load_data(CSV_PATH)
+    if not CSV_PATHS:
+        raise ValueError("CSV_PATHS 不能为空，请至少填写一个 CSV 路径")
 
-    plot_time_series(df, save_path=f"{OUT_PREFIX}_timeseries.png")
-    _, r2 = plot_3d_surface(df, save_path=f"{OUT_PREFIX}_3d_surface.png")
-    print(f"surface fit R^2 = {r2:.3f}")
+    data_frames = [load_data(path) for path in CSV_PATHS]
+    labels = [Path(path).stem for path in CSV_PATHS]
+
+    # 时间序列图保持原行为：绘制列表中的第一组数据。
+    plot_time_series(data_frames[0], save_path=f"{OUT_PREFIX}_timeseries.png")
+    _, fit_results = plot_3d_surface(
+        data_frames,
+        labels=labels,
+        save_path=f"{OUT_PREFIX}_3d_surface.png",
+    )
+    for label, r2 in fit_results:
+        print(f"{label}: surface fit R^2 = {r2:.3f}")
 
     if SHOW_PLOTS:
         plt.show()

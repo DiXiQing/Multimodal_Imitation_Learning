@@ -18,7 +18,7 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData")
+DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\Training")
 OUTPUT_DIR = Path(__file__).resolve().parent / "pth_models"
 
 MODEL_SPECS = {

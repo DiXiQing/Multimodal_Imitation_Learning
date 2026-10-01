@@ -62,7 +62,7 @@ TRIAL_NAME = f"TRIAL_Red_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 # 只改这个单词："red"、"black" 或 "blue"
 OBJECT_COLOR = "red"
 
-BACKUP_DIR = r"Data\BackupData\Ma"
+BACKUP_DIR = r"Data\BackupData\D"
 
 OUTPUT_DIR = os.path.join(
     BACKUP_DIR,
