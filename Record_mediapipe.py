@@ -57,10 +57,10 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_Red_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Black_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
-OBJECT_COLOR = "red"
+OBJECT_COLOR = "black"
 
 BACKUP_DIR = r"Data\BackupData\D"
 
@@ -116,7 +116,7 @@ REALTIME_LPF_ALPHA = 0.15
 CAMERA_INDEX = 0
 
 FRAME_W = 640
-FRAME_H = 800
+FRAME_H = 1000
 
 TARGET_FPS = 30.0
 
