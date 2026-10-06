@@ -1,0 +1,24 @@
+D5 stability analysis: 14 trials
+
+Three largest composite shape deviations:
+- TRIAL_Red_20261006_193436: 0.2410
+- TRIAL_Red_20261006_193519: 0.1941
+- TRIAL_Red_20261006_193403: 0.1756
+
+Three smallest composite shape deviations:
+- TRIAL_Red_20261006_193113: 0.0652
+- TRIAL_Red_20261006_193209: 0.0681
+- TRIAL_Red_20261006_192953: 0.0797
+
+Aggregate median ± SD:
+- start_width_median: 20.1740 ± 5.7248
+- max_width: 218.3910 ± 17.7071
+- final_width_median: 89.2615 ± 21.2004
+- start_area_median: 729.0000 ± 129.7260
+- final_area_median: 3450.0000 ± 219.6333
+- max_width_progress_pct: 64.0000 ± 5.4797
+- peak_speed_progress_pct: 62.5000 ± 4.2967
+- max_width_minus_peak_speed_pct: 1.5000 ± 4.5265
+- area_at_max_width_over_final: 0.5069 ± 0.0415
+- area_negative_step_fraction: 0.2385 ± 0.0424
+- composite_shape_deviation: 0.1048 ± 0.0524
