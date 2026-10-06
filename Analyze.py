@@ -27,9 +27,9 @@ import pandas as pd
 # Edit these values for each experiment.
 # ============================================================
 
-TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\Ma\TRIAL_Black_20260928_200535")
-FRAME_START = 2093 - 15
-FRAME_END = 2125
+TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D5\TRIAL_Red_20261006_192614")
+FRAME_START = 139 - 15
+FRAME_END = 189
 
 LPF_ALPHA = 0.15
 
@@ -161,7 +161,7 @@ def main() -> None:
         linewidth=1.8,
     )
     grasp_axes[0].set_ylabel("Object Area (px^2)")
-    grasp_axes[0].set_title("Object Area / Finger Width / 3D Speed")
+    grasp_axes[0].set_title("Object Area / Finger Width / 3-Axis Acceleration")
     grasp_axes[0].grid(alpha=0.3)
 
     grasp_axes[1].plot(
@@ -173,16 +173,12 @@ def main() -> None:
     grasp_axes[1].set_ylabel("Finger Width (px)")
     grasp_axes[1].grid(alpha=0.3)
 
-    grasp_axes[2].plot(
-        frames,
-        result["velocity"],
-        color="tab:purple",
-        linewidth=2,
-        label="3D speed",
-    )
+    grasp_axes[2].plot(frames, result["ax"], linewidth=1.8, label="ax")
+    grasp_axes[2].plot(frames, result["ay"], linewidth=1.8, label="ay")
+    grasp_axes[2].plot(frames, result["az"], linewidth=1.8, label="az")
     grasp_axes[2].axhline(0, color="black", linewidth=0.7)
     grasp_axes[2].set_xlabel("Frame")
-    grasp_axes[2].set_ylabel("Speed (m/s)")
+    grasp_axes[2].set_ylabel("Acceleration (m/s^2)")
     grasp_axes[2].grid(alpha=0.3)
     grasp_axes[2].legend()
 
