@@ -13,7 +13,6 @@ with future real-time use.
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 
@@ -21,7 +20,7 @@ import pandas as pd
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D6")
+DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D9")
 
 INPUT_CSV = "grasp_data.csv"
 OUTPUT_CSV = "grasp_data_smoothed.csv"
@@ -61,7 +60,7 @@ def smooth_trial(df: pd.DataFrame) -> pd.DataFrame:
 def save_preview(raw: pd.DataFrame, smooth: pd.DataFrame, save_path: Path) -> None:
     frame = raw["frame"].to_numpy()
 
-    fig, axes = plt.subplots(4, 1, figsize=(14, 12), sharex=True)
+    fig, axes = plt.subplots(3, 1, figsize=(14, 10), sharex=True)
 
     axes[0].plot(frame, raw["object_area"], alpha=0.5, label="Raw")
     axes[0].plot(frame, smooth["object_area"], linewidth=2, label="Smoothed")
@@ -75,21 +74,35 @@ def save_preview(raw: pd.DataFrame, smooth: pd.DataFrame, save_path: Path) -> No
     axes[1].legend()
     axes[1].grid(alpha=0.25)
 
-    axes[2].plot(frame, raw["velocity"], alpha=0.5, label="Raw")
-    axes[2].plot(frame, smooth["velocity"], linewidth=2, label="Smoothed")
-    axes[2].set_ylabel("Velocity")
-    axes[2].legend()
+    acceleration_colors = {
+        "ax": "tab:red",
+        "ay": "tab:green",
+        "az": "tab:blue",
+    }
+
+    for col, color in acceleration_colors.items():
+        axes[2].plot(
+            frame,
+            raw[col],
+            color=color,
+            alpha=0.28,
+            linestyle="--",
+            linewidth=1.0,
+            label=f"{col} raw",
+        )
+        axes[2].plot(
+            frame,
+            smooth[col],
+            color=color,
+            linewidth=2.0,
+            label=f"{col} smoothed",
+        )
+
+    axes[2].set_ylabel("Acceleration (m/s²)")
+    axes[2].set_xlabel("Frame")
+    axes[2].set_title("Three-axis acceleration")
+    axes[2].legend(ncol=3)
     axes[2].grid(alpha=0.25)
-
-    raw_acc = np.sqrt(raw["ax"]**2 + raw["ay"]**2 + raw["az"]**2)
-    smooth_acc = np.sqrt(smooth["ax"]**2 + smooth["ay"]**2 + smooth["az"]**2)
-
-    axes[3].plot(frame, raw_acc, alpha=0.5, label="Raw")
-    axes[3].plot(frame, smooth_acc, linewidth=2, label="Smoothed")
-    axes[3].set_ylabel("Acceleration Mag")
-    axes[3].set_xlabel("Frame")
-    axes[3].legend()
-    axes[3].grid(alpha=0.25)
 
     plt.tight_layout()
     plt.savefig(save_path, dpi=200)

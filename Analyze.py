@@ -27,9 +27,9 @@ import pandas as pd
 # Edit these values for each experiment.
 # ============================================================
 
-TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\D\TRIAL_Black_20261007_104137")
-FRAME_START = 59 - 15
-FRAME_END = 125
+TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\D\TRIAL_Blue_20261007_141842")
+FRAME_START = 130 - 15
+FRAME_END = 180
 
 LPF_ALPHA = 0.15
 

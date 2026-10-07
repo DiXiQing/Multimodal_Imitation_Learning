@@ -1,8 +1,7 @@
-"""Train three 15-frame window MLP models for unseen object-size generalization.
+"""Train three 15-frame window MLP models with a standard trial split.
 
-Training sizes are 2, 3, and 4 cm.
-Test sizes are 2.5, 3.5, and 4.5 cm.
-The split is fixed by object size; no test trial is used for training.
+This configuration uses the nine D9 trials and randomly holds out two trials
+for testing. The remaining seven trials are used for training.
 
 Models:
     1. window_area_only:         object_area -> finger_width
@@ -16,7 +15,7 @@ Important:
     - Training runs for a fixed number of epochs.
     - Each prediction uses the previous 15 frames, including the current frame.
     - Therefore predictions begin from the 15th usable frame of each test trial.
-    - Input data are read from grasp_data.csv.
+    - Input data are read from grasp_data_smoothed.csv.
     - No additional smoothing is performed inside this training script.
 """
 
@@ -38,8 +37,8 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D8")
-OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_size_generalization"
+DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D9")
+OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d9_7train_2test"
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
@@ -61,8 +60,8 @@ LEARNING_RATE = 1e-3
 WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 SEED = 42
-TRAIN_SIZES = (2.0, 3.0, 4.0)
-TEST_SIZES = (2.5, 3.5, 4.5)
+INPUT_CSV = "grasp_data_smoothed.csv"
+TEST_TRIALS = 2
 
 class WindowMLP(nn.Module):
     def __init__(self, window_size: int, feature_count: int, hidden_size: int = 32):
@@ -111,7 +110,7 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
     required = ["frame"] + all_features + [TARGET_COLUMN]
     trials = {}
 
-    for csv_path in sorted(data_root.glob("TRIAL_*/grasp_data.csv")):
+    for csv_path in sorted(data_root.glob(f"TRIAL_*/{INPUT_CSV}")):
         trial_name = csv_path.parent.name
         frame = pd.read_csv(csv_path)
 
@@ -129,39 +128,26 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
             print(f"[Skip] {trial_name}: fewer than {WINDOW_SIZE} rows")
             continue
 
-        # Ignore folders that do not follow the explicit size naming scheme.
-        try:
-            trial_size(trial_name)
-        except ValueError:
-            continue
-
         trials[trial_name] = frame
 
     if not trials:
-        raise RuntimeError("No usable grasp_data.csv trials were found")
+        raise RuntimeError(f"No usable {INPUT_CSV} trials were found")
 
     return trials
 
 
-def split_train_test(trials: dict[str, pd.DataFrame]):
-    train_names = []
-    test_names = []
-
-    for name in sorted(trials):
-        size = trial_size(name)
-        if size in TRAIN_SIZES:
-            train_names.append(name)
-        elif size in TEST_SIZES:
-            test_names.append(name)
-
-    missing_train = [size for size in TRAIN_SIZES if not any(trial_size(name) == size for name in train_names)]
-    missing_test = [size for size in TEST_SIZES if not any(trial_size(name) == size for name in test_names)]
-    if missing_train or missing_test:
+def split_train_test(trials: dict[str, pd.DataFrame], test_trials: int, seed: int):
+    names = sorted(trials)
+    if len(names) <= test_trials:
         raise ValueError(
-            f"Missing required sizes. train={missing_train}, test={missing_test}"
+            f"Found {len(names)} trial(s), but test_trials={test_trials}."
         )
 
-    return sorted(train_names), sorted(test_names)
+    rng = np.random.default_rng(seed)
+    shuffled = list(rng.permutation(names))
+    test_names = sorted(shuffled[:test_trials])
+    train_names = sorted(shuffled[test_trials:])
+    return train_names, test_names
 
 
 def make_windows(trials: dict[str, pd.DataFrame], trial_names: list[str], feature_columns: list[str], window_size: int):
@@ -456,7 +442,7 @@ def plot_overall_comparison(summary: pd.DataFrame, output_dir: Path):
 def make_size_summary(metrics: pd.DataFrame):
     rows = []
 
-    for size in (*TRAIN_SIZES, *TEST_SIZES):
+    for size in sorted(metrics["object_size_cm"].dropna().unique()):
         for model_name in MODEL_SPECS:
             part = metrics.loc[(metrics["object_size_cm"] == size) & (metrics["model"] == model_name)]
 
@@ -506,23 +492,23 @@ def main() -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     trials = load_trials(args.data_root)
-    train_names, test_names = split_train_test(trials)
+    train_names, test_names = split_train_test(trials, TEST_TRIALS, args.seed)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     save_split(train_names, test_names, args.output_dir)
 
     print(f"Device: {device}")
     print(f"Window: {args.window_size} frames")
-    print("Input CSV: grasp_data.csv")
+    print(f"Input CSV: {INPUT_CSV}")
     print("Additional smoothing in training: OFF")
 
     print(f"\nTraining trials: {len(train_names)}")
-    for size in TRAIN_SIZES:
+    for size in sorted({trial_size(name) for name in train_names}):
         names = [name for name in train_names if trial_size(name) == size]
         print(f"  {size:g} cm: {len(names)} -> {', '.join(names)}")
 
     print(f"\nTest trials: {len(test_names)}")
-    for size in TEST_SIZES:
+    for size in sorted({trial_size(name) for name in test_names}):
         names = [name for name in test_names if trial_size(name) == size]
         print(f"  {size:g} cm: {len(names)} -> {', '.join(names)}")
 

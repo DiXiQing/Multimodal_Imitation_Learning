@@ -23,17 +23,17 @@ import pandas as pd
 # Configuration
 # ============================================================
 
-TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D5\TRIAL_Red_20261006_192925")
+TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\D\TRIAL_Blue_20261007_141842")
 
 # Select repair mode here: "object", "finger", or "both"
 REPAIR_MODE = "finger"
 
 # Object-area repair ranges: [(start_frame, end_frame), ...]
-OBJECT_REPAIR_RANGES = [(109, 116)]
+OBJECT_REPAIR_RANGES = [(115, 134)]
 
 # Finger-width repair ranges: [(start_frame, end_frame, target_finger_width_px), ...]
 # Example for first 15 stationary frames:
-FINGER_REPAIR_RANGES = [(100, 122, 20.0)]
+FINGER_REPAIR_RANGES = [(115, 134, 15.0)]
 
 OBJECT_JITTER_RATIO = 0.015
 OBJECT_MIN_JITTER_PX = 6.0
