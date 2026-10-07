@@ -1,0 +1,24 @@
+D6 stability analysis: 15 trials
+
+Three largest composite shape deviations:
+- TRIAL_Black_20261007_104836: 0.2296
+- TRIAL_Black_20261007_105342: 0.1928
+- TRIAL_Black_20261007_104137: 0.1348
+
+Three smallest composite shape deviations:
+- TRIAL_Black_20261007_104953: 0.0516
+- TRIAL_Black_20261007_105202: 0.0585
+- TRIAL_Black_20261007_104705: 0.0843
+
+Aggregate median ± SD:
+- start_width_median: 11.3140 ± 6.6416
+- max_width: 259.7880 ± 12.4088
+- final_width_median: 130.1880 ± 10.9996
+- start_area_median: 6424.0000 ± 502.4771
+- final_area_median: 18942.0000 ± 1628.2117
+- max_width_progress_pct: 57.0000 ± 4.8941
+- peak_speed_progress_pct: 56.0000 ± 3.7759
+- max_width_minus_peak_speed_pct: 2.0000 ± 3.6345
+- area_at_max_width_over_final: 0.5837 ± 0.0629
+- area_negative_step_fraction: 0.2308 ± 0.0433
+- composite_shape_deviation: 0.0965 ± 0.0474

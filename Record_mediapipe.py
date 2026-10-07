@@ -60,7 +60,7 @@ from datetime import datetime
 TRIAL_NAME = f"TRIAL_Black_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
-OBJECT_COLOR = "black"
+OBJECT_COLOR = "blue"
 
 BACKUP_DIR = r"Data\BackupData\D"
 
@@ -78,6 +78,10 @@ VIDEO_PATH = os.path.join(OUTPUT_DIR, "recorded_video.mp4")
 # ============================================================
 
 IMU_ADDRESS = "D8:76:A8:5D:CC:CF"
+
+# BLE 连接失败时自动重试，避免一次超时直接终止整次录制
+IMU_MAX_CONNECT_ATTEMPTS = 3
+IMU_RETRY_DELAY_SECONDS = 2.0
 
 # WT9011DCL-BT50
 #
@@ -527,7 +531,13 @@ def record():
         cap.release()
         return
 
-    hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.3, min_tracking_confidence=0.3)
+    hands = mp_hands.Hands(
+        static_image_mode=False,
+        max_num_hands=1,
+        model_complexity=1,
+        min_detection_confidence=0.6,
+        min_tracking_confidence=0.6,
+    )
 
     # ========================================================
     # CSV
@@ -815,12 +825,13 @@ def record():
     # IMU Async Task
     # ========================================================
 
-    async def imu_record_task():
+    async def imu_record_once():
 
         try:
 
             async with BleakClient(
-                IMU_ADDRESS
+                IMU_ADDRESS,
+                timeout=20.0
             ) as client:
 
                 print()
@@ -947,12 +958,67 @@ def record():
 
         except Exception as e:
 
-            print()
-            print(
-                f"[IMU] Error: {e}"
-            )
+            import traceback
 
-            state.running = False
+            print(
+                f"[IMU] Error: "
+                f"type={type(e).__name__}, "
+                f"repr={e!r}"
+            )
+            traceback.print_exc()
+
+            # 把异常交给外层重试逻辑处理。重试期间保持 calibrating=True，
+            # 避免主线程在两次连接之间提前开始录制。
+            raise
+
+
+    # ========================================================
+    # IMU Async Task with automatic retries
+    # ========================================================
+
+    async def imu_record_task():
+
+        for attempt in range(1, IMU_MAX_CONNECT_ATTEMPTS + 1):
+
+            if not state.running:
+                return
+
+            # 每次重试前保持主线程等待校准的状态；最终失败时再放行。
+            with state.lock:
+                state.calibrating = True
+
+            if attempt > 1:
+                print()
+                print(
+                    f"[IMU] 第 {attempt}/{IMU_MAX_CONNECT_ATTEMPTS} 次重试连接..."
+                )
+
+            try:
+                await imu_record_once()
+                return
+
+            except Exception as e:
+                print(
+                    f"[IMU] 连接/运行失败（第 {attempt}/"
+                    f"{IMU_MAX_CONNECT_ATTEMPTS} 次）："
+                    f"{type(e).__name__}: {e}"
+                )
+
+                if attempt < IMU_MAX_CONNECT_ATTEMPTS:
+                    print(
+                        f"[IMU] {IMU_RETRY_DELAY_SECONDS:.1f} 秒后自动重试"
+                    )
+                    await asyncio.sleep(IMU_RETRY_DELAY_SECONDS)
+                else:
+                    with state.lock:
+                        state.calibrating = False
+
+                    print()
+                    print(
+                        "[IMU] 3 次连接均失败，继续进行摄像头录制；"
+                        "本次记录的 IMU 数据为空/为默认值。"
+                    )
+                    return
 
 
     # ========================================================

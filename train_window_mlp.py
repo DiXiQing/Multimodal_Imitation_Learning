@@ -1,8 +1,8 @@
-"""Train three 15-frame window MLP models using all available trials except held-out test trials.
+"""Train three 15-frame window MLP models for unseen object-size generalization.
 
-Dataset size is not fixed.
-Select the target color(s) with COLORS.
-All remaining trials after held-out test trial(s) are used for training.
+Training sizes are 2, 3, and 4 cm.
+Test sizes are 2.5, 3.5, and 4.5 cm.
+The split is fixed by object size; no test trial is used for training.
 
 Models:
     1. window_area_only:         object_area -> finger_width
@@ -16,7 +16,7 @@ Important:
     - Training runs for a fixed number of epochs.
     - Each prediction uses the previous 15 frames, including the current frame.
     - Therefore predictions begin from the 15th usable frame of each test trial.
-    - Input data are read from grasp_data_smoothed.csv.
+    - Input data are read from grasp_data.csv.
     - No additional smoothing is performed inside this training script.
 """
 
@@ -38,8 +38,8 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D5")
-OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_auto_split"
+DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D8")
+OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_size_generalization"
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
@@ -60,9 +60,9 @@ BATCH_SIZE = 32
 LEARNING_RATE = 1e-3
 WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
-TEST_TRIALS_PER_COLOR = 3
 SEED = 42
-COLORS = ("Red",)
+TRAIN_SIZES = (2.0, 3.0, 4.0)
+TEST_SIZES = (2.5, 3.5, 4.5)
 
 class WindowMLP(nn.Module):
     def __init__(self, window_size: int, feature_count: int, hidden_size: int = 32):
@@ -89,11 +89,21 @@ def set_seed(seed: int) -> None:
         torch.cuda.manual_seed_all(seed)
 
 
-def trial_color(trial_name: str) -> str:
-    for color in COLORS:
-        if f"_{color}_" in trial_name:
-            return color
-    raise ValueError(f"Cannot determine color from trial name: {trial_name}")
+def trial_size(trial_name: str) -> float:
+    size_tokens = {
+        "_2cm_": 2.0,
+        "_2p5cm_": 2.5,
+        "_3cm_": 3.0,
+        "_3p5cm_": 3.5,
+        "_4cm_": 4.0,
+        "_4p5cm_": 4.5,
+    }
+
+    for token, size in size_tokens.items():
+        if token in trial_name:
+            return size
+
+    raise ValueError(f"Cannot determine object size from trial name: {trial_name}")
 
 
 def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
@@ -101,7 +111,7 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
     required = ["frame"] + all_features + [TARGET_COLUMN]
     trials = {}
 
-    for csv_path in sorted(data_root.glob("TRIAL_*/grasp_data_smoothed.csv")):
+    for csv_path in sorted(data_root.glob("TRIAL_*/grasp_data.csv")):
         trial_name = csv_path.parent.name
         frame = pd.read_csv(csv_path)
 
@@ -119,32 +129,37 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
             print(f"[Skip] {trial_name}: fewer than {WINDOW_SIZE} rows")
             continue
 
-        # Ignore trials whose color is not selected in COLORS.
-        if not any(f"_{color}_" in trial_name for color in COLORS):
+        # Ignore folders that do not follow the explicit size naming scheme.
+        try:
+            trial_size(trial_name)
+        except ValueError:
             continue
 
         trials[trial_name] = frame
 
     if not trials:
-        raise RuntimeError("No usable grasp_data_smoothed.csv trials were found")
+        raise RuntimeError("No usable grasp_data.csv trials were found")
 
     return trials
 
 
-def split_train_test(trials: dict[str, pd.DataFrame], test_per_color: int, seed: int):
-    rng = np.random.default_rng(seed)
+def split_train_test(trials: dict[str, pd.DataFrame]):
     train_names = []
     test_names = []
 
-    for color in COLORS:
-        names = sorted([name for name in trials if trial_color(name) == color])
+    for name in sorted(trials):
+        size = trial_size(name)
+        if size in TRAIN_SIZES:
+            train_names.append(name)
+        elif size in TEST_SIZES:
+            test_names.append(name)
 
-        if len(names) <= test_per_color:
-            raise ValueError(f"{color}: found {len(names)} trial(s), but test_per_color={test_per_color}. Need at least {test_per_color + 1} trials.")
-
-        shuffled = list(rng.permutation(names))
-        test_names.extend(shuffled[:test_per_color])
-        train_names.extend(shuffled[test_per_color:])
+    missing_train = [size for size in TRAIN_SIZES if not any(trial_size(name) == size for name in train_names)]
+    missing_test = [size for size in TEST_SIZES if not any(trial_size(name) == size for name in test_names)]
+    if missing_train or missing_test:
+        raise ValueError(
+            f"Missing required sizes. train={missing_train}, test={missing_test}"
+        )
 
     return sorted(train_names), sorted(test_names)
 
@@ -358,7 +373,7 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
 
             rows.append({
                 "trial": trial_name,
-                "object_color": trial_color(trial_name),
+                "object_size_cm": trial_size(trial_name),
                 "model": model_name,
                 "rmse_px": rmse,
                 "mae_px": mae,
@@ -438,15 +453,15 @@ def plot_overall_comparison(summary: pd.DataFrame, output_dir: Path):
     plt.close()
 
 
-def make_color_summary(metrics: pd.DataFrame):
+def make_size_summary(metrics: pd.DataFrame):
     rows = []
 
-    for color in COLORS:
+    for size in (*TRAIN_SIZES, *TEST_SIZES):
         for model_name in MODEL_SPECS:
-            part = metrics.loc[(metrics["object_color"] == color) & (metrics["model"] == model_name)]
+            part = metrics.loc[(metrics["object_size_cm"] == size) & (metrics["model"] == model_name)]
 
             rows.append({
-                "object_color": color,
+                "object_size_cm": size,
                 "model": model_name,
                 "rmse_mean_px": part["rmse_px"].mean(),
                 "rmse_sd_px": part["rmse_px"].std(ddof=1),
@@ -463,16 +478,16 @@ def save_split(train_names: list[str], test_names: list[str], output_dir: Path):
     rows = []
 
     for name in train_names:
-        rows.append({"trial": name, "object_color": trial_color(name), "split": "train"})
+        rows.append({"trial": name, "object_size_cm": trial_size(name), "split": "train"})
 
     for name in test_names:
-        rows.append({"trial": name, "object_color": trial_color(name), "split": "test"})
+        rows.append({"trial": name, "object_size_cm": trial_size(name), "split": "test"})
 
-    pd.DataFrame(rows).sort_values(["object_color", "split", "trial"]).to_csv(output_dir / "data_split.csv", index=False, encoding="utf-8-sig")
+    pd.DataFrame(rows).sort_values(["object_size_cm", "split", "trial"]).to_csv(output_dir / "data_split.csv", index=False, encoding="utf-8-sig")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Train Window MLP models with automatic train/test split")
+    parser = argparse.ArgumentParser(description="Train Window MLP models for unseen object-size generalization")
     parser.add_argument("--data-root", type=Path, default=DATA_ROOT)
     parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
     parser.add_argument("--window-size", type=int, default=WINDOW_SIZE)
@@ -481,7 +496,6 @@ def main() -> None:
     parser.add_argument("--lr", type=float, default=LEARNING_RATE)
     parser.add_argument("--weight-decay", type=float, default=WEIGHT_DECAY)
     parser.add_argument("--hidden-size", type=int, default=HIDDEN_SIZE)
-    parser.add_argument("--test-per-color", type=int, default=TEST_TRIALS_PER_COLOR)
     parser.add_argument("--seed", type=int, default=SEED)
     args = parser.parse_args()
 
@@ -492,25 +506,25 @@ def main() -> None:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     trials = load_trials(args.data_root)
-    train_names, test_names = split_train_test(trials, args.test_per_color, args.seed)
+    train_names, test_names = split_train_test(trials)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     save_split(train_names, test_names, args.output_dir)
 
     print(f"Device: {device}")
     print(f"Window: {args.window_size} frames")
-    print("Input CSV: grasp_data_smoothed.csv")
+    print("Input CSV: grasp_data.csv")
     print("Additional smoothing in training: OFF")
 
     print(f"\nTraining trials: {len(train_names)}")
-    for color in COLORS:
-        names = [name for name in train_names if trial_color(name) == color]
-        print(f"  {color}: {len(names)} -> {', '.join(names)}")
+    for size in TRAIN_SIZES:
+        names = [name for name in train_names if trial_size(name) == size]
+        print(f"  {size:g} cm: {len(names)} -> {', '.join(names)}")
 
     print(f"\nTest trials: {len(test_names)}")
-    for color in COLORS:
-        names = [name for name in test_names if trial_color(name) == color]
-        print(f"  {color}: {len(names)} -> {', '.join(names)}")
+    for size in TEST_SIZES:
+        names = [name for name in test_names if trial_size(name) == size]
+        print(f"  {size:g} cm: {len(names)} -> {', '.join(names)}")
 
     model_paths = {}
 
@@ -525,8 +539,8 @@ def main() -> None:
     overall_summary.to_csv(args.output_dir / "overall_model_summary.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
     plot_overall_comparison(overall_summary, args.output_dir)
 
-    color_summary = make_color_summary(metrics)
-    color_summary.to_csv(args.output_dir / "model_summary_by_color.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
+    size_summary = make_size_summary(metrics)
+    size_summary.to_csv(args.output_dir / "model_summary_by_size.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
 
     print(f"\nTest results across {len(test_names)} held-out trial(s)")
     for _, row in overall_summary.iterrows():
@@ -541,7 +555,7 @@ def main() -> None:
     print("  data_split.csv")
     print("  test_trial_metrics.csv")
     print("  overall_model_summary.csv")
-    print("  model_summary_by_color.csv")
+    print("  model_summary_by_size.csv")
     print("  overall_model_comparison.png")
     print("  models/*.pth")
     print("  test_predictions/*.png")

@@ -129,7 +129,7 @@ def main() -> None:
         axis.grid(alpha=0.25)
         axis.legend(loc="best")
     axes[-1].set_xlabel("Normalized movement progress (%)")
-    fig.suptitle("D5 trial stability: red = three largest composite deviations")
+    fig.suptitle(f"{ROOT.name} trial stability: red = three largest composite deviations")
     fig.tight_layout()
     fig.savefig(OUT / "normalized_overlays.png", dpi=160)
     plt.close(fig)
@@ -158,7 +158,7 @@ def main() -> None:
     pd.DataFrame(correlation_rows).to_csv(OUT / "correlation_to_median.csv", index=False)
 
     lines = [
-        f"D5 stability analysis: {len(trials)} trials",
+        f"{ROOT.name} stability analysis: {len(trials)} trials",
         "",
         "Three largest composite shape deviations:",
     ]

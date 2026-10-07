@@ -21,7 +21,7 @@ import pandas as pd
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D5")
+DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D6")
 
 INPUT_CSV = "grasp_data.csv"
 OUTPUT_CSV = "grasp_data_smoothed.csv"
