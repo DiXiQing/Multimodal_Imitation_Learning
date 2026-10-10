@@ -1,0 +1,15 @@
+{
+  "operation": "Remove first 15 frames and append next 15 actual recorded frames; regenerate Analyze and Smooth outputs",
+  "original_frame_range": [
+    44,
+    125
+  ],
+  "new_frame_range": [
+    59,
+    140
+  ],
+  "rows": 82,
+  "backup": "analysis/104137_before_crop_shift15_20261010_203344",
+  "source": "camera.csv and imu.csv",
+  "synthetic_padding": false
+}

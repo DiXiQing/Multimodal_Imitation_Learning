@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "purpose": "Declared sensitivity experiment: modify finger-width label rise shape",
+  "field": "finger_width",
+  "relative_onset_frame": 15,
+  "absolute_onset_frame": 74,
+  "baseline_px": 17.692,
+  "preserved_raw_peak_px": 242.87,
+  "preserved_raw_peak_relative_frame": 38.0,
+  "method": "Flat baseline through relative frame 15, cubic smoothstep to original raw peak; original descending segment retained",
+  "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\analysis\\104137_before_finger_rise_20261010_203900",
+  "source_csv": "grasp_data.csv",
+  "other_columns_unchanged": true
+}

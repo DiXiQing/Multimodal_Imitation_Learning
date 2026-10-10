@@ -1,0 +1,21 @@
+{
+  "kind": "synthetic sensitivity experiment; finger_width target is modified, not original measured data",
+  "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\analysis\\d9_110703_before_local_peak_20261010_142622",
+  "prior_adjustment": "ay x1.5 retained in raw input",
+  "original_smoothed_peak_frame": 61.0,
+  "time_warp": "query_frame = frame + 2*Gaussian(frame, center=peak-2, sigma=6); tails cut at 18 frames",
+  "width_multiplier": "1 + 0.10*Gaussian weight",
+  "co_warped_columns": [
+    "object_area",
+    "ax",
+    "ay",
+    "az",
+    "mag",
+    "velocity"
+  ],
+  "smoothing": "regenerated with Smooth.py",
+  "frame_and_camera_time": "unchanged",
+  "model_run": false,
+  "improvement_verified": false,
+  "existing_analyze_plots": "pre-adjustment; use synthetic_local_peak_comparison.png and updated smoothing_preview.png"
+}

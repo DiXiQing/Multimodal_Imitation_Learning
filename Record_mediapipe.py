@@ -44,6 +44,7 @@ import threading
 import time
 import csv
 import os
+import ctypes
 
 import cv2
 import numpy as np
@@ -57,10 +58,10 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_Black_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Size_4cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
-OBJECT_COLOR = "blue"
+OBJECT_COLOR = "black"
 
 BACKUP_DIR = r"Data\BackupData\D"
 
@@ -117,7 +118,7 @@ REALTIME_LPF_ALPHA = 0.15
 # Camera
 # ============================================================
 
-CAMERA_INDEX = 0
+CAMERA_INDEX = 1
 
 FRAME_W = 640
 FRAME_H = 1000
@@ -1097,7 +1098,7 @@ def record():
     print()
     print("录制过程中不进行任何推理")
     print()
-    print("按 Q 结束录制")
+    print("按 Q 结束录制（Windows 下无需点击画面窗口）")
     print()
 
 
@@ -1106,6 +1107,15 @@ def record():
     # ========================================================
 
     frame_idx = 0
+
+    # Windows global key state; retain OpenCV key handling on other systems.
+    get_key_state = None
+    if os.name == "nt":
+        get_key_state = ctypes.WinDLL("user32", use_last_error=True).GetAsyncKeyState
+        get_key_state.argtypes = [ctypes.c_int]
+        get_key_state.restype = ctypes.c_short
+    # Ignore a Q held before recording starts until it has been released.
+    global_q_armed = get_key_state is None or not (get_key_state(0x51) & 0x8000)
 
     frame_interval = (
         1.0 /
@@ -1346,7 +1356,14 @@ def record():
                 0xFF
             )
 
-            if key == ord("q"):
+            global_q_pressed = False
+            if get_key_state is not None:
+                q_down = bool(get_key_state(0x51) & 0x8000)
+                if not q_down:
+                    global_q_armed = True
+                global_q_pressed = global_q_armed and q_down
+
+            if key in (ord("q"), ord("Q")) or global_q_pressed:
 
                 print()
                 print(

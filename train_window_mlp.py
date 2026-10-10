@@ -1,22 +1,11 @@
-"""Train three 15-frame window MLP models with a standard trial split.
+"""Train two causal window MLP models with single-size or generalization splits.
 
-This configuration uses the nine D9 trials and randomly holds out two trials
-for testing. The remaining seven trials are used for training.
-
-Models:
-    1. window_area_only:         object_area -> finger_width
-    2. window_area_velocity:     object_area + velocity -> finger_width
-    3. window_area_acceleration: object_area + ax + ay + az -> finger_width
-
-Important:
-    - Complete trials are kept separate.
-    - Test trials are NEVER used during training.
-    - No validation split is used.
-    - Training runs for a fixed number of epochs.
-    - Each prediction uses the previous 15 frames, including the current frame.
-    - Therefore predictions begin from the 15th usable frame of each test trial.
-    - Input data are read from grasp_data_smoothed.csv.
-    - No additional smoothing is performed inside this training script.
+Compare object_area against object_area + ax + ay + az.
+Velocity is neither required nor used. Read grasp_data_smoothed.csv without
+additional smoothing. Keep complete test trials out of training and normalize
+using training data only. Defaults: 15-frame windows and 1000 epochs.
+Select RUN_MODE in the configuration. Generalization trains on 3/4.5 cm,
+holds out trials within each size, and evaluates all 4 cm trials separately.
 """
 
 from __future__ import annotations
@@ -37,18 +26,28 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\临时数据\D9")
-OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d9_7train_2test"
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10\3")
+OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d9_no_velocity"
+
+# Choose in code: "single_size" or "generalization".
+# single_size uses DATA_ROOT, TEST_TRIALS and TEST_TRIAL_NAMES below.
+RUN_MODE = "generalization"
+GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10")
+GENERALIZATION_OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d10_generalization"
+TRAIN_SIZE_FOLDERS = ("3", "4.5")
+GENERALIZATION_SIZE_FOLDER = "4"
+# Hold out complete trials separately within each training size.
+SELF_TEST_TRIALS_BY_FOLDER = {"3": 5, "4.5": 4}
+# Optional exact folder names; [] uses the seeded split for that size.
+SELF_TEST_NAMES_BY_FOLDER = {"3": [], "4.5": []}
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
-    "window_area_velocity": ["object_area", "velocity"],
     "window_area_acceleration": ["object_area", "ax", "ay", "az"],
 }
 
 MODEL_LABELS = {
     "window_area_only": "Area only",
-    "window_area_velocity": "Area + velocity",
     "window_area_acceleration": "Area + acceleration",
 }
 
@@ -61,7 +60,11 @@ WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 SEED = 42
 INPUT_CSV = "grasp_data_smoothed.csv"
-TEST_TRIALS = 2
+TEST_TRIALS = 4
+
+# Edit this list to choose fixed test trials. All remaining trials train.
+# Set to None or [] to use the random split controlled by TEST_TRIALS and SEED.
+TEST_TRIAL_NAMES = []
 
 class WindowMLP(nn.Module):
     def __init__(self, window_size: int, feature_count: int, hidden_size: int = 32):
@@ -131,7 +134,7 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
         trials[trial_name] = frame
 
     if not trials:
-        raise RuntimeError(f"No usable {INPUT_CSV} trials were found")
+        raise RuntimeError(f"No usable {INPUT_CSV} trials were found in {data_root} (expected TRIAL_*/{INPUT_CSV})")
 
     return trials
 
@@ -148,6 +151,50 @@ def split_train_test(trials: dict[str, pd.DataFrame], test_trials: int, seed: in
     test_names = sorted(shuffled[:test_trials])
     train_names = sorted(shuffled[test_trials:])
     return train_names, test_names
+
+
+def choose_split(trials, test_names, test_count, seed):
+    if not test_names:
+        return split_train_test(trials, test_count, seed)
+    test_names = sorted(set(test_names))
+    missing = sorted(set(test_names) - set(trials))
+    if missing:
+        raise ValueError(f"Test trials not found among usable input trials: {missing}")
+    train_names = sorted(set(trials) - set(test_names))
+    if not train_names:
+        raise ValueError("At least one trial must remain for training")
+    return train_names, test_names
+
+
+def prepare_split(args):
+    if args.mode == "single_size":
+        trials = load_trials(args.data_root)
+        if len({trial_size(name) for name in trials}) != 1:
+            raise ValueError("single_size requires exactly one object size")
+        train, test = choose_split(trials, args.test_names, args.test_trials, args.seed)
+        return trials, train, test, []
+    if len(set(TRAIN_SIZE_FOLDERS)) != len(TRAIN_SIZE_FOLDERS):
+        raise ValueError("Training size folders must be unique")
+    if GENERALIZATION_SIZE_FOLDER in TRAIN_SIZE_FOLDERS:
+        raise ValueError("Generalization size must not be used for training")
+    trials, train, test = {}, [], []
+    for folder in (*TRAIN_SIZE_FOLDERS, GENERALIZATION_SIZE_FOLDER):
+        part = load_trials(args.generalization_root / folder)
+        if any(trial_size(name) != float(folder) for name in part):
+            raise ValueError(f"Trial size does not match folder {folder}")
+        if set(part) & set(trials):
+            raise ValueError("Duplicate trial names across size folders")
+        trials.update(part)
+        if folder == GENERALIZATION_SIZE_FOLDER:
+            generalization = sorted(part)
+        else:
+            size_train, size_test = choose_split(
+                part, SELF_TEST_NAMES_BY_FOLDER.get(folder),
+                SELF_TEST_TRIALS_BY_FOLDER[folder], args.seed,
+            )
+            train.extend(size_train)
+            test.extend(size_test)
+    return trials, sorted(train), sorted(test), generalization
 
 
 def make_windows(trials: dict[str, pd.DataFrame], trial_names: list[str], feature_columns: list[str], window_size: int):
@@ -332,8 +379,8 @@ def predict_trial(checkpoint_path: Path, frame: pd.DataFrame, device: torch.devi
     return target.astype(float), prediction.astype(float), predicted_frames
 
 
-def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], model_paths: dict[str, Path], args, device: torch.device):
-    prediction_dir = args.output_dir / "test_predictions"
+def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], model_paths: dict[str, Path], args, device: torch.device, prediction_folder="test_predictions"):
+    prediction_dir = args.output_dir / prediction_folder
     prediction_dir.mkdir(parents=True, exist_ok=True)
 
     rows = []
@@ -345,7 +392,7 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
 
         predictions = {}
         metrics = {}
-        common_prediction_frames = None
+        prediction_frames_by_model = {}
 
         for model_name, model_path in model_paths.items():
             target, prediction, prediction_frames = predict_trial(model_path, frame, device)
@@ -354,8 +401,7 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
             predictions[model_name] = prediction
             metrics[model_name] = (rmse, mae, r2)
 
-            if common_prediction_frames is None:
-                common_prediction_frames = prediction_frames
+            prediction_frames_by_model[model_name] = prediction_frames
 
             rows.append({
                 "trial": trial_name,
@@ -373,7 +419,7 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
 
         for model_name in MODEL_SPECS:
             rmse = metrics[model_name][0]
-            plt.plot(common_prediction_frames, predictions[model_name], linewidth=2, label=f"{MODEL_LABELS[model_name]} (RMSE {rmse:.1f}px)")
+            plt.plot(prediction_frames_by_model[model_name], predictions[model_name], linewidth=2, label=f"{MODEL_LABELS[model_name]} (RMSE {rmse:.1f}px)")
 
         plt.title(trial_name)
         plt.xlabel("Frame")
@@ -460,7 +506,7 @@ def make_size_summary(metrics: pd.DataFrame):
     return pd.DataFrame(rows)
 
 
-def save_split(train_names: list[str], test_names: list[str], output_dir: Path):
+def save_split(train_names: list[str], test_names: list[str], output_dir: Path, generalization_names=()):
     rows = []
 
     for name in train_names:
@@ -469,13 +515,18 @@ def save_split(train_names: list[str], test_names: list[str], output_dir: Path):
     for name in test_names:
         rows.append({"trial": name, "object_size_cm": trial_size(name), "split": "test"})
 
+    for name in generalization_names:
+        rows.append({"trial": name, "object_size_cm": trial_size(name), "split": "generalization_test"})
+
     pd.DataFrame(rows).sort_values(["object_size_cm", "split", "trial"]).to_csv(output_dir / "data_split.csv", index=False, encoding="utf-8-sig")
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Train Window MLP models for unseen object-size generalization")
+    parser = argparse.ArgumentParser(description="Compare area-only and area-plus-acceleration Window MLP models")
+    parser.add_argument("--mode", choices=["single_size", "generalization"], default=RUN_MODE)
+    parser.add_argument("--generalization-root", type=Path, default=GENERALIZATION_ROOT)
     parser.add_argument("--data-root", type=Path, default=DATA_ROOT)
-    parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--window-size", type=int, default=WINDOW_SIZE)
     parser.add_argument("--epochs", type=int, default=EPOCHS)
     parser.add_argument("--batch-size", type=int, default=BATCH_SIZE)
@@ -483,20 +534,36 @@ def main() -> None:
     parser.add_argument("--weight-decay", type=float, default=WEIGHT_DECAY)
     parser.add_argument("--hidden-size", type=int, default=HIDDEN_SIZE)
     parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--test-trials", type=int, default=TEST_TRIALS)
+    parser.add_argument(
+        "--test-names", nargs="+", default=TEST_TRIAL_NAMES,
+        help="Exact trial folder names to hold out; overrides --test-trials.",
+    )
     args = parser.parse_args()
+    if args.output_dir is None:
+        args.output_dir = GENERALIZATION_OUTPUT_DIR if args.mode == "generalization" else OUTPUT_DIR
 
     if args.window_size < 2:
         parser.error("--window-size must be at least 2")
 
+    if args.test_trials < 1:
+        parser.error("--test-trials must be at least 1")
+
     set_seed(args.seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    trials = load_trials(args.data_root)
-    train_names, test_names = split_train_test(trials, TEST_TRIALS, args.seed)
+    try:
+        trials, train_names, test_names, generalization_names = prepare_split(args)
+    except (ValueError, RuntimeError, KeyError) as exc:
+        parser.error(str(exc))
+
+    if not test_names:
+        parser.error("At least one test trial is required; set TEST_TRIAL_NAMES or TEST_TRIALS")
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    save_split(train_names, test_names, args.output_dir)
+    save_split(train_names, test_names, args.output_dir, generalization_names)
 
+    print(f"Mode: {args.mode}")
     print(f"Device: {device}")
     print(f"Window: {args.window_size} frames")
     print(f"Input CSV: {INPUT_CSV}")
@@ -511,6 +578,10 @@ def main() -> None:
     for size in sorted({trial_size(name) for name in test_names}):
         names = [name for name in test_names if trial_size(name) == size]
         print(f"  {size:g} cm: {len(names)} -> {', '.join(names)}")
+
+    if generalization_names:
+        print(f"\nGeneralization trials (never used in training): {len(generalization_names)}")
+        print("  " + ", ".join(generalization_names))
 
     model_paths = {}
 
@@ -527,6 +598,21 @@ def main() -> None:
 
     size_summary = make_size_summary(metrics)
     size_summary.to_csv(args.output_dir / "model_summary_by_size.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
+
+    if generalization_names:
+        generalization_metrics = evaluate_and_plot(
+            trials, generalization_names, model_paths, args, device,
+            prediction_folder="generalization_predictions",
+        )
+        generalization_metrics.to_csv(args.output_dir / "generalization_trial_metrics.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
+        generalization_summary = make_overall_summary(generalization_metrics)
+        generalization_summary.to_csv(args.output_dir / "generalization_model_summary.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
+        comparison_dir = args.output_dir / "generalization_comparison"
+        comparison_dir.mkdir(exist_ok=True)
+        plot_overall_comparison(generalization_summary, comparison_dir)
+        print("\nGeneralization results (4 cm):")
+        for _, row in generalization_summary.iterrows():
+            print(f"{MODEL_LABELS[row['model']]}: RMSE {row['rmse_mean_px']:.2f}px | MAE {row['mae_mean_px']:.2f}px | R2 {row['r2_mean']:.3f}")
 
     print(f"\nTest results across {len(test_names)} held-out trial(s)")
     for _, row in overall_summary.iterrows():
@@ -545,6 +631,10 @@ def main() -> None:
     print("  overall_model_comparison.png")
     print("  models/*.pth")
     print("  test_predictions/*.png")
+    if generalization_names:
+        print("  generalization_trial_metrics.csv")
+        print("  generalization_model_summary.csv")
+        print("  generalization_predictions/*.png")
 
 
 if __name__ == "__main__":

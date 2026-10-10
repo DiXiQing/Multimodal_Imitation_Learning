@@ -11,6 +11,8 @@ Outputs:
   grasp_data.csv (overwritten)
   grasp_curve.png
   velocity_3d_speed.png
+  grasp_data_smoothed.csv (existing causal smoothing rules)
+  smoothing_preview.png
 """
 
 from __future__ import annotations
@@ -21,15 +23,16 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from Smooth import process_trial
 
 
 # ============================================================
 # Edit these values for each experiment.
 # ============================================================
 
-TRIAL_DIR = Path(r"D:\Code\Multimodal_Imitation_Learning\Data\BackupData\D\TRIAL_Blue_20261007_141842")
-FRAME_START = 130 - 15
-FRAME_END = 180
+TRIAL_DIR = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10\4\TRIAL_Size_4cm_20261010_163854")
+FRAME_START = 366 - 15
+FRAME_END = 422
 
 LPF_ALPHA = 0.15
 
@@ -225,6 +228,10 @@ def main() -> None:
     print(f"Saved CSV: {output_csv}")
     print(f"Saved grasp curve: {grasp_curve_path}")
     print(f"Saved plot: {output_plot}")
+
+    # Smooth only the CSV just generated, including when --output-dir is used.
+    print("\nApplying smoothing...")
+    process_trial(output_csv)
 
 
 if __name__ == "__main__":
