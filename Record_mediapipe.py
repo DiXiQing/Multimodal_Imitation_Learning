@@ -58,7 +58,7 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_Size_4cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Size_2p5cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
 OBJECT_COLOR = "black"
@@ -174,10 +174,10 @@ OBJECT_BOX_COLORS = {
     "blue": (255, 0, 0),
 }
 
-# 彩色物体在远处的轮廓较小；黑色需要较高阈值以过滤阴影。
+# 小尺寸物体在远处轮廓较小；黑色2cm方块也需要低于1000px²的阈值。
 OBJECT_MIN_CONTOUR_AREA = {
     "red": 500.0,
-    "black": 3000.0,
+    "black": 500.0,
     "blue": 800.0,
 }
 
@@ -1172,6 +1172,9 @@ def record():
 
                 break
 
+            # Keep an untouched camera image for saved frame files.
+            raw_frame = frame.copy()
+
 
             # ------------------------------------------------
             # Camera timestamp
@@ -1337,8 +1340,8 @@ def record():
                 2,
             )
 
-            # 保存已经画好检测结果的 JPG 和视频
-            success = cv2.imwrite(frame_path, display)
+            # JPG保存原始相机图像；视频和预览保留检测结果及状态信息。
+            success = cv2.imwrite(frame_path, raw_frame)
             if not success:
                 print(f"[Camera] JPG 保存失败: {frame_name}")
 

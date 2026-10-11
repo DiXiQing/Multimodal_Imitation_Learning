@@ -1,0 +1,17 @@
+{
+  "trial": "TRIAL_Size_3p5cm_20261011_151734",
+  "frame_start": 242,
+  "frame_end": 289,
+  "peak_frame": 268,
+  "rows": 48,
+  "flags": [
+    "Low opening peak"
+  ],
+  "source_sha256": {
+    "camera.csv": "7869e8bb859a24cd4953596edca25aba7e78c9b9d1b23c50e93be4dba63d7452",
+    "imu.csv": "3ef311f7db50031f53210430e77c630de81bed62865a00e4d52334507d8a01f9"
+  },
+  "method": "15 frames before onset; close to 45% opening peak plus 15 tail frames; source CSVs retained",
+  "status": "Failed",
+  "error": "Traceback (most recent call last):\n  File \"C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Analyze.py\", line 238, in <module>\n    main()\n  File \"C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Analyze.py\", line 113, in main\n    raise ValueError(\"Selected time range has fewer than two IMU samples\")\nValueError: Selected time range has fewer than two IMU samples\n"
+}

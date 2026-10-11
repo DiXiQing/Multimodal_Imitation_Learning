@@ -1,0 +1,17 @@
+{
+  "type": "synthetic exploratory adjustment",
+  "target_initial_first5_mean": 0.07541187124805848,
+  "previous_initial_first5_mean": 0.7482938621540534,
+  "scale": 0.10077841749359856,
+  "full_adjustment_relative_frames": [
+    0,
+    14
+  ],
+  "transition_relative_frames": [
+    14,
+    29
+  ],
+  "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\analysis\\d11_before_initial_acceleration_adjustment_20261011_141504\\TRIAL_Size_2cm_20261011_123917",
+  "source_camera_imu_unchanged": true,
+  "velocity": "Preserved; not reintegrated from adjusted acceleration"
+}

@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "trial": "TRIAL_Size_4cm_20261011_150824",
+  "frame_start": 139,
+  "frame_end": 206,
+  "peak_frame": 168,
+  "rows": 68,
+  "flags": [],
+  "source_sha256": {
+    "camera.csv": "da12955f578be51862a278c122d562a137ec0a19b446927e8f9f44071b30429e",
+    "imu.csv": "ca85d8a0864181befeee47703e25c47c7dbb2761bc9028fb7111f9f077015960"
+  },
+  "method": "15 frames before onset; first stable grip plus 15 tail frames, fallback 45% closing threshold; source CSVs retained",
+  "status": "OK"
+}

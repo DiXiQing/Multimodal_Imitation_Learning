@@ -1,17 +1,18 @@
 """Train two causal window MLP models with single-size or generalization splits.
 
-Compare object_area against object_area + ax + ay + az.
+Compare object_area against object_area + acceleration magnitude.
 Velocity is neither required nor used. Read grasp_data_smoothed.csv without
 additional smoothing. Keep complete test trials out of training and normalize
 using training data only. Defaults: 15-frame windows and 1000 epochs.
-Select RUN_MODE in the configuration. Generalization trains on 3/4.5 cm,
-holds out trials within each size, and evaluates all 4 cm trials separately.
+Select RUN_MODE in the configuration. Generalization trains on 2/3/4 cm,
+holds out 5 of 20 trials per size, and evaluates 2.5/3.5/4.5 cm separately.
 """
 
 from __future__ import annotations
 
 import argparse
 import random
+from datetime import datetime
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -26,29 +27,31 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10\3")
-OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d9_no_velocity"
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10\2")
+RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+OUTPUT_DIR = Path(__file__).resolve().parent / f"singleSize_{RUN_TIMESTAMP}"
 
 # Choose in code: "single_size" or "generalization".
 # single_size uses DATA_ROOT, TEST_TRIALS and TEST_TRIAL_NAMES below.
 RUN_MODE = "generalization"
 GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10")
-GENERALIZATION_OUTPUT_DIR = Path(__file__).resolve().parent / "window_mlp_d10_generalization"
-TRAIN_SIZE_FOLDERS = ("3", "4.5")
-GENERALIZATION_SIZE_FOLDER = "4"
+GENERALIZATION_OUTPUT_DIR = Path(__file__).resolve().parent / f"generalization_{RUN_TIMESTAMP}"
+TRAIN_SIZE_FOLDERS = ("2", "3", "4")
+GENERALIZATION_SIZE_FOLDERS = ("2.5", "3.5", "4.5")
+TRAIN_TRIALS_PER_SIZE = 15
 # Hold out complete trials separately within each training size.
-SELF_TEST_TRIALS_BY_FOLDER = {"3": 5, "4.5": 4}
+SELF_TEST_TRIALS_BY_FOLDER = {"2": 5, "3": 5, "4": 5}
 # Optional exact folder names; [] uses the seeded split for that size.
-SELF_TEST_NAMES_BY_FOLDER = {"3": [], "4.5": []}
+SELF_TEST_NAMES_BY_FOLDER = {"2": [], "3": [], "4": []}
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
-    "window_area_acceleration": ["object_area", "ax", "ay", "az"],
+    "window_area_acceleration": ["object_area", "acceleration_magnitude"],
 }
 
 MODEL_LABELS = {
     "window_area_only": "Area only",
-    "window_area_acceleration": "Area + acceleration",
+    "window_area_acceleration": "Area + acceleration magnitude",
 }
 
 TARGET_COLUMN = "finger_width"
@@ -60,7 +63,7 @@ WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 SEED = 42
 INPUT_CSV = "grasp_data_smoothed.csv"
-TEST_TRIALS = 4
+TEST_TRIALS = 5
 
 # Edit this list to choose fixed test trials. All remaining trials train.
 # Set to None or [] to use the random split controlled by TEST_TRIALS and SEED.
@@ -110,7 +113,11 @@ def trial_size(trial_name: str) -> float:
 
 def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
     all_features = sorted({column for columns in MODEL_SPECS.values() for column in columns})
-    required = ["frame"] + all_features + [TARGET_COLUMN]
+    # Derive magnitude from the smoothed axes, rather than the stored mag
+    # column, which may use a different smoothing convention.
+    required = ["frame"] + [c for c in all_features if c != "acceleration_magnitude"] + [TARGET_COLUMN]
+    if "acceleration_magnitude" in all_features:
+        required += ["ax", "ay", "az"]
     trials = {}
 
     for csv_path in sorted(data_root.glob(f"TRIAL_*/{INPUT_CSV}")):
@@ -124,6 +131,11 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
 
         for column in required:
             frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+        if "acceleration_magnitude" in all_features:
+            frame["acceleration_magnitude"] = np.linalg.norm(
+                frame[["ax", "ay", "az"]].to_numpy(dtype=float), axis=1
+            )
 
         frame = frame.reset_index(drop=True)
 
@@ -175,26 +187,35 @@ def prepare_split(args):
         return trials, train, test, []
     if len(set(TRAIN_SIZE_FOLDERS)) != len(TRAIN_SIZE_FOLDERS):
         raise ValueError("Training size folders must be unique")
-    if GENERALIZATION_SIZE_FOLDER in TRAIN_SIZE_FOLDERS:
-        raise ValueError("Generalization size must not be used for training")
-    trials, train, test = {}, [], []
-    for folder in (*TRAIN_SIZE_FOLDERS, GENERALIZATION_SIZE_FOLDER):
+    if len(set(GENERALIZATION_SIZE_FOLDERS)) != len(GENERALIZATION_SIZE_FOLDERS):
+        raise ValueError("Generalization size folders must be unique")
+    if set(GENERALIZATION_SIZE_FOLDERS) & set(TRAIN_SIZE_FOLDERS):
+        raise ValueError("Generalization sizes must not be used for training")
+    trials, train, test, generalization = {}, [], [], []
+    for folder in (*TRAIN_SIZE_FOLDERS, *GENERALIZATION_SIZE_FOLDERS):
         part = load_trials(args.generalization_root / folder)
+        missing_csv = sorted(t.name for t in (args.generalization_root / folder).glob("TRIAL_*")
+                             if t.is_dir() and not (t / INPUT_CSV).exists())
+        for name in missing_csv:
+            print(f"[Skip] {name}: missing {INPUT_CSV}")
         if any(trial_size(name) != float(folder) for name in part):
             raise ValueError(f"Trial size does not match folder {folder}")
         if set(part) & set(trials):
             raise ValueError("Duplicate trial names across size folders")
         trials.update(part)
-        if folder == GENERALIZATION_SIZE_FOLDER:
-            generalization = sorted(part)
+        if folder in GENERALIZATION_SIZE_FOLDERS:
+            generalization.extend(sorted(part))
         else:
             size_train, size_test = choose_split(
                 part, SELF_TEST_NAMES_BY_FOLDER.get(folder),
                 SELF_TEST_TRIALS_BY_FOLDER[folder], args.seed,
             )
+            if len(size_train) != TRAIN_TRIALS_PER_SIZE or len(size_test) != 5:
+                raise ValueError(f"Size {folder} requires exactly 15 train and 5 test trials; "
+                                 f"found {len(size_train)} train and {len(size_test)} test")
             train.extend(size_train)
             test.extend(size_test)
-    return trials, sorted(train), sorted(test), generalization
+    return trials, sorted(train), sorted(test), sorted(generalization)
 
 
 def make_windows(trials: dict[str, pd.DataFrame], trial_names: list[str], feature_columns: list[str], window_size: int):
@@ -389,6 +410,11 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
         frame = trials[trial_name].copy()
         full_frames = frame["frame"].to_numpy(dtype=float)
         full_target = frame[TARGET_COLUMN].to_numpy(dtype=float)
+        # Use the same full-trial time mapping for measured and predicted curves.
+        frame_span = full_frames[-1] - full_frames[0]
+        if frame_span <= 0:
+            raise ValueError(f"Trial {trial_name} has no positive frame span")
+        full_progress = 100.0 * (full_frames - full_frames[0]) / frame_span
 
         predictions = {}
         metrics = {}
@@ -415,14 +441,16 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
         # Plot the full measured trajectory.
         # Window-MLP predictions start only when 15 frames are available.
         plt.figure(figsize=(14, 6))
-        plt.plot(full_frames, full_target, linewidth=3, label="Measured finger width")
+        plt.plot(full_progress, full_target, linewidth=3, label="Measured finger width")
 
         for model_name in MODEL_SPECS:
             rmse = metrics[model_name][0]
-            plt.plot(prediction_frames_by_model[model_name], predictions[model_name], linewidth=2, label=f"{MODEL_LABELS[model_name]} (RMSE {rmse:.1f}px)")
+            prediction_progress = 100.0 * (prediction_frames_by_model[model_name] - full_frames[0]) / frame_span
+            plt.plot(prediction_progress, predictions[model_name], linewidth=2, label=f"{MODEL_LABELS[model_name]} (RMSE {rmse:.1f}px)")
 
         plt.title(trial_name)
-        plt.xlabel("Frame")
+        plt.xlabel("Recorded trial progress (%)")
+        plt.xlim(0, 100)
         plt.ylabel("Finger width (px)")
         plt.grid(alpha=0.25)
         plt.legend()
@@ -607,10 +635,14 @@ def main() -> None:
         generalization_metrics.to_csv(args.output_dir / "generalization_trial_metrics.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
         generalization_summary = make_overall_summary(generalization_metrics)
         generalization_summary.to_csv(args.output_dir / "generalization_model_summary.csv", index=False, encoding="utf-8-sig", float_format="%.6f")
+        make_size_summary(generalization_metrics).to_csv(
+            args.output_dir / "generalization_summary_by_size.csv", index=False,
+            encoding="utf-8-sig", float_format="%.6f",
+        )
         comparison_dir = args.output_dir / "generalization_comparison"
         comparison_dir.mkdir(exist_ok=True)
         plot_overall_comparison(generalization_summary, comparison_dir)
-        print("\nGeneralization results (4 cm):")
+        print("\nGeneralization results (" + ", ".join(GENERALIZATION_SIZE_FOLDERS) + " cm):")
         for _, row in generalization_summary.iterrows():
             print(f"{MODEL_LABELS[row['model']]}: RMSE {row['rmse_mean_px']:.2f}px | MAE {row['mae_mean_px']:.2f}px | R2 {row['r2_mean']:.3f}")
 
@@ -634,6 +666,7 @@ def main() -> None:
     if generalization_names:
         print("  generalization_trial_metrics.csv")
         print("  generalization_model_summary.csv")
+        print("  generalization_summary_by_size.csv")
         print("  generalization_predictions/*.png")
 
 

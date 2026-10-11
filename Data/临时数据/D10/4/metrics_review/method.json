@@ -1,0 +1,11 @@
+{
+  "experiments": 20,
+  "grid_points": 201,
+  "normalization": "Per experiment and signal min-max before interpolation",
+  "reference": "Pointwise median of all 20 normalized experiments",
+  "opening_onset": "Minimum fingertip aperture preceding first global maximum",
+  "opening_mean": "Arithmetic sample mean, inclusive endpoints",
+  "sd": "Sample SD, ddof=1",
+  "acceleration": "Norm of smoothed ax ay az",
+  "final_area": "Last CSV row"
+}
