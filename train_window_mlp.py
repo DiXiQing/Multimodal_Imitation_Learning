@@ -27,7 +27,7 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10\2")
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D12\3")
 RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 OUTPUT_DIR = Path(__file__).resolve().parent / f"singleSize_{RUN_TIMESTAMP}"
 

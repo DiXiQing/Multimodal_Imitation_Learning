@@ -58,7 +58,7 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_Size_2p5cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Size_3cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
 OBJECT_COLOR = "black"
