@@ -1,0 +1,26 @@
+{
+  "trial": "TRIAL_Size_4cm_20261013_130447",
+  "recording_version": "stable_calibration",
+  "source_camera_rows": 169,
+  "source_imu_rows": 290,
+  "status": "cropped_review_required",
+  "flags": [
+    "FW detection missing in 22 cropped frames; not repaired"
+  ],
+  "group": "4cm",
+  "frame_start": 39,
+  "frame_end": 102,
+  "peak_frame": 78,
+  "rows": 64,
+  "area_gain": 3.2293959128677296,
+  "initial_acceleration": 0.031066336322846787,
+  "final_acceleration": 0.19113607295193313,
+  "acc_peak": 1.0662369773615583,
+  "fw_peak": 208.66366194936126,
+  "source_sha256": {
+    "camera.csv": "c9e97391b62736e7bc4edc95c45759ccdb1c8c62daaa128ba7a3e4286a056d9a",
+    "imu.csv": "647011887dee98e32208320eca2a565cdb731156fd5c90b96e3bef1c5e36d875"
+  },
+  "method": "First substantial grasp peak with area growth; 25 frames pre-onset and stable grip plus 15 tail frames; sorted/deduplicated IMU only in memory",
+  "fw_zero_frames": 22
+}

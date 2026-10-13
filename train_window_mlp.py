@@ -4,8 +4,8 @@ Compare object_area against object_area + acceleration magnitude.
 Velocity is neither required nor used. Read grasp_data_smoothed.csv without
 additional smoothing. Keep complete test trials out of training and normalize
 using training data only. Defaults: 15-frame windows and 1000 epochs.
-Select RUN_MODE in the configuration. Generalization trains on 2/3/4 cm,
-holds out 5 of 20 trials per size, and evaluates 2.5/3.5/4.5 cm separately.
+Select RUN_MODE and size folders in the configuration. Generalization holds
+out TEST_TRIALS per training size and evaluates unseen sizes separately.
 """
 
 from __future__ import annotations
@@ -27,22 +27,24 @@ from torch.utils.data import DataLoader, TensorDataset
 # Configuration
 # ============================================================
 
-DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D12\3")
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D13\3")
 RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-OUTPUT_DIR = Path(__file__).resolve().parent / f"singleSize_{RUN_TIMESTAMP}"
+RESULT_ROOT = Path(__file__).resolve().parent / "Data" / "Result"
+OUTPUT_DIR = RESULT_ROOT / f"singleSize_{RUN_TIMESTAMP}"
 
 # Choose in code: "single_size" or "generalization".
 # single_size uses DATA_ROOT, TEST_TRIALS and TEST_TRIAL_NAMES below.
-RUN_MODE = "generalization"
-GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D10")
-GENERALIZATION_OUTPUT_DIR = Path(__file__).resolve().parent / f"generalization_{RUN_TIMESTAMP}"
-TRAIN_SIZE_FOLDERS = ("2", "3", "4")
-GENERALIZATION_SIZE_FOLDERS = ("2.5", "3.5", "4.5")
-TRAIN_TRIALS_PER_SIZE = 15
+RUN_MODE = "single_size"
+GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D13")
+GENERALIZATION_OUTPUT_DIR = RESULT_ROOT / f"generalization_{RUN_TIMESTAMP}"
+# TRAIN_SIZE_FOLDERS = ("2", "3", "4")
+# GENERALIZATION_SIZE_FOLDERS = ("2.5", "3.5", "4.5")
+TRAIN_SIZE_FOLDERS = ("4.5", "3.5")
+GENERALIZATION_SIZE_FOLDERS = ("4",)
 # Hold out complete trials separately within each training size.
-SELF_TEST_TRIALS_BY_FOLDER = {"2": 5, "3": 5, "4": 5}
+SELF_TEST_TRIALS_BY_FOLDER = {}
 # Optional exact folder names; [] uses the seeded split for that size.
-SELF_TEST_NAMES_BY_FOLDER = {"2": [], "3": [], "4": []}
+SELF_TEST_NAMES_BY_FOLDER = {}
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
@@ -63,7 +65,7 @@ WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 SEED = 42
 INPUT_CSV = "grasp_data_smoothed.csv"
-TEST_TRIALS = 5
+TEST_TRIALS = 3
 
 # Edit this list to choose fixed test trials. All remaining trials train.
 # Set to None or [] to use the random split controlled by TEST_TRIALS and SEED.
@@ -97,11 +99,11 @@ def set_seed(seed: int) -> None:
 def trial_size(trial_name: str) -> float:
     size_tokens = {
         "_2cm_": 2.0,
-        "_2p5cm_": 2.5,
+        "_2.5cm_": 2.5,
         "_3cm_": 3.0,
-        "_3p5cm_": 3.5,
+        "_3.5cm_": 3.5,
         "_4cm_": 4.0,
-        "_4p5cm_": 4.5,
+        "_4.5cm_": 4.5,
     }
 
     for token, size in size_tokens.items():
@@ -208,11 +210,8 @@ def prepare_split(args):
         else:
             size_train, size_test = choose_split(
                 part, SELF_TEST_NAMES_BY_FOLDER.get(folder),
-                SELF_TEST_TRIALS_BY_FOLDER[folder], args.seed,
+                SELF_TEST_TRIALS_BY_FOLDER.get(folder, args.test_trials), args.seed,
             )
-            if len(size_train) != TRAIN_TRIALS_PER_SIZE or len(size_test) != 5:
-                raise ValueError(f"Size {folder} requires exactly 15 train and 5 test trials; "
-                                 f"found {len(size_train)} train and {len(size_test)} test")
             train.extend(size_train)
             test.extend(size_test)
     return trials, sorted(train), sorted(test), sorted(generalization)

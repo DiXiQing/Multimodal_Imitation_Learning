@@ -1,0 +1,16 @@
+{
+  "source": "TRIAL_Size_3cm_20261013_154107_842077_segment09",
+  "uniform_imu_rate_hz": 50.0,
+  "measured_camera_rate_hz": 29.94572710953198,
+  "imu_median_interval_seconds": 0.019999980926513672,
+  "imu_max_gap_seconds": 0.07012248039245605,
+  "filter": "2nd-order causal Butterworth SOS; initialized at first sample; no future samples; no post-sync EMA",
+  "placement_control_alpha": 0.21560216881353234,
+  "comparison_csv_warning": "Only acceleration columns changed; velocity retained and not suitable as recomputed velocity",
+  "source_sha256": {
+    "camera.csv": "790cbb892ee19e649f0217104aad99b2fc0ddc7738b9a010fdbd0863f0c0a363",
+    "imu.csv": "92855cb8c6fe00aebf67d93b93f4c007714a113aff2e14740b37e9390eb06a47",
+    "grasp_data.csv": "34d2685cf5b1fc4c296b7375267446f3c01307af4f4921def29f027027ef8586",
+    "grasp_data_smoothed.csv": "c0d8fcf41b885cf7b8219100426fff0d81d630adc98c579c63bdd6c5474a8472"
+  }
+}

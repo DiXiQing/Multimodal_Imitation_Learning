@@ -1,0 +1,21 @@
+{
+  "segment": 2,
+  "source_trial": "TRIAL_Size_3.5cm_20261013_181010_655846",
+  "frame_start": 307,
+  "frame_end": 373,
+  "camera_frames": 67,
+  "imu_samples": 110,
+  "duration_seconds": 2.2044456005096436,
+  "imu_max_gap_seconds": 0.04103541374206543,
+  "fw_zero_frames": 0,
+  "oa_zero_frames": 0,
+  "frame_numbering": "Original source frame numbers retained",
+  "video_fps": 30,
+  "source_sha256": {
+    "camera.csv": "c9aabce2629897fdf73926f92e27eec6ed50e8d40f97654688e9bcdddb7f1260",
+    "imu.csv": "efd1589bf67ec410cea47add0f07097e4b079ee5562e6e86ad71e10fa85042df",
+    "recorded_video.mp4": "19efe39051166f8756e918670fc10007eadd0bd868d10a419f7f07efc0153d45",
+    "imu_processing.json": "f52290c3d37c12c28044b2fff62039a82a8b07b58e6a740dbe9221ebbc208158",
+    "trial_summary.json": "7c407755fdf963f99265a3ba8f3ea7c85ef21876f73120ff7539328d0e7779f0"
+  }
+}

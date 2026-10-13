@@ -1,0 +1,73 @@
+{
+  "torch_version": "2.6.0+cu124",
+  "python_version": "3.10.20",
+  "cuda_available": true,
+  "torch_threads": 8,
+  "models": [
+    {
+      "name": "window_area_only",
+      "shape": [
+        1,
+        15,
+        1
+      ],
+      "parameters": 1601,
+      "weight_bytes": 6404,
+      "checkpoint_bytes": 12972,
+      "macs": 1536,
+      "train_windows": 676,
+      "checkpoint_train_windows": 676,
+      "train_trials": 12,
+      "epochs": 1000,
+      "cpu_inference": {
+        "1": {
+          "median_ms": 0.048,
+          "p95_ms": 0.0592,
+          "mean_ms": 0.05029719999999999
+        },
+        "8": {
+          "median_ms": 0.049,
+          "p95_ms": 0.06580499999999999,
+          "mean_ms": 0.05385835
+        }
+      },
+      "layers": "Sequential(\n  (0): Flatten(start_dim=1, end_dim=-1)\n  (1): Linear(in_features=15, out_features=32, bias=True)\n  (2): ReLU()\n  (3): Dropout(p=0.1, inplace=False)\n  (4): Linear(in_features=32, out_features=32, bias=True)\n  (5): ReLU()\n  (6): Linear(in_features=32, out_features=1, bias=True)\n)"
+    },
+    {
+      "name": "window_area_acceleration",
+      "shape": [
+        1,
+        15,
+        2
+      ],
+      "parameters": 2081,
+      "weight_bytes": 8324,
+      "checkpoint_bytes": 15052,
+      "macs": 2016,
+      "train_windows": 676,
+      "checkpoint_train_windows": 676,
+      "train_trials": 12,
+      "epochs": 1000,
+      "cpu_inference": {
+        "1": {
+          "median_ms": 0.0489,
+          "p95_ms": 0.06680499999999999,
+          "mean_ms": 0.05343975
+        },
+        "8": {
+          "median_ms": 0.0491,
+          "p95_ms": 0.0621,
+          "mean_ms": 0.05190575
+        }
+      },
+      "layers": "Sequential(\n  (0): Flatten(start_dim=1, end_dim=-1)\n  (1): Linear(in_features=30, out_features=32, bias=True)\n  (2): ReLU()\n  (3): Dropout(p=0.1, inplace=False)\n  (4): Linear(in_features=32, out_features=32, bias=True)\n  (5): ReLU()\n  (6): Linear(in_features=32, out_features=1, bias=True)\n)"
+    }
+  ],
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "data": {
+    "trials": 15,
+    "rows_min": 69,
+    "rows_max": 73,
+    "test_trials": 3
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "acceleration_method": "attitude_gravity_removal_then_static_sensor_bias",
+  "calibration_seconds": 2.0,
+  "calibration_wait_seconds": 10.188000000081956,
+  "calibration_samples": 104,
+  "calibration_quality": "Stable calibration samples",
+  "sensor_bias_g": [
+    -0.0061904335680121585,
+    -0.015570000409758469,
+    0.0324385210303093
+  ],
+  "gravity_m_s2": 9.81,
+  "attitude_convention": "ENU Z-Y-X",
+  "ax_ay_az_units": "m/s^2",
+  "ax_ay_az_frame": "sensor/body",
+  "raw_acceleration_units": "g"
+}

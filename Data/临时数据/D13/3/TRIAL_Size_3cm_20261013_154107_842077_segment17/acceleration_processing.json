@@ -1,0 +1,18 @@
+{
+  "method": "2nd-order causal Butterworth low-pass on gravity-removed sensor axes, before camera synchronization",
+  "cutoff_hz": 3,
+  "uniform_imu_rate_hz": 50.0,
+  "initialization": "steady state at first segment sample",
+  "irregular_timestamps": "sort, deduplicate, interpolate to uniform 50 Hz",
+  "magnitude": "norm of filtered axes after interpolation to camera times",
+  "post_sync_acceleration_ema": false,
+  "fw_oa": "existing smoothing retained",
+  "velocity": "existing values retained; training does not use velocity",
+  "max_imu_gap_seconds": 0.042528390884399414,
+  "source_sha256": {
+    "camera.csv": "5760b2870b382b5e0a56875dceabbd044f31bf5267898f5a009dc0e233c07091",
+    "imu.csv": "ecae1f0cc329afe91a23ce39e6d0d63c29e1d5af94dfc923ea506fbca2137ebd",
+    "grasp_data.csv": "0dc2864db56018d1e5d88e5e48bb75d850047acf9d9701e109ac4447952b2c4b"
+  },
+  "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\analysis\\D13_3_before_lowpass3Hz_20261013_173559\\TRIAL_Size_3cm_20261013_154107_842077_segment17"
+}

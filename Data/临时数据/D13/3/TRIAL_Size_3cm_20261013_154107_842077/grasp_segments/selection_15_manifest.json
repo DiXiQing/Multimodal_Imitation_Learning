@@ -1,0 +1,238 @@
+{
+  "method": "All 21 median curve reference; common 5-95 percentile ranges; weighted RMSE acceleration 0.5, FW 0.25, OA 0.25",
+  "rows": [
+    {
+      "segment": 1,
+      "decision": "reserve",
+      "score": 0.13874472465675927,
+      "acceleration_rmse": 0.16977455075976927,
+      "fw_rmse_px": 11.66221981659024,
+      "oa_rmse_px2": 564.1114735719699,
+      "frame_start": 107,
+      "frame_end": 172,
+      "flags": []
+    },
+    {
+      "segment": 2,
+      "decision": "keep",
+      "score": 0.10620174355849618,
+      "acceleration_rmse": 0.12755869241726098,
+      "fw_rmse_px": 12.285334155927147,
+      "oa_rmse_px2": 375.54189305369687,
+      "frame_start": 242,
+      "frame_end": 312,
+      "flags": []
+    },
+    {
+      "segment": 3,
+      "decision": "reserve",
+      "score": 0.16389345891453902,
+      "acceleration_rmse": 0.1876997921951425,
+      "fw_rmse_px": 30.482426562848943,
+      "oa_rmse_px2": 395.5451511375875,
+      "frame_start": 401,
+      "frame_end": 462,
+      "flags": [
+        "Short stable hold: crop ends before release"
+      ]
+    },
+    {
+      "segment": 4,
+      "decision": "keep",
+      "score": 0.08087117089334868,
+      "acceleration_rmse": 0.09898722047269704,
+      "fw_rmse_px": 9.611566788358099,
+      "oa_rmse_px2": 262.05854295355886,
+      "frame_start": 556,
+      "frame_end": 625,
+      "flags": []
+    },
+    {
+      "segment": 5,
+      "decision": "reserve",
+      "score": 0.1136386776058928,
+      "acceleration_rmse": 0.14574029996800428,
+      "fw_rmse_px": 17.474196434625437,
+      "oa_rmse_px2": 210.48255098516609,
+      "frame_start": 728,
+      "frame_end": 799,
+      "flags": []
+    },
+    {
+      "segment": 6,
+      "decision": "keep",
+      "score": 0.08450196587768234,
+      "acceleration_rmse": 0.11455650310005902,
+      "fw_rmse_px": 4.391326495402285,
+      "oa_rmse_px2": 300.12850649749197,
+      "frame_start": 895,
+      "frame_end": 963,
+      "flags": []
+    },
+    {
+      "segment": 7,
+      "decision": "reserve",
+      "score": 0.2088974207310559,
+      "acceleration_rmse": 0.25106924500255196,
+      "fw_rmse_px": 38.34499274070734,
+      "oa_rmse_px2": 402.1832052648148,
+      "frame_start": 1066,
+      "frame_end": 1146,
+      "flags": []
+    },
+    {
+      "segment": 8,
+      "decision": "keep",
+      "score": 0.06572764331124915,
+      "acceleration_rmse": 0.07900922376632334,
+      "fw_rmse_px": 8.865209983645919,
+      "oa_rmse_px2": 201.99907222634747,
+      "frame_start": 1245,
+      "frame_end": 1314,
+      "flags": []
+    },
+    {
+      "segment": 9,
+      "decision": "keep",
+      "score": 0.08442839045806987,
+      "acceleration_rmse": 0.12070436623970258,
+      "fw_rmse_px": 10.027887302029722,
+      "oa_rmse_px2": 106.44419276359856,
+      "frame_start": 1429,
+      "frame_end": 1498,
+      "flags": []
+    },
+    {
+      "segment": 10,
+      "decision": "keep",
+      "score": 0.08123748060135819,
+      "acceleration_rmse": 0.11214385527673656,
+      "fw_rmse_px": 8.66891824125691,
+      "oa_rmse_px2": 164.0948026146676,
+      "frame_start": 1585,
+      "frame_end": 1653,
+      "flags": []
+    },
+    {
+      "segment": 11,
+      "decision": "keep",
+      "score": 0.05518133501199761,
+      "acceleration_rmse": 0.055628019777598056,
+      "fw_rmse_px": 6.5163225552408575,
+      "oa_rmse_px2": 294.601231639325,
+      "frame_start": 1742,
+      "frame_end": 1811,
+      "flags": []
+    },
+    {
+      "segment": 12,
+      "decision": "reserve",
+      "score": 0.11365757206925897,
+      "acceleration_rmse": 0.12394698826404643,
+      "fw_rmse_px": 16.349933191578756,
+      "oa_rmse_px2": 447.3543586916552,
+      "frame_start": 1937,
+      "frame_end": 2005,
+      "flags": []
+    },
+    {
+      "segment": 13,
+      "decision": "keep",
+      "score": 0.08173673794670833,
+      "acceleration_rmse": 0.10404115288428262,
+      "fw_rmse_px": 10.065221930651592,
+      "oa_rmse_px2": 218.0909606461721,
+      "frame_start": 2077,
+      "frame_end": 2148,
+      "flags": []
+    },
+    {
+      "segment": 14,
+      "decision": "keep",
+      "score": 0.06484326267488369,
+      "acceleration_rmse": 0.08899811166131344,
+      "fw_rmse_px": 4.1649264349900275,
+      "oa_rmse_px2": 200.99912080631216,
+      "frame_start": 2213,
+      "frame_end": 2282,
+      "flags": []
+    },
+    {
+      "segment": 15,
+      "decision": "keep",
+      "score": 0.10118275282341578,
+      "acceleration_rmse": 0.13131329857301555,
+      "fw_rmse_px": 4.880344159969418,
+      "oa_rmse_px2": 424.7291880216912,
+      "frame_start": 2350,
+      "frame_end": 2420,
+      "flags": []
+    },
+    {
+      "segment": 16,
+      "decision": "keep",
+      "score": 0.04811248940734719,
+      "acceleration_rmse": 0.05571997786863794,
+      "fw_rmse_px": 3.8152145158680857,
+      "oa_rmse_px2": 231.3999103700918,
+      "frame_start": 2501,
+      "frame_end": 2570,
+      "flags": []
+    },
+    {
+      "segment": 17,
+      "decision": "keep",
+      "score": 0.08315660692609163,
+      "acceleration_rmse": 0.11183285562311328,
+      "fw_rmse_px": 6.883101469466506,
+      "oa_rmse_px2": 243.5120061821327,
+      "frame_start": 2649,
+      "frame_end": 2720,
+      "flags": []
+    },
+    {
+      "segment": 18,
+      "decision": "keep",
+      "score": 0.08756597898723234,
+      "acceleration_rmse": 0.1030798278505647,
+      "fw_rmse_px": 13.472106800074409,
+      "oa_rmse_px2": 250.88214755804594,
+      "frame_start": 2802,
+      "frame_end": 2871,
+      "flags": []
+    },
+    {
+      "segment": 19,
+      "decision": "keep",
+      "score": 0.08167782714028145,
+      "acceleration_rmse": 0.10223807775306604,
+      "fw_rmse_px": 12.504567003852797,
+      "oa_rmse_px2": 176.79477787400214,
+      "frame_start": 2966,
+      "frame_end": 3038,
+      "flags": []
+    },
+    {
+      "segment": 20,
+      "decision": "keep",
+      "score": 0.11207985698318196,
+      "acceleration_rmse": 0.14599042415535604,
+      "fw_rmse_px": 3.661478622732902,
+      "oa_rmse_px2": 506.5208146993935,
+      "frame_start": 3112,
+      "frame_end": 3181,
+      "flags": []
+    },
+    {
+      "segment": 21,
+      "decision": "reserve",
+      "score": 0.15597831353210137,
+      "acceleration_rmse": 0.19644878448527076,
+      "fw_rmse_px": 10.466994198137328,
+      "oa_rmse_px2": 642.8020469422881,
+      "frame_start": 3237,
+      "frame_end": 3302,
+      "flags": []
+    }
+  ]
+}

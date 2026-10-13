@@ -1,0 +1,8 @@
+{
+  "method": "2nd-order causal Butterworth on gravity-removed axes before camera sync",
+  "cutoff_hz": 3,
+  "imu_uniform_rate_hz": 50,
+  "post_sync_ema": false,
+  "initialization": "steady state at first segment sample",
+  "velocity": "existing integrated velocity, not recomputed from low-pass axes"
+}

@@ -12,7 +12,7 @@ record_reach_to_grasp.py
 8. 程序启动后直接开始录制
 9. 按 Q 结束整个录制
 10. 不使用 valid 字段
-11. 录制阶段保存完整 IMU 原始数据
+11. 姿态逐帧去重力，保存线性加速度、原始加速度与姿态
 12. 实时低通滤波并对三轴加速度做梯形积分
 13. 后处理阶段再将 IMU 50 Hz 重采样到 30 Hz
 
@@ -45,11 +45,13 @@ import time
 import csv
 import os
 import ctypes
+import json
 
 import cv2
 import numpy as np
 import mediapipe as mp
-from bleak import BleakClient
+from bleak import BleakClient, BleakScanner
+from imu_processing import gravity_in_sensor, parse_imu_packet, linear_acceleration, calibration_quality
 
 from datetime import datetime
 
@@ -58,7 +60,7 @@ from datetime import datetime
 # 配置
 # ============================================================
 
-TRIAL_NAME = f"TRIAL_Size_3cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+TRIAL_NAME = f"TRIAL_Size_3.5cm_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
 # 只改这个单词："red"、"black" 或 "blue"
 OBJECT_COLOR = "black"
@@ -82,7 +84,9 @@ IMU_ADDRESS = "D8:76:A8:5D:CC:CF"
 
 # BLE 连接失败时自动重试，避免一次超时直接终止整次录制
 IMU_MAX_CONNECT_ATTEMPTS = 3
-IMU_RETRY_DELAY_SECONDS = 2.0
+IMU_RETRY_DELAY_SECONDS = 3.0
+IMU_SCAN_TIMEOUT_SECONDS = 10.0
+IMU_CONNECT_TIMEOUT_SECONDS = 30.0
 
 # WT9011DCL-BT50
 #
@@ -109,6 +113,7 @@ GRAVITY = 9.81
 # ============================================================
 
 CALIB_SECONDS = 2.0
+CALIB_MAX_WAIT_SECONDS = 20.0
 
 # 与 Analyze.py 相同的因果低通参数。实时积分没有终点漂移修正。
 REALTIME_LPF_ALPHA = 0.15
@@ -216,6 +221,9 @@ class SharedState:
         self.calibrating = True
 
         self.calib_buffer = []
+        self.calib_linear_buffer = []
+        self.calib_gyro_buffer = []
+        self.calib_timestamps = []
 
         self.acc_bias = [
             0.0,
@@ -275,9 +283,7 @@ def parse_witmotion_packet(packet):
         ...
         ...
 
-    返回：
-        ax, ay, az
-        单位：g
+    返回：原始加速度(g)、角速度(°/s)、姿态角(°)的字典。
     """
 
     if len(packet) != 20:
@@ -321,11 +327,7 @@ def parse_witmotion_packet(packet):
         16.0
     )
 
-    return [
-        ax,
-        ay,
-        az
-    ]
+    return parse_imu_packet(packet)
 
 
 # ============================================================
@@ -593,7 +595,11 @@ def record():
         "vx",
         "vy",
         "vz",
-        "velocity"
+        "velocity",
+        "ax_raw_g", "ay_raw_g", "az_raw_g",
+        "gx_dps", "gy_dps", "gz_dps",
+        "roll_deg", "pitch_deg", "yaw_deg",
+        "gravity_x_g", "gravity_y_g", "gravity_z_g"
     ])
 
 
@@ -671,9 +677,12 @@ def record():
         )
 
 
-        for packet_index, raw in enumerate(
+        for packet_index, packet in enumerate(
             packets
         ):
+            raw = packet['acc']
+            angles = packet['angles']
+            gravity = gravity_in_sensor(angles)
 
             # ------------------------------------------------
             # 时间戳
@@ -711,6 +720,14 @@ def record():
                     state.calib_buffer.append(
                         raw
                     )
+                    state.calib_linear_buffer.append(raw - gravity)
+                    state.calib_gyro_buffer.append(packet['gyro'].copy())
+                    state.calib_timestamps.append(ts)
+                    while len(state.calib_timestamps) > 1 and ts - state.calib_timestamps[0] > 2.1:
+                        state.calib_timestamps.pop(0)
+                        state.calib_buffer.pop(0)
+                        state.calib_linear_buffer.pop(0)
+                        state.calib_gyro_buffer.pop(0)
 
                     continue
 
@@ -718,17 +735,8 @@ def record():
                 # Bias correction
                 # ------------------------------------------------
 
-                net = [
-                    (
-                        raw[i]
-                        -
-                        state.acc_bias[i]
-                    )
-                    *
-                    GRAVITY
-
-                    for i in range(3)
-                ]
+                # 与 IMUTest 相同：逐帧重力投影 + 初始两秒残余传感器零偏。
+                net = linear_acceleration(packet, state.acc_bias, GRAVITY).tolist()
 
                 mag = (
                     net[0] ** 2
@@ -816,7 +824,11 @@ def record():
                     vx,
                     vy,
                     vz,
-                    velocity
+                    velocity,
+                    *raw.tolist(),
+                    *packet['gyro'].tolist(),
+                    *angles.tolist(),
+                    *gravity.tolist()
                 ])
 
                 imu_counter += 1
@@ -829,10 +841,19 @@ def record():
     async def imu_record_once():
 
         try:
+            print(f"[IMU] 扫描设备 {IMU_ADDRESS}（最多 {IMU_SCAN_TIMEOUT_SECONDS:g} 秒）...")
+            # 每次重试重新扫描，传入当前广播对应的 BLEDevice，避免隐式扫描和旧句柄。
+            device = await BleakScanner.find_device_by_address(
+                IMU_ADDRESS, timeout=IMU_SCAN_TIMEOUT_SECONDS
+            )
+            if device is None:
+                raise ConnectionError("扫描未发现 IMU；检查设备电源及是否被其他程序占用")
+            print(f"[IMU] 已发现 {device.name or IMU_ADDRESS}，开始连接并读取服务...")
 
             async with BleakClient(
-                IMU_ADDRESS,
-                timeout=20.0
+                device,
+                timeout=IMU_CONNECT_TIMEOUT_SECONDS,
+                winrt={"use_cached_services": False} if os.name == "nt" else {},
             ) as client:
 
                 print()
@@ -844,9 +865,18 @@ def record():
                 # ------------------------------------------------
                 # Start notify
                 # ------------------------------------------------
+                characteristic = client.services.get_characteristic(IMU_NOTIFY_UUID)
+                if characteristic is None:
+                    available = [c.uuid for service in client.services for c in service.characteristics]
+                    raise ConnectionError(
+                        f"连接成功但未发现 IMU 通知特征 {IMU_NOTIFY_UUID}；"
+                        f"实际服务特征：{available}"
+                    )
+                if not {"notify", "indicate"}.intersection(characteristic.properties):
+                    raise ConnectionError("IMU 特征不支持数据通知，不能开始录制")
 
                 await client.start_notify(
-                    IMU_NOTIFY_UUID,
+                    characteristic,
                     recording_imu_handler
                 )
 
@@ -867,54 +897,49 @@ def record():
                     state.calibrating = True
 
                     state.calib_buffer = []
+                    state.calib_linear_buffer = []
+                    state.calib_gyro_buffer = []
+                    state.calib_timestamps = []
 
 
                 await asyncio.sleep(
                     CALIB_SECONDS
                 )
 
+                calibration_started = time.monotonic() - CALIB_SECONDS
+                last_reason = None
+                while state.running:
+                    if not client.is_connected:
+                        raise ConnectionError("IMU 在校准期间断开")
+                    with state.lock:
+                        good, reason = calibration_quality(
+                            state.calib_buffer, state.calib_linear_buffer,
+                            state.calib_gyro_buffer, state.calib_timestamps,
+                        )
+                        if good:
+                            # 接受样本和释放录制必须在同一个锁内完成。
+                            state.acc_bias = np.mean(state.calib_linear_buffer, axis=0).tolist()
+                            state.filtered_acc = [0.0, 0.0, 0.0]
+                            state.previous_filtered_acc = None
+                            state.realtime_velocity = [0.0, 0.0, 0.0]
+                            state.latest_velocity = 0.0
+                            state.integration_ts = None
+                            state.calibrating = False
+                    if good:
+                        break
+                    if reason != last_reason:
+                        print(f"[IMU] 校准尚未合格，继续保持静止：{reason}")
+                        last_reason = reason
+                    if time.monotonic() - calibration_started >= CALIB_MAX_WAIT_SECONDS:
+                        raise RuntimeError(f"静置校准等待 20 秒仍未合格：{reason}")
+                    await asyncio.sleep(0.05)
+                if not state.running:
+                    return
+
 
                 # ------------------------------------------------
                 # Calculate bias
                 # ------------------------------------------------
-
-                with state.lock:
-
-                    if (
-                        len(
-                            state.calib_buffer
-                        )
-                        > 0
-                    ):
-
-                        buf = np.array(
-                            state.calib_buffer
-                        )
-
-                        state.acc_bias = (
-                            buf.mean(
-                                axis=0
-                            )
-                            .tolist()
-                        )
-
-                    else:
-
-                        state.acc_bias = [
-                            0.0,
-                            0.0,
-                            0.0
-                        ]
-
-                    state.calibrating = False
-
-                    # 从校准结束后的第一个 IMU 样本开始积分。
-                    state.filtered_acc = [0.0, 0.0, 0.0]
-                    state.previous_filtered_acc = None
-                    state.realtime_velocity = [0.0, 0.0, 0.0]
-                    state.latest_velocity = 0.0
-                    state.integration_ts = None
-
 
                 print()
                 print(
@@ -922,10 +947,26 @@ def record():
                 )
 
                 print(
-                    "[IMU] bias = "
+                    "[IMU] 去重力后的传感器零偏 = "
                     f"{[f'{v:.5f}' for v in state.acc_bias]}"
                     " g"
                 )
+
+                with open(os.path.join(OUTPUT_DIR, "imu_processing.json"), "w", encoding="utf-8") as metadata_file:
+                    json.dump({
+                        "acceleration_method": "attitude_gravity_removal_then_static_sensor_bias",
+                        "calibration_seconds": CALIB_SECONDS,
+                        "calibration_wait_seconds": time.monotonic() - calibration_started,
+                        "calibration_quality": reason,
+                        "calibration_samples": len(state.calib_linear_buffer),
+                        "sensor_bias_g": state.acc_bias,
+                        "gravity_m_s2": GRAVITY,
+                        "attitude_convention": "ENU, body-to-world Rz(yaw) Ry(pitch) Rx(roll)",
+                        "ax_ay_az_units": "m/s^2",
+                        "ax_ay_az_frame": "sensor/body",
+                        "raw_acceleration_units": "g",
+                        "velocity_method": "existing body-axis low-pass trapezoidal integration; drift remains possible",
+                    }, metadata_file, indent=2, ensure_ascii=False)
 
 
                 # ------------------------------------------------
@@ -933,6 +974,10 @@ def record():
                 # ------------------------------------------------
 
                 while state.running:
+                    if not client.is_connected:
+                        with state.lock:
+                            state.running = False
+                        raise ConnectionError("录制期间 IMU 已断开；停止录制以避免保存缺失 IMU 的帧")
 
                     await asyncio.sleep(
                         0.05
@@ -959,14 +1004,11 @@ def record():
 
         except Exception as e:
 
-            import traceback
-
             print(
-                f"[IMU] Error: "
+                f"[IMU] 本次连接失败: "
                 f"type={type(e).__name__}, "
                 f"repr={e!r}"
             )
-            traceback.print_exc()
 
             # 把异常交给外层重试逻辑处理。重试期间保持 calibrating=True，
             # 避免主线程在两次连接之间提前开始录制。
@@ -984,7 +1026,7 @@ def record():
             if not state.running:
                 return
 
-            # 每次重试前保持主线程等待校准的状态；最终失败时再放行。
+            # 重试期间主线程等待校准；最终失败时终止整个录制。
             with state.lock:
                 state.calibrating = True
 
@@ -999,6 +1041,8 @@ def record():
                 return
 
             except Exception as e:
+                if not state.running:
+                    return
                 print(
                     f"[IMU] 连接/运行失败（第 {attempt}/"
                     f"{IMU_MAX_CONNECT_ATTEMPTS} 次）："
@@ -1012,12 +1056,12 @@ def record():
                     await asyncio.sleep(IMU_RETRY_DELAY_SECONDS)
                 else:
                     with state.lock:
-                        state.calibrating = False
+                        state.running = False
 
                     print()
                     print(
-                        "[IMU] 3 次连接均失败，继续进行摄像头录制；"
-                        "本次记录的 IMU 数据为空/为默认值。"
+                        f"[IMU] {IMU_MAX_CONNECT_ATTEMPTS} 次连接/运行均失败，"
+                        "终止整个录制。"
                     )
                     return
 
@@ -1074,7 +1118,15 @@ def record():
 
     if not state.running:
 
+        hands.close()
+
+        video_writer.release()
+
         cap.release()
+
+        cv2.destroyAllWindows()
+
+        imu_thread.join(timeout=3)
 
         camera_file.close()
 

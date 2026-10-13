@@ -1,811 +1,423 @@
+"""Compare real-time acceleration smoothing after gravity compensation.
+
+R: recalibrate while stationary. Q / close: save CSV and quit.
+Stable two-second calibration; causal 3/5 Hz low-pass at nominal 50 Hz.
+Protocol: WT9011DCL 0x61, Euler body-to-world Rz(yaw) Ry(pitch) Rx(roll).
+https://wit-motion.gitbook.io/witmotion-sdk/wit-standard-protocol/wit-standard-communication-protocol
 """
-IMUTest.py
-
-WT9011DCL-BT50
-Real-Time Acceleration -> Velocity Test
-
-Processing:
-    Raw acceleration
-          ↓
-    Gravity compensation
-          ↓
-    Bias calibration
-          ↓
-    Low-pass filter
-          ↓
-    Trapezoidal integration
-          ↓
-    Zero-velocity detection / correction
-          ↓
-    Velocity
-
-操作：
-    程序启动
-        ↓
-    IMU 静止 3 秒进行 calibration
-        ↓
-    开始实时计算
-        ↓
-    按 Q 结束
-        ↓
-    自动保存 CSV
-"""
-
+import argparse
 import asyncio
 import csv
-import os
-import time
-import threading
 from collections import deque
-
-import numpy as np
-from bleak import BleakClient
-
 from datetime import datetime
+from pathlib import Path
+import struct
+import threading
+import time
+import numpy as np
+from scipy.signal import butter, sosfilt, sosfilt_zi
+from bleak import BleakClient
+from imu_processing import gravity_in_sensor, parse_imu_packet, linear_acceleration, calibration_quality
+
+DEVICE_ADDRESS = 'D8:76:A8:5D:CC:CF'
+NOTIFY_UUID = '0000ffe4-0000-1000-8000-00805f9a34fb'
+CALIB_SECONDS = 2.0
+CALIB_MAX_WAIT_SECONDS = 20.0
+GRAVITY = 9.81
+PLOT_SECONDS = 20.0
+IMU_RATE_HZ = 50.0
+# Same time constant as span=5 EMA at 30 Hz, applied at the IMU rate.
+EMA_ALPHA = 1 - (1 - 1 / 3) ** (30.0 / IMU_RATE_HZ)
+OUTPUT_DIR = Path(__file__).resolve().parent / 'Data' / 'BackupData' / 'IMU_Acceleration_Test'
+CSV_COLUMNS = ['imu_index', 't_imu', 'ax', 'ay', 'az', 'mag', 'calibration_id',
+               'ax_raw_g', 'ay_raw_g', 'az_raw_g', 'gx_dps', 'gy_dps', 'gz_dps',
+               'roll_deg', 'pitch_deg', 'yaw_deg',
+               'gravity_x_g', 'gravity_y_g', 'gravity_z_g',
+               'ax_linear', 'ay_linear', 'az_linear', 'mag_linear',
+               'ax_ema', 'ay_ema', 'az_ema', 'mag_ema',
+               'ax_lowpass_3hz', 'ay_lowpass_3hz', 'az_lowpass_3hz', 'mag_lowpass_3hz',
+               'ax_lowpass_5hz', 'ay_lowpass_5hz', 'az_lowpass_5hz', 'mag_lowpass_5hz']
 
 
-# ============================================================
-# Configuration
-# ============================================================
+class LiveAccelerationFilters:
+    """One update per hardware sample; never use BLE arrival jitter as dt.
 
-DEVICE_ADDRESS = "D8:76:A8:5D:CC:CF"
-
-NOTIFY_UUID = "0000ffe4-0000-1000-8000-00805f9a34fb"
-
-OUTPUT_DIR = r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\BackupData\IMU_Velocity_Test"
-
-
-OUTPUT_FILE = os.path.join(
-    OUTPUT_DIR,
-    f"velocity_test_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-)
-
-# Calibration time
-CALIBRATION_TIME = 3.0
-
-# Low-pass filter
-LPF_ALPHA = 0.15
-
-# Zero velocity threshold
-ZUPT_ACCEL_THRESHOLD = 0.20
-ZUPT_VELOCITY_THRESHOLD = 0.15
-
-# Maximum reasonable velocity
-MAX_VELOCITY = 5.0
-
-ZUPT_STATIC_DURATION = 0.15
-
-
-# ============================================================
-# Global data
-# ============================================================
-
-data_rows = []
-
-running = True
-
-sample_count = 0
-
-previous_time = None
-
-previous_acc = np.zeros(3)
-
-velocity = np.zeros(3)
-
-bias = np.zeros(3)
-
-gravity = np.zeros(3)
-
-filtered_acc = np.zeros(3)
-
-calibration_samples = []
-
-stationary_since = None
-
-
-# ============================================================
-# Keyboard
-# ============================================================
-
-def keyboard_listener():
-
-    global running
-
-    while running:
-
-        try:
-
-            key = input()
-
-            if key.strip().lower() == "q":
-
-                print()
-                print("[System] Q pressed")
-
-                running = False
-
-                break
-
-        except EOFError:
-
-            break
-
-
-# ============================================================
-# Parse WT9011DCL 0x61 packet
-# ============================================================
-
-def parse_packet(packet):
-
+    All axes use identical causal filters before their vector norm is computed.
+    Reset on calibration/reconnect to avoid carrying old filter history.
     """
-    WT9011DCL 0x61 acceleration packet
+    def __init__(self):
+        self.sos = {hz: butter(2, hz, fs=IMU_RATE_HZ, output='sos') for hz in (3, 5)}
+        self.reset()
 
-    Packet:
+    def reset(self):
+        self.ema = None
+        self.history = {}
 
-    55 61
-    AX_L AX_H
-    AY_L AY_H
-    AZ_L AZ_H
-    GX_L GX_H
-    GY_L GY_H
-    GZ_L GZ_H
-    ...
-
-    Acceleration:
-        raw / 32768 * 16 g
-
-    Result:
-        m/s^2
-    """
-
-    if len(packet) < 20:
-        return None
-
-    if packet[0] != 0x55:
-        return None
-
-    if packet[1] != 0x61:
-        return None
-
-    ax_raw = int.from_bytes(
-        packet[2:4],
-        byteorder="little",
-        signed=True
-    )
-
-    ay_raw = int.from_bytes(
-        packet[4:6],
-        byteorder="little",
-        signed=True
-    )
-
-    az_raw = int.from_bytes(
-        packet[6:8],
-        byteorder="little",
-        signed=True
-    )
-
-    # ±16 g
-    ax_g = ax_raw / 32768.0 * 16.0
-    ay_g = ay_raw / 32768.0 * 16.0
-    az_g = az_raw / 32768.0 * 16.0
-
-    # g -> m/s²
-    G = 9.80665
-
-    acceleration = np.array([
-        ax_g * G,
-        ay_g * G,
-        az_g * G
-    ])
-
-    return acceleration
-
-
-# ============================================================
-# Extract packets from BLE notification
-# ============================================================
-
-def extract_packets(data):
-
-    packets = []
-
-    i = 0
-
-    while i <= len(data) - 20:
-
-        if data[i] == 0x55 and data[i + 1] == 0x61:
-
-            packet = data[i:i + 20]
-
-            packets.append(packet)
-
-            i += 20
-
+    def update(self, axes):
+        axes = np.asarray(axes, dtype=float)
+        if self.ema is None:
+            self.ema = axes.copy()
+            self.history = {hz: sosfilt_zi(sos)[:, :, None] * axes[None, None, :]
+                            for hz, sos in self.sos.items()}
         else:
+            self.ema += EMA_ALPHA * (axes - self.ema)
+        result = [self.ema.copy()]
+        for hz, sos in self.sos.items():
+            value, self.history[hz] = sosfilt(sos, axes[None, :], axis=0, zi=self.history[hz])
+            result.append(value[0])
+        return result
 
+
+def extract_imu_packets(data):
+    packets, i = [], 0
+    while i <= len(data) - 20:
+        if data[i:i+2] == b'\x55\x61':
+            packets.append(parse_imu_packet(data[i:i+20]))
+            i += 20
+        else:
             i += 1
-
     return packets
 
 
-# ============================================================
-# Gravity / Bias calibration
-# ============================================================
-
-def calibration_phase():
-
-    global bias
-    global gravity
-
-    if len(calibration_samples) < 10:
-
-        return
-
-    samples = np.array(
-        calibration_samples
-    )
-
-    mean_acc = np.mean(
-        samples,
-        axis=0
-    )
-
-    print()
-    print("=" * 70)
-    print("Calibration Result")
-    print("=" * 70)
-
-    print(
-        f"Mean acceleration:"
-    )
-
-    print(
-        f"X = {mean_acc[0]: .4f} m/s²"
-    )
-
-    print(
-        f"Y = {mean_acc[1]: .4f} m/s²"
-    )
-
-    print(
-        f"Z = {mean_acc[2]: .4f} m/s²"
-    )
-
-    print()
-
-    # Gravity vector is the measured static acceleration
-    gravity = mean_acc.copy()
-
-    # For a static IMU, measured acceleration consists
-    # mainly of gravity. Therefore the dynamic acceleration
-    # is obtained by subtracting the static gravity vector.
-
-    print(
-        f"Gravity vector:"
-    )
-
-    print(
-        f"X = {gravity[0]: .4f}"
-    )
-
-    print(
-        f"Y = {gravity[1]: .4f}"
-    )
-
-    print(
-        f"Z = {gravity[2]: .4f}"
-    )
-
-    print()
-
-
-# ============================================================
-# Low pass filter
-# ============================================================
-
-def low_pass_filter(acc):
-
-    global filtered_acc
-
-    filtered_acc = (
-        LPF_ALPHA * acc
-        +
-        (1.0 - LPF_ALPHA) * filtered_acc
-    )
-
-    return filtered_acc.copy()
-
-
-# ============================================================
-# Zero velocity detection
-# ============================================================
-
-def is_stationary(acc, current_time):
-
-    global stationary_since
-
-    acc_norm = np.linalg.norm(acc)
-
-    if acc_norm < ZUPT_ACCEL_THRESHOLD:
-        if stationary_since is None:
-            stationary_since = current_time
-        duration = current_time - stationary_since
-        return duration >= ZUPT_STATIC_DURATION
-    else:
-        stationary_since = None
-        return False
-
-# ============================================================
-# Save CSV
-# ============================================================
-
-def save_csv():
-
-    if len(data_rows) == 0:
-
-        print(
-            "[Warning] 没有测试数据"
-        )
-
-        return
-
-    os.makedirs(
-        OUTPUT_DIR,
-        exist_ok=True
-    )
-
-    with open(
-        OUTPUT_FILE,
-        "w",
-        newline="",
-        encoding="utf-8"
-    ) as f:
-
-        writer = csv.writer(f)
-
-        writer.writerow([
-            "time",
-            "dt",
-
-            "ax_raw",
-            "ay_raw",
-            "az_raw",
-
-            "ax_corrected",
-            "ay_corrected",
-            "az_corrected",
-
-            "ax_filtered",
-            "ay_filtered",
-            "az_filtered",
-
-            "vx",
-            "vy",
-            "vz",
-
-            "speed",
-
-            "stationary"
-        ])
-
-        writer.writerows(
-            data_rows
-        )
-
-    print()
-    print(
-        f"[Saved] CSV:"
-    )
-    print(
-        OUTPUT_FILE
-    )
-
-    print()
-    print(
-        f"Samples saved: "
-        f"{len(data_rows)}"
-    )
-
-
-# ============================================================
-# Process one acceleration sample
-# ============================================================
-
-def process_sample(acc):
-
-    global previous_time
-    global previous_acc
-    global velocity
-    global sample_count
-
-    current_time = time.perf_counter()
-
-    # --------------------------------------------------------
-    # Calibration
-    # --------------------------------------------------------
-
-    if (
-        current_time - calibration_start
-        <
-        CALIBRATION_TIME
-    ):
-
-        calibration_samples.append(
-            acc.copy()
-        )
-
-        return
-
-    # First sample after calibration
-    if previous_time is None:
-
-        previous_time = current_time
-
-        previous_acc = acc.copy()
-
-        calibration_phase()
-
-        print()
-        print("=" * 70)
-        print("Real-Time Velocity Calculation")
-        print("=" * 70)
-
-        return
-
-    # --------------------------------------------------------
-    # dt
-    # --------------------------------------------------------
-
-    dt = (
-        current_time
-        -
-        previous_time
-    )
-
-    previous_time = current_time
-
-    # Protect against abnormal dt
-    if dt <= 0 or dt > 0.2:
-
-        return
-
-    # --------------------------------------------------------
-    # Gravity compensation
-    # --------------------------------------------------------
-
-    corrected_acc = (
-        acc - gravity
-    )
-
-    # --------------------------------------------------------
-    # Low-pass filter
-    # --------------------------------------------------------
-
-    acc_filtered = low_pass_filter(
-        corrected_acc
-    )
-
-    # --------------------------------------------------------
-    # Trapezoidal integration
-    # --------------------------------------------------------
-
-    velocity = velocity + (
-        previous_acc
-        +
-        acc_filtered
-    ) * 0.5 * dt
-
-    previous_acc = acc_filtered.copy()
-
-    # --------------------------------------------------------
-    # Zero Velocity Detection
-    # --------------------------------------------------------
-
-    stationary = is_stationary(acc_filtered,current_time)
-
-    if stationary:
-
-        velocity[:] = 0.0
-
-    # --------------------------------------------------------
-    # Safety protection
-    # --------------------------------------------------------
-
-    speed = np.linalg.norm(
-        velocity
-    )
-
-    if speed > MAX_VELOCITY:
-
-        velocity *= (
-            MAX_VELOCITY / speed
-        )
-
-        speed = MAX_VELOCITY
-
-    # --------------------------------------------------------
-    # Save
-    # --------------------------------------------------------
-
-    elapsed = (
-        current_time
-        -
-        measurement_start
-    )
-
-    sample_count += 1
-
-    data_rows.append([
-
-        f"{elapsed:.6f}",
-
-        f"{dt:.6f}",
-
-        f"{acc[0]:.6f}",
-        f"{acc[1]:.6f}",
-        f"{acc[2]:.6f}",
-
-        f"{corrected_acc[0]:.6f}",
-        f"{corrected_acc[1]:.6f}",
-        f"{corrected_acc[2]:.6f}",
-
-        f"{acc_filtered[0]:.6f}",
-        f"{acc_filtered[1]:.6f}",
-        f"{acc_filtered[2]:.6f}",
-
-        f"{velocity[0]:.6f}",
-        f"{velocity[1]:.6f}",
-        f"{velocity[2]:.6f}",
-
-        f"{speed:.6f}",
-
-        int(stationary)
-    ])
-
-    # --------------------------------------------------------
-    # Real-time display
-    # --------------------------------------------------------
-
-    print(
-        "\r"
-        f"ACC "
-        f"X:{acc_filtered[0]:7.3f} "
-        f"Y:{acc_filtered[1]:7.3f} "
-        f"Z:{acc_filtered[2]:7.3f}"
-        " | "
-        f"VEL "
-        f"X:{velocity[0]:7.3f} "
-        f"Y:{velocity[1]:7.3f} "
-        f"Z:{velocity[2]:7.3f}"
-        " | "
-        f"SPEED:{speed:7.3f} m/s"
-        " | "
-        f"N:{sample_count}",
-        end="",
-        flush=True
-    )
-
-
-# ============================================================
-# BLE callback
-# ============================================================
-
-def notification_handler(
-    sender,
-    data
-):
-
-    packets = extract_packets(
-        bytes(data)
-    )
-
-    for packet in packets:
-
-        acc = parse_packet(
-            packet
-        )
-
-        if acc is not None:
-
-            process_sample(
-                acc
-            )
-
-
-# ============================================================
-# Main
-# ============================================================
-
-async def main():
-
-    global running
-    global calibration_start
-    global measurement_start
-
-    print()
-    print("=" * 70)
-    print("WT9011DCL-BT50 Real-Time Velocity Test")
-    print("=" * 70)
-
-    print()
-
-    print(
-        f"Device : {DEVICE_ADDRESS}"
-    )
-
-    print(
-        f"Notify : {NOTIFY_UUID}"
-    )
-
-    print(
-        f"Output : {OUTPUT_FILE}"
-    )
-
-    print()
-
-    # --------------------------------------------------------
-    # Connect
-    # --------------------------------------------------------
-
-    try:
-
-        async with BleakClient(
-            DEVICE_ADDRESS
-        ) as client:
-
-            print(
-                f"[BLE] Connected: "
-                f"{client.is_connected}"
-            )
-
-            # ------------------------------------------------
-            # Start notification
-            # ------------------------------------------------
-
-            await client.start_notify(
-                NOTIFY_UUID,
-                notification_handler
-            )
-
-            print()
-            print("=" * 70)
-            print("Calibration")
-            print("=" * 70)
-
-            print()
-            print(
-                "请保持 IMU 静止 "
-                f"{CALIBRATION_TIME:.0f} 秒"
-            )
-
-            print(
-                "不要移动 IMU..."
-            )
-
-            calibration_start = (
-                time.perf_counter()
-            )
-
-            # Keyboard thread
-            threading.Thread(
-                target=keyboard_listener,
-                daemon=True
-            ).start()
-
-            # ------------------------------------------------
-            # Wait calibration
-            # ------------------------------------------------
-
-            while (
-                running
-                and
-                time.perf_counter()
-                -
-                calibration_start
-                <
-                CALIBRATION_TIME
-            ):
-
-                await asyncio.sleep(
-                    0.01
-                )
-
-            if not running:
-
+class State:
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.stop = threading.Event()
+        self.recalibrate = threading.Event()
+        self.status = 'Connecting to IMU...'
+        self.calibrating = True
+        self.started = None
+        self.samples = []
+        self.linear_samples = []
+        self.calibration_times = []
+        self.gyro_samples = []
+        self.bias = np.zeros(3)
+        self.linear_bias = np.zeros(3)
+        self.latest = np.zeros(3)
+        self.linear = np.zeros(3)
+        self.linear_mag = 0.
+        self.angles = np.zeros(3)
+        self.mag = 0.
+        self.origin = None
+        self.points = deque(maxlen=10000)
+        self.rows = []
+        self.calibration_id = 0
+        self.filters = LiveAccelerationFilters()
+        self.filtered_mags = np.zeros(3)
+
+    def begin(self):
+        with self.lock:
+            self.calibrating = True
+            self.started = time.monotonic()
+            self.samples = []
+            self.linear_samples = []
+            self.calibration_times = []
+            self.gyro_samples = []
+            self.filters.reset()
+            self.filtered_mags[:] = 0
+            self.points.clear()
+            self.status = 'Keep IMU still: calibrating for 2 seconds...'
+
+    def calibration_quality(self):
+        """Called with lock held; reject transient attitude or moving samples.
+
+        A single static pose cannot identify arbitrary angle offsets and sensor
+        bias separately. Reject a large unexplained residual instead of hiding it.
+        """
+        return calibration_quality(self.samples, self.linear_samples,
+                                   self.gyro_samples, self.calibration_times)
+
+    def finish(self):
+        with self.lock:
+            if not self.samples:
+                raise RuntimeError('No IMU samples received during calibration')
+            self.bias = np.mean(self.samples, axis=0)
+            self.linear_bias = np.mean(self.linear_samples, axis=0)
+            self.calibrating = False
+            self.calibration_id += 1
+            self.points.clear()
+            self.origin = None
+            self.latest = np.zeros(3)
+            self.mag = 0.
+            self.linear = np.zeros(3)
+            self.linear_mag = 0.
+            self.filters.reset()
+            self.filtered_mags[:] = 0
+            self.status = 'Live | R: recalibrate | Q: save and exit'
+            print('[IMU] Calibration complete; bias (g):', self.bias)
+            print('[IMU] After gravity removal, sensor offset (g):', self.linear_bias)
+            if np.linalg.norm(self.linear_bias) > .15:
+                self.status = 'Large calibration residual: check static pose / sensor angle calibration | R: retry'
+                print('[IMU] Warning: large gravity-model residual; verify static tilt before trusting correction.')
+
+    def process(self, packet, timestamp):
+        raw, gyro, angles = packet['acc'], packet['gyro'], packet['angles']
+        gravity = gravity_in_sensor(angles)
+        with self.lock:
+            self.angles = angles.copy()
+            if self.calibrating:
+                self.samples.append(raw.copy())
+                self.linear_samples.append(raw - gravity)
+                self.calibration_times.append(timestamp)
+                self.gyro_samples.append(gyro.copy())
+                # Only the latest stationary interval is used after warm-up.
+                while len(self.calibration_times)>1 and timestamp-self.calibration_times[0]>2.1:
+                    self.calibration_times.pop(0)
+                    self.samples.pop(0)
+                    self.linear_samples.pop(0)
+                    self.gyro_samples.pop(0)
                 return
+            self.latest = (raw - self.bias) * GRAVITY
+            self.mag = float(np.linalg.norm(self.latest))
+            self.linear = linear_acceleration(packet, self.linear_bias, GRAVITY)
+            self.linear_mag = float(np.linalg.norm(self.linear))
+            filtered = self.filters.update(self.linear)
+            self.filtered_mags = np.array([np.linalg.norm(a) for a in filtered])
+            if self.origin is None:
+                self.origin = timestamp
+            elapsed = timestamp - self.origin
+            self.points.append((elapsed, self.linear_mag, *self.filtered_mags))
+            self.rows.append([len(self.rows), timestamp, *self.latest, self.mag, self.calibration_id,
+                              *raw, *gyro, *angles, *gravity, *self.linear, self.linear_mag,
+                              *[v for axes in filtered for v in (*axes, float(np.linalg.norm(axes)))]])
 
-            calibration_phase()
-
-            # ------------------------------------------------
-            # Reset
-            # ------------------------------------------------
-
-            previous_time = None
-
-            measurement_start = (
-                time.perf_counter()
-            )
-
-            print()
-            print("=" * 70)
-            print("开始实时速度测试")
-            print("=" * 70)
-
-            print()
-            print(
-                "现在可以移动 IMU"
-            )
-
-            print(
-                "输入 Q 后回车结束测试"
-            )
-
-            print()
-
-            # ------------------------------------------------
-            # Measurement
-            # ------------------------------------------------
-
-            while running:
-
-                await asyncio.sleep(
-                    0.01
-                )
-
-            # ------------------------------------------------
-            # Stop notify
-            # ------------------------------------------------
-
-            try:
-
-                await client.stop_notify(
-                    NOTIFY_UUID
-                )
-
-            except Exception:
-
-                pass
-
-    except Exception as e:
-
-        print()
-        print(
-            f"[BLE] Error: {e}"
-        )
-
-    finally:
-
-        running = False
-
-        print()
-        print()
-        print("=" * 70)
-        print("保存测试数据")
-        print("=" * 70)
-
-        save_csv()
-
-        print()
-        print("=" * 70)
-        print("程序结束")
-        print("=" * 70)
+    def notify(self, sender, data):
+        if self.stop.is_set():
+            return
+        received = time.time()
+        # Same 50 Hz batch timestamp convention as Record_mediapipe.
+        for i, raw in enumerate(extract_imu_packets(bytes(data))):
+            self.process(raw, received + i / 50.)
 
 
-# ============================================================
-# Entry
-# ============================================================
+async def measure(state):
+    for attempt in range(1, 4):
+        if state.stop.is_set():
+            return
+        try:
+            with state.lock:
+                state.status = f'Connecting to IMU ({attempt}/3)...'
+                state.calibrating = True
+            async with BleakClient(DEVICE_ADDRESS, timeout=20.) as client:
+                state.begin()
+                await client.start_notify(NOTIFY_UUID, state.notify)
+                try:
+                    while not state.stop.is_set():
+                        if not client.is_connected:
+                            raise ConnectionError('IMU disconnected')
+                        if state.recalibrate.is_set():
+                            state.recalibrate.clear()
+                            state.begin()
+                        with state.lock:
+                            ready = state.calibrating and time.monotonic() - state.started >= CALIB_SECONDS
+                        if ready:
+                            with state.lock:
+                                good, reason = state.calibration_quality()
+                                waited = time.monotonic()-state.started
+                                if not good:
+                                    state.status = reason + ' | calibration pending'
+                            if good:
+                                state.finish()
+                            elif waited > CALIB_MAX_WAIT_SECONDS:
+                                raise RuntimeError('Calibration rejected: '+reason+'. Keep still or check sensor angle calibration.')
+                        await asyncio.sleep(.05)
+                finally:
+                    if client.is_connected:
+                        await client.stop_notify(NOTIFY_UUID)
+            return
+        except Exception as exc:
+            print(f'[IMU] Attempt {attempt}: {exc}')
+            with state.lock:
+                state.status = f'IMU error: {exc}'
+                state.calibrating = True
+                state.started = None
+            if attempt < 3:
+                for _ in range(40):
+                    if state.stop.is_set():
+                        return
+                    await asyncio.sleep(.05)
+            else:
+                with state.lock:
+                    state.status = 'Connection failed. Close the window to exit.'
 
-if __name__ == "__main__":
 
+def worker(state):
     try:
+        asyncio.run(measure(state))
+    finally:
+        if state.rows:
+            OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            path = OUTPUT_DIR / f'acceleration_test_{datetime.now():%Y%m%d_%H%M%S_%f}.csv'
+            with path.open('w', newline='', encoding='utf-8-sig') as f:
+                writer = csv.writer(f)
+                writer.writerow(CSV_COLUMNS)
+                writer.writerows(state.rows)
+            print('[Saved]', path)
 
-        asyncio.run(
-            main()
-        )
 
-    except Exception as e:
-        import traceback
-        print()
-        print(f"[BLE] Error: {type(e).__name__}: {e}")
-        traceback.print_exc()
+def main():
+    import tkinter as tk
+    from matplotlib.figure import Figure
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    state = State()
+    window = tk.Tk()
+    window.title('IMU — Real-time smoothing: EMA / 3 Hz / 5 Hz')
+    window.geometry('1050x650')
+    status, values = tk.StringVar(value=state.status), tk.StringVar(value='Waiting for IMU...')
+    tk.Label(window, textvariable=status, font=('Segoe UI', 12)).pack(pady=8)
+    tk.Label(window, textvariable=values, font=('Segoe UI', 11)).pack()
+    fig = Figure(figsize=(10, 5), dpi=100)
+    ax = fig.add_subplot(111)
+    plot_lines = [
+        ax.plot([], [], color='gray', alpha=.45, lw=1, label='Gravity removed: unsmoothed')[0],
+        ax.plot([], [], color='tab:blue', lw=1.4, label='EMA (same time constant as current smoothing)')[0],
+        ax.plot([], [], color='tab:orange', lw=2, label='Causal low-pass 3 Hz')[0],
+        ax.plot([], [], color='tab:green', lw=1.7, label='Causal low-pass 5 Hz')[0],
+    ]
+    ax.set(xlabel='Time since calibration (s)', ylabel='Acceleration magnitude (m/s²)', xlim=(0, PLOT_SECONDS), ylim=(0, 1))
+    ax.grid(alpha=.25)
+    ax.legend(loc='upper left')
+    fig.tight_layout()
+    canvas = FigureCanvasTkAgg(fig, master=window)
+    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+    thread = threading.Thread(target=worker, args=(state,), daemon=True)
+    closing = False
+
+    def shutdown():
+        if thread.is_alive():
+            window.after(50, shutdown)
+        else:
+            window.destroy()
+
+    def close(event=None):
+        nonlocal closing
+        if not closing:
+            closing = True
+            state.stop.set()
+            status.set('Stopping BLE and saving CSV...')
+            window.after(50, shutdown)
+
+    def recalibrate(event=None):
+        if not closing:
+            state.recalibrate.set()
+
+    controls = tk.Frame(window)
+    controls.pack(pady=8)
+    visibility = []
+    for plot_line, label in zip(plot_lines, ['Raw', 'EMA', '3 Hz', '5 Hz']):
+        checked = tk.BooleanVar(value=True)
+        visibility.append(checked)
+        tk.Checkbutton(controls, text=label, variable=checked).pack(side=tk.LEFT, padx=4)
+    tk.Button(controls, text='Recalibrate (R)', command=recalibrate).pack(side=tk.LEFT, padx=10)
+    tk.Button(controls, text='Save and exit (Q)', command=close).pack(side=tk.LEFT, padx=10)
+    for key in ['r', 'R']:
+        window.bind('<'+key+'>', recalibrate)
+    for key in ['q', 'Q']:
+        window.bind('<'+key+'>', close)
+    window.protocol('WM_DELETE_WINDOW', close)
+
+    def update():
+        if closing:
+            return
+        with state.lock:
+            points, text = list(state.points), state.status
+            acceleration, mag, count = state.linear.copy(), state.mag, len(state.rows)
+            linear_mag, angles = state.linear_mag, state.angles.copy()
+            filtered_mags = state.filtered_mags.copy()
+            if state.calibrating and state.started is not None:
+                remaining = CALIB_SECONDS - (time.monotonic() - state.started)
+                if remaining > 0:
+                    text += f' {remaining:.1f} s remaining'
+        status.set(text)
+        values.set(f'Raw={linear_mag:.3f} | EMA={filtered_mags[0]:.3f} | 3 Hz={filtered_mags[1]:.3f} | 5 Hz={filtered_mags[2]:.3f} m/s² | samples={count}')
+        if points:
+            latest = max(p[0] for p in points)
+            start = max(0, latest - PLOT_SECONDS)
+            visible = np.array([p for p in points if p[0] >= start])
+            for i, (plot_line, checked) in enumerate(zip(plot_lines, visibility), 1):
+                plot_line.set_data(visible[:, 0], visible[:, i])
+                plot_line.set_visible(checked.get())
+            ax.set_xlim(start, max(PLOT_SECONDS, latest))
+            selected = [i + 1 for i, checked in enumerate(visibility) if checked.get()]
+            ax.set_ylim(0, max(.3, float(visible[:, selected].max()) * 1.15) if selected else .3)
+            canvas.draw_idle()
+        else:
+            for plot_line in plot_lines:
+                plot_line.set_data([], [])
+            canvas.draw_idle()
+        window.after(50, update)
+
+    thread.start()
+    update()
+    try:
+        window.mainloop()
+    finally:
+        state.stop.set()
+        thread.join()
+
+
+def self_test():
+    packet = b'\x55\x61' + struct.pack('<9h', 2048, -4096, 1024, 16384, -8192, 0, 8192, -4096, 16384)
+    samples = extract_imu_packets(b'noise' + packet + packet)
+    assert len(samples) == 2
+    np.testing.assert_allclose(samples[0]['acc'], [1, -2, .5])
+    np.testing.assert_allclose(samples[0]['gyro'], [1000, -500, 0])
+    np.testing.assert_allclose(samples[0]['angles'], [45, -22.5, 90])
+    def sample(acc, angles=(0, 0, 0)):
+        return dict(acc=np.array(acc, dtype=float), gyro=np.zeros(3), angles=np.array(angles, dtype=float))
+    state = State();state.begin()
+    offset = np.array([.01, -.02, .015])
+    state.process(sample(np.array([0., 0., 1.]) + offset), 100)
+    assert not state.rows
+    state.finish()
+    state.process(sample(np.array([0., 0., 1.]) + offset), 101)
+    assert state.mag == 0
+    state.process(sample(np.array([.1, -.2, 1.]) + offset), 101.02)
+    np.testing.assert_allclose(state.latest, [.981, -1.962, 0])
+    np.testing.assert_allclose(state.mag, np.linalg.norm(state.latest))
+    # Independent rotations: body-to-world Rz Ry Rx, rotate world +Z into body.
+    for k, angles in enumerate([(30,0,0),(0,45,0),(40,-35,120),(180,0,0),(0,90,60),(0,0,150)]):
+        r,p,y=np.deg2rad(angles)
+        rx=np.array([[1,0,0],[0,np.cos(r),-np.sin(r)],[0,np.sin(r),np.cos(r)]])
+        ry=np.array([[np.cos(p),0,np.sin(p)],[0,1,0],[-np.sin(p),0,np.cos(p)]])
+        rz=np.array([[np.cos(y),-np.sin(y),0],[np.sin(y),np.cos(y),0],[0,0,1]])
+        gravity=(rz@ry@rx).T@np.array([0.,0.,1.])
+        np.testing.assert_allclose(gravity_in_sensor(angles),gravity,atol=1e-12)
+        state.process(sample(gravity+offset,angles),102+k)
+        assert state.linear_mag < 1e-10
+        dynamic=np.array([.12,-.07,.03])
+        state.process(sample(gravity+offset+dynamic,angles),102.02+k)
+        np.testing.assert_allclose(state.linear,dynamic*GRAVITY,atol=1e-12)
+    state.begin();state.process(sample(np.array([1.,0.,0.])+offset,(0,-90,0)),110);state.finish()
+    state.process(sample(np.array([1.,0.,0.])+offset,(0,-90,0)),111)
+    assert state.mag == 0 and state.calibration_id == 2
+    assert state.linear_mag < 1e-10
+    assert len(state.rows[-1]) == len(CSV_COLUMNS)
+    # DC must be preserved, and 3 Hz must suppress 10 Hz more than 5 Hz.
+    filters = LiveAccelerationFilters()
+    for _ in range(100):
+        values = filters.update([.4, -.2, .1])
+        for value in values:
+            np.testing.assert_allclose(value, [.4, -.2, .1], atol=1e-10)
+    filters.reset()
+    waves = []
+    for i in range(500):
+        values = filters.update([np.sin(2*np.pi*10*i/IMU_RATE_HZ), 0, 0])
+        waves.append([v[0] for v in values])
+    rms = np.sqrt(np.mean(np.array(waves)[100:]**2, axis=0))
+    assert rms[1] < rms[2] < .25, rms
+    filters.reset()
+    for value in filters.update([0,0,0]):
+        np.testing.assert_array_equal(value, np.zeros(3))
+    print('PASS: causal filters preserve DC, suppress high frequencies and reset after calibration')
+    print('PASS: parsing, tilted/inverted static poses, yaw invariance, dynamic acceleration, bias and recalibration')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--self-test', action='store_true')
+    args = parser.parse_args()
+    if args.self_test:
+        self_test()
+    else:
+        main()

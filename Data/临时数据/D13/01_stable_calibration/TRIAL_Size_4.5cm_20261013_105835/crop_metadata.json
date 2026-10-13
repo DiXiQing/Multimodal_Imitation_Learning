@@ -1,0 +1,28 @@
+{
+  "trial": "TRIAL_Size_4.5cm_20261013_105835",
+  "recording_version": "stable_calibration",
+  "source_camera_rows": 202,
+  "source_imu_rows": 348,
+  "status": "cropped",
+  "flags": [],
+  "group": "01_stable_calibration",
+  "frame_start": 83,
+  "frame_end": 150,
+  "peak_frame": 121,
+  "rows": 68,
+  "area_gain": 2.428950592078399,
+  "initial_acceleration": 0.0601281826181861,
+  "final_acceleration": 0.11787660200283226,
+  "acc_peak": 0.7520085398801566,
+  "fw_peak": 208.9458573032372,
+  "source_sha256": {
+    "camera.csv": "542d95035565fe1a27ad1c5a1f04dfa0fb516cbc012e2f96b863a02e1e910b9d",
+    "imu.csv": "41f9a17a3535d49c3ceef1fd81123684e10468f82f46ba7ee7330a8545f66727"
+  },
+  "method": "Original crop extended with 10 preceding recorded frames; end unchanged; source CSV/video unchanged; speed and causal smoothing recalculated",
+  "previous_frame_start": 93,
+  "start_extension_frames": 10,
+  "extension_backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\analysis\\D13_before_start_extension_20261013_123827\\TRIAL_Size_4.5cm_20261013_105835",
+  "clip_file": "grasp_video.mp4",
+  "clip_fps": 30
+}

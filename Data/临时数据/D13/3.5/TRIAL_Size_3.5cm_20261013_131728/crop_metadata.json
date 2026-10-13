@@ -1,0 +1,24 @@
+{
+  "trial": "TRIAL_Size_3.5cm_20261013_131728",
+  "recording_version": "stable_calibration",
+  "source_camera_rows": 190,
+  "source_imu_rows": 330,
+  "status": "cropped",
+  "flags": [],
+  "group": "3.5cm",
+  "frame_start": 54,
+  "frame_end": 123,
+  "peak_frame": 93,
+  "rows": 70,
+  "area_gain": 2.7190197716513507,
+  "initial_acceleration": 0.10596105713122592,
+  "final_acceleration": 0.09500029004047277,
+  "acc_peak": 0.8502710027964645,
+  "fw_peak": 182.26957700412626,
+  "source_sha256": {
+    "camera.csv": "9b8fc568b2c1d95fa3315336df13623ef6ee56cdf838a9e8b08b3fbd85b8b7c5",
+    "imu.csv": "73271677457d1cb30e8f9fc853c2baa0c32812292ff338497f8ee1514f37aa28"
+  },
+  "method": "First substantial grasp peak with area growth; 25 frames pre-onset and stable grip plus 15 tail frames; sorted/deduplicated IMU only in memory",
+  "fw_zero_frames": 0
+}

@@ -1,0 +1,18 @@
+{
+  "acceleration_method": "attitude_gravity_removal_then_static_sensor_bias",
+  "calibration_seconds": 2.0,
+  "calibration_wait_seconds": 4.795999999972992,
+  "calibration_quality": "Stable calibration samples",
+  "calibration_samples": 104,
+  "sensor_bias_g": [
+    0.017709951685192606,
+    0.001955378728286417,
+    0.0276993264909116
+  ],
+  "gravity_m_s2": 9.81,
+  "attitude_convention": "ENU, body-to-world Rz(yaw) Ry(pitch) Rx(roll)",
+  "ax_ay_az_units": "m/s^2",
+  "ax_ay_az_frame": "sensor/body",
+  "raw_acceleration_units": "g",
+  "velocity_method": "existing body-axis low-pass trapezoidal integration; drift remains possible"
+}
