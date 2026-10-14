@@ -1,10 +1,10 @@
-"""Compare real-time acceleration smoothing after gravity compensation.
 
-R: recalibrate while stationary. Q / close: save CSV and quit.
-Stable two-second calibration; causal 3/5 Hz low-pass at nominal 50 Hz.
-Protocol: WT9011DCL 0x61, Euler body-to-world Rz(yaw) Ry(pitch) Rx(roll).
-https://wit-motion.gitbook.io/witmotion-sdk/wit-standard-protocol/wit-standard-communication-protocol
-"""
+
+
+
+
+
+
 import argparse
 import asyncio
 import csv
@@ -26,7 +26,7 @@ CALIB_MAX_WAIT_SECONDS = 20.0
 GRAVITY = 9.81
 PLOT_SECONDS = 20.0
 IMU_RATE_HZ = 50.0
-# Same time constant as span=5 EMA at 30 Hz, applied at the IMU rate.
+                                                                     
 EMA_ALPHA = 1 - (1 - 1 / 3) ** (30.0 / IMU_RATE_HZ)
 OUTPUT_DIR = Path(__file__).resolve().parent / 'Data' / 'BackupData' / 'IMU_Acceleration_Test'
 CSV_COLUMNS = ['imu_index', 't_imu', 'ax', 'ay', 'az', 'mag', 'calibration_id',
@@ -37,14 +37,25 @@ CSV_COLUMNS = ['imu_index', 't_imu', 'ax', 'ay', 'az', 'mag', 'calibration_id',
                'ax_ema', 'ay_ema', 'az_ema', 'mag_ema',
                'ax_lowpass_3hz', 'ay_lowpass_3hz', 'az_lowpass_3hz', 'mag_lowpass_3hz',
                'ax_lowpass_5hz', 'ay_lowpass_5hz', 'az_lowpass_5hz', 'mag_lowpass_5hz']
+CSV_COLUMNS += ['world_ax', 'world_ay', 'world_az', 'forward_raw', 'forward_ema',
+                'forward_3hz', 'forward_5hz', 'forward_x', 'forward_y', 'forward_z', 'direction_id']
+
+
+def body_to_world(axes, angles):
+    roll, pitch, yaw = np.deg2rad(angles)
+    cr, sr, cp, sp, cy, sy = np.cos(roll), np.sin(roll), np.cos(pitch), np.sin(pitch), np.cos(yaw), np.sin(yaw)
+    rotation = np.array([[cy*cp, cy*sp*sr-sy*cr, cy*sp*cr+sy*sr],
+                         [sy*cp, sy*sp*sr+cy*cr, sy*sp*cr-cy*sr],
+                         [-sp, cp*sr, cp*cr]])
+    return rotation @ axes
 
 
 class LiveAccelerationFilters:
-    """One update per hardware sample; never use BLE arrival jitter as dt.
 
-    All axes use identical causal filters before their vector norm is computed.
-    Reset on calibration/reconnect to avoid carrying old filter history.
-    """
+
+
+
+
     def __init__(self):
         self.sos = {hz: butter(2, hz, fs=IMU_RATE_HZ, output='sos') for hz in (3, 5)}
         self.reset()
@@ -104,6 +115,51 @@ class State:
         self.calibration_id = 0
         self.filters = LiveAccelerationFilters()
         self.filtered_mags = np.zeros(3)
+        self.world_filters = LiveAccelerationFilters()
+        self.forward = None
+        self.direction_id = 0
+        self.direction_pending = False
+        self.direction_samples = []
+        self.direction_wait_samples = 0
+        self.signed = np.full(4, np.nan)
+
+    def learn_forward(self):
+        with self.lock:
+            if self.calibrating:
+                return
+            self.forward = None
+            self.signed[:] = np.nan
+            self.direction_pending = True
+            self.direction_samples = []
+            self.direction_wait_samples = 0
+            self.status = 'Direction: start still, then move straight toward the object. Do not move back first.'
+
+    def update_direction(self, world):
+        if not self.direction_pending:
+            return
+        self.direction_wait_samples += 1
+        horizontal = world.copy()
+        horizontal[2] = 0
+        if self.direction_samples or np.linalg.norm(horizontal) >= .35:
+            self.direction_samples.append(horizontal)
+        if len(self.direction_samples) >= 6:
+            samples = np.array(self.direction_samples)
+            mean = samples.mean(axis=0)
+            strength = np.linalg.norm(mean)
+            consistency = strength / max(np.linalg.norm(samples, axis=1).mean(), 1e-9)
+            self.direction_pending = False
+            if strength < .2 or consistency < .75:
+                self.status = 'Direction not stable. Press D, start still and make one straight forward movement.'
+            else:
+                self.forward = mean / strength
+                self.direction_id += 1
+                self.points.clear()
+                self.origin = None
+                self.status = 'Direction ready: toward object is positive. R: recalibrate; D: relearn direction.'
+                print('[IMU] Forward direction in world coordinates:', self.forward)
+        elif self.direction_wait_samples > IMU_RATE_HZ * 8:
+            self.direction_pending = False
+            self.status = 'No clear forward movement detected. Press D to retry.'
 
     def begin(self):
         with self.lock:
@@ -116,14 +172,18 @@ class State:
             self.filters.reset()
             self.filtered_mags[:] = 0
             self.points.clear()
+            self.world_filters.reset()
+            self.forward = None
+            self.direction_pending = False
+            self.signed[:] = np.nan
             self.status = 'Keep IMU still: calibrating for 2 seconds...'
 
     def calibration_quality(self):
-        """Called with lock held; reject transient attitude or moving samples.
 
-        A single static pose cannot identify arbitrary angle offsets and sensor
-        bias separately. Reject a large unexplained residual instead of hiding it.
-        """
+
+
+
+
         return calibration_quality(self.samples, self.linear_samples,
                                    self.gyro_samples, self.calibration_times)
 
@@ -143,7 +203,11 @@ class State:
             self.linear_mag = 0.
             self.filters.reset()
             self.filtered_mags[:] = 0
-            self.status = 'Live | R: recalibrate | Q: save and exit'
+            self.world_filters.reset()
+            self.forward = None
+            self.direction_pending = False
+            self.signed[:] = np.nan
+            self.status = 'Calibrated. Press D while still, then move straight toward the object to learn direction.'
             print('[IMU] Calibration complete; bias (g):', self.bias)
             print('[IMU] After gravity removal, sensor offset (g):', self.linear_bias)
             if np.linalg.norm(self.linear_bias) > .15:
@@ -160,7 +224,7 @@ class State:
                 self.linear_samples.append(raw - gravity)
                 self.calibration_times.append(timestamp)
                 self.gyro_samples.append(gyro.copy())
-                # Only the latest stationary interval is used after warm-up.
+                                                                            
                 while len(self.calibration_times)>1 and timestamp-self.calibration_times[0]>2.1:
                     self.calibration_times.pop(0)
                     self.samples.pop(0)
@@ -173,19 +237,26 @@ class State:
             self.linear_mag = float(np.linalg.norm(self.linear))
             filtered = self.filters.update(self.linear)
             self.filtered_mags = np.array([np.linalg.norm(a) for a in filtered])
+            world = body_to_world(self.linear, angles)
+            world_filtered = self.world_filters.update(world)
+            self.update_direction(world)
+            if self.forward is not None:
+                self.signed = np.array([np.dot(a, self.forward) for a in [world, *world_filtered]])
             if self.origin is None:
                 self.origin = timestamp
             elapsed = timestamp - self.origin
-            self.points.append((elapsed, self.linear_mag, *self.filtered_mags))
+            self.points.append((elapsed, self.linear_mag, *self.filtered_mags, *self.signed))
             self.rows.append([len(self.rows), timestamp, *self.latest, self.mag, self.calibration_id,
                               *raw, *gyro, *angles, *gravity, *self.linear, self.linear_mag,
-                              *[v for axes in filtered for v in (*axes, float(np.linalg.norm(axes)))]])
+                              *[v for axes in filtered for v in (*axes, float(np.linalg.norm(axes)))],
+                              *world, *self.signed, *(self.forward if self.forward is not None else np.full(3, np.nan)),
+                              self.direction_id if self.forward is not None else 0])
 
     def notify(self, sender, data):
         if self.stop.is_set():
             return
         received = time.time()
-        # Same 50 Hz batch timestamp convention as Record_mediapipe.
+                                                                    
         for i, raw in enumerate(extract_imu_packets(bytes(data))):
             self.process(raw, received + i / 50.)
 
@@ -261,13 +332,14 @@ def main():
     from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
     state = State()
     window = tk.Tk()
-    window.title('IMU — Real-time smoothing: EMA / 3 Hz / 5 Hz')
-    window.geometry('1050x650')
+    window.title('IMU — Magnitude and signed forward acceleration')
+    window.geometry('1150x850')
     status, values = tk.StringVar(value=state.status), tk.StringVar(value='Waiting for IMU...')
     tk.Label(window, textvariable=status, font=('Segoe UI', 12)).pack(pady=8)
     tk.Label(window, textvariable=values, font=('Segoe UI', 11)).pack()
     fig = Figure(figsize=(10, 5), dpi=100)
-    ax = fig.add_subplot(111)
+    ax = fig.add_subplot(211)
+    signed_ax = fig.add_subplot(212)
     plot_lines = [
         ax.plot([], [], color='gray', alpha=.45, lw=1, label='Gravity removed: unsmoothed')[0],
         ax.plot([], [], color='tab:blue', lw=1.4, label='EMA (same time constant as current smoothing)')[0],
@@ -277,6 +349,15 @@ def main():
     ax.set(xlabel='Time since calibration (s)', ylabel='Acceleration magnitude (m/s²)', xlim=(0, PLOT_SECONDS), ylim=(0, 1))
     ax.grid(alpha=.25)
     ax.legend(loc='upper left')
+    signed_lines = [signed_ax.plot([], [], color=color, lw=width, alpha=alpha, label=label)[0]
+                    for color, width, alpha, label in [('gray', 1, .45, 'Signed raw'),
+                    ('tab:blue', 1.4, 1, 'Signed EMA'), ('tab:orange', 2, 1, 'Signed 3 Hz'),
+                    ('tab:green', 1.7, 1, 'Signed 5 Hz')]]
+    signed_ax.axhline(0, color='black', lw=.8)
+    signed_ax.set(xlabel='Time since direction setup (s)', ylabel='Forward acceleration (m/s²)',
+                  xlim=(0, PLOT_SECONDS), ylim=(-1, 1), title='Fixed horizontal forward axis: toward object = positive')
+    signed_ax.grid(alpha=.25)
+    signed_ax.legend(loc='upper left')
     fig.tight_layout()
     canvas = FigureCanvasTkAgg(fig, master=window)
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
@@ -301,6 +382,10 @@ def main():
         if not closing:
             state.recalibrate.set()
 
+    def direction(event=None):
+        if not closing:
+            state.learn_forward()
+
     controls = tk.Frame(window)
     controls.pack(pady=8)
     visibility = []
@@ -309,11 +394,14 @@ def main():
         visibility.append(checked)
         tk.Checkbutton(controls, text=label, variable=checked).pack(side=tk.LEFT, padx=4)
     tk.Button(controls, text='Recalibrate (R)', command=recalibrate).pack(side=tk.LEFT, padx=10)
+    tk.Button(controls, text='Learn forward direction (D)', command=direction).pack(side=tk.LEFT, padx=10)
     tk.Button(controls, text='Save and exit (Q)', command=close).pack(side=tk.LEFT, padx=10)
     for key in ['r', 'R']:
         window.bind('<'+key+'>', recalibrate)
     for key in ['q', 'Q']:
         window.bind('<'+key+'>', close)
+    for key in ['d', 'D']:
+        window.bind('<'+key+'>', direction)
     window.protocol('WM_DELETE_WINDOW', close)
 
     def update():
@@ -324,12 +412,14 @@ def main():
             acceleration, mag, count = state.linear.copy(), state.mag, len(state.rows)
             linear_mag, angles = state.linear_mag, state.angles.copy()
             filtered_mags = state.filtered_mags.copy()
+            signed_values = state.signed.copy()
             if state.calibrating and state.started is not None:
                 remaining = CALIB_SECONDS - (time.monotonic() - state.started)
                 if remaining > 0:
                     text += f' {remaining:.1f} s remaining'
         status.set(text)
-        values.set(f'Raw={linear_mag:.3f} | EMA={filtered_mags[0]:.3f} | 3 Hz={filtered_mags[1]:.3f} | 5 Hz={filtered_mags[2]:.3f} m/s² | samples={count}')
+        signed_text = f'{signed_values[2]:+.3f}' if np.isfinite(signed_values[2]) else 'direction not set'
+        values.set(f'Magnitude 3 Hz={filtered_mags[1]:.3f} | Signed 3 Hz={signed_text} m/s² | samples={count}')
         if points:
             latest = max(p[0] for p in points)
             start = max(0, latest - PLOT_SECONDS)
@@ -337,12 +427,19 @@ def main():
             for i, (plot_line, checked) in enumerate(zip(plot_lines, visibility), 1):
                 plot_line.set_data(visible[:, 0], visible[:, i])
                 plot_line.set_visible(checked.get())
+                signed_lines[i-1].set_data(visible[:, 0], visible[:, i+4])
+                signed_lines[i-1].set_visible(checked.get())
             ax.set_xlim(start, max(PLOT_SECONDS, latest))
             selected = [i + 1 for i, checked in enumerate(visibility) if checked.get()]
             ax.set_ylim(0, max(.3, float(visible[:, selected].max()) * 1.15) if selected else .3)
+            signed_ax.set_xlim(start, max(PLOT_SECONDS, latest))
+            signed_data = visible[:, [i+4 for i in selected]] if selected else np.array([])
+            finite_signed = signed_data[np.isfinite(signed_data)]
+            limit = max(.3, float(np.max(np.abs(finite_signed))) * 1.15) if finite_signed.size else 1
+            signed_ax.set_ylim(-limit, limit)
             canvas.draw_idle()
         else:
-            for plot_line in plot_lines:
+            for plot_line in [*plot_lines, *signed_lines]:
                 plot_line.set_data([], [])
             canvas.draw_idle()
         window.after(50, update)
@@ -375,7 +472,7 @@ def self_test():
     state.process(sample(np.array([.1, -.2, 1.]) + offset), 101.02)
     np.testing.assert_allclose(state.latest, [.981, -1.962, 0])
     np.testing.assert_allclose(state.mag, np.linalg.norm(state.latest))
-    # Independent rotations: body-to-world Rz Ry Rx, rotate world +Z into body.
+                                                                               
     for k, angles in enumerate([(30,0,0),(0,45,0),(40,-35,120),(180,0,0),(0,90,60),(0,0,150)]):
         r,p,y=np.deg2rad(angles)
         rx=np.array([[1,0,0],[0,np.cos(r),-np.sin(r)],[0,np.sin(r),np.cos(r)]])
@@ -393,7 +490,7 @@ def self_test():
     assert state.mag == 0 and state.calibration_id == 2
     assert state.linear_mag < 1e-10
     assert len(state.rows[-1]) == len(CSV_COLUMNS)
-    # DC must be preserved, and 3 Hz must suppress 10 Hz more than 5 Hz.
+                                                                        
     filters = LiveAccelerationFilters()
     for _ in range(100):
         values = filters.update([.4, -.2, .1])
@@ -410,11 +507,27 @@ def self_test():
     for value in filters.update([0,0,0]):
         np.testing.assert_array_equal(value, np.zeros(3))
     print('PASS: causal filters preserve DC, suppress high frequencies and reset after calibration')
+    for angles in [(0,0,0),(30,20,70),(-45,10,120)]:
+        rotation = np.column_stack([body_to_world(np.eye(3)[:,j], angles) for j in range(3)])
+        np.testing.assert_allclose(body_to_world(rotation.T @ np.array([1.,-.5,.2]), angles), [1.,-.5,.2], atol=1e-12)
+    state = State()
+    state.calibrating = False
+    state.learn_forward()
+    for _ in range(6):
+        state.update_direction(np.array([.6,.8,0.]))
+    np.testing.assert_allclose(state.forward, [.6,.8,0.])
+    assert np.dot(state.forward, [.6,.8,0.]) > 0
+    assert np.dot(state.forward, [-.6,-.8,0.]) < 0
+    state.process(sample([.1,0,1]), 200)
+    assert len(state.rows[-1]) == len(CSV_COLUMNS)
+    state.begin()
+    assert state.forward is None and np.isnan(state.signed).all()
+    print('PASS: world rotation, forward direction, signed projection, CSV columns and reset')
     print('PASS: parsing, tilted/inverted static poses, yaw invariance, dynamic acceleration, bias and recalibration')
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description='Real-time signed acceleration test')
     parser.add_argument('--self-test', action='store_true')
     args = parser.parse_args()
     if args.self_test:

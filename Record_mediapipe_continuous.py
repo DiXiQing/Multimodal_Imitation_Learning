@@ -1,12 +1,11 @@
-"""Continuous trial recording; Record_mediapipe.py is left unchanged.
 
-Next trial: save/start without reconnecting. Recalibrate: save, calibrate,
-then start a new trial. Finish trial: save and pause with preview still open.
-"""
+
+
+
+
 import asyncio
 import csv
 from datetime import datetime
-import json
 from pathlib import Path
 import shutil
 import tempfile
@@ -20,18 +19,20 @@ from PIL import Image, ImageTk
 
 import Record_mediapipe as config
 from imu_processing import gravity_in_sensor, linear_acceleration, calibration_quality
+from IMUTest import body_to_world
 
-# Defaults follow the current recorder; size can also be changed in the window.
+                                                                               
 OBJECT_SIZE_CM = config.TRIAL_NAME.split('Size_')[1].split('cm_')[0]
 OUTPUT_ROOT = Path(__file__).resolve().parent / config.BACKUP_DIR
 IMU_COLUMNS = ['imu_index','t_imu','ax','ay','az','mag','vx','vy','vz','velocity',
                'ax_raw_g','ay_raw_g','az_raw_g','gx_dps','gy_dps','gz_dps',
                'roll_deg','pitch_deg','yaw_deg','gravity_x_g','gravity_y_g','gravity_z_g']
+IMU_COLUMNS += ['forward_raw','forward_x','forward_y','forward_z']
 
 
 class Trial:
     def __init__(self, base, size, width, height, calibration):
-        self.name = f'TRIAL_Size_{float(size):g}cm_{datetime.now():%Y%m%d_%H%M%S_%f}'
+        self.name = f'TRIAL_Size_{float(size):g}cm_{datetime.now():%Y%m%d_%H%M%S}'
         self.path = base / self.name
         self.frames = self.path / 'frames'
         self.frames.mkdir(parents=True, exist_ok=False)
@@ -43,7 +44,7 @@ class Trial:
         self.frame_count = self.imu_count = 0
         self.started = time.time()
         self.closed = False
-        # OpenCV paths on Windows may not support Chinese filenames.
+                                                                    
         fd = tempfile.NamedTemporaryFile(prefix='grasp_video_',suffix='.mp4',delete=False)
         self.video_temp = Path(fd.name);fd.close()
         self.video = cv2.VideoWriter(str(self.video_temp),cv2.VideoWriter_fourcc(*'mp4v'),config.TARGET_FPS,(width,height))
@@ -51,7 +52,6 @@ class Trial:
             self.camera_file.close();self.imu_file.close()
             self.video_temp.unlink(missing_ok=True)
             raise RuntimeError('Cannot create trial video')
-        (self.path/'imu_processing.json').write_text(json.dumps(calibration,indent=2),encoding='utf-8')
 
     def save_frame(self, raw, display, timestamp, aperture, area):
         if self.closed:raise RuntimeError('Trial already closed')
@@ -64,11 +64,11 @@ class Trial:
         if self.frame_count % 30 == 0:
             self.camera_file.flush();self.imu_file.flush()
 
-    def save_imu(self, timestamp, net, packet, velocity):
+    def save_imu(self, timestamp, net, packet, velocity, signed_data):
         if self.closed or timestamp < self.started:return
         self.imu.writerow([self.imu_count,timestamp,*net,float(np.linalg.norm(net)),
                            *velocity,float(np.linalg.norm(velocity)),*packet['acc'],
-                           *packet['gyro'],*packet['angles'],*gravity_in_sensor(packet['angles'])])
+                           *packet['gyro'],*packet['angles'],*gravity_in_sensor(packet['angles']),*signed_data])
         self.imu_count += 1
 
     def close(self):
@@ -76,9 +76,6 @@ class Trial:
         self.closed=True
         self.video.release();self.camera_file.close();self.imu_file.close()
         shutil.move(str(self.video_temp),str(self.path/'recorded_video.mp4'))
-        (self.path/'trial_summary.json').write_text(json.dumps(dict(
-            camera_frames=self.frame_count,imu_samples=self.imu_count,
-            started=self.started,ended=time.time(),object_color=config.OBJECT_COLOR),indent=2),encoding='utf-8')
         print(f'[Saved] {self.path} | frames={self.frame_count}, IMU={self.imu_count}',flush=True)
 
 
@@ -91,7 +88,40 @@ class Recorder:
         self.bias=np.zeros(3);self.latest=np.zeros(3)
         self.raw=[];self.residual=[];self.gyro=[];self.times=[]
         self.calibration={};self.auto_start=False
+        self.forward=None;self.direction_id=0;self.direction_pending=False
+        self.direction_samples=[];self.direction_wait_samples=0
+        self.signed=np.full(4,np.nan)
         self.reset_integration()
+
+    def request_direction(self):
+        with self.lock:
+            if not self.connected or self.calibrating or not self.calibration_ready:
+                raise RuntimeError('Wait for IMU calibration')
+            self.finish_trial()
+            self.auto_start=False;self.forward=None;self.signed[:]=np.nan
+            self.direction_pending=True;self.direction_samples=[];self.direction_wait_samples=0
+            self.status='Direction setup: start still, move straight toward object; do not move back first'
+
+    def update_direction(self, world):
+        if not self.direction_pending:return
+        self.direction_wait_samples+=1
+        horizontal=world.copy();horizontal[2]=0
+        if self.direction_samples or np.linalg.norm(horizontal)>=.35:
+            self.direction_samples.append(horizontal)
+        if len(self.direction_samples)>=6:
+            samples=np.array(self.direction_samples);mean=samples.mean(axis=0)
+            strength=np.linalg.norm(mean)
+            consistency=strength/max(np.linalg.norm(samples,axis=1).mean(),1e-9)
+            self.direction_pending=False
+            if strength<.2 or consistency<.75:
+                self.status='Direction unstable: press D and retry a straight forward movement'
+            else:
+                self.forward=mean/strength;self.direction_id+=1
+                self.status='Direction ready: return to starting position, then press N to record'
+                print('[IMU] Forward world direction:',self.forward,flush=True)
+        elif self.direction_wait_samples>400:
+            self.direction_pending=False
+            self.status='Direction timeout: press D to retry'
 
     def reset_integration(self):
         self.filtered=np.zeros(3);self.previous=None;self.previous_time=None
@@ -102,6 +132,8 @@ class Recorder:
             self.calibrating=True;self.calibration_ready=False
             self.raw=[];self.residual=[];self.gyro=[];self.times=[]
             self.calibration_started=time.monotonic()
+            self.forward=None;self.direction_pending=False;self.signed[:]=np.nan
+            self.auto_start=False
             self.status='Keep IMU still: checking calibration (at least 2 s)'
 
     def finish_trial(self):
@@ -116,6 +148,8 @@ class Recorder:
         with self.lock:
             if not self.connected or self.calibrating or not self.calibration_ready:
                 raise RuntimeError('Wait for IMU calibration')
+            if self.forward is None or self.direction_pending:
+                raise RuntimeError('Press D to learn the forward direction first')
             self.finish_trial()
             self.reset_integration()
             self.trial=Trial(OUTPUT_ROOT,size,width,height,self.calibration)
@@ -142,13 +176,18 @@ class Recorder:
                     continue
                 net=linear_acceleration(packet,self.bias,config.GRAVITY)
                 self.latest=net
+                world=body_to_world(net,packet['angles'])
+                self.update_direction(world)
+                if self.forward is not None:
+                    self.signed[0]=float(np.dot(world,self.forward))
                 if self.trial is None:continue
                 filtered=config.REALTIME_LPF_ALPHA*net+(1-config.REALTIME_LPF_ALPHA)*self.filtered
                 if self.previous_time is not None:
                     dt=timestamp-self.previous_time
                     if 0<dt<=.2:self.velocity+=.5*(self.previous+filtered)*dt
                 self.filtered=filtered;self.previous=filtered.copy();self.previous_time=timestamp
-                self.trial.save_imu(timestamp,net,packet,self.velocity)
+                signed_data=[self.signed[0],*self.forward]
+                self.trial.save_imu(timestamp,net,packet,self.velocity,signed_data)
 
     async def measure(self):
         for attempt in range(1,config.IMU_MAX_CONNECT_ATTEMPTS+1):
@@ -184,7 +223,8 @@ class Recorder:
                                             gravity_m_s2=config.GRAVITY,attitude_convention='ENU Z-Y-X',ax_ay_az_units='m/s^2',
                                             ax_ay_az_frame='sensor/body',raw_acceleration_units='g')
                                         self.reset_integration();self.calibrating=False;self.calibration_ready=True
-                                        self.status='Calibration complete';self.auto_start=True
+                                        self.status='Calibration complete: press D to learn forward direction'
+                                        self.auto_start=False
                                         print('[IMU] Calibration complete; bias (g):',self.bias,flush=True)
                                     elif elapsed>config.CALIB_MAX_WAIT_SECONDS:
                                         raise RuntimeError('Calibration rejected: '+reason)
@@ -197,6 +237,7 @@ class Recorder:
                 with self.lock:
                     had_trial=self.trial is not None
                     self.connected=False;self.calibration_ready=False;self.calibrating=True
+                    self.forward=None;self.direction_pending=False;self.signed[:]=np.nan
                     self.finish_trial();self.status=f'IMU error: {exc}'
                 print('[IMU]',type(exc).__name__,str(exc),flush=True)
                 if had_trial or attempt==config.IMU_MAX_CONNECT_ATTEMPTS:
@@ -245,6 +286,10 @@ def main():
         try:recorder.request_calibration()
         except Exception as exc:messagebox.showerror('无法校准',str(exc))
 
+    def direction(event=None):
+        try:recorder.request_direction()
+        except Exception as exc:messagebox.showerror('无法设置方向',str(exc))
+
     def await_shutdown():
         if thread.is_alive():window.after(50,await_shutdown)
         else:window.destroy()
@@ -262,8 +307,10 @@ def main():
     finish_button.grid(row=0,column=3,padx=5)
     calib_button=tk.Button(controls,text='重新校准 (R)',command=recalibrate)
     calib_button.grid(row=0,column=4,padx=5)
-    tk.Button(controls,text='保存并退出 (Q)',command=close).grid(row=0,column=5,padx=5)
-    for key,fn in [('n',start),('s',pause),('r',recalibrate),('q',close)]:
+    direction_button=tk.Button(controls,text='设置正方向 (D)',command=direction)
+    direction_button.grid(row=0,column=5,padx=5)
+    tk.Button(controls,text='保存并退出 (Q)',command=close).grid(row=0,column=6,padx=5)
+    for key,fn in [('n',start),('s',pause),('r',recalibrate),('d',direction),('q',close)]:
         window.bind('<'+key+'>',fn);window.bind('<'+key.upper()+'>',fn)
     window.protocol('WM_DELETE_WINDOW',close)
 
@@ -290,11 +337,13 @@ def main():
                     cv2.putText(display,'REC',(10,30),cv2.FONT_HERSHEY_SIMPLEX,.8,(0,0,255),2)
                     trial.save_frame(raw,display,timestamp,fw,area)
                 status.set(recorder.status)
-                info.set(f'FW={fw:.1f}px | OA={area:.0f}px² | Acc={np.linalg.norm(recorder.latest):.3f}m/s² | Frames={trial.frame_count if trial else 0}')
+                signed_text=f'{recorder.signed[0]:+.3f}' if recorder.forward is not None else '未设置'
+                info.set(f'FW={fw:.1f}px | OA={area:.0f}px² | Acc={np.linalg.norm(recorder.latest):.3f} | 正向加速度={signed_text}m/s² | Frames={trial.frame_count if trial else 0}')
                 ready=recorder.connected and recorder.calibration_ready and not recorder.calibrating
-                start_button.config(state='normal' if ready else 'disabled')
+                start_button.config(state='normal' if ready and recorder.forward is not None and not recorder.direction_pending else 'disabled')
                 finish_button.config(state='normal' if trial else 'disabled')
                 calib_button.config(state='normal' if ready else 'disabled')
+                direction_button.config(state='normal' if ready and not recorder.direction_pending else 'disabled')
             photo=ImageTk.PhotoImage(Image.fromarray(cv2.cvtColor(display,cv2.COLOR_BGR2RGB)))
             preview.config(image=photo);preview.image=photo
         except Exception as exc:

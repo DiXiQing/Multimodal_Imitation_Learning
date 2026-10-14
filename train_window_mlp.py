@@ -1,13 +1,3 @@
-"""Train two causal window MLP models with single-size or generalization splits.
-
-Compare object_area against object_area + acceleration magnitude.
-Velocity is neither required nor used. Read grasp_data_smoothed.csv without
-additional smoothing. Keep complete test trials out of training and normalize
-using training data only. Defaults: 15-frame windows and 1000 epochs.
-Select RUN_MODE and size folders in the configuration. Generalization holds
-out TEST_TRIALS per training size and evaluates unseen sizes separately.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -23,37 +13,28 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 
 
-# ============================================================
-# Configuration
-# ============================================================
-
-DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D13\3")
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D13\4")
 RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-RESULT_ROOT = Path(__file__).resolve().parent / "Data" / "Result"
-OUTPUT_DIR = RESULT_ROOT / f"singleSize_{RUN_TIMESTAMP}"
+OUTPUT_DIR = DATA_ROOT / "Result" / f"singleSize_{RUN_TIMESTAMP}"
 
-# Choose in code: "single_size" or "generalization".
-# single_size uses DATA_ROOT, TEST_TRIALS and TEST_TRIAL_NAMES below.
-RUN_MODE = "single_size"
-GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\临时数据\D13")
-GENERALIZATION_OUTPUT_DIR = RESULT_ROOT / f"generalization_{RUN_TIMESTAMP}"
-# TRAIN_SIZE_FOLDERS = ("2", "3", "4")
-# GENERALIZATION_SIZE_FOLDERS = ("2.5", "3.5", "4.5")
-TRAIN_SIZE_FOLDERS = ("4.5", "3.5")
-GENERALIZATION_SIZE_FOLDERS = ("4",)
-# Hold out complete trials separately within each training size.
+# "single_size" or "generalization".
+RUN_MODE = "generalization"
+GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D13")
+GENERALIZATION_OUTPUT_DIR = GENERALIZATION_ROOT / "Result" / f"generalization_{RUN_TIMESTAMP}"
+TRAIN_SIZE_FOLDERS = ("2", "3","4")
+GENERALIZATION_SIZE_FOLDERS = ("2.5","3.5", "4.5")
+
 SELF_TEST_TRIALS_BY_FOLDER = {}
-# Optional exact folder names; [] uses the seeded split for that size.
 SELF_TEST_NAMES_BY_FOLDER = {}
 
 MODEL_SPECS = {
     "window_area_only": ["object_area"],
-    "window_area_acceleration": ["object_area", "acceleration_magnitude"],
+    "window_area_acceleration": ["object_area", "forward_acceleration"],
 }
 
 MODEL_LABELS = {
     "window_area_only": "Area only",
-    "window_area_acceleration": "Area + acceleration magnitude",
+    "window_area_acceleration": "Area + signed forward acceleration",
 }
 
 TARGET_COLUMN = "finger_width"
@@ -65,10 +46,8 @@ WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 SEED = 42
 INPUT_CSV = "grasp_data_smoothed.csv"
-TEST_TRIALS = 3
+TEST_TRIALS = 4
 
-# Edit this list to choose fixed test trials. All remaining trials train.
-# Set to None or [] to use the random split controlled by TEST_TRIALS and SEED.
 TEST_TRIAL_NAMES = []
 
 class WindowMLP(nn.Module):
@@ -115,11 +94,7 @@ def trial_size(trial_name: str) -> float:
 
 def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
     all_features = sorted({column for columns in MODEL_SPECS.values() for column in columns})
-    # Derive magnitude from the smoothed axes, rather than the stored mag
-    # column, which may use a different smoothing convention.
-    required = ["frame"] + [c for c in all_features if c != "acceleration_magnitude"] + [TARGET_COLUMN]
-    if "acceleration_magnitude" in all_features:
-        required += ["ax", "ay", "az"]
+    required = ["frame"] + all_features + [TARGET_COLUMN]
     trials = {}
 
     for csv_path in sorted(data_root.glob(f"TRIAL_*/{INPUT_CSV}")):
@@ -133,11 +108,6 @@ def load_trials(data_root: Path) -> dict[str, pd.DataFrame]:
 
         for column in required:
             frame[column] = pd.to_numeric(frame[column], errors="coerce")
-
-        if "acceleration_magnitude" in all_features:
-            frame["acceleration_magnitude"] = np.linalg.norm(
-                frame[["ax", "ay", "az"]].to_numpy(dtype=float), axis=1
-            )
 
         frame = frame.reset_index(drop=True)
 
@@ -409,7 +379,6 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
         frame = trials[trial_name].copy()
         full_frames = frame["frame"].to_numpy(dtype=float)
         full_target = frame[TARGET_COLUMN].to_numpy(dtype=float)
-        # Use the same full-trial time mapping for measured and predicted curves.
         frame_span = full_frames[-1] - full_frames[0]
         if frame_span <= 0:
             raise ValueError(f"Trial {trial_name} has no positive frame span")
@@ -437,8 +406,6 @@ def evaluate_and_plot(trials: dict[str, pd.DataFrame], test_names: list[str], mo
                 "r2": r2,
             })
 
-        # Plot the full measured trajectory.
-        # Window-MLP predictions start only when 15 frames are available.
         plt.figure(figsize=(14, 6))
         plt.plot(full_progress, full_target, linewidth=3, label="Measured finger width")
 
@@ -568,7 +535,9 @@ def main() -> None:
     )
     args = parser.parse_args()
     if args.output_dir is None:
-        args.output_dir = GENERALIZATION_OUTPUT_DIR if args.mode == "generalization" else OUTPUT_DIR
+        data_directory = args.generalization_root if args.mode == "generalization" else args.data_root
+        run_prefix = "generalization" if args.mode == "generalization" else "singleSize"
+        args.output_dir = data_directory / "Result" / f"{run_prefix}_{RUN_TIMESTAMP}"
 
     if args.window_size < 2:
         parser.error("--window-size must be at least 2")

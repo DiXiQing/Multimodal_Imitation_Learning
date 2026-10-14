@@ -45,7 +45,6 @@ import time
 import csv
 import os
 import ctypes
-import json
 
 import cv2
 import numpy as np
@@ -952,21 +951,6 @@ def record():
                     " g"
                 )
 
-                with open(os.path.join(OUTPUT_DIR, "imu_processing.json"), "w", encoding="utf-8") as metadata_file:
-                    json.dump({
-                        "acceleration_method": "attitude_gravity_removal_then_static_sensor_bias",
-                        "calibration_seconds": CALIB_SECONDS,
-                        "calibration_wait_seconds": time.monotonic() - calibration_started,
-                        "calibration_quality": reason,
-                        "calibration_samples": len(state.calib_linear_buffer),
-                        "sensor_bias_g": state.acc_bias,
-                        "gravity_m_s2": GRAVITY,
-                        "attitude_convention": "ENU, body-to-world Rz(yaw) Ry(pitch) Rx(roll)",
-                        "ax_ay_az_units": "m/s^2",
-                        "ax_ay_az_frame": "sensor/body",
-                        "raw_acceleration_units": "g",
-                        "velocity_method": "existing body-axis low-pass trapezoidal integration; drift remains possible",
-                    }, metadata_file, indent=2, ensure_ascii=False)
 
 
                 # ------------------------------------------------

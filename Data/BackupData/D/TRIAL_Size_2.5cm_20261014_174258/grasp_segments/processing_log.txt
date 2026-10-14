@@ -1,0 +1,164 @@
+ peak   status                                                reason  start  onset  size_cm  stable     end  area_gain  imu_max_gap_seconds
+  128 accepted                                                           87    112      2.5   138.0   153.0   3.714531             0.071649
+  257 accepted                                                          217    242      2.5   270.0   285.0   2.814471             0.099087
+  385 accepted                                                          344    369      2.5   397.0   412.0   2.838068             0.099575
+  513 accepted                                                          474    499      2.5   522.0   537.0   2.079475             0.071199
+  627 accepted                                                          587    612      2.5   640.0   655.0   1.715236             0.070663
+  747 accepted                                                          705    730      2.5   756.0   771.0   2.026771             0.068647
+  864 accepted                                                          823    848      2.5   877.0   892.0   2.326476             0.070149
+  986 accepted                                                          944    969      2.5  1000.0  1015.0   2.791444             0.070022
+ 1101 accepted                                                         1060   1085      2.5  1115.0  1130.0   1.630435             0.070349
+ 1214 accepted                                                         1176   1201      2.5  1224.0  1239.0   1.358056             0.042576
+ 1330 excluded no complete stable grasp for 15 post-stability frames   1291   1316      2.5     NaN     NaN        NaN                  NaN
+ 1445 accepted                                                         1401   1426      2.5  1455.0  1470.0   1.473430             0.053382
+ 1704 accepted                                                         1667   1692      2.5  1716.0  1731.0   1.876938             0.070614
+ 1844 excluded no complete stable grasp for 15 post-stability frames   1801   1826      2.5     NaN     NaN        NaN                  NaN
+ 2059 accepted                                                         2019   2044      2.5  2067.0  2082.0   2.151927             0.046649
+ 2216 accepted                                                         2175   2200      2.5  2228.0  2243.0   2.397780             0.070621
+ 2348 accepted                                                         2310   2335      2.5  2359.0  2374.0   3.579329             0.052508
+ 2575 accepted                                                         2535   2560      2.5  2587.0  2602.0   1.888781             0.070730
+ 2706 accepted                                                         2665   2690      2.5  2716.0  2731.0   2.473485             0.070535
+ 2760 excluded              visually confirmed return/release action   2714   2739      2.5     NaN     NaN        NaN                  NaN
+ 2845 accepted                                                         2807   2832      2.5  2856.0  2871.0   1.883205             0.070931
+ 2991 accepted                                                         2950   2975      2.5  3001.0  3016.0   2.265079             0.071382
+ 3129 accepted                                                         3089   3114      2.5  3141.0  3156.0   2.078049             0.070450
+ 3259 accepted                                                         3222   3247      2.5  3271.0  3286.0   3.117442             0.069891
+ 3395 accepted                                                         3354   3379      2.5  3408.0  3423.0   2.810119             0.068312
+ 3525 accepted                                                         3484   3509      2.5  3534.0  3549.0   2.426948             0.041963
+ 3700 accepted                                                         3662   3687      2.5  3712.0  3727.0   3.426058             0.069911
+ 3822 accepted                                                         3784   3809      2.5  3835.0  3850.0   2.197674             0.068608
+ 3934 accepted                                                         3897   3922      2.5  3945.0  3960.0   1.955312             0.069158
+ 4076 excluded no complete stable grasp for 15 post-stability frames   4035   4060      2.5     NaN     NaN        NaN                  NaN
+ 4194 accepted                                                         4156   4181      2.5  4206.0  4221.0   2.852394             0.069414
+ 4321 accepted                                                         4281   4306      2.5  4333.0  4348.0   2.927536             0.071179
+ 4458 accepted                                                         4418   4443      2.5  4469.0  4484.0   2.142857             0.042687
+ 4589 accepted                                                         4550   4575      2.5  4602.0  4617.0   1.925099             0.069508
+ 4717 accepted                                                         4680   4705      2.5  4727.0  4742.0   3.075349             0.071433
+ 4849 accepted                                                         4809   4834      2.5  4861.0  4876.0   2.424552             0.073013
+ 4985 accepted                                                         4946   4971      2.5  4997.0  5012.0   2.954969             0.042288
+ 5110 accepted                                                         5069   5094      2.5  5124.0  5139.0   2.221088             0.043938
+ 5257 accepted                                                         5218   5243      2.5  5269.0  5284.0   2.545743             0.071278
+ 5378 accepted                                                         5340   5365      2.5  5392.0  5407.0   3.066739             0.044473
+ 5523 accepted                                                         5485   5510      2.5  5535.0  5550.0   1.982507             0.042334
+ 5655 accepted                                                         5613   5638      2.5  5667.0  5682.0   2.520000             0.071501
+ 5783 accepted                                                         5745   5770      2.5  5796.0  5811.0   2.828444             0.071589
+ 5917 accepted                                                         5877   5902      2.5  5930.0  5945.0   3.179506             0.041604
+ 6082 accepted                                                         6039   6064      2.5  6092.0  6107.0   2.886818             0.070503
+ 6218 accepted                                                         6177   6202      2.5  6226.0  6241.0   2.653846             0.070703
+ 6344 accepted                                                         6304   6329      2.5  6357.0  6372.0   2.781417             0.067781
+ 6495 accepted                                                         6456   6481      2.5  6507.0  6522.0   2.306150             0.066556
+ 7030 accepted                                                         6991   7016      3.0  7040.0  7055.0   3.801686             0.071483
+ 7161 accepted                                                         7122   7147      3.0  7172.0  7187.0   3.526786             0.042015
+ 7282 excluded no complete stable grasp for 15 post-stability frames   7242   7267      3.0     NaN     NaN        NaN                  NaN
+ 7395 accepted                                                         7353   7378      3.0  7406.0  7421.0   1.825999             0.071552
+ 7510 accepted                                                         7468   7493      3.0  7524.0  7539.0   1.742690             0.041851
+ 7653 accepted                                                         7615   7640      3.0  7665.0  7680.0   2.151280             0.062765
+ 7785 accepted                                                         7743   7768      3.0  7795.0  7810.0   2.371515             0.042614
+ 7910 accepted                                                         7870   7895      3.0  7921.0  7936.0   1.835796             0.045905
+ 8035 accepted                                                         8000   8025      3.0  8052.0  8067.0   2.037424             0.070104
+ 8171 accepted                                                         8129   8154      3.0  8181.0  8196.0   2.433637             0.070321
+ 8293 accepted                                                         8254   8279      3.0  8306.0  8321.0   2.286421             0.070939
+ 8416 accepted                                                         8376   8401      3.0  8428.0  8443.0   2.423136             0.068981
+ 8533 accepted                                                         8493   8518      3.0  8545.0  8560.0   2.370663             0.043566
+ 8669 accepted                                                         8631   8656      3.0  8681.0  8696.0   2.044654             0.041535
+ 8791 accepted                                                         8749   8774      3.0  8801.0  8816.0   2.463487             0.049906
+ 8929 accepted                                                         8892   8917      3.0  8941.0  8956.0   2.340176             0.041148
+ 9052 accepted                                                         9012   9037      3.0  9066.0  9081.0   2.343981             0.070553
+ 9177 accepted                                                         9135   9160      3.0  9189.0  9204.0   2.184152             0.070477
+ 9295 accepted                                                         9257   9282      3.0  9308.0  9323.0   2.306513             0.069759
+ 9412 accepted                                                         9373   9398      3.0  9423.0  9438.0   2.637037             0.069163
+ 9542 accepted                                                         9499   9524      3.0  9555.0  9570.0   2.230503             0.070021
+ 9663 accepted                                                         9622   9647      3.0  9676.0  9691.0   2.479968             0.070136
+ 9782 accepted                                                         9740   9765      3.0  9794.0  9809.0   2.344105             0.069805
+ 9902 accepted                                                         9864   9889      3.0  9916.0  9931.0   2.148736             0.070820
+10030 accepted                                                         9987  10012      3.0 10040.0 10055.0   2.839506             0.041494
+10146 accepted                                                        10106  10131      3.0 10156.0 10171.0   2.893944             0.069500
+10265 accepted                                                        10220  10245      3.0 10275.0 10290.0   2.564655             0.043826
+10388 accepted                                                        10345  10370      3.0 10399.0 10414.0   2.267137             0.041878
+10705 excluded no complete stable grasp for 15 post-stability frames  10667  10692      3.0     NaN     NaN        NaN                  NaN
+10815 accepted                                                        10776  10801      3.0 10829.0 10844.0   2.242562             0.069468
+10923 accepted                                                        10882  10907      3.0 10934.0 10949.0   2.201818             0.099604
+11042 accepted                                                        11002  11027      3.0 11055.0 11070.0   2.029960             0.041633
+11154 accepted                                                        11114  11139      3.0 11169.0 11184.0   1.749784             0.044124
+11258 accepted                                                        11216  11241      3.0 11271.0 11286.0   2.860485             0.072036
+11355 accepted                                                        11313  11338      3.0 11366.0 11381.0   2.456897             0.067611
+11479 accepted                                                        11436  11461      3.0 11492.0 11507.0   3.068100             0.069969
+Saved TRIAL_Size_2.5cm_20261014_174301 67
+Saved TRIAL_Size_2.5cm_20261014_174305 69
+Saved TRIAL_Size_2.5cm_20261014_174310 69
+Saved TRIAL_Size_2.5cm_20261014_174314 64
+Saved TRIAL_Size_2.5cm_20261014_174318 69
+Saved TRIAL_Size_2.5cm_20261014_174322 67
+Saved TRIAL_Size_2.5cm_20261014_174326 70
+Saved TRIAL_Size_2.5cm_20261014_174330 72
+Saved TRIAL_Size_2.5cm_20261014_174333 71
+Saved TRIAL_Size_2.5cm_20261014_174337 64
+Saved TRIAL_Size_2.5cm_20261014_174345 70
+Saved TRIAL_Size_2.5cm_20261014_174354 65
+Saved TRIAL_Size_2.5cm_20261014_174406 64
+Saved TRIAL_Size_2.5cm_20261014_174411 69
+Saved TRIAL_Size_2.5cm_20261014_174415 65
+Saved TRIAL_Size_2.5cm_20261014_174424 68
+Saved TRIAL_Size_2.5cm_20261014_174428 67
+Saved TRIAL_Size_2.5cm_20261014_174433 65
+Saved TRIAL_Size_2.5cm_20261014_174437 67
+Saved TRIAL_Size_2.5cm_20261014_174442 68
+Saved TRIAL_Size_2.5cm_20261014_174446 65
+Saved TRIAL_Size_2.5cm_20261014_174451 70
+Saved TRIAL_Size_2.5cm_20261014_174455 66
+Saved TRIAL_Size_2.5cm_20261014_174501 66
+Saved TRIAL_Size_2.5cm_20261014_174505 67
+Saved TRIAL_Size_2.5cm_20261014_174509 64
+Saved TRIAL_Size_2.5cm_20261014_174518 66
+Saved TRIAL_Size_2.5cm_20261014_174522 68
+Saved TRIAL_Size_2.5cm_20261014_174526 67
+Saved TRIAL_Size_2.5cm_20261014_174531 68
+Saved TRIAL_Size_2.5cm_20261014_174535 63
+Saved TRIAL_Size_2.5cm_20261014_174539 68
+Saved TRIAL_Size_2.5cm_20261014_174544 67
+Saved TRIAL_Size_2.5cm_20261014_174548 71
+Saved TRIAL_Size_2.5cm_20261014_174553 67
+Saved TRIAL_Size_2.5cm_20261014_174557 68
+Saved TRIAL_Size_2.5cm_20261014_174602 66
+Saved TRIAL_Size_2.5cm_20261014_174606 70
+Saved TRIAL_Size_2.5cm_20261014_174611 67
+Saved TRIAL_Size_2.5cm_20261014_174615 69
+Saved TRIAL_Size_2.5cm_20261014_174620 69
+Saved TRIAL_Size_2.5cm_20261014_174625 65
+Saved TRIAL_Size_2.5cm_20261014_174629 69
+Saved TRIAL_Size_2.5cm_20261014_174634 67
+Saved TRIAL_Size_3cm_20261014_174652 65
+Saved TRIAL_Size_3cm_20261014_174657 66
+Saved TRIAL_Size_3cm_20261014_174704 69
+Saved TRIAL_Size_3cm_20261014_174708 72
+Saved TRIAL_Size_3cm_20261014_174713 66
+Saved TRIAL_Size_3cm_20261014_174717 68
+Saved TRIAL_Size_3cm_20261014_174722 67
+Saved TRIAL_Size_3cm_20261014_174726 68
+Saved TRIAL_Size_3cm_20261014_174730 68
+Saved TRIAL_Size_3cm_20261014_174734 68
+Saved TRIAL_Size_3cm_20261014_174738 68
+Saved TRIAL_Size_3cm_20261014_174742 68
+Saved TRIAL_Size_3cm_20261014_174747 66
+Saved TRIAL_Size_3cm_20261014_174751 68
+Saved TRIAL_Size_3cm_20261014_174756 65
+Saved TRIAL_Size_3cm_20261014_174800 70
+Saved TRIAL_Size_3cm_20261014_174804 70
+Saved TRIAL_Size_3cm_20261014_174808 67
+Saved TRIAL_Size_3cm_20261014_174812 66
+Saved TRIAL_Size_3cm_20261014_174816 72
+Saved TRIAL_Size_3cm_20261014_174820 70
+Saved TRIAL_Size_3cm_20261014_174824 70
+Saved TRIAL_Size_3cm_20261014_174828 68
+Saved TRIAL_Size_3cm_20261014_174832 69
+Saved TRIAL_Size_3cm_20261014_174836 66
+Saved TRIAL_Size_3cm_20261014_174840 71
+Saved TRIAL_Size_3cm_20261014_174844 70
+Saved TRIAL_Size_3cm_20261014_174902 69
+Saved TRIAL_Size_3cm_20261014_174906 68
+Saved TRIAL_Size_3cm_20261014_174910 69
+Saved TRIAL_Size_3cm_20261014_174914 71
+Saved TRIAL_Size_3cm_20261014_174917 71
+Saved TRIAL_Size_3cm_20261014_174920 69
+Saved TRIAL_Size_3cm_20261014_174924 72
+Verified all videos, CSV alignment, copied frames, original hashes. Counts: {2.5: 44, 3.0: 34}
