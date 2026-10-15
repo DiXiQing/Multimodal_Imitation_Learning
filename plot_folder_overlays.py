@@ -8,7 +8,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D13\4.5')
+DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D14\4')
 TEST_PREDICTIONS_DIR = None
 INPUT_CSV = 'grasp_data_smoothed.csv'
 EXCLUDED_FOLDERS = {'backup', '备用', '待检查', 'filter_comparison', 'overlay_plots'}

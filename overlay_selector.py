@@ -59,7 +59,7 @@ def open_selector(base, filename, excluded_trials, output, dpi):
     window.minsize(1000, 650)
     top = ttk.Frame(window, padding=8)
     top.pack(fill='x')
-    status = tk.StringVar(value='点击曲线；Ctrl 点击多选；拖入可用或备用；保存后移动文件夹')
+    status = tk.StringVar(value='点击曲线或列表选择；Ctrl 点击多选；点击按钮切换分类；保存后移动文件夹')
     ttk.Label(top, textvariable=status).pack(side='left', fill='x', expand=True)
     body = ttk.Frame(window)
     body.pack(fill='both', expand=True)
@@ -98,8 +98,11 @@ def open_selector(base, filename, excluded_trials, output, dpi):
         ax.grid(alpha=.2)
     axes[-1].set_xlabel('Recorded trial progress (%)')
     fig.tight_layout()
-    drag = dict(start=None, active=False)
-    ghost = tk.Label(window, text='', bg='#fff0b3', relief='solid', padx=8, pady=4)
+    def update_selection_status():
+        selected_groups = {groups[i] for i in selected}
+        text = '移入备用' if selected_groups == {'usable'} else '移入可用' if selected_groups == {'reserve'} else '移入另一分类'
+        move_button.configure(text=text, state='normal' if selected else 'disabled')
+        status.set(f'已选 {len(selected)} 组 | Ctrl 点击多选，按钮切换分类 | {"有未保存分类" if groups != saved_groups else "分类已保存"}')
 
     def redraw():
         for key, box in lists.items():
@@ -122,7 +125,7 @@ def open_selector(base, filename, excluded_trials, output, dpi):
         count = sum(view.get() == 'all' or group == view.get() for group in groups.values())
         axes[0].set_title(f'{count} experiments')
         canvas.draw_idle()
-        status.set(f'已选 {len(selected)} 组 | Ctrl 点击多选，拖入分类 | {"有未保存分类" if groups != saved_groups else "分类已保存"}')
+        update_selection_status()
 
     def plot_press(event):
         if event.button != 1 or event.inaxes is None:
@@ -149,42 +152,29 @@ def open_selector(base, filename, excluded_trials, output, dpi):
         elif i not in selected:
             selected.clear()
             selected.add(i)
-        gui = event.guiEvent
-        if gui is not None:
-            drag['start'] = (gui.x_root, gui.y_root)
         redraw()
 
     def list_select(key):
         selected.clear()
         selected.update(list_ids[key][n] for n in lists[key].curselection())
+        for other_key, box in lists.items():
+            if other_key != key:
+                box.selection_clear(0, 'end')
         for line, i in lines:
             line.set_linewidth(3 if i in selected else 1.2)
             line.set_alpha(1 if not selected or i in selected else .18)
         canvas.draw_idle()
+        update_selection_status()
 
-    def list_press(event):
-        drag['start'] = (event.x_root, event.y_root)
-
-    def motion(event):
-        if not selected or drag['start'] is None:
+    def move_selected():
+        if not selected:
             return
-        if abs(event.x_root-drag['start'][0]) + abs(event.y_root-drag['start'][1]) < 8:
-            return
-        drag['active'] = True
-        ghost.configure(text=f'拖动 {len(selected)} 组')
-        ghost.place(x=event.x_root-window.winfo_rootx()+12, y=event.y_root-window.winfo_rooty()+12)
-
-    def release(event):
-        if drag['active']:
-            for key, box in lists.items():
-                frame = headings[key]
-                if frame.winfo_rootx() <= event.x_root <= frame.winfo_rootx()+frame.winfo_width() and frame.winfo_rooty() <= event.y_root <= frame.winfo_rooty()+frame.winfo_height():
-                    for i in selected:
-                        groups[i] = key
-                    redraw()
-                    break
-        ghost.place_forget()
-        drag.update(start=None, active=False)
+        for i in selected:
+            groups[i] = 'reserve' if groups[i] == 'usable' else 'usable'
+        destinations = {groups[i] for i in selected}
+        if view.get() != 'all' and len(destinations) == 1:
+            view.set(next(iter(destinations)))
+        redraw()
 
     def save():
         try:
@@ -206,12 +196,11 @@ def open_selector(base, filename, excluded_trials, output, dpi):
 
     ttk.Button(top, text='保存分类', command=save).pack(side='right')
     ttk.Button(top, text='清空选择', command=lambda: (selected.clear(), redraw())).pack(side='right', padx=8)
+    move_button = ttk.Button(top, text='移入另一分类', command=move_selected, state='disabled')
+    move_button.pack(side='right')
     for key, box in lists.items():
         box.bind('<<ListboxSelect>>', lambda event, key=key: list_select(key))
-        box.bind('<ButtonPress-1>', list_press, add='+')
     canvas.mpl_connect('button_press_event', plot_press)
-    window.bind_all('<B1-Motion>', motion, add='+')
-    window.bind_all('<ButtonRelease-1>', release, add='+')
     window.protocol('WM_DELETE_WINDOW', close)
     redraw()
     window.mainloop()

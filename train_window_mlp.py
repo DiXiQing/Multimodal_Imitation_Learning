@@ -19,7 +19,7 @@ OUTPUT_DIR = DATA_ROOT / "Result" / f"singleSize_{RUN_TIMESTAMP}"
 
 # "single_size" or "generalization".
 RUN_MODE = "generalization"
-GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D13")
+GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D14")
 GENERALIZATION_OUTPUT_DIR = GENERALIZATION_ROOT / "Result" / f"generalization_{RUN_TIMESTAMP}"
 TRAIN_SIZE_FOLDERS = ("2", "3","4")
 GENERALIZATION_SIZE_FOLDERS = ("2.5","3.5", "4.5")
@@ -446,7 +446,10 @@ def make_overall_summary(metrics: pd.DataFrame):
     return pd.DataFrame(rows)
 
 
-def plot_overall_comparison(summary: pd.DataFrame, output_dir: Path):
+def plot_overall_comparison(summary: pd.DataFrame, output_dir: Path, *, prediction_folder="test_predictions"):
+    if prediction_folder not in {"test_predictions", "generalization_predictions"}:
+        raise ValueError(f"Unknown prediction folder: {prediction_folder}")
+    dataset_label = "Generalization" if prediction_folder == "generalization_predictions" else "Test"
     order = list(MODEL_SPECS.keys())
     x = np.arange(len(order))
     width = 0.36
@@ -471,11 +474,11 @@ def plot_overall_comparison(summary: pd.DataFrame, output_dir: Path):
 
     plt.xticks(x, [MODEL_LABELS[name] for name in order])
     plt.ylabel("Error (px)")
-    plt.title("Overall test error by model")
+    plt.title(f"{dataset_label} prediction error by model ({prediction_folder})")
     plt.grid(axis="y", alpha=0.25)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(output_dir / "overall_model_comparison.png", dpi=200)
+    plt.savefig(output_dir / f"{prediction_folder.removesuffix('_predictions')}_model_comparison.png", dpi=200)
     plt.close()
 
 
@@ -607,9 +610,10 @@ def main() -> None:
             args.output_dir / "generalization_summary_by_size.csv", index=False,
             encoding="utf-8-sig", float_format="%.6f",
         )
-        comparison_dir = args.output_dir / "generalization_comparison"
-        comparison_dir.mkdir(exist_ok=True)
-        plot_overall_comparison(generalization_summary, comparison_dir)
+        plot_overall_comparison(
+            generalization_summary, args.output_dir,
+            prediction_folder="generalization_predictions",
+        )
         print("\nGeneralization results (" + ", ".join(GENERALIZATION_SIZE_FOLDERS) + " cm):")
         for _, row in generalization_summary.iterrows():
             print(f"{MODEL_LABELS[row['model']]}: RMSE {row['rmse_mean_px']:.2f}px | MAE {row['mae_mean_px']:.2f}px | R2 {row['r2_mean']:.3f}")
@@ -628,13 +632,14 @@ def main() -> None:
     print("  test_trial_metrics.csv")
     print("  overall_model_summary.csv")
     print("  model_summary_by_size.csv")
-    print("  overall_model_comparison.png")
+    print("  test_model_comparison.png")
     print("  models/*.pth")
     print("  test_predictions/*.png")
     if generalization_names:
         print("  generalization_trial_metrics.csv")
         print("  generalization_model_summary.csv")
         print("  generalization_summary_by_size.csv")
+        print("  generalization_model_comparison.png")
         print("  generalization_predictions/*.png")
 
 
