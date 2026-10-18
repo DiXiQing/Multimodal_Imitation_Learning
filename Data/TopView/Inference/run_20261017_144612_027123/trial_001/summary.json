@@ -1,0 +1,16 @@
+{
+  "total_frames": 241,
+  "invalid_frames": 0,
+  "outside_training_range_frames": 0,
+  "all_valid": {
+    "frames": 241,
+    "mae_px": 4.361539600495717,
+    "rmse_px": 6.139729420926025
+  },
+  "within_training_range": {
+    "frames": 241,
+    "mae_px": 4.361539600495717,
+    "rmse_px": 6.139729420926025
+  },
+  "video_timing": "Fixed FPS; use CSV timestamps for actual acquisition time."
+}

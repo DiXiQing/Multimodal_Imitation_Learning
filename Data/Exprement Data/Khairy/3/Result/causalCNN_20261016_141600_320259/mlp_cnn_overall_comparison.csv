@@ -1,0 +1,5 @@
+objective,inputs,metric,mean,std,trials
+MLP,Area + signed forward acceleration,rmse_px,27.393488238373138,8.22185173035784,12
+CNN,Area + signed forward acceleration,rmse_px,26.65132765625921,11.412529232184488,12
+MLP,Area + signed forward acceleration,mae_px,19.675034753081952,6.278424973344539,12
+CNN,Area + signed forward acceleration,mae_px,19.265174424158438,8.413240608613313,12

@@ -1,0 +1,71 @@
+=== Current-distance MLP vs causal five-frame MLP ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3
+Device: cuda | Loss: mae | Seed: 20261016
+Train: 30 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3\Train
+Validation: 9 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3\Validation
+Validation selects the best checkpoint; these are validation metrics, not independent test metrics.
+Both models predict the SAME target frames; first four frames and discontinuous windows are omitted.
+Maximum selection epochs: 1000; early-stop patience: 80
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3\Result\distance_mlp_window5_20261018_221011_316327
+
+[distance_current] Select epoch using 30 fit / 9 validation trials
+  epoch    1/1000 | train MAE=23.016px | val MAE=23.658px | best epoch=1
+  epoch   25/1000 | train MAE=9.266px | val MAE=7.946px | best epoch=25
+  epoch   50/1000 | train MAE=7.883px | val MAE=7.271px | best epoch=49
+  epoch   75/1000 | train MAE=7.504px | val MAE=6.695px | best epoch=59
+  epoch  100/1000 | train MAE=7.209px | val MAE=6.475px | best epoch=79
+  epoch  125/1000 | train MAE=7.069px | val MAE=7.531px | best epoch=120
+  epoch  150/1000 | train MAE=6.843px | val MAE=6.752px | best epoch=120
+  epoch  175/1000 | train MAE=6.627px | val MAE=7.112px | best epoch=120
+  epoch  200/1000 | train MAE=6.550px | val MAE=7.473px | best epoch=120
+  Early stopping: 80 epochs without validation improvement.
+[distance_current] Saved best checkpoint at epoch 120; validation is never added to training.
+
+[distance_window5] Select epoch using 30 fit / 9 validation trials
+  epoch    1/1000 | train MAE=22.982px | val MAE=23.731px | best epoch=1
+  epoch   25/1000 | train MAE=7.064px | val MAE=6.180px | best epoch=22
+  epoch   50/1000 | train MAE=5.560px | val MAE=5.515px | best epoch=44
+  epoch   75/1000 | train MAE=5.186px | val MAE=5.065px | best epoch=44
+  epoch  100/1000 | train MAE=4.919px | val MAE=4.524px | best epoch=44
+  epoch  124/1000 | train MAE=4.945px | val MAE=4.706px | best epoch=44
+  Early stopping: 80 epochs without validation improvement.
+[distance_window5] Saved best checkpoint at epoch 44; validation is never added to training.
+
+=== Validation evaluation: identical target frames for both models ===
+  Blue_3cm_20261017_184929 | distance_current: MAE=5.66px | RMSE=8.95px
+  Blue_3cm_20261017_184929 | distance_window5: MAE=3.21px | RMSE=3.93px
+  Blue_3cm_20261017_184933 | distance_current: MAE=7.87px | RMSE=11.05px
+  Blue_3cm_20261017_184933 | distance_window5: MAE=5.96px | RMSE=7.59px
+  Blue_3cm_20261017_184937 | distance_current: MAE=6.43px | RMSE=9.77px
+  Blue_3cm_20261017_184937 | distance_window5: MAE=4.79px | RMSE=6.32px
+  Blue_3cm_20261017_184942 | distance_current: MAE=6.59px | RMSE=9.14px
+  Blue_3cm_20261017_184942 | distance_window5: MAE=2.94px | RMSE=4.01px
+  Blue_3cm_20261017_184946 | distance_current: MAE=6.57px | RMSE=9.37px
+  Blue_3cm_20261017_184946 | distance_window5: MAE=5.25px | RMSE=6.87px
+  Blue_3cm_20261017_184949 | distance_current: MAE=4.99px | RMSE=7.92px
+  Blue_3cm_20261017_184949 | distance_window5: MAE=4.67px | RMSE=6.08px
+  Blue_3cm_20261017_184956 | distance_current: MAE=6.25px | RMSE=7.95px
+  Blue_3cm_20261017_184956 | distance_window5: MAE=2.85px | RMSE=3.67px
+  Blue_3cm_20261017_184959 | distance_current: MAE=5.98px | RMSE=8.48px
+  Blue_3cm_20261017_184959 | distance_window5: MAE=4.33px | RMSE=5.17px
+  Blue_3cm_20261017_185008 | distance_current: MAE=6.67px | RMSE=8.82px
+  Blue_3cm_20261017_185008 | distance_window5: MAE=5.95px | RMSE=6.83px
+
+=== Overall validation metrics (all eligible validation frames pooled) ===
+Current distance: MAE=6.34px | RMSE=9.12px | R2=0.906
+Past 5 distances: MAE=4.50px | RMSE=5.84px | R2=0.961
+Total time: 28.8s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3\Result\distance_mlp_window5_20261018_221011_316327
+  validation_model_comparison.png
+  validation_metrics_chart.png
+  validation_predictions/*.png
+  training_curves.png
+  overall_model_summary.csv
+  validation_phase_metrics.csv
+  validation_phase_errors.png
+  validation_trial_phase_metrics.csv
+  validation_phase_summary.csv
+  data_split.csv
+  models/distance_current.pth
+  models/distance_window5.pth

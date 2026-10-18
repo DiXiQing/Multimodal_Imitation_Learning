@@ -1,0 +1,165 @@
+{
+  "model_path": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_window5.pth",
+  "model": {
+    "schema": "distance_mlp_v1",
+    "model_name": "distance_window5",
+    "input_size": 5,
+    "hidden_size": 32,
+    "dropout": 0.1,
+    "window_size": 5,
+    "comparison_required_context": 5,
+    "input_order": "oldest to newest; current frame included",
+    "target": "current-frame fingertip aperture; no historical aperture inputs",
+    "scaler": {
+      "x_min": 0.1909378468990326,
+      "x_scale": 264.183837890625,
+      "y_mean": 34.039127349853516,
+      "y_scale": 25.477724075317383
+    },
+    "loss": "mae",
+    "epochs": 494,
+    "seed": 20261016,
+    "max_frame_gap_s": 0.1,
+    "recording_settings": {
+      "v": 60,
+      "s": 120,
+      "color_s_min": 140,
+      "color_v_min": 0,
+      "area": 10,
+      "camera": 1,
+      "width": 640,
+      "height": 480,
+      "object_color": "red",
+      "object_id": "red_2cm",
+      "hsv_ranges": [
+        [
+          [
+            0,
+            140,
+            0
+          ],
+          [
+            8,
+            255,
+            255
+          ]
+        ],
+        [
+          [
+            172,
+            140,
+            0
+          ],
+          [
+            179,
+            255,
+            255
+          ]
+        ]
+      ],
+      "fps": 30.0,
+      "size_cm": 2.0,
+      "center_source": "detected",
+      "locked_center": null,
+      "base_workflow": "Record_mediapipe_continuous.py",
+      "fingertip_method": "MediaPipe landmarks 4,8"
+    },
+    "fitted_trials": [
+      "Red_2cm_20261017_202207",
+      "Red_2cm_20261017_202211",
+      "Red_2cm_20261017_202215",
+      "Red_2cm_20261017_202220",
+      "Red_2cm_20261017_202231",
+      "Red_2cm_20261017_202238",
+      "Red_2cm_20261017_202241",
+      "Red_2cm_20261017_202245",
+      "Red_2cm_20261017_202247",
+      "Red_2cm_20261017_202251",
+      "Red_2cm_20261017_202255",
+      "Red_2cm_20261017_202303",
+      "Red_2cm_20261017_202308",
+      "Red_2cm_20261017_202311",
+      "Red_2cm_20261017_202316",
+      "Red_2cm_20261017_202320",
+      "Red_2cm_20261017_202338",
+      "Red_2cm_20261017_202342",
+      "Red_2cm_20261017_202356",
+      "Red_2cm_20261017_202400",
+      "Red_2cm_20261017_202408",
+      "Red_2cm_20261017_202415",
+      "Red_2cm_20261017_202419",
+      "Red_2cm_20261017_202423",
+      "Red_2cm_20261017_202427",
+      "Red_2cm_20261017_202430",
+      "Red_2cm_20261017_202436",
+      "Red_2cm_20261017_202442",
+      "Red_2cm_20261017_202446",
+      "Red_2cm_20261017_202449",
+      "Red_2cm_20261017_202456",
+      "Red_2cm_20261017_202503",
+      "Red_2cm_20261017_202513",
+      "Red_2cm_20261017_202519",
+      "Red_2cm_20261017_202539",
+      "Red_2cm_20261017_202555",
+      "Red_2cm_20261017_202600",
+      "Red_2cm_20261017_202604",
+      "Red_2cm_20261017_202620",
+      "Red_2cm_20261017_202623"
+    ],
+    "x_min": 0.1909378468990326,
+    "x_max": 264.37477573752403,
+    "scale": 264.183837890625
+  },
+  "recording_settings": {
+    "v": 60,
+    "s": 120,
+    "color_s_min": 140,
+    "color_v_min": 0,
+    "area": 10,
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "object_color": "red",
+    "object_id": "red_2cm",
+    "hsv_ranges": [
+      [
+        [
+          0,
+          140,
+          0
+        ],
+        [
+          8,
+          255,
+          255
+        ]
+      ],
+      [
+        [
+          172,
+          140,
+          0
+        ],
+        [
+          179,
+          255,
+          255
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 2.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  },
+  "camera": 1,
+  "video": null,
+  "input": "five consecutive distances, oldest to current; checkpoint normalization",
+  "output": "finger_width in pixels",
+  "error_definition": "predicted minus measured",
+  "target": "manually selected model; no automatic object classification",
+  "object_center_source": "detected",
+  "locked_center": null
+}

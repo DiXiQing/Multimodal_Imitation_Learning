@@ -1,0 +1,1 @@
+5 trials set aside at user request. Four show object-center tracking jumps; one also contains missing detections. The fifth has an atypical but not confirmed invalid curve and is stored for exploratory review only. Original files unchanged; move_manifest.json records original paths and hashes. Keep this selection transparent in any reported evaluation.

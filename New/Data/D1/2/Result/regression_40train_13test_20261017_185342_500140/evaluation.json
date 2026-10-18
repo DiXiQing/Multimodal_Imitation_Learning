@@ -1,0 +1,31 @@
+{
+  "selected_by_training_cv": {
+    "kind": "spline",
+    "param": 0.0001,
+    "cv_rmse": 10.898581502452782,
+    "cv_mae": 8.034452654060562,
+    "cv_rmse_sd": 2.132522003423513
+  },
+  "test_pooled_metrics": {
+    "mae": 8.56164256869738,
+    "rmse": 11.9530016572089,
+    "bias": -0.003544938094757253,
+    "r2": 0.8473395854011826
+  },
+  "test_mean_trial_mae": 8.50122428419173,
+  "test_mean_trial_rmse": 11.826499183383985,
+  "baseline_test_pooled_metrics": {
+    "mae": 27.10247298106874,
+    "rmse": 30.59329537879515,
+    "bias": 0.23210181037014183,
+    "r2": -5.756115953126084e-05
+  },
+  "baseline_value_px": 38.516497893272124,
+  "outside_training_range_frames": 0,
+  "training_distance_range_px": [
+    0.18369570086348452,
+    258.31953432578433
+  ],
+  "fitting_validation_seconds": 0.213913199986564,
+  "total_seconds": 3.611406700016232
+}

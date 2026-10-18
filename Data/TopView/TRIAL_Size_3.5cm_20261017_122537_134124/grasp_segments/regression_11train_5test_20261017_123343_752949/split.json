@@ -1,0 +1,27 @@
+{
+  "seed": 20261016,
+  "train_trials": [
+    "grasp_001",
+    "grasp_004",
+    "grasp_005",
+    "grasp_006",
+    "grasp_007",
+    "grasp_008",
+    "grasp_009",
+    "grasp_010",
+    "grasp_013",
+    "grasp_014",
+    "grasp_015"
+  ],
+  "test_trials": [
+    "grasp_002",
+    "grasp_003",
+    "grasp_011",
+    "grasp_012",
+    "grasp_016"
+  ],
+  "strategy": "Seeded random complete-trial split; first 5 shuffled trial indices are held out.",
+  "validation": "Leave-one-trial-out on 11 training trials; choose lowest mean validation RMSE.",
+  "weighting": "Equal total weight per training trial; validation score is mean of trial RMSE.",
+  "data": "All raw valid segment frames, including pre-movement rest and grasp hold; no smoothing or clipping."
+}

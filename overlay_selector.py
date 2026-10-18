@@ -39,7 +39,7 @@ def move_trials(trials, groups, base):
 
 
 def open_selector(base, filename, excluded_trials, output, dpi):
-    from plot_folder_overlays import read_trials, SIGNALS, plot_group
+    from plot_folder_overlays import read_trials, SIGNALS, plot_group, mean_curve
     trials, _ = read_trials(base, filename, True, True, excluded_trials)
     trials = [t for t in trials if not any(p.casefold() in {'待检查', 'filter_comparison'}
               for p in t['path'].relative_to(base).parts[:-1])]
@@ -71,6 +71,7 @@ def open_selector(base, filename, excluded_trials, output, dpi):
     ttk.Label(panel, text='叠加图显示').pack(anchor='w')
     for text, value in [('可用', 'usable'), ('备用', 'reserve'), ('全部', 'all')]:
         ttk.Radiobutton(panel, text=text, variable=view, value=value, command=lambda: redraw()).pack(anchor='w')
+    ttk.Button(panel, text='导出当前平均线 CSV', command=lambda: export_mean()).pack(fill='x', pady=4)
     lists, headings, list_ids = {}, {}, {}
     for key, title in [('usable', '可用'), ('reserve', '备用')]:
         frame = ttk.LabelFrame(panel, text=title, padding=6)
@@ -126,6 +127,19 @@ def open_selector(base, filename, excluded_trials, output, dpi):
         axes[0].set_title(f'{count} experiments')
         canvas.draw_idle()
         update_selection_status()
+
+    def export_mean():
+        visible = [t for i, t in enumerate(trials) if view.get() == 'all' or groups[i] == view.get()]
+        if not visible:
+            status.set('当前分类没有实验，无法生成平均线')
+            return
+        try:
+            output.mkdir(parents=True, exist_ok=True)
+            path = output / f'mean_curve_{view.get()}.csv'
+            mean_curve(visible).to_csv(path, index=False, encoding='utf-8-sig')
+            status.set(f'已导出 {len(visible)} 组实验的平均线：{path}')
+        except OSError as exc:
+            messagebox.showerror('导出失败', str(exc), parent=window)
 
     def plot_press(event):
         if event.button != 1 or event.inaxes is None:

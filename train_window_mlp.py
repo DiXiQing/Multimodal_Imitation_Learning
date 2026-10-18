@@ -13,16 +13,18 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 
 
-DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D13\4")
+DATA_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\Khairy\selected_15_3cm")
 RUN_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 OUTPUT_DIR = DATA_ROOT / "Result" / f"singleSize_{RUN_TIMESTAMP}"
 
 # "single_size" or "generalization".
-RUN_MODE = "generalization"
-GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D14")
+RUN_MODE = "single_size"
+GENERALIZATION_ROOT = Path(r"C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\Khairy")
 GENERALIZATION_OUTPUT_DIR = GENERALIZATION_ROOT / "Result" / f"generalization_{RUN_TIMESTAMP}"
-TRAIN_SIZE_FOLDERS = ("2", "3","4")
-GENERALIZATION_SIZE_FOLDERS = ("2.5","3.5", "4.5")
+# TRAIN_SIZE_FOLDERS = ("2", "3","4")
+# GENERALIZATION_SIZE_FOLDERS = ("2.5","3.5", "4.5")
+TRAIN_SIZE_FOLDERS = ("3","4")
+GENERALIZATION_SIZE_FOLDERS = ("3.5",)
 
 SELF_TEST_TRIALS_BY_FOLDER = {}
 SELF_TEST_NAMES_BY_FOLDER = {}

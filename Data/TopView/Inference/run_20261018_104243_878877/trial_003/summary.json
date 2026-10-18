@@ -1,0 +1,21 @@
+{
+  "total_frames": 2307,
+  "invalid_frames": 640,
+  "outside_training_range_frames": 275,
+  "all_valid": {
+    "frames": 1667,
+    "mae_px": 13.43963274909315,
+    "rmse_px": 17.546016629370598,
+    "r2": 0.3607929639202174
+  },
+  "within_training_range": {
+    "frames": 1392,
+    "mae_px": 13.559052805380283,
+    "rmse_px": 17.553168167900324,
+    "r2": 0.3111963358059666
+  },
+  "video_timing": "Fixed FPS; use CSV timestamps for actual acquisition time.",
+  "valid_definition": "Five-frame window ready; warm-up and detection loss have no prediction.",
+  "missing_detection_frames": 560,
+  "warmup_frames": 80
+}

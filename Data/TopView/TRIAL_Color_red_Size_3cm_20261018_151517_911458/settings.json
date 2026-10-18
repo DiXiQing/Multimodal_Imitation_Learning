@@ -1,0 +1,44 @@
+{
+  "v": 60,
+  "s": 120,
+  "color_s_min": 66,
+  "color_v_min": 49,
+  "area": 148,
+  "camera": 1,
+  "width": 640,
+  "height": 480,
+  "object_color": "red",
+  "object_id": "red_3cm",
+  "hsv_ranges": [
+    [
+      [
+        0,
+        66,
+        49
+      ],
+      [
+        8,
+        255,
+        255
+      ]
+    ],
+    [
+      [
+        172,
+        66,
+        49
+      ],
+      [
+        179,
+        255,
+        255
+      ]
+    ]
+  ],
+  "fps": 30.0,
+  "size_cm": 3.0,
+  "center_source": "detected",
+  "locked_center": null,
+  "base_workflow": "Record_mediapipe_continuous.py",
+  "fingertip_method": "MediaPipe landmarks 4,8"
+}

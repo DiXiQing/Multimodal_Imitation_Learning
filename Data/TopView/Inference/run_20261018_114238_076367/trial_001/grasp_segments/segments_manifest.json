@@ -1,0 +1,28 @@
+{
+  "expected_by_user": 1,
+  "confirmed_grasps": 1,
+  "counts": {
+    "red": 0,
+    "blue": 0,
+    "black": 1
+  },
+  "excluded_exchange_times_s": [],
+  "segments": [
+    {
+      "number": 1,
+      "folder": "Black_4cm_20261018_114317",
+      "color": "black",
+      "size_cm": 4,
+      "start": 49,
+      "onset": 61,
+      "peak": 72,
+      "stable": 84,
+      "end": 104,
+      "frames": 56,
+      "start_time_s": 1.6197688999818638,
+      "end_time_s": 3.4599220999516547,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\Inference\\run_20261018_114238_076367\\trial_001",
+      "boundary_rule": "Reviewed grasp peaks; ~0.4 s pre-onset and ~0.65 s stable hold; withdrawal/object exchange excluded."
+    }
+  ]
+}

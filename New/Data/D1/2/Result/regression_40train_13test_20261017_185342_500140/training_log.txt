@@ -1,0 +1,56 @@
+=== Camera-only grasp regression ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\2
+Input: hand_object_distance (px) -> Output: finger_width (px)
+Training: 40 trials / 1750 frames
+  TRIAL_Color_red_Size_2cm_20261017_174431_688123, TRIAL_Color_red_Size_2cm_20261017_174436_983157, TRIAL_Color_red_Size_2cm_20261017_174439_273725, TRIAL_Color_red_Size_2cm_20261017_174441_798007, TRIAL_Color_red_Size_2cm_20261017_174444_143172, TRIAL_Color_red_Size_2cm_20261017_174446_718652, TRIAL_Color_red_Size_2cm_20261017_174453_966272, TRIAL_Color_red_Size_2cm_20261017_174459_418099, TRIAL_Color_red_Size_2cm_20261017_174502_157189, TRIAL_Color_red_Size_2cm_20261017_174504_798034, TRIAL_Color_red_Size_2cm_20261017_174507_248984, TRIAL_Color_red_Size_2cm_20261017_174516_529853, TRIAL_Color_red_Size_2cm_20261017_174519_008251, TRIAL_Color_red_Size_2cm_20261017_174526_592291, TRIAL_Color_red_Size_2cm_20261017_174538_217149, TRIAL_Color_red_Size_2cm_20261017_174544_618107, TRIAL_Color_red_Size_2cm_20261017_174547_440223, TRIAL_Color_red_Size_2cm_20261017_174602_563829, TRIAL_Color_red_Size_2cm_20261017_174605_796496, TRIAL_Color_red_Size_2cm_20261017_174611_919703, TRIAL_Color_red_Size_2cm_20261017_174620_145426, TRIAL_Color_red_Size_2cm_20261017_174627_036239, TRIAL_Color_red_Size_2cm_20261017_174629_620000, TRIAL_Color_red_Size_2cm_20261017_174632_180446, TRIAL_Color_red_Size_2cm_20261017_174636_915387, TRIAL_Color_red_Size_2cm_20261017_174639_368520, TRIAL_Color_red_Size_2cm_20261017_174641_993040, TRIAL_Color_red_Size_2cm_20261017_174648_597846, TRIAL_Color_red_Size_2cm_20261017_174650_821942, TRIAL_Color_red_Size_2cm_20261017_174653_454473, TRIAL_Color_red_Size_2cm_20261017_174701_427968, TRIAL_Color_red_Size_2cm_20261017_174704_218115, TRIAL_Color_red_Size_2cm_20261017_174709_128826, TRIAL_Color_red_Size_2cm_20261017_174712_171716, TRIAL_Color_red_Size_2cm_20261017_174716_838943, TRIAL_Color_red_Size_2cm_20261017_174722_857677, TRIAL_Color_red_Size_2cm_20261017_174729_690077, TRIAL_Color_red_Size_2cm_20261017_174732_866948, TRIAL_Color_red_Size_2cm_20261017_174741_113114, TRIAL_Color_red_Size_2cm_20261017_174747_164134
+Test: 13 trials / 598 frames
+  TRIAL_Color_red_Size_2cm_20261017_174449_131053, TRIAL_Color_red_Size_2cm_20261017_174456_361340, TRIAL_Color_red_Size_2cm_20261017_174522_125201, TRIAL_Color_red_Size_2cm_20261017_174533_581595, TRIAL_Color_red_Size_2cm_20261017_174552_072343, TRIAL_Color_red_Size_2cm_20261017_174554_573963, TRIAL_Color_red_Size_2cm_20261017_174559_494596, TRIAL_Color_red_Size_2cm_20261017_174608_932620, TRIAL_Color_red_Size_2cm_20261017_174614_677121, TRIAL_Color_red_Size_2cm_20261017_174617_487875, TRIAL_Color_red_Size_2cm_20261017_174719_589327, TRIAL_Color_red_Size_2cm_20261017_174736_050230, TRIAL_Color_red_Size_2cm_20261017_174744_076393
+Seed: 20261016 | Validation: leave-one-trial-out
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\2\Result\regression_40train_13test_20261017_185342_500140
+
+[1/3] Fit and validate 10 candidates (400 fits)
+  [01/10] polynomial param=1       CV RMSE= 29.90px | MAE= 26.83px | 0.02s
+  [02/10] polynomial param=2       CV RMSE= 12.43px | MAE=  9.92px | 0.01s
+  [03/10] polynomial param=3       CV RMSE= 12.36px | MAE=  9.81px | 0.01s
+  [04/10] polynomial param=4       CV RMSE= 11.52px | MAE=  9.13px | 0.01s
+  [05/10] spline     param=0.0001  CV RMSE= 10.90px | MAE=  8.03px | 0.03s
+  [06/10] spline     param=0.001   CV RMSE= 11.06px | MAE=  8.32px | 0.02s
+  [07/10] spline     param=0.01    CV RMSE= 11.40px | MAE=  8.91px | 0.03s
+  [08/10] spline     param=0.1     CV RMSE= 11.90px | MAE=  9.68px | 0.02s
+  [09/10] spline     param=1       CV RMSE= 16.92px | MAE= 15.44px | 0.02s
+  [10/10] spline     param=10      CV RMSE= 27.11px | MAE= 24.50px | 0.02s
+
+[2/3] Refit selected model on all 40 training trials: spline, param=0.0001
+  10 fitted coefficients | fitting and validation: 0.214s
+
+[3/3] Evaluate 13 held-out trials and save prediction plots
+  TRIAL_Color_red_Size_2cm_20261017_174449_131053: MAE=5.09px | RMSE=8.86px | R2=0.919
+  TRIAL_Color_red_Size_2cm_20261017_174456_361340: MAE=9.48px | RMSE=11.76px | R2=0.815
+  TRIAL_Color_red_Size_2cm_20261017_174522_125201: MAE=9.21px | RMSE=12.16px | R2=0.840
+  TRIAL_Color_red_Size_2cm_20261017_174533_581595: MAE=7.63px | RMSE=10.33px | R2=0.911
+  TRIAL_Color_red_Size_2cm_20261017_174552_072343: MAE=7.23px | RMSE=10.28px | R2=0.876
+  TRIAL_Color_red_Size_2cm_20261017_174554_573963: MAE=8.64px | RMSE=12.07px | R2=0.834
+  TRIAL_Color_red_Size_2cm_20261017_174559_494596: MAE=8.10px | RMSE=11.55px | R2=0.872
+  TRIAL_Color_red_Size_2cm_20261017_174608_932620: MAE=9.46px | RMSE=11.71px | R2=0.863
+  TRIAL_Color_red_Size_2cm_20261017_174614_677121: MAE=11.08px | RMSE=14.85px | R2=0.775
+  TRIAL_Color_red_Size_2cm_20261017_174617_487875: MAE=9.46px | RMSE=11.64px | R2=0.866
+  TRIAL_Color_red_Size_2cm_20261017_174719_589327: MAE=8.54px | RMSE=12.40px | R2=0.821
+  TRIAL_Color_red_Size_2cm_20261017_174736_050230: MAE=8.89px | RMSE=12.35px | R2=0.824
+  TRIAL_Color_red_Size_2cm_20261017_174744_076393: MAE=7.70px | RMSE=13.78px | R2=0.786
+
+=== Test results (all held-out frames) ===
+MAE: 8.56px | RMSE: 11.95px | R2: 0.847
+Baseline RMSE: 30.59px
+Total time: 3.61s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\2\Result\regression_40train_13test_20261017_185342_500140
+  test_predictions.png
+  test_predictions/*.png
+  regression_fit.png
+  overall_model_summary.csv
+  test_metrics.csv
+  test_predictions.csv
+  cv_summary.csv
+  data_split.csv
+  models/best_model.json
+  training_log.txt

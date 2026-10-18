@@ -1,0 +1,50 @@
+=== Camera-only grasp regression ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_4cm_20261017_142000_558582\grasp_segments
+Input: hand_object_distance (px) -> Output: finger_width (px)
+Training: 35 trials / 1783 frames
+  grasp_001, grasp_002, grasp_003, grasp_004, grasp_006, grasp_008, grasp_009, grasp_010, grasp_011, grasp_012, grasp_013, grasp_014, grasp_015, grasp_016, grasp_017, grasp_018, grasp_019, grasp_020, grasp_021, grasp_022, grasp_023, grasp_024, grasp_025, grasp_026, grasp_028, grasp_029, grasp_031, grasp_032, grasp_033, grasp_036, grasp_037, grasp_038, grasp_039, grasp_040, grasp_041
+Test: 7 trials / 357 frames
+  grasp_005, grasp_007, grasp_027, grasp_030, grasp_034, grasp_035, grasp_042
+Seed: 20261016 | Validation: leave-one-trial-out
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_4cm_20261017_142000_558582\grasp_segments\Result\regression_35train_7test_20261017_142637_596810
+
+[1/3] Fit and validate 10 candidates (350 fits)
+  [01/10] polynomial param=1       CV RMSE= 25.86px | MAE= 22.32px | 0.02s
+  [02/10] polynomial param=2       CV RMSE= 11.86px | MAE=  9.46px | 0.01s
+  [03/10] polynomial param=3       CV RMSE= 11.53px | MAE=  9.33px | 0.01s
+  [04/10] polynomial param=4       CV RMSE= 10.60px | MAE=  8.20px | 0.01s
+  [05/10] spline     param=0.0001  CV RMSE= 10.30px | MAE=  7.90px | 0.03s
+  [06/10] spline     param=0.001   CV RMSE= 10.50px | MAE=  8.12px | 0.02s
+  [07/10] spline     param=0.01    CV RMSE= 10.72px | MAE=  8.39px | 0.02s
+  [08/10] spline     param=0.1     CV RMSE= 11.11px | MAE=  8.94px | 0.02s
+  [09/10] spline     param=1       CV RMSE= 15.63px | MAE= 13.95px | 0.02s
+  [10/10] spline     param=10      CV RMSE= 23.77px | MAE= 20.70px | 0.02s
+
+[2/3] Refit selected model on all 35 training trials: spline, param=0.0001
+  10 fitted coefficients | fitting and validation: 0.188s
+
+[3/3] Evaluate 7 held-out trials and save prediction plots
+  grasp_005: MAE=5.87px | RMSE=7.13px | R2=0.936
+  grasp_007: MAE=7.71px | RMSE=8.60px | R2=0.871
+  grasp_027: MAE=5.39px | RMSE=7.21px | R2=0.937
+  grasp_030: MAE=5.19px | RMSE=7.79px | R2=0.920
+  grasp_034: MAE=12.19px | RMSE=15.64px | R2=0.704
+  grasp_035: MAE=7.00px | RMSE=8.47px | R2=0.927
+  grasp_042: MAE=6.25px | RMSE=7.95px | R2=0.931
+
+=== Test results (all held-out frames) ===
+MAE: 7.03px | RMSE: 9.28px | R2: 0.893
+Baseline RMSE: 28.34px
+Total time: 2.44s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_4cm_20261017_142000_558582\grasp_segments\Result\regression_35train_7test_20261017_142637_596810
+  test_predictions.png
+  test_predictions/*.png
+  regression_fit.png
+  overall_model_summary.csv
+  test_metrics.csv
+  test_predictions.csv
+  cv_summary.csv
+  data_split.csv
+  models/best_model.json
+  training_log.txt

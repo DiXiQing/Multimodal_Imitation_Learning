@@ -1,0 +1,14 @@
+{
+  "v": 60,
+  "s": 120,
+  "area": 500,
+  "camera": 1,
+  "width": 640,
+  "height": 480,
+  "fps": 30.0,
+  "size_cm": 3.5,
+  "center_source": "detected",
+  "locked_center": null,
+  "base_workflow": "Record_mediapipe_continuous.py",
+  "fingertip_method": "MediaPipe landmarks 4,8"
+}

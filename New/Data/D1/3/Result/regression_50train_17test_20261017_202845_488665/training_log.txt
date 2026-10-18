@@ -1,0 +1,63 @@
+=== Camera-only grasp regression ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\3
+Input: hand_object_distance (px) -> Output: finger_width (px)
+Training: 50 trials / 2621 frames
+  Blue_3cm_20261017_184551, Blue_3cm_20261017_184554, Blue_3cm_20261017_184558, Blue_3cm_20261017_184602, Blue_3cm_20261017_184610, Blue_3cm_20261017_184618, Blue_3cm_20261017_184622, Blue_3cm_20261017_184627, Blue_3cm_20261017_184631, Blue_3cm_20261017_184634, Blue_3cm_20261017_184638, Blue_3cm_20261017_184641, Blue_3cm_20261017_184652, Blue_3cm_20261017_184658, Blue_3cm_20261017_184702, Blue_3cm_20261017_184707, Blue_3cm_20261017_184720, Blue_3cm_20261017_184727, Blue_3cm_20261017_184731, Blue_3cm_20261017_184735, Blue_3cm_20261017_184748, Blue_3cm_20261017_184750, Blue_3cm_20261017_184754, Blue_3cm_20261017_184757, Blue_3cm_20261017_184759, Blue_3cm_20261017_184804, Blue_3cm_20261017_184807, Blue_3cm_20261017_184811, Blue_3cm_20261017_184819, Blue_3cm_20261017_184822, Blue_3cm_20261017_184826, Blue_3cm_20261017_184829, Blue_3cm_20261017_184837, Blue_3cm_20261017_184841, Blue_3cm_20261017_184847, Blue_3cm_20261017_184851, Blue_3cm_20261017_184855, Blue_3cm_20261017_184901, Blue_3cm_20261017_184904, Blue_3cm_20261017_184910, Blue_3cm_20261017_184913, Blue_3cm_20261017_184917, Blue_3cm_20261017_184922, Blue_3cm_20261017_184929, Blue_3cm_20261017_184937, Blue_3cm_20261017_184939, Blue_3cm_20261017_184942, Blue_3cm_20261017_184946, Blue_3cm_20261017_184949, Blue_3cm_20261017_185008
+Test: 17 trials / 837 frames
+  Blue_3cm_20261017_184544, Blue_3cm_20261017_184548, Blue_3cm_20261017_184607, Blue_3cm_20261017_184614, Blue_3cm_20261017_184648, Blue_3cm_20261017_184712, Blue_3cm_20261017_184716, Blue_3cm_20261017_184724, Blue_3cm_20261017_184745, Blue_3cm_20261017_184815, Blue_3cm_20261017_184832, Blue_3cm_20261017_184858, Blue_3cm_20261017_184926, Blue_3cm_20261017_184933, Blue_3cm_20261017_184956, Blue_3cm_20261017_184959, Blue_3cm_20261017_185004
+Seed: 20261016 | Validation: leave-one-trial-out
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\3\Result\regression_50train_17test_20261017_202845_488665
+
+[1/3] Fit and validate 10 candidates (500 fits)
+  [01/10] polynomial param=1       CV RMSE= 27.99px | MAE= 24.30px | 0.02s
+  [02/10] polynomial param=2       CV RMSE= 10.65px | MAE=  8.33px | 0.02s
+  [03/10] polynomial param=3       CV RMSE= 10.65px | MAE=  8.34px | 0.01s
+  [04/10] polynomial param=4       CV RMSE=  9.92px | MAE=  7.74px | 0.02s
+  [05/10] spline     param=0.0001  CV RMSE=  9.41px | MAE=  6.95px | 0.04s
+  [06/10] spline     param=0.001   CV RMSE=  9.60px | MAE=  7.27px | 0.04s
+  [07/10] spline     param=0.01    CV RMSE=  9.96px | MAE=  7.75px | 0.05s
+  [08/10] spline     param=0.1     CV RMSE= 10.40px | MAE=  8.36px | 0.07s
+  [09/10] spline     param=1       CV RMSE= 16.07px | MAE= 14.31px | 0.04s
+  [10/10] spline     param=10      CV RMSE= 25.68px | MAE= 22.42px | 0.04s
+
+[2/3] Refit selected model on all 50 training trials: spline, param=0.0001
+  10 fitted coefficients | fitting and validation: 0.370s
+
+[3/3] Evaluate 17 held-out trials and save prediction plots
+  Blue_3cm_20261017_184544: MAE=5.27px | RMSE=6.06px | R2=0.964
+  Blue_3cm_20261017_184548: MAE=5.22px | RMSE=5.85px | R2=0.955
+  Blue_3cm_20261017_184607: MAE=7.23px | RMSE=8.66px | R2=0.894
+  Blue_3cm_20261017_184614: MAE=4.06px | RMSE=4.75px | R2=0.970
+  Blue_3cm_20261017_184648: MAE=6.63px | RMSE=8.80px | R2=0.939
+  Blue_3cm_20261017_184712: MAE=6.50px | RMSE=8.38px | R2=0.943
+  Blue_3cm_20261017_184716: MAE=9.03px | RMSE=10.97px | R2=0.877
+  Blue_3cm_20261017_184724: MAE=9.33px | RMSE=11.66px | R2=0.848
+  Blue_3cm_20261017_184745: MAE=6.11px | RMSE=7.68px | R2=0.928
+  Blue_3cm_20261017_184815: MAE=8.47px | RMSE=11.97px | R2=0.860
+  Blue_3cm_20261017_184832: MAE=7.70px | RMSE=10.25px | R2=0.874
+  Blue_3cm_20261017_184858: MAE=11.40px | RMSE=14.52px | R2=0.737
+  Blue_3cm_20261017_184926: MAE=8.01px | RMSE=11.10px | R2=0.889
+  Blue_3cm_20261017_184933: MAE=7.61px | RMSE=10.87px | R2=0.878
+  Blue_3cm_20261017_184956: MAE=6.15px | RMSE=7.83px | R2=0.937
+  Blue_3cm_20261017_184959: MAE=5.15px | RMSE=8.07px | R2=0.928
+  Blue_3cm_20261017_185004: MAE=7.91px | RMSE=9.66px | R2=0.910
+
+=== Test results (all held-out frames) ===
+MAE: 7.13px | RMSE: 9.50px | R2: 0.904
+Baseline RMSE: 30.71px
+Total time: 5.66s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\3\Result\regression_50train_17test_20261017_202845_488665
+  test_metrics_chart.png
+  test_metrics_chart.pdf
+  test_metrics_chart_data.csv
+  test_predictions.png
+  test_predictions/*.png
+  regression_fit.png
+  overall_model_summary.csv
+  test_metrics.csv
+  test_predictions.csv
+  cv_summary.csv
+  data_split.csv
+  models/best_model.json
+  training_log.txt

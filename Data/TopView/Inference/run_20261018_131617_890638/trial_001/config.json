@@ -1,0 +1,448 @@
+{
+  "models": {
+    "blue": {
+      "model_path": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_window5.pth",
+      "model": {
+        "schema": "distance_mlp_v1",
+        "model_name": "distance_window5",
+        "input_size": 5,
+        "hidden_size": 32,
+        "dropout": 0.1,
+        "window_size": 5,
+        "comparison_required_context": 5,
+        "input_order": "oldest to newest; current frame included",
+        "target": "current-frame fingertip aperture; no historical aperture inputs",
+        "scaler": {
+          "x_min": 0.8527414798736572,
+          "x_scale": 261.545654296875,
+          "y_mean": 49.169368743896484,
+          "y_scale": 29.010339736938477
+        },
+        "loss": "mae",
+        "epochs": 469,
+        "seed": 20261016,
+        "max_frame_gap_s": 0.1,
+        "recording_settings": {
+          "v": 60,
+          "s": 120,
+          "color_s_min": 140,
+          "color_v_min": 20,
+          "area": 10,
+          "camera": 1,
+          "width": 640,
+          "height": 480,
+          "object_color": "blue",
+          "object_id": "blue_3cm",
+          "hsv_ranges": [
+            [
+              [
+                90,
+                140,
+                20
+              ],
+              [
+                135,
+                255,
+                255
+              ]
+            ]
+          ],
+          "fps": 30.0,
+          "size_cm": 3.0,
+          "center_source": "detected",
+          "locked_center": null,
+          "base_workflow": "Record_mediapipe_continuous.py",
+          "fingertip_method": "MediaPipe landmarks 4,8"
+        },
+        "fitted_trials": [
+          "Blue_3cm_20261017_184544",
+          "Blue_3cm_20261017_184551",
+          "Blue_3cm_20261017_184554",
+          "Blue_3cm_20261017_184558",
+          "Blue_3cm_20261017_184602",
+          "Blue_3cm_20261017_184614",
+          "Blue_3cm_20261017_184622",
+          "Blue_3cm_20261017_184627",
+          "Blue_3cm_20261017_184631",
+          "Blue_3cm_20261017_184634",
+          "Blue_3cm_20261017_184638",
+          "Blue_3cm_20261017_184641",
+          "Blue_3cm_20261017_184658",
+          "Blue_3cm_20261017_184716",
+          "Blue_3cm_20261017_184720",
+          "Blue_3cm_20261017_184724",
+          "Blue_3cm_20261017_184727",
+          "Blue_3cm_20261017_184750",
+          "Blue_3cm_20261017_184754",
+          "Blue_3cm_20261017_184804",
+          "Blue_3cm_20261017_184815",
+          "Blue_3cm_20261017_184822",
+          "Blue_3cm_20261017_184826",
+          "Blue_3cm_20261017_184829",
+          "Blue_3cm_20261017_184841",
+          "Blue_3cm_20261017_184855",
+          "Blue_3cm_20261017_184901",
+          "Blue_3cm_20261017_184910",
+          "Blue_3cm_20261017_184917",
+          "Blue_3cm_20261017_184922",
+          "Blue_3cm_20261017_184926",
+          "Blue_3cm_20261017_184929",
+          "Blue_3cm_20261017_184933",
+          "Blue_3cm_20261017_184937",
+          "Blue_3cm_20261017_184939",
+          "Blue_3cm_20261017_184942",
+          "Blue_3cm_20261017_184946",
+          "Blue_3cm_20261017_184949",
+          "Blue_3cm_20261017_185004",
+          "Blue_3cm_20261017_185008"
+        ],
+        "x_min": 0.8527414798736572,
+        "x_max": 262.39839577674866,
+        "scale": 261.545654296875
+      },
+      "recording_settings": {
+        "v": 60,
+        "s": 120,
+        "color_s_min": 50,
+        "color_v_min": 50,
+        "area": 150,
+        "camera": 1,
+        "width": 640,
+        "height": 480,
+        "object_color": "blue",
+        "object_id": "blue_3cm",
+        "hsv_ranges": [
+          [
+            [
+              90,
+              140,
+              20
+            ],
+            [
+              135,
+              255,
+              255
+            ]
+          ]
+        ],
+        "fps": 30.0,
+        "size_cm": 3.0,
+        "center_source": "detected",
+        "locked_center": null,
+        "base_workflow": "Record_mediapipe_continuous.py",
+        "fingertip_method": "MediaPipe landmarks 4,8"
+      }
+    },
+    "red": {
+      "model_path": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_window5.pth",
+      "model": {
+        "schema": "distance_mlp_v1",
+        "model_name": "distance_window5",
+        "input_size": 5,
+        "hidden_size": 32,
+        "dropout": 0.1,
+        "window_size": 5,
+        "comparison_required_context": 5,
+        "input_order": "oldest to newest; current frame included",
+        "target": "current-frame fingertip aperture; no historical aperture inputs",
+        "scaler": {
+          "x_min": 0.1909378468990326,
+          "x_scale": 264.183837890625,
+          "y_mean": 34.039127349853516,
+          "y_scale": 25.477724075317383
+        },
+        "loss": "mae",
+        "epochs": 494,
+        "seed": 20261016,
+        "max_frame_gap_s": 0.1,
+        "recording_settings": {
+          "v": 60,
+          "s": 120,
+          "color_s_min": 140,
+          "color_v_min": 0,
+          "area": 10,
+          "camera": 1,
+          "width": 640,
+          "height": 480,
+          "object_color": "red",
+          "object_id": "red_2cm",
+          "hsv_ranges": [
+            [
+              [
+                0,
+                140,
+                0
+              ],
+              [
+                8,
+                255,
+                255
+              ]
+            ],
+            [
+              [
+                172,
+                140,
+                0
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          ],
+          "fps": 30.0,
+          "size_cm": 2.0,
+          "center_source": "detected",
+          "locked_center": null,
+          "base_workflow": "Record_mediapipe_continuous.py",
+          "fingertip_method": "MediaPipe landmarks 4,8"
+        },
+        "fitted_trials": [
+          "Red_2cm_20261017_202207",
+          "Red_2cm_20261017_202211",
+          "Red_2cm_20261017_202215",
+          "Red_2cm_20261017_202220",
+          "Red_2cm_20261017_202231",
+          "Red_2cm_20261017_202238",
+          "Red_2cm_20261017_202241",
+          "Red_2cm_20261017_202245",
+          "Red_2cm_20261017_202247",
+          "Red_2cm_20261017_202251",
+          "Red_2cm_20261017_202255",
+          "Red_2cm_20261017_202303",
+          "Red_2cm_20261017_202308",
+          "Red_2cm_20261017_202311",
+          "Red_2cm_20261017_202316",
+          "Red_2cm_20261017_202320",
+          "Red_2cm_20261017_202338",
+          "Red_2cm_20261017_202342",
+          "Red_2cm_20261017_202356",
+          "Red_2cm_20261017_202400",
+          "Red_2cm_20261017_202408",
+          "Red_2cm_20261017_202415",
+          "Red_2cm_20261017_202419",
+          "Red_2cm_20261017_202423",
+          "Red_2cm_20261017_202427",
+          "Red_2cm_20261017_202430",
+          "Red_2cm_20261017_202436",
+          "Red_2cm_20261017_202442",
+          "Red_2cm_20261017_202446",
+          "Red_2cm_20261017_202449",
+          "Red_2cm_20261017_202456",
+          "Red_2cm_20261017_202503",
+          "Red_2cm_20261017_202513",
+          "Red_2cm_20261017_202519",
+          "Red_2cm_20261017_202539",
+          "Red_2cm_20261017_202555",
+          "Red_2cm_20261017_202600",
+          "Red_2cm_20261017_202604",
+          "Red_2cm_20261017_202620",
+          "Red_2cm_20261017_202623"
+        ],
+        "x_min": 0.1909378468990326,
+        "x_max": 264.37477573752403,
+        "scale": 264.183837890625
+      },
+      "recording_settings": {
+        "v": 60,
+        "s": 120,
+        "color_s_min": 140,
+        "color_v_min": 0,
+        "area": 100,
+        "camera": 1,
+        "width": 640,
+        "height": 480,
+        "object_color": "red",
+        "object_id": "red_2cm",
+        "hsv_ranges": [
+          [
+            [
+              0,
+              140,
+              0
+            ],
+            [
+              8,
+              255,
+              255
+            ]
+          ],
+          [
+            [
+              172,
+              140,
+              0
+            ],
+            [
+              179,
+              255,
+              255
+            ]
+          ]
+        ],
+        "fps": 30.0,
+        "size_cm": 2.0,
+        "center_source": "detected",
+        "locked_center": null,
+        "base_workflow": "Record_mediapipe_continuous.py",
+        "fingertip_method": "MediaPipe landmarks 4,8"
+      }
+    },
+    "black": {
+      "model_path": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_window5.pth",
+      "model": {
+        "schema": "distance_mlp_v1",
+        "model_name": "distance_window5",
+        "input_size": 5,
+        "hidden_size": 32,
+        "dropout": 0.1,
+        "window_size": 5,
+        "comparison_required_context": 5,
+        "input_order": "oldest to newest; current frame included",
+        "target": "current-frame fingertip aperture; no historical aperture inputs",
+        "scaler": {
+          "x_min": 0.10397417098283768,
+          "x_scale": 258.9115295410156,
+          "y_mean": 52.095333099365234,
+          "y_scale": 26.645172119140625
+        },
+        "loss": "mae",
+        "epochs": 505,
+        "seed": 20261016,
+        "max_frame_gap_s": 0.1,
+        "recording_settings": {
+          "v": 60,
+          "s": 120,
+          "area": 500,
+          "camera": 1,
+          "width": 640,
+          "height": 480,
+          "fps": 30.0,
+          "size_cm": 4.0,
+          "center_source": "detected",
+          "locked_center": null,
+          "base_workflow": "Record_mediapipe_continuous.py",
+          "fingertip_method": "MediaPipe landmarks 4,8"
+        },
+        "fitted_trials": [
+          "Black_4cm_20261017_142005",
+          "Black_4cm_20261017_142008",
+          "Black_4cm_20261017_142014",
+          "Black_4cm_20261017_142020",
+          "Black_4cm_20261017_142027",
+          "Black_4cm_20261017_142030",
+          "Black_4cm_20261017_142036",
+          "Black_4cm_20261017_142043",
+          "Black_4cm_20261017_142048",
+          "Black_4cm_20261017_142051",
+          "Black_4cm_20261017_142056",
+          "Black_4cm_20261017_142059",
+          "Black_4cm_20261017_142108",
+          "Black_4cm_20261017_142111",
+          "Black_4cm_20261017_142115",
+          "Black_4cm_20261017_142121",
+          "Black_4cm_20261017_142125",
+          "Black_4cm_20261017_142130",
+          "Black_4cm_20261017_142133",
+          "Black_4cm_20261017_142139",
+          "Black_4cm_20261017_142142",
+          "Black_4cm_20261017_142152",
+          "Black_4cm_20261017_142156",
+          "Black_4cm_20261017_142206",
+          "Black_4cm_20261017_142210",
+          "Black_4cm_20261017_142216",
+          "Black_4cm_20261017_142232",
+          "Black_4cm_20261017_142235",
+          "Black_4cm_20261017_142239",
+          "Black_4cm_20261017_142247"
+        ],
+        "x_min": 0.10397417098283768,
+        "x_max": 259.01550371199846,
+        "scale": 258.9115295410156
+      },
+      "recording_settings": {
+        "v": 60,
+        "s": 120,
+        "area": 500,
+        "camera": 1,
+        "width": 640,
+        "height": 480,
+        "fps": 30.0,
+        "size_cm": 4.0,
+        "center_source": "detected",
+        "locked_center": null,
+        "base_workflow": "Record_mediapipe_continuous.py",
+        "fingertip_method": "MediaPipe landmarks 4,8",
+        "color_s_min": 140,
+        "color_v_min": 50
+      }
+    }
+  },
+  "initial_detection_settings": {
+    "blue": {
+      "v": 60,
+      "s": 120,
+      "area": 150,
+      "color_s_min": 50,
+      "color_v_min": 50
+    },
+    "red": {
+      "v": 60,
+      "s": 120,
+      "area": 100,
+      "color_s_min": 140,
+      "color_v_min": 0
+    },
+    "black": {
+      "v": 60,
+      "s": 120,
+      "area": 500,
+      "color_s_min": 140,
+      "color_v_min": 50
+    }
+  },
+  "camera": 1,
+  "video": null,
+  "input": "five consecutive distances, oldest to current; checkpoint normalization",
+  "output": "finger_width in pixels",
+  "confirmation_frames": 3,
+  "error_definition": "predicted minus measured",
+  "target": "HSV color classification inside fixed placement ROI; one object at a time; ambiguous colors suppress prediction",
+  "placement_roi": [
+    225,
+    169,
+    200,
+    195
+  ],
+  "target_color": "continuous_multi_target",
+  "model_path": "See per-frame model_path in predictions.csv",
+  "object_center_source": "detected",
+  "recording_mode": "One continuous session; multiple object changes and grasps; no automatic grasp counting.",
+  "parameter_revision": 0,
+  "detection_settings": {
+    "blue": {
+      "v": 60,
+      "s": 120,
+      "area": 150,
+      "color_s_min": 50,
+      "color_v_min": 50
+    },
+    "red": {
+      "v": 60,
+      "s": 120,
+      "area": 100,
+      "color_s_min": 140,
+      "color_v_min": 0
+    },
+    "black": {
+      "v": 60,
+      "s": 120,
+      "area": 500,
+      "color_s_min": 140,
+      "color_v_min": 50
+    }
+  },
+  "locked_center": null
+}

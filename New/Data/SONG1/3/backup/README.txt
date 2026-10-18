@@ -1,0 +1,1 @@
+Two extreme curve-shape outliers set aside at user request; not confirmed measurement defects. Original bytes hash-verified; 50 retained. Reference and method in manifest. No training performed.

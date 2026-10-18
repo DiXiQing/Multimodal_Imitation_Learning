@@ -1,0 +1,78 @@
+=== Camera-only grasp regression ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Report\median_contact_validation_20261017\input_snapshot
+Input: hand_object_distance (px) -> Output: finger_width (px)
+Training: 40 trials / 2312 frames
+  Red_2cm_20261017_202207, Red_2cm_20261017_202211, Red_2cm_20261017_202215, Red_2cm_20261017_202220, Red_2cm_20261017_202231, Red_2cm_20261017_202238, Red_2cm_20261017_202241, Red_2cm_20261017_202245, Red_2cm_20261017_202247, Red_2cm_20261017_202251, Red_2cm_20261017_202255, Red_2cm_20261017_202303, Red_2cm_20261017_202308, Red_2cm_20261017_202311, Red_2cm_20261017_202316, Red_2cm_20261017_202320, Red_2cm_20261017_202338, Red_2cm_20261017_202342, Red_2cm_20261017_202356, Red_2cm_20261017_202400, Red_2cm_20261017_202408, Red_2cm_20261017_202415, Red_2cm_20261017_202419, Red_2cm_20261017_202423, Red_2cm_20261017_202427, Red_2cm_20261017_202430, Red_2cm_20261017_202436, Red_2cm_20261017_202442, Red_2cm_20261017_202446, Red_2cm_20261017_202449, Red_2cm_20261017_202456, Red_2cm_20261017_202503, Red_2cm_20261017_202513, Red_2cm_20261017_202519, Red_2cm_20261017_202539, Red_2cm_20261017_202555, Red_2cm_20261017_202600, Red_2cm_20261017_202604, Red_2cm_20261017_202620, Red_2cm_20261017_202623
+Test: 20 trials / 1115 frames
+  Red_2cm_20261017_202155, Red_2cm_20261017_202202, Red_2cm_20261017_202224, Red_2cm_20261017_202235, Red_2cm_20261017_202300, Red_2cm_20261017_202323, Red_2cm_20261017_202330, Red_2cm_20261017_202333, Red_2cm_20261017_202351, Red_2cm_20261017_202404, Red_2cm_20261017_202412, Red_2cm_20261017_202433, Red_2cm_20261017_202453, Red_2cm_20261017_202508, Red_2cm_20261017_202526, Red_2cm_20261017_202542, Red_2cm_20261017_202552, Red_2cm_20261017_202608, Red_2cm_20261017_202611, Red_2cm_20261017_202616
+Seed: 20261016 | Validation: leave-one-trial-out
+Model mode: median | Selection criterion: validation MAE
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Report\median_contact_validation_20261017\Result
+
+[1/3] Fit and validate 14 candidates (560 fits)
+  [01/14] polynomial param=1       CV RMSE= 25.51px | MAE= 21.71px | 0.02s
+  [02/14] polynomial param=2       CV RMSE=  9.54px | MAE=  7.18px | 0.03s
+  [03/14] polynomial param=3       CV RMSE=  9.49px | MAE=  7.13px | 0.03s
+  [04/14] polynomial param=4       CV RMSE=  8.71px | MAE=  6.47px | 0.03s
+  [05/14] spline     param=0.0001  CV RMSE=  8.21px | MAE=  5.86px | 0.10s
+  [06/14] spline     param=0.001   CV RMSE=  8.38px | MAE=  6.09px | 0.11s
+  [07/14] spline     param=0.01    CV RMSE=  8.64px | MAE=  6.38px | 0.07s
+  [08/14] spline     param=0.1     CV RMSE=  9.12px | MAE=  7.06px | 0.06s
+  [09/14] spline     param=1       CV RMSE= 14.81px | MAE= 13.09px | 0.07s
+  [10/14] spline     param=10      CV RMSE= 23.45px | MAE= 20.08px | 0.11s
+  [11/14] median_spline param=0       CV RMSE=  7.33px | MAE=  4.42px | 14.28s
+  [12/14] median_spline param=0.001   CV RMSE=  7.37px | MAE=  4.44px | 11.83s
+  [13/14] median_spline param=0.01    CV RMSE=  7.65px | MAE=  4.70px | 11.97s
+  [14/14] median_spline param=0.1     CV RMSE= 10.27px | MAE=  7.82px | 13.47s
+
+[2/3] Refit selected model on all 40 training trials: median_spline, param=0
+  16 fitted coefficients | fitting and validation: 52.562s
+  Knot placement: weighted_quantile (training data only)
+
+[3/3] Evaluate 20 held-out trials and save prediction plots
+  Red_2cm_20261017_202155: MAE=4.95px | RMSE=7.71px | R2=0.909
+  Red_2cm_20261017_202202: MAE=6.28px | RMSE=8.68px | R2=0.885
+  Red_2cm_20261017_202224: MAE=3.93px | RMSE=6.79px | R2=0.895
+  Red_2cm_20261017_202235: MAE=6.30px | RMSE=9.21px | R2=0.883
+  Red_2cm_20261017_202300: MAE=3.62px | RMSE=5.72px | R2=0.942
+  Red_2cm_20261017_202323: MAE=3.12px | RMSE=6.45px | R2=0.933
+  Red_2cm_20261017_202330: MAE=4.46px | RMSE=7.71px | R2=0.891
+  Red_2cm_20261017_202333: MAE=4.30px | RMSE=7.73px | R2=0.904
+  Red_2cm_20261017_202351: MAE=4.66px | RMSE=7.58px | R2=0.906
+  Red_2cm_20261017_202404: MAE=4.60px | RMSE=7.48px | R2=0.892
+  Red_2cm_20261017_202412: MAE=5.22px | RMSE=9.41px | R2=0.873
+  Red_2cm_20261017_202433: MAE=3.56px | RMSE=4.74px | R2=0.969
+  Red_2cm_20261017_202453: MAE=3.65px | RMSE=6.55px | R2=0.937
+  Red_2cm_20261017_202508: MAE=4.96px | RMSE=8.25px | R2=0.907
+  Red_2cm_20261017_202526: MAE=3.17px | RMSE=6.58px | R2=0.921
+  Red_2cm_20261017_202542: MAE=4.94px | RMSE=9.15px | R2=0.867
+  Red_2cm_20261017_202552: MAE=6.06px | RMSE=10.20px | R2=0.844
+  Red_2cm_20261017_202608: MAE=6.50px | RMSE=10.80px | R2=0.846
+  Red_2cm_20261017_202611: MAE=4.67px | RMSE=7.55px | R2=0.913
+  Red_2cm_20261017_202616: MAE=5.97px | RMSE=9.56px | R2=0.870
+
+=== Test results (all held-out frames) ===
+MAE: 4.65px | RMSE: 7.91px | R2: 0.902
+Baseline RMSE: 25.24px
+Total time: 61.15s
+
+Same test split comparison (not used to select the saved model):
+  Mean regression: MAE=6.50px | RMSE=9.06px | R2=0.871
+  Median regression: MAE=4.65px | RMSE=7.91px | R2=0.902
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Report\median_contact_validation_20261017\Result
+  test_metrics_chart.png
+  test_metrics_chart.pdf
+  test_metrics_chart_data.csv
+  model_family_comparison.png
+  model_family_comparison.csv
+  test_predictions.png
+  test_predictions/*.png
+  regression_fit.png
+  overall_model_summary.csv
+  test_metrics.csv
+  test_predictions.csv
+  cv_summary.csv
+  data_split.csv
+  models/best_model.json
+  training_log.txt

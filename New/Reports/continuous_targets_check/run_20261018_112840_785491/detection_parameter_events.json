@@ -1,0 +1,30 @@
+[
+  {
+    "revision": 0,
+    "frame": 0,
+    "elapsed_s": 0,
+    "settings": {
+      "blue": {
+        "v": 60,
+        "s": 120,
+        "area": 10,
+        "color_s_min": 20,
+        "color_v_min": 0
+      },
+      "red": {
+        "v": 60,
+        "s": 120,
+        "area": 10,
+        "color_s_min": 140,
+        "color_v_min": 0
+      },
+      "black": {
+        "v": 60,
+        "s": 120,
+        "area": 500,
+        "color_s_min": 140,
+        "color_v_min": 50
+      }
+    }
+  }
+]

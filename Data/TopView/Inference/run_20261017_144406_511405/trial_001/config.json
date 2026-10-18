@@ -1,0 +1,61 @@
+{
+  "model_path": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Size_4cm_20261017_142000_558582\\grasp_segments\\Result\\regression_35train_7test_20261017_142637_596810\\models\\best_model.json",
+  "model": {
+    "kind": "spline",
+    "param": 0.0001,
+    "x_min": 0.10397416874386248,
+    "x_max": 259.0155145346116,
+    "scale": 258.9115403658677,
+    "knots": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.14285714285714285,
+      0.2857142857142857,
+      0.42857142857142855,
+      0.5714285714285714,
+      0.7142857142857142,
+      0.8571428571428571,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "degree": 3,
+    "coefficients": [
+      44.751700973022295,
+      53.679821463714475,
+      97.4327270970761,
+      88.45874292686945,
+      97.72067855500568,
+      100.14123923511487,
+      82.4550390266823,
+      95.31105118863401,
+      15.465774689745617,
+      2.780862692199697
+    ]
+  },
+  "recording_settings": {
+    "v": 60,
+    "s": 120,
+    "area": 500,
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "fps": 30.0,
+    "size_cm": 4.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  },
+  "camera": 1,
+  "video": "Data\\TopView\\TRIAL_Size_4cm_20261017_142000_558582\\grasp_segments\\grasp_001\\grasp_video.mp4",
+  "input": "hand_object_distance in pixels",
+  "output": "finger_width in pixels",
+  "error_definition": "predicted minus measured",
+  "target": "manually selected model; no automatic object classification",
+  "object_center_source": "detected",
+  "locked_center": null
+}

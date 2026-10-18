@@ -1,14 +1,13 @@
 from pathlib import Path
 import argparse
 import re
-import math
 import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\D14\4')
+DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\Exprement Data\Khairy\selected_15_3cm')
 TEST_PREDICTIONS_DIR = None
 INPUT_CSV = 'grasp_data_smoothed.csv'
 EXCLUDED_FOLDERS = {'backup', '备用', '待检查', 'filter_comparison', 'overlay_plots'}
@@ -62,24 +61,33 @@ def read_trials(base, filename, recursive, include_backup, excluded_trials=()):
     return trials, report
 
 
+def mean_curve(trials):
+    columns = ['progress_percent'] + [col for col, _ in SIGNALS]
+    if not trials:
+        return pd.DataFrame(columns=columns)
+    progress = np.linspace(0, 100, 101)
+    result = {'progress_percent': progress}
+    for col, _ in SIGNALS:
+        result[col] = np.mean([np.interp(progress, t['x'], t['data'][col]) for t in trials], axis=0)
+    return pd.DataFrame(result)
+
+
 def plot_group(trials, output, title, dpi):
     output.mkdir(parents=True, exist_ok=True)
+    average = mean_curve(trials)
+    average.to_csv(output/'mean_curve.csv', index=False, encoding='utf-8-sig')
     colors = plt.get_cmap('turbo')(np.linspace(.05, .95, len(trials)))
-    ncol = min(4, max(1, math.ceil(len(trials) / 15)))
     def lines(ax, col, ylabel):
         for t, color in zip(trials, colors):
-            ax.plot(t['x'], t['data'][col], color=color, lw=1.2, label=t['label'])
-        ax.set(xlabel='Recorded trial progress (%)', ylabel=ylabel, xlim=(0, 100))
+            ax.plot(t['x'], t['data'][col], color=color, lw=1.2)
+        ax.set(ylabel=ylabel, xlim=(0, 100))
         if col == 'forward_acceleration':
             ax.axhline(0, color='black', lw=.8, alpha=.4)
         ax.grid(alpha=.2)
-    height = max(8, math.ceil(len(trials) / ncol) * .25)
-    fig, axs = plt.subplots(2, 2, figsize=(16, height))
-    for ax, (col, ylabel) in zip([axs[0, 0], axs[0, 1], axs[1, 0]], SIGNALS):
+    fig, axs = plt.subplots(3, 1, figsize=(9, 12), sharex=True)
+    for ax, (col, ylabel) in zip(axs, SIGNALS):
         lines(ax, col, ylabel)
-    axs[1, 1].axis('off')
-    handles, labels = axs[0, 0].get_legend_handles_labels()
-    axs[1, 1].legend(handles, labels, ncol=ncol, loc='center', fontsize=7, frameon=False, title=f'{len(trials)} experiments')
+    axs[-1].set_xlabel('Recorded trial progress (%)')
     fig.tight_layout()
     fig.savefig(output/'overlay.png', dpi=dpi, bbox_inches='tight')
     plt.close(fig)

@@ -1,0 +1,60 @@
+{
+  "expected_by_user": 3,
+  "confirmed_grasps": 3,
+  "counts": {
+    "red": 0,
+    "blue": 0,
+    "black": 3
+  },
+  "excluded_exchange_times_s": [],
+  "segments": [
+    {
+      "number": 1,
+      "folder": "Black_4cm_20261018_131653",
+      "color": "black",
+      "size_cm": 4,
+      "start": 89,
+      "onset": 101,
+      "peak": 110,
+      "stable": 122,
+      "end": 142,
+      "frames": 54,
+      "start_time_s": 3.0143836999777704,
+      "end_time_s": 4.77535509999143,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\Inference\\run_20261018_131617_890638\\trial_001",
+      "boundary_rule": "Reviewed grasp peaks; ~0.4 s pre-onset and ~0.65 s stable hold; withdrawal/object exchange excluded."
+    },
+    {
+      "number": 2,
+      "folder": "Black_4cm_20261018_131705",
+      "color": "black",
+      "size_cm": 4,
+      "start": 430,
+      "onset": 441,
+      "peak": 449,
+      "stable": 462,
+      "end": 482,
+      "frames": 53,
+      "start_time_s": 14.374100500019267,
+      "end_time_s": 16.117980299983174,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\Inference\\run_20261018_131617_890638\\trial_001",
+      "boundary_rule": "Reviewed grasp peaks; ~0.4 s pre-onset and ~0.65 s stable hold; withdrawal/object exchange excluded."
+    },
+    {
+      "number": 3,
+      "folder": "Black_4cm_20261018_131713",
+      "color": "black",
+      "size_cm": 4,
+      "start": 670,
+      "onset": 681,
+      "peak": 690,
+      "stable": 703,
+      "end": 723,
+      "frames": 54,
+      "start_time_s": 22.375312499993015,
+      "end_time_s": 24.151109599974006,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\Inference\\run_20261018_131617_890638\\trial_001",
+      "boundary_rule": "Reviewed grasp peaks; ~0.4 s pre-onset and ~0.65 s stable hold; withdrawal/object exchange excluded."
+    }
+  ]
+}

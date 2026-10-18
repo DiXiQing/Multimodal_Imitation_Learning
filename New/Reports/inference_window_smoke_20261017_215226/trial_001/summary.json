@@ -1,0 +1,21 @@
+{
+  "total_frames": 6,
+  "invalid_frames": 4,
+  "outside_training_range_frames": 0,
+  "all_valid": {
+    "frames": 2,
+    "mae_px": 1.0,
+    "rmse_px": 1.0,
+    "r2": -3.0
+  },
+  "within_training_range": {
+    "frames": 2,
+    "mae_px": 1.0,
+    "rmse_px": 1.0,
+    "r2": -3.0
+  },
+  "video_timing": "Fixed FPS; use CSV timestamps for actual acquisition time.",
+  "valid_definition": "Five-frame window ready; warm-up and detection loss have no prediction.",
+  "missing_detection_frames": 0,
+  "warmup_frames": 4
+}

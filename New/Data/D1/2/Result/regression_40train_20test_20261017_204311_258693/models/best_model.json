@@ -1,0 +1,85 @@
+{
+  "kind": "median_spline",
+  "param": 0,
+  "x_min": 0.19093785316405665,
+  "x_max": 264.37478755228375,
+  "scale": 264.1838496991197,
+  "coefficients": [
+    16.014960666074543,
+    22.775418631661775,
+    96.1596281416961,
+    73.33653608168088,
+    90.43108806770759,
+    92.0936028263381,
+    68.5084644499399,
+    73.28179473781277,
+    -8.896101741435801,
+    17.115259010784396
+  ],
+  "knots": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.14285714285714285,
+    0.2857142857142857,
+    0.42857142857142855,
+    0.5714285714285714,
+    0.7142857142857142,
+    0.8571428571428571,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "degree": 3,
+  "quantile": 0.5,
+  "loss": "weighted_absolute_error",
+  "smoothness": "L1 second differences of spline coefficients",
+  "optimizer": "scipy.optimize.linprog/highs",
+  "recording_settings": {
+    "v": 60,
+    "s": 120,
+    "color_s_min": 140,
+    "color_v_min": 0,
+    "area": 10,
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "object_color": "red",
+    "object_id": "red_2cm",
+    "hsv_ranges": [
+      [
+        [
+          0,
+          140,
+          0
+        ],
+        [
+          8,
+          255,
+          255
+        ]
+      ],
+      [
+        [
+          172,
+          140,
+          0
+        ],
+        [
+          179,
+          255,
+          255
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 2.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  },
+  "recording_settings_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\2\\Red_2cm_20261017_202207\\settings.json"
+}

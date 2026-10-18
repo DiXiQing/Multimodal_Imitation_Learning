@@ -1,0 +1,48 @@
+=== Camera-only grasp regression ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_3.5cm_20261017_122537_134124\grasp_segments
+Input: hand_object_distance (px) -> Output: finger_width (px)
+Training: 11 trials / 613 frames
+  grasp_001, grasp_004, grasp_005, grasp_006, grasp_007, grasp_008, grasp_009, grasp_010, grasp_013, grasp_014, grasp_015
+Test: 5 trials / 273 frames
+  grasp_002, grasp_003, grasp_011, grasp_012, grasp_016
+Seed: 20261016 | Validation: leave-one-trial-out
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_3.5cm_20261017_122537_134124\grasp_segments\Result\regression_11train_5test_20261017_123618_376963
+
+[1/3] Fit and validate 10 candidates (110 fits)
+  [01/10] polynomial param=1       CV RMSE= 24.85px | MAE= 21.49px | 0.09s
+  [02/10] polynomial param=2       CV RMSE=  8.85px | MAE=  7.14px | 0.01s
+  [03/10] polynomial param=3       CV RMSE=  8.88px | MAE=  7.16px | 0.01s
+  [04/10] polynomial param=4       CV RMSE=  7.92px | MAE=  6.33px | 0.01s
+  [05/10] spline     param=0.0001  CV RMSE=  7.54px | MAE=  5.83px | 0.03s
+  [06/10] spline     param=0.001   CV RMSE=  7.73px | MAE=  6.06px | 0.01s
+  [07/10] spline     param=0.01    CV RMSE=  7.94px | MAE=  6.29px | 0.01s
+  [08/10] spline     param=0.1     CV RMSE=  8.25px | MAE=  6.75px | 0.01s
+  [09/10] spline     param=1       CV RMSE= 13.32px | MAE= 11.97px | 0.01s
+  [10/10] spline     param=10      CV RMSE= 22.57px | MAE= 19.67px | 0.01s
+
+[2/3] Refit selected model on all 11 training trials: spline, param=0.0001
+  10 fitted coefficients | fitting and validation: 0.191s
+
+[3/3] Evaluate 5 held-out trials and save prediction plots
+  grasp_002: MAE=3.92px | RMSE=4.48px | R2=0.970
+  grasp_003: MAE=4.13px | RMSE=6.77px | R2=0.938
+  grasp_011: MAE=7.65px | RMSE=9.10px | R2=0.914
+  grasp_012: MAE=9.51px | RMSE=11.71px | R2=0.796
+  grasp_016: MAE=6.49px | RMSE=8.65px | R2=0.896
+
+=== Test results (all held-out frames) ===
+MAE: 6.13px | RMSE: 8.30px | R2: 0.907
+Baseline RMSE: 27.27px
+Total time: 1.68s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Size_3.5cm_20261017_122537_134124\grasp_segments\Result\regression_11train_5test_20261017_123618_376963
+  test_predictions.png
+  test_predictions/*.png
+  regression_fit.png
+  overall_model_summary.csv
+  test_metrics.csv
+  test_predictions.csv
+  cv_summary.csv
+  data_split.csv
+  models/best_model.json
+  training_log.txt

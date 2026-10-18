@@ -1,0 +1,17 @@
+{
+  "segment": 9,
+  "start": 1133,
+  "onset": 1145,
+  "peak": 1163,
+  "stable": 1173,
+  "end": 1193,
+  "frames": 61,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 20,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 10 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 2.017117500305176,
+  "invalid_frames": 0,
+  "source_start_frame": 1133,
+  "source_end_frame": 1193,
+  "folder_name": "Black_3cm_20261018_150742"
+}

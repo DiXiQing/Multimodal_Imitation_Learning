@@ -17,3 +17,21 @@ Data/**/*.avi
 Data/**/*.mov
 Data/**/*.mkv
 Data/**/*.zip
+
+# Raw frame folders and video recordings anywhere in this repository.
+# Keep local media; commit CSV, settings, models and analysis figures separately.
+**/[Ff][Rr][Aa][Mm][Ee][Ss]/
+*.[mM][pP]4
+*.[aA][vV][iI]
+*.[mM][oO][vV]
+*.[mM][kK][vV]
+*.[wW][mM][vV]
+*.[mM]4[vV]
+*.[wW][eE][bB][mM]
+*.[mM][pP][eE][gG]
+*.[mM][pP][gG]
+
+# Local dataset archives can duplicate the entire recordings directory.
+*.[zZ][iI][pP]
+*.7[zZ]
+*.[rR][aA][rR]
