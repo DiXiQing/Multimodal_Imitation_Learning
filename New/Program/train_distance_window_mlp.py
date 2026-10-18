@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from trial_paths import grasp_folders
 
 # Edit here when running directly from an IDE. Empty SOURCE prompts for a path.
-SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\3'
+SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\2'
 TRAIN_FOLDER = 'Train'
 VALIDATION_FOLDER = 'Validation'
 SEED = 20261016
