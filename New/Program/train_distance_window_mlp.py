@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from trial_paths import grasp_folders
 
 # Edit here when running directly from an IDE. Empty SOURCE prompts for a path.
-SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\D1\2'
+SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\SONG1\4'
 TRAIN_FOLDER = 'Train'
 VALIDATION_FOLDER = 'Validation'
 SEED = 20261016
@@ -427,8 +427,8 @@ def plot_results(output, summary, per_trial, histories, validation):
         ax.set_yticks(pos, [f'Validation {i:02d}' for i in range(1, len(validation) + 1)] + ['Overall'])
         ax.invert_yaxis(); ax.set_title(title); ax.grid(axis='x', alpha=.2); ax.set_axisbelow(True)
     axs[0].legend(fontsize=8)
-    fig.suptitle('Per-trial validation metrics | Overall pools all eligible validation frames')
-    fig.tight_layout(rect=(0, 0, 1, .95)); fig.savefig(output / 'validation_metrics_chart.png', dpi=170); plt.close(fig)
+    fig.tight_layout(); fig.savefig(output / 'validation_metrics_chart.png', dpi=170)
+    fig.savefig(output / 'validation_metrics_chart.pdf'); plt.close(fig)
     write_csv(output / 'validation_label_mapping.csv', [dict(label=f'Validation {i:02d}', trial=g['name']) for i, g in enumerate(validation, 1)])
     fig, axs = plt.subplots(1, 2, figsize=(12, 4.5))
     for ax,name in zip(axs,MODEL_SPECS):

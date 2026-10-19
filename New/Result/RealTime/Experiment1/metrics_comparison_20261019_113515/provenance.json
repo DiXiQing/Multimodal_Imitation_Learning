@@ -1,0 +1,77 @@
+{
+  "method": "Same eligible recorded frames across 9 segmented grasps. Current model evaluated offline with the paired original training checkpoint; Window 5 uses original recorded predictions. Matching window checkpoints reproduce saved values within 0.001px. Overall recomputed from pooled frames, not mean trial scores. No training, smoothing, shifting or source modifications.",
+  "trials": [
+    {
+      "trial": "Black_4cm_20261018_113709",
+      "frames": 55,
+      "total_segment_frames": 55,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 1.75881232280517e-05
+    },
+    {
+      "trial": "Black_4cm_20261018_113809",
+      "frames": 51,
+      "total_segment_frames": 51,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 5.168557072465774e-05
+    },
+    {
+      "trial": "Black_4cm_20261018_114317",
+      "frames": 56,
+      "total_segment_frames": 56,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261017_215125_574383\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 3.172178730892483e-05
+    },
+    {
+      "trial": "Blue_3cm_20261018_113648",
+      "frames": 53,
+      "total_segment_frames": 53,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 1.4791794683333137e-05
+    },
+    {
+      "trial": "Blue_3cm_20261018_113752",
+      "frames": 56,
+      "total_segment_frames": 56,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 2.7060775209974963e-05
+    },
+    {
+      "trial": "Blue_3cm_20261018_113822",
+      "frames": 53,
+      "total_segment_frames": 53,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261017_223333_030201\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 3.3410217156415456e-05
+    },
+    {
+      "trial": "Red_2cm_20261018_113630",
+      "frames": 57,
+      "total_segment_frames": 57,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 3.3798083450164995e-05
+    },
+    {
+      "trial": "Red_2cm_20261018_113733",
+      "frames": 55,
+      "total_segment_frames": 55,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 4.3018268115702085e-05
+    },
+    {
+      "trial": "Red_2cm_20261018_113840",
+      "frames": 60,
+      "total_segment_frames": 60,
+      "current_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_current.pth",
+      "window_model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261017_213924_764497\\models\\distance_window5.pth",
+      "max_window_reconstruction_difference_px": 3.894728456543817e-05
+    }
+  ]
+}

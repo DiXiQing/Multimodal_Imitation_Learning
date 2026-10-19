@@ -1,0 +1,14 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\Inference\\run_20261018_153832_802120\\trial_001",
+  "models": {
+    "blue": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261018_151544_535958\\grasp_segments\\Result\\distance_mlp_window5_20261018_152555_247675\\models\\distance_window5.pth",
+    "black": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_3cm_20261018_150704_338887\\grasp_segments\\Result\\distance_mlp_window5_20261018_153227_711853\\models\\distance_window5.pth"
+  },
+  "total_grasps": 6,
+  "total_frames": 335,
+  "eligible_frames": 282,
+  "window_reconstruction_max_error_px": 0.0,
+  "overall": "Pooled identical finite recorded-window frames for both models; baseline offline inference from sibling current-distance checkpoint; window uses unchanged realtime predictions.",
+  "phase": "Initial before reviewed onset; Grasping from onset until reviewed stable hold; Hold from stable hold through segment end. Equal grasp weighting, sample SD ddof=1. No footer.",
+  "note": "Realtime recording, not offline validation. Blue 3 and Black 3 grasps. Physical black size 40 mm; original model metadata incorrectly says 30 mm. Missing predictions excluded from both metrics and retained in source CSV. No training or smoothing."
+}

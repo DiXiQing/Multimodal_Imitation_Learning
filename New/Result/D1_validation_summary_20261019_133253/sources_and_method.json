@@ -1,0 +1,12 @@
+{
+  "sources": {
+    "Red 20 mm": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\2\\Result\\distance_mlp_window5_20261018_230453_976437",
+    "Blue 30 mm": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\3\\Result\\distance_mlp_window5_20261018_221011_316327",
+    "Black 40 mm": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261018_225943_941141"
+  },
+  "total_grasps": 27,
+  "total_frames": 1194,
+  "overall": "MAE/RMSE/R2 recomputed on concatenated eligible validation frames; not mean of target metrics. R2 uses the global measured mean.",
+  "phase": "Mean of individual-grasp phase MAEs; error bars are sample SD (ddof=1) across 27 grasps overall or 9 grasps per target. No footer on plots.",
+  "note": "Saved validation predictions only. No retraining, smoothing, exclusions, or changes to source results. Pixel scales refer to respective camera recordings."
+}

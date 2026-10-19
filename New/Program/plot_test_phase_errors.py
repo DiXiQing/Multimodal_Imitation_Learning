@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 MODELS = [('distance_window5','Window 5','predicted_window5_px')]
-PHASES = [('rest','Initial','#338ac0'),('movement','Movement','#ff8510'),('hold','Hold','#2ca02c')]
+PHASES = [('rest','Initial','#338ac0'),('movement','Grasping','#ff8510'),('hold','Hold','#2ca02c')]
 
 
 def write_rows(path,rows):
