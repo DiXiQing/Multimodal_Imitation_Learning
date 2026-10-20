@@ -1,0 +1,12 @@
+{
+  "length": "Complete original segment, no cropping",
+  "peak": "First raw maximum",
+  "progress": "Normalized frame index 0-100%",
+  "remaining_distance": "100*(d_peak-d_last)/(d_first-d_last)",
+  "nrmse": "101 progress points; leave-one-trial-out mean reference; common denominator is mean individual peak-to-peak range for each variable",
+  "reference_ranges_px": {
+    "distance": 251.77161217926414,
+    "aperture": 93.66216600906453
+  },
+  "sd": "Sample SD ddof=1"
+}

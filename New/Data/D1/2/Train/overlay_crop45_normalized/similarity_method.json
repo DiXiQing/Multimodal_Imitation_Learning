@@ -1,0 +1,13 @@
+{
+  "length": "First 45 frames",
+  "peak": "First raw maximum",
+  "progress": "Normalized frame index 0-100%",
+  "remaining_distance": "100*(d_peak-d_last)/(d_first-d_last)",
+  "nrmse": "101 progress points; leave-one-trial-out mean reference; denominator mean individual peak-to-peak range",
+  "reference_ranges_px": {
+    "distance": 253.0554972213266,
+    "aperture": 79.2379213229606
+  },
+  "sd": "Sample SD ddof=1",
+  "trials": 30
+}

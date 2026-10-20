@@ -1,0 +1,1 @@
+Plot-only preview. Retain first min(50, original length) frames, using 1-based frame numbering. Normalize each retained segment frame axis to 0-100%; no padding or extrapolation for segments shorter than 50 frames. Values remain original px; no smoothing or amplitude normalization. Original CSV and videos unchanged.

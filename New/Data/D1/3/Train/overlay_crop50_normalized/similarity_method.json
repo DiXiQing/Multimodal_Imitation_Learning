@@ -1,0 +1,12 @@
+{
+  "crop": "First min(50,N) rows, 1-based displayed frames; originals unchanged",
+  "progress": "(segment_frame-first)/(last-first)",
+  "peak": "First raw maximum aperture in retained segment; no smoothing",
+  "remaining_distance": "100*(d_at_peak-d_last)/(d_first-d_last)",
+  "nrmse": "Linear interpolation to 101 progress points. RMSE relative to mean of OTHER 29 trials, divided by a common reference range for each variable: mean of the 30 individual retained peak-to-peak ranges.",
+  "normalization_range_px": {
+    "distance": 251.73717238947089,
+    "aperture": 93.66216600906453
+  },
+  "aggregation": "Arithmetic mean and sample standard deviation ddof=1 across 30 trials; descriptive consistency, not prediction error"
+}
