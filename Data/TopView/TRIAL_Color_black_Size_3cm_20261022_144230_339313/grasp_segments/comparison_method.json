@@ -1,0 +1,8 @@
+{
+  "sources": {
+    "Previous fast": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Train",
+    "New slower": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_3cm_20261022_144230_339313\\grasp_segments"
+  },
+  "note": "Descriptive comparison only, no training. Actual CSV timestamps, no time normalization or truncation. Onset/stable use saved event annotations; not metronome-defined movement duration. Old dataset labels black4cm, new settings black3cm, so pure speed effect cannot be assumed. Missing original measurements preserved.",
+  "invalid_new": 1
+}

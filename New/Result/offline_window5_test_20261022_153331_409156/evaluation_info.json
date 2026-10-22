@@ -1,0 +1,46 @@
+{
+  "model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Result\\distance_mlp_window5_20261018_225943_941141\\models\\distance_window5.pth",
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow",
+  "trial_count": 18,
+  "overall": {
+    "frames": 1141,
+    "mae": 5.853789468130262,
+    "rmse": 9.490446119730253,
+    "r2": 0.880223001084306
+  },
+  "warnings": [
+    "Black_3cm_20261022_144242: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144246: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144250: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144254: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144259: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144302: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144311: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144317: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144324: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144328: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144333: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144338: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144344: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144348: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144353: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144358: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144402: size_cm differs: model=4.0, test=3.0",
+    "Black_3cm_20261022_144411: size_cm differs: model=4.0, test=3.0"
+  ],
+  "method": "Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal 5-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.",
+  "model_recording_settings": {
+    "v": 60,
+    "s": 120,
+    "area": 500,
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "fps": 30.0,
+    "size_cm": 4.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  }
+}

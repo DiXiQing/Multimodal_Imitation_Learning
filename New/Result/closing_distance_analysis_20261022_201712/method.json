@@ -1,0 +1,11 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D1\\Train",
+  "event": "Operational early-closure landmark, not exact physiological onset: first sample after smoothed peak below peak - fraction*(peak-hold) for 3 consecutive samples; peak uses centered 3-point median for event localization only. Hold is median from stored stable boundary to end. Distance is original recorded distance at landmark.",
+  "thresholds": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "primary": 0.1,
+  "grouping": "Recording batches identified by timestamp: fast 16:17, slow A 19:19, slow B 19:32. No model training, no data edits. These are selected training data, descriptive analysis only."
+}

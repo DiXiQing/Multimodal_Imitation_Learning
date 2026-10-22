@@ -1,0 +1,8 @@
+{
+  "sources": {
+    "Fast (1 s cue)": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_4cm_20261022_161759_111243\\grasp_segments",
+    "Slower (2 s cue)": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_4cm_20261022_162259_948374\\grasp_segments"
+  },
+  "note": "Descriptive comparison only, no training. Actual CSV timestamps, no time normalization or truncation. Onset/stable use saved event annotations; not metronome-defined movement duration. Both settings label black4cm; metronome targets 1 second and 2 seconds respectively. Different recording sessions may also differ in behavior. Missing original measurements preserved.",
+  "invalid_new": 0
+}

@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from trial_paths import grasp_folders
 
 # Edit here when running directly from an IDE. Empty SOURCE prompts for a path.
-SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\SONG1\4'
+SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1'
 TRAIN_FOLDER = 'Train'
 VALIDATION_FOLDER = 'Validation'
 SEED = 20261016
@@ -387,7 +387,6 @@ def main():
             phase_rows.append(dict(model=name, phase=phase, frames=len(subset),
                 **scores(actual, np.array([r[key] for r in subset]))))
     write_csv(output / 'validation_phase_metrics.csv', phase_rows)
-    from plot_test_phase_errors import export_phase_errors
     export_phase_errors(output, all_predictions, prefix='validation')
     plot_results(output, summary, metrics_rows, histories, validation)
     log('\n=== Overall validation metrics (all eligible validation frames pooled) ===')
@@ -402,6 +401,49 @@ def main():
                  'data_split.csv', 'models/distance_current.pth', 'models/distance_window5.pth']:
         log('  ' + name)
     (output / 'RESULT.txt').write_text((output / 'training_log.txt').read_text(encoding='utf-8'), encoding='utf-8')
+
+
+def export_phase_errors(output, predictions, prefix='test'):
+    PHASES = [('rest', 'Initial'), ('movement', 'Grasping'), ('hold', 'Hold')]
+    output = Path(output)
+    per_trial = []
+    for trial in sorted({r['trial'] for r in predictions}):
+        for phase, _ in PHASES:
+            subset = [r for r in predictions if r['trial'] == trial and r['phase'] == phase]
+            if not subset:
+                continue
+            y = np.asarray([float(r['actual_aperture_px']) for r in subset])
+            p = np.asarray([float(r['predicted_window5_px']) for r in subset])
+            valid = np.isfinite(y) & np.isfinite(p)
+            if valid.any():
+                per_trial.append(dict(model='distance_window5', trial=trial, phase=phase,
+                                      frames=int(valid.sum()), mae_px=float(np.mean(abs(p[valid]-y[valid])))))
+    if not per_trial:
+        raise ValueError('No finite phase predictions available.')
+    summary = []
+    for phase, _ in PHASES:
+        part = [r for r in per_trial if r['phase'] == phase]
+        values = [r['mae_px'] for r in part]
+        summary.append(dict(model='distance_window5', phase=phase, grasps=len(part),
+            frames=sum(r['frames'] for r in part), mean_trial_mae_px=float(np.mean(values)) if values else None,
+            sd_trial_mae_px=float(np.std(values, ddof=1)) if len(values)>1 else 0. if values else None))
+    write_csv(output/f'{prefix}_trial_phase_metrics.csv', per_trial)
+    write_csv(output/f'{prefix}_phase_summary.csv', summary)
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+    for i, row in enumerate(summary):
+        if row['mean_trial_mae_px'] is not None:
+            ax.bar(i, row['mean_trial_mae_px'], width=.55, color='#e59a32',
+                   yerr=row['sd_trial_mae_px'], capsize=5)
+    ax.set_xticks(range(3), [label for _, label in PHASES])
+    ax.set(title='Errors by phase', ylabel='Mean per-grasp MAE (px)')
+    ax.grid(axis='y', alpha=.2)
+    ax.set_axisbelow(True)
+    fig.tight_layout()
+    for ext in ('png', 'pdf'):
+        fig.savefig(output/f'{prefix}_phase_errors.{ext}', dpi=200)
+    plt.close(fig)
+    return summary
+
 
 
 def plot_results(output, summary, per_trial, histories, validation):

@@ -1,0 +1,53 @@
+{
+  "model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D2\\fast\\Result\\distance_mlp_window5_20261022_185040_407871\\models\\distance_window5.pth",
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D2\\slow",
+  "trial_count": 49,
+  "overall": {
+    "frames": 2070,
+    "mae": 5.822935218488772,
+    "rmse": 7.726681608465319,
+    "r2": 0.9410004425959102
+  },
+  "warnings": [],
+  "method": "Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal 5-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.",
+  "model_recording_settings": {
+    "v": 60,
+    "s": 120,
+    "color_s_min": 140,
+    "color_v_min": 50,
+    "area": 500,
+    "max_area": 3000,
+    "metronome_at_recording_start": {
+      "bpm": 60.0,
+      "movement_beats": 1,
+      "rest_beats": 1,
+      "target_movement_s": 1.0,
+      "rest_s": 1.0
+    },
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "object_color": "black",
+    "object_id": "black_4cm",
+    "hsv_ranges": [
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          179,
+          120,
+          60
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 4.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  }
+}

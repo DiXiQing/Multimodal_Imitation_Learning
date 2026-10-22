@@ -1,0 +1,29 @@
+{
+  "model": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Model\\4\\distance_window5.pth",
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_3cm_20261022_144230_339313\\grasp_segments\\Black_3cm_20261022_144234",
+  "trial_count": 1,
+  "overall": {
+    "frames": 47,
+    "mae": 5.090667750070231,
+    "rmse": 6.517655430840839,
+    "r2": 0.9506666140814424
+  },
+  "warnings": [
+    "Black_3cm_20261022_144234: size_cm differs: model=4.0, test=3.0"
+  ],
+  "method": "Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal 5-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.",
+  "model_recording_settings": {
+    "v": 60,
+    "s": 120,
+    "area": 500,
+    "camera": 1,
+    "width": 640,
+    "height": 480,
+    "fps": 30.0,
+    "size_cm": 4.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  }
+}

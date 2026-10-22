@@ -1,0 +1,18 @@
+{
+  "segment": 1,
+  "start": 117,
+  "onset": 129,
+  "peak": 141,
+  "stable": 154,
+  "end": 167,
+  "frames": 51,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 13,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 10 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.6642735004425049,
+  "invalid_frames": 0,
+  "source_start_frame": 117,
+  "source_end_frame": 167,
+  "folder_name": "Black_3cm_20261022_144234",
+  "review_note": "Tail capped before renewed opening/release; original recording unchanged"
+}

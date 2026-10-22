@@ -1,0 +1,25 @@
+{
+  "segment": 49,
+  "start": 4754,
+  "onset": 4766,
+  "peak": 4779,
+  "stable": 4790,
+  "end": 4797,
+  "frames": 44,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 7,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.4913887977600098,
+  "invalid_frames": 0,
+  "source_start_frame": 4754,
+  "source_end_frame": 4797,
+  "folder_name": "Black_4cm_20261022_162539",
+  "tail_trim": {
+    "original_end": 4799,
+    "original_frames": 46,
+    "removed_frames": 2,
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D2\\slow\\backup\\tail_trim_20261022_180348",
+    "reason": "Sustained terminal aperture re-opening after stable hold",
+    "rule": "Last-two-frame median >=3 px above minimum 3-point median after stable; trim at first two smoothed points >minimum+1.5 px; retain at least 3 stable frames"
+  }
+}

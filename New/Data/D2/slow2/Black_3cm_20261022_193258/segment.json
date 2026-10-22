@@ -1,0 +1,25 @@
+{
+  "segment": 4,
+  "start": 494,
+  "onset": 506,
+  "peak": 529,
+  "stable": 583,
+  "end": 598,
+  "frames": 105,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 15,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 3.46614146232605,
+  "invalid_frames": 0,
+  "source_start_frame": 494,
+  "source_end_frame": 598,
+  "folder_name": "Black_3cm_20261022_193258",
+  "tail_trim": {
+    "original_end": 601,
+    "original_frames": 108,
+    "removed_frames": 3,
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_3cm_20261022_193242_002419\\grasp_segments\\backup\\tail_trim_20261022_193659",
+    "reason": "Sustained terminal aperture re-opening after stable hold",
+    "rule": "Last-two-frame median >=3 px above minimum 3-point median after stable; trim at first two smoothed points >minimum+1.5 px; retain at least 3 stable frames"
+  }
+}

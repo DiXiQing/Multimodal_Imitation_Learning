@@ -1,0 +1,307 @@
+{
+  "basis": "User manual curve selection; not confirmation of measurement defects.",
+  "trials": [
+    {
+      "folder": "Black_3cm_20261022_144234",
+      "group": "reserve"
+    },
+    {
+      "folder": "Black_3cm_20261022_144242",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144246",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144250",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144254",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144259",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144302",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144307",
+      "group": "reserve"
+    },
+    {
+      "folder": "Black_3cm_20261022_144311",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144317",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144324",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144328",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144333",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144338",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144344",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144348",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144353",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144358",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144402",
+      "group": "usable"
+    },
+    {
+      "folder": "Black_3cm_20261022_144406",
+      "group": "reserve"
+    },
+    {
+      "folder": "Black_3cm_20261022_144411",
+      "group": "usable"
+    }
+  ],
+  "moves": [
+    {
+      "original": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\Black_3cm_20261022_144234",
+      "destination": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\backup\\Black_3cm_20261022_144234",
+      "file_hashes": {
+        "camera.csv": "27307abd6c25a53b6993241c40ad7676d6676663e89bc2ea8a25209c5c70db03",
+        "grasp_video.mp4": "5429daa4020403b3bf8bec0f519238c76cf045ca52ca6621693811b9be0cbb6c",
+        "segment.json": "2209b4a1a364f93c0ec0372bc78f134521a7c4142077d1d9057e8681ed8c0907",
+        "settings.json": "8b05a1fb24cb9c09a413c495f045a2e527157adb093a9f1cc89d013f77d0a75d",
+        "frames\\frame_000117.jpg": "1213b49c63c3c205624ee869c81746e00898543d5f6e147fe6b8fed8bc3affc4",
+        "frames\\frame_000118.jpg": "8dda263f10c3d74b67425cf934c5be3c1fa4c08d09cc47202c4de0b5f83b60eb",
+        "frames\\frame_000119.jpg": "d48710baff2a8cd9914e9b60f1c04a67495b9d63088645ce00c94c10477406f2",
+        "frames\\frame_000120.jpg": "a99904968c7387da63e2a7e4d991da752572ccca5c89aa3b95380bb5be888aef",
+        "frames\\frame_000121.jpg": "1ea9b3343c1d4db4c1c8b3e31654fe8ea646a26c50fb8b8fda1900eecb31f920",
+        "frames\\frame_000122.jpg": "f52d14424f1d3b4758821af4fb33bd1fc2210ebb53736d1b69479f60f0df1563",
+        "frames\\frame_000123.jpg": "173a70e130ae01854108e9b949a03e681426425814306736cf3f8ff99e3636aa",
+        "frames\\frame_000124.jpg": "198f427758800ac326d094a3f8f48d45065b645ad259cf2758c733b67bea6eb4",
+        "frames\\frame_000125.jpg": "8cfb4ae26148b9fa84e6830feaf602b9174d309bb7cfa0e9f861a723b8f14075",
+        "frames\\frame_000126.jpg": "fdcfbda38df148004578054cb5df5cf9147a087c1462a0c9d243803ea209e5bb",
+        "frames\\frame_000127.jpg": "4f181503f8158affeb80abe235faae6b656bbfbbd5ffd517ff640941437eaf1d",
+        "frames\\frame_000128.jpg": "32cde9b506f8b2ef2c19f6d7f643c06b05ee7892825fbe734595c8e0a4e388a0",
+        "frames\\frame_000129.jpg": "4aad54b9af946cfbfeadb374d6082b7cff001bed590c690a37ab944516d23120",
+        "frames\\frame_000130.jpg": "34d95f0c3501bf04615b3e177fd610fb4cccefdd3642a01c0ead08341cf407c0",
+        "frames\\frame_000131.jpg": "b7afd40a81f22fe913b643ed295d1f6a0db7f2dd051ea215753eaeffbfc7e93c",
+        "frames\\frame_000132.jpg": "2a3d505446d3b5502961bbf79f207232b38c4b157cc83460b9cee4d71adf6ded",
+        "frames\\frame_000133.jpg": "022db695bb2eca172248f91143c1d8a344cf77516c47f2cfe1a7ac8b688d8fc1",
+        "frames\\frame_000134.jpg": "3f3d2554678d65ea0242263843bde435037539235f41b33cf26152e214e243e4",
+        "frames\\frame_000135.jpg": "e8b1d226c3689e57d45e9b1c8e3ffb2430773d5e3bef7185788ffd9603e5bde9",
+        "frames\\frame_000136.jpg": "c81b490664258e0b5e6dbf523c78df06efe0e2652e218b2c4c7ab458d69189e7",
+        "frames\\frame_000137.jpg": "ed9dfdd0c3122e925c2247f9c156ef1f2cd19b5af586cea87a56a9cd4a4d3821",
+        "frames\\frame_000138.jpg": "623595e9d468ddd446bb0b296b12b30e66a6bda98584137b27251091b08bd55d",
+        "frames\\frame_000139.jpg": "841f38efce2bd4866704b17817462603a4a30e912761b762a48790a6b0b42a6d",
+        "frames\\frame_000140.jpg": "482e056c7b847981ae95532ffb76e8f12f5c18f719b98620285fdcd4b712f9bd",
+        "frames\\frame_000141.jpg": "140c7fd82e0f2e8644ff1f00fd87fcf04358b1a887f138409b633efb34f5bf4d",
+        "frames\\frame_000142.jpg": "699de7e7dc816e37fd719fd73b4263238c89c90123de876dc85bf69251b6e9a0",
+        "frames\\frame_000143.jpg": "472ff3cb24b42ad263b431b8b102d5ae68688651232ee2887976b871982f2b47",
+        "frames\\frame_000144.jpg": "bc366f5749d1feda036cdffdffc1e3e66a007306aa16adad33f162fdd6301e37",
+        "frames\\frame_000145.jpg": "50c6f3b4e78e04c1b5b1f2c32cad6c5b38810773adc168a05cbb30bae4c2bc65",
+        "frames\\frame_000146.jpg": "72d026f410ff115c85559af5ebbf63ce3ccfd0fecfbbb11a2ee75ac3387cd5f5",
+        "frames\\frame_000147.jpg": "c828fdd82eb5b3dca89674d6a6412a3d471ea0144cbe4993483205ae9b32b78d",
+        "frames\\frame_000148.jpg": "e3217e537b6e6d1e770519de9ed55a91c801d2c92fc7b8798da9d28575e75778",
+        "frames\\frame_000149.jpg": "8e50bd2bbaff0c2664dbbe4cbb4b83ff965377ebc407354119821b628863717e",
+        "frames\\frame_000150.jpg": "621ea813355ca4d6dd8fa7aae8886b47212921723fea73da49503b54b0b0c858",
+        "frames\\frame_000151.jpg": "6eac976651530af70c4f96c651d9429403281609dc9779aeffeffa3cf0394593",
+        "frames\\frame_000152.jpg": "d0d83bf39aad667410f663a64f573eae2fa5618ceec41e6126cfa270adeaf884",
+        "frames\\frame_000153.jpg": "d9369dd9bd40896dd42dba7fb34547dbfbd6569beea9c36fddf7cd6e0573e622",
+        "frames\\frame_000154.jpg": "dfb7c51ec73a5376de1d3b5b051a0bd9c07caec77246ec4ebde9de444becd08a",
+        "frames\\frame_000155.jpg": "774d026295604ac4927c7c5ed49cf69a8eeae69720b9297bc6ea453e55c6c13b",
+        "frames\\frame_000156.jpg": "d725c4f28e8190070efa15f6df04c52047d42c1fd7ce29a4d6f7630209fa4cb7",
+        "frames\\frame_000157.jpg": "3859d2f36730f66395405b8fb9a2df9f56eae05198409cc60844b12105bf64da",
+        "frames\\frame_000158.jpg": "eb5738b4a6e76710ac397d52a1e72df85be6ab646c40048893a739479352ed23",
+        "frames\\frame_000159.jpg": "ae97a94d29f39ce8121f56780e1760829e687dc193d458db082439eaac677bf2",
+        "frames\\frame_000160.jpg": "36fe3c3bb267af3e4836cfc4a23cf6d845a2cbeff763af9a52adf86a4f9e9110",
+        "frames\\frame_000161.jpg": "205937aa00180a4fcb49dee2cae520c3d86fbd33fe19f73a2accbbd44446018e",
+        "frames\\frame_000162.jpg": "518eada82d522113ff018dde72445acfd2585a9c4b495b0d6883e1f3c4587a8b",
+        "frames\\frame_000163.jpg": "22157056f3ae28d2015ba8fd0d9f1566e98f4657c6aa0ccd9838300953dbf2c4",
+        "frames\\frame_000164.jpg": "c72241e31603687065490d143ef380f8d06bc2a2288c9acb18c2ac8148aac39c",
+        "frames\\frame_000165.jpg": "bf978456e2d8d928da45cf76d05034a4b3deaeae6ca34697cbbe022e844332c9",
+        "frames\\frame_000166.jpg": "10f282389a8305c7559a013e3df8bd8fb240bf3e4f5cd46e478bd22c88cd8b88",
+        "frames\\frame_000167.jpg": "e720bd3c6ef7ff684114cb88ee03ea3f64735806027d5f8836a9b395073ee4ec"
+      }
+    },
+    {
+      "original": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\Black_3cm_20261022_144307",
+      "destination": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\backup\\Black_3cm_20261022_144307",
+      "file_hashes": {
+        "camera.csv": "7d32f44557111350df99c91ea74d34ec185bcdeb2e2f420c1ca8844cee248df2",
+        "grasp_video.mp4": "b6fdce6f05ee6cdbe46f43c222dc49eeef78a290410dde4621688251ccd6c856",
+        "segment.json": "1e422714a8d2a13a30bb67cfe0bd1b7aa1aa50b951f233b3c0862f417c0738b1",
+        "settings.json": "8b05a1fb24cb9c09a413c495f045a2e527157adb093a9f1cc89d013f77d0a75d",
+        "frames\\frame_001078.jpg": "facde45ed4f1e04fb56ee1cbe5343d7782bf25f054556f416f27e5f4be8e9e97",
+        "frames\\frame_001079.jpg": "14f341fdaaeebacaf203464b0362262c55d488399724f57d4f44cb5a19980d91",
+        "frames\\frame_001080.jpg": "a257358df60b541628e2a0e37c160ed1fd18bb709713f8d9fa0bfb106e6da249",
+        "frames\\frame_001081.jpg": "fc36b0c3c751199eb18845c61c1dc3f7a46a475d74f68146e4235c895e3668cb",
+        "frames\\frame_001082.jpg": "92ac51f6f1bd0c80b378aafa8725c65ae2862c5baaa1f7aadfaea5c7c87b27d7",
+        "frames\\frame_001083.jpg": "5f2cd3130e7a025b49bb3709db610feb60f97e2cb52436e398168118c5f4610c",
+        "frames\\frame_001084.jpg": "b81fd956300ff01baa360601f6d379c11ee8c739f0e9bc980372c1b6c6b89eaf",
+        "frames\\frame_001085.jpg": "013f9cd596ae766a350748decb634d3d4e1cf63d1835ecf3288ea328494f67cb",
+        "frames\\frame_001086.jpg": "075ce3d279d01f78e022a01f8ba3a63d9397caaa7dde0bf5e709c19338e67b59",
+        "frames\\frame_001087.jpg": "7c33a21525891f74922fabe4cfeafd87d805925c9cc219e34ac7b9e0c46e9d3d",
+        "frames\\frame_001088.jpg": "7645d49f7bf450fb4ded1c2d931459178242b491718eed5cbc3e21fd2626d62d",
+        "frames\\frame_001089.jpg": "6d580eacdbd2f8f332a90c4d824bf2feab589962c1196de1787d1789c716ee83",
+        "frames\\frame_001090.jpg": "4af61c365f3283e15e16635117227a7984e36057894b3bed2eda46326ed89bc0",
+        "frames\\frame_001091.jpg": "318a1b788bf07377eb3a289e9775d80dcc940d5a90dfc31b63e6374b100990c7",
+        "frames\\frame_001092.jpg": "30c6a6eb54f962c40fcbe1410d4144091463e1b861990ef6c2a8950477570518",
+        "frames\\frame_001093.jpg": "2868420cf0e4a8d415e85e2ae10318e109447eb37f1611a750d95ad178436ea4",
+        "frames\\frame_001094.jpg": "61ac47462f8440a41ccc9b3618eb35dbee7712bd72940766fad1d8642783dd0f",
+        "frames\\frame_001095.jpg": "24ed6b9faea5beea28b19700b8b444712bdf7d9f5068318555cc974e0eb0329c",
+        "frames\\frame_001096.jpg": "4373cdf46efbb110c041861a18342b5a7346e5c1a62888b163026cd1cb72e31f",
+        "frames\\frame_001097.jpg": "2d486547ec8b6e8bd7dfb4c47228757774391c43f98afc4d2ffa7ce7dd38d098",
+        "frames\\frame_001098.jpg": "ddf6b279376671b85599e9647a45d4971b58e5290f3bccd7691681a6079bb63a",
+        "frames\\frame_001099.jpg": "50cb3c6192d20cd75dcc8e692d8ce79e75d384dd078d62e570923136a8f6e4d0",
+        "frames\\frame_001100.jpg": "47658342c100912368f12ddf57a5cad4ed5b6485ca26a520e78733c18487bbf3",
+        "frames\\frame_001101.jpg": "913c84916ab77d085687ee8e6e377ece66c20428122c6f150ff728c8acda28fc",
+        "frames\\frame_001102.jpg": "a8d5ee7a8661c5bdbe31dcc3646879be3dbde839d8f087c9007c2c67210752b5",
+        "frames\\frame_001103.jpg": "c201df3955680cfc66b16c51222fc5ed0bc2536601da2f8264cff39bbdd21f3c",
+        "frames\\frame_001104.jpg": "a5185f7d113e25a5ed99db41b837b0e5dfec7b062c6980db2eded19738362d46",
+        "frames\\frame_001105.jpg": "26c2e7aa07a137a81d6ad0d38d497fa70e1d1eb2ce9c96320b61be3baefb678f",
+        "frames\\frame_001106.jpg": "3efd2f516db109912896da7bf2994d84a42538c1579f0eaa38abef2451eab229",
+        "frames\\frame_001107.jpg": "e4f7bf2d45c7791901a39e1e210e08f0808cc9c495e4dc4f90e83006799ffbef",
+        "frames\\frame_001108.jpg": "b2612738aefb67386d328e875aa01be94d0cad3c08f101a0416bbde7c0261d1d",
+        "frames\\frame_001109.jpg": "893905e3591b83752e9dbe3073579a2774d41b357eda668e0951da1664c86ab1",
+        "frames\\frame_001110.jpg": "02361c8f6cd1653619510e8b99979b7465e6057f6125938cae946c023946cdea",
+        "frames\\frame_001111.jpg": "05af3914b903d333e795459f30492eb025908aa775d2df71a517a4f26e988227",
+        "frames\\frame_001112.jpg": "8d2daec4243ead5f97e8b559e97d7a90b58a367a9c21cea909db0b3db8779851",
+        "frames\\frame_001113.jpg": "19727b5bdf16766f9b773a39558f0a5649c754516d2be9d62b123dc073fe8ab1",
+        "frames\\frame_001114.jpg": "f4806643a943f8b935c15a71276a9ec70a345828cf58ad46495ea665594f0716",
+        "frames\\frame_001115.jpg": "95625ec56e72628d7b98b1295350c7c25727ad2c36dc7a020137cbdf62a56a7b",
+        "frames\\frame_001116.jpg": "507532c919703bfe508811cf65b736a18ea06cdfafae44c92a7fcae3764194ce",
+        "frames\\frame_001117.jpg": "a12e4281c57ded3afe9443e8bcc9cae82aeb82549049f30b5d0ef8c7ac796f1d",
+        "frames\\frame_001118.jpg": "79f911a6e91ad38bd72425b70a45bd2e7e4797b6c5cf1f01aecbc7f5dd497799",
+        "frames\\frame_001119.jpg": "379bb15b41936803a0ac9929ff45313a39c21e88bd5280a2184b4fc0918ab055",
+        "frames\\frame_001120.jpg": "b43af0765ba9b061dddb118f341c82cd5d71c0908f9888444801aa7d1fa7e161",
+        "frames\\frame_001121.jpg": "1753f6d103af8d71fc0f909e33f2e0d0e93a9f1fbba99f42e17d1b3bfb73cae1",
+        "frames\\frame_001122.jpg": "641b8c91c846c14c1124f3ac756af6b04b712a4848542affcd0488dfad6aa626",
+        "frames\\frame_001123.jpg": "066e984677c215f1e7cd5b69cac19e057baf40849063a4351f4d6e4e263b681c",
+        "frames\\frame_001124.jpg": "0d0f376d31815533a8d0a818a2db3c907dd9fa03cc3a1bdcf0409866a622007e",
+        "frames\\frame_001125.jpg": "6ca87adb802b073fd37dce3b39444da8610ce132b700be94d2647178da43b205",
+        "frames\\frame_001126.jpg": "97beeeb14d2da4fb3ed08134df28a4ac8030af58082d918ba5472853b036bd90",
+        "frames\\frame_001127.jpg": "a59ac10f9150e320724806cefbae34c920525b5ba360ca97379529ac3bb9b3f6",
+        "frames\\frame_001128.jpg": "19cb341524a11ecf0a39756009b2f8893d717a1c4c3821b39fab202618ed4489",
+        "frames\\frame_001129.jpg": "ee4617ef2e8ca2130e942f804cfe650b5fdbb0bd5847128e10cd8f147fb3d56a",
+        "frames\\frame_001130.jpg": "2db24a698e4e91136ea453f63646188fc17b5f3d20b9e0541bff63ae748dc7b9",
+        "frames\\frame_001131.jpg": "96f94cd4ce6c44a5edceaee8f2c8c7cb91c2d02bf5525bf684fbf46d24ff9c8b",
+        "frames\\frame_001132.jpg": "5441598e1640c4b4f0f756d0c05c22ca55313b0720b3be5ae5af99b9dab3b6c9",
+        "frames\\frame_001133.jpg": "d7331d0bcaba5e583f20b30b1ef8a4a04954de6dc4a61a80ab42a7a11798358c",
+        "frames\\frame_001134.jpg": "455b1d6b7c4f1d7ccfc57b7d282443f50df7049d26990afd3f5dce5ca781732b",
+        "frames\\frame_001135.jpg": "0294638b59815c8df9b96266b860035a7057c66e948d03dbc0beca3bc0d6138d",
+        "frames\\frame_001136.jpg": "6cffa0291ce19a220c0254b2a79682c7318da80d0704c80f3fd6b549b5946bc9",
+        "frames\\frame_001137.jpg": "19293e7b6a3fafb6aa8dc8effa58351c5984694c3a50683d2a21f9f92170ae42",
+        "frames\\frame_001138.jpg": "36a2074237959b9928579852e13d16caad8379a4429a4b4111377a2c2cd1a55e",
+        "frames\\frame_001139.jpg": "1a6d150eb4ee5ab37654c1c26ae327a66831c269adcdc1d6c5382df233317cfa",
+        "frames\\frame_001140.jpg": "64d93651ac5ff97d6a3a15269118d31398e6707aff9ca8dda9942128b2abe840",
+        "frames\\frame_001141.jpg": "22e7dea034c91eb8845940786011ed5860701ba5d72c7d15c871da0d5aabb93b",
+        "frames\\frame_001142.jpg": "2b02d158dbc8df53c3f50aa15b1261725741d3d52f62398e38fd8c594e349296",
+        "frames\\frame_001143.jpg": "a21b236a25442973cd6b3e8224858fd4c2a7271e96862ecdf4f1f7b803409486",
+        "frames\\frame_001144.jpg": "ebe3ad27604dd602dbc2dbb5bd6eb258fe1abdee5a913e72aa4fa8189493aa77"
+      }
+    },
+    {
+      "original": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\Black_3cm_20261022_144406",
+      "destination": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D1\\4\\Validation_slow\\backup\\Black_3cm_20261022_144406",
+      "file_hashes": {
+        "camera.csv": "a69d34336ef964dbd6999c0dc1de35786e059e13d7d61419a134d5970caa98b6",
+        "grasp_video.mp4": "9654b11ee38b371d54cdd89a96355e49e8e168826f8a3cfe71e156322c6d5173",
+        "segment.json": "567ec89c1ea1717c0dcea55f842487312c14456cfbc4bc830812d88d91be4fd5",
+        "settings.json": "8b05a1fb24cb9c09a413c495f045a2e527157adb093a9f1cc89d013f77d0a75d",
+        "frames\\frame_002861.jpg": "b2f5b2a2709debb146d3469b42b67047fdff9d23da5e71948082454fbeaa8587",
+        "frames\\frame_002862.jpg": "a773ea2aea2829dc098eb525f0c4f51e7884cdcd7430e4d5f80da553054f05e9",
+        "frames\\frame_002863.jpg": "2d99884b1ce09a0e3f002f69c4ebf5284d1f29314d02be96ae2efd5c5130eae1",
+        "frames\\frame_002864.jpg": "d32ad1acea79d10b80976355bf81a793976c983c475e564a2f977c08175e7caf",
+        "frames\\frame_002865.jpg": "135e66b8710403ad121aea8a10f38b5c21941fb7268f4b92f3b286572411cf81",
+        "frames\\frame_002866.jpg": "09545cef63a37fcc46db9f573277234ab2128f9009e29801ea9a1ab7c8830df0",
+        "frames\\frame_002867.jpg": "27ca90e41ff4b878217202f6796e8e97788f232af98e863b51ea1c35551004d4",
+        "frames\\frame_002868.jpg": "696f9c8c29d302a8ec92b63f222cadd0d29b96b348ff84b365545c0772ff6f0c",
+        "frames\\frame_002869.jpg": "a22c138a8bf0651fcded38320db9cf2d16cf9d81e31e79db78f11510e7011b92",
+        "frames\\frame_002870.jpg": "184e6032a1569b86b820bab8be3e66637963017672bf9fde2a0d7251fa068758",
+        "frames\\frame_002871.jpg": "3aec51c4ed0672383cdcea4e5f65416961d3a6b61cfcfba44186a841ea482bdf",
+        "frames\\frame_002872.jpg": "163e6fe0bb12579744824e6ab54b62706899e513e9b95bd4cdf7a163a0614557",
+        "frames\\frame_002873.jpg": "5b5bbda95bda6ab90b4eb6a92d98e0c22ad1219b8ab9fbe71378efc5d3672beb",
+        "frames\\frame_002874.jpg": "863fb4f71566631da5760967bf58c8d144bce2dbeb65b03e59eaf590fe835a41",
+        "frames\\frame_002875.jpg": "4e2b8db280885688688213b7d802ec70b0c1d0d1406bb13475a80a8e454a0c57",
+        "frames\\frame_002876.jpg": "25c1afc4b2a52cfb6dd375db095e5d6cf89071236326c06b3c537248c1b26d8e",
+        "frames\\frame_002877.jpg": "1d0ffca9eff9d2486e7790646d57476dfcbb366636bc948edc01a6a233a7ae6e",
+        "frames\\frame_002878.jpg": "3e6dde7b0f0c246affba7434ed211090a138d9824a9ab2d1eb653b91716ad315",
+        "frames\\frame_002879.jpg": "50c87f759b3051b4f59c230dddde9958855eab5ec0a8715deec71227aa8cef30",
+        "frames\\frame_002880.jpg": "34cded16e5c69b7855132e712cdb6f20e3857c8eafea0b82c311fc3e951dfc92",
+        "frames\\frame_002881.jpg": "cc7327458879b0ab9187d893cfd85b6c1582bb42d9439b8d37e8d0a13c3f5d0e",
+        "frames\\frame_002882.jpg": "d1f5a7460594502c297ebbbd2ad7dc95fdf7c44833052b8826bfb49b0e9eded1",
+        "frames\\frame_002883.jpg": "6a8c1dbee50175ab9dce2e1bc646ef5c89d7280d719f17607d24acc0d5586e33",
+        "frames\\frame_002884.jpg": "88b843854ac068088b56a3e8d75490beedf4f23f3ab31d57b76cc6fc7e5b8579",
+        "frames\\frame_002885.jpg": "6124b814d38700f25366426e0ac5326e170e8cf37c1ba403ead4f34f50258fe5",
+        "frames\\frame_002886.jpg": "2fad41a7beb53721a84cd14715d494d6f10ca2cc0cde3954304c19b771c13944",
+        "frames\\frame_002887.jpg": "b170428444d7142b1cde928456727d8f8b88ff191a794108d550e27d5438f084",
+        "frames\\frame_002888.jpg": "9699e0cc497736af328daaade0e8fe0195962bf908dc91a42274ed524e5a2883",
+        "frames\\frame_002889.jpg": "2086998b8cab85b5713e811518cf9e536c0d73b26b0c4e568516a3640ab309f9",
+        "frames\\frame_002890.jpg": "5bcb00e335a8fc16f2257545abd44f3a4286ebbc38a94908b844e251d305e888",
+        "frames\\frame_002891.jpg": "a35c5f6c8a9837647509c382938d58fe61a541c51a2bee4368cb6d73a9282155",
+        "frames\\frame_002892.jpg": "d5757e7b9877fa86f6cabb9cdb6bada13c02290cb82c5e6c181dbc505ed67c91",
+        "frames\\frame_002893.jpg": "1ade4766766e5d60c1a3ae0a7e09b90a461ed26a3e13dbec782881c17e975064",
+        "frames\\frame_002894.jpg": "ff0832e84c464e50acf4f33b05b335f27ef7cdc96731f953051b79186da8217f",
+        "frames\\frame_002895.jpg": "ef0ac3d005706077feab7b1efbfe38cc01e2e63dfdeb4843e21c59eef99eac99",
+        "frames\\frame_002896.jpg": "57cc2c6475cf1d22988a25b8eb4a1bcb0a7d998e69853fa00cf7c5ecfb78868c",
+        "frames\\frame_002897.jpg": "7c7c01332c96e1f5e56276e4c8c797bde6e14d45f18a0d809fedcc9457a2815b",
+        "frames\\frame_002898.jpg": "680158a53f160c3fd3cee14212bbb7a9ed76e1dd4c064a30c6e0482377cb50f3",
+        "frames\\frame_002899.jpg": "b9f1c76635f629c61f07626ae1c381c652ef02e86f9c98984c184cb6804da8fb",
+        "frames\\frame_002900.jpg": "3a6696021d633bac1629c1ab016b7bc16d41fb985e84bdbc498f702701f6c719",
+        "frames\\frame_002901.jpg": "667c1c29a5ae8bfb1726b5616aa44ee9c9ee386bd334d415c6a70b2cd9cd4a86",
+        "frames\\frame_002902.jpg": "61a13ec5e58357da6f41c11c7c148ae7a8aa68f1f0e1f24f0a3e25d1cd2f5aa4",
+        "frames\\frame_002903.jpg": "9c6eea674895abccea3f06d76d8ae785b69d46f803d348076744a8c4943d9947",
+        "frames\\frame_002904.jpg": "92e3eae949762b8a88c8fe8c0e9f426d272873d52dcc14a6207df31a9cb9b8db",
+        "frames\\frame_002905.jpg": "700e692767c126dbd49c96ae754e092805ccb9a3ca771693cf6bfd54d1f44ce7",
+        "frames\\frame_002906.jpg": "1958447f2334cce86f7a6b3a3faed841fde47dde3dfad5522f2070cf09df7386",
+        "frames\\frame_002907.jpg": "abe48b8f364460215402d99b727bf813ae3c6b6147be89702c40a1abcb918659",
+        "frames\\frame_002908.jpg": "60d4a57452b58e9e14b3515a58f219a2a2ff50212568eb99396e492d8b026a00",
+        "frames\\frame_002909.jpg": "d7084460b5ef3896131a13405ec92691db4d9f1214b6e175dbc6b449339c3c39",
+        "frames\\frame_002910.jpg": "ca0b38740b91a5a9ea4c428c6462fad5c63287c410619d08aceaaee977f2e28b",
+        "frames\\frame_002911.jpg": "b5997cf214d54c1d2b35223dccf034661c974d233f2ded1c93cca3dbe9440d63",
+        "frames\\frame_002912.jpg": "bde342f36d97b634dba5f9b3676c70c3f8179381408da8a2cfcf451e9d546506",
+        "frames\\frame_002913.jpg": "ce4866ed87728bb9100689f8e3f9eed43414793c0d9bf5bc3e4139ca41feebaf",
+        "frames\\frame_002914.jpg": "dacb6fca6e405f4ba8c6fcdd2dae1adeefff55d8ac0b7e8f896682b160958bbf",
+        "frames\\frame_002915.jpg": "6968e9bf8898e7b0346100056cec0a3968c7aa8420833029c9a5a8bc2e97ae0c",
+        "frames\\frame_002916.jpg": "9d1fdf3b53950ae11188293056b8b0e4b117be116f99705f5ac343f6b320428e",
+        "frames\\frame_002917.jpg": "220ee25f03db4201ea56388abd0a48333b2f58e88e8474df31b84ea1174e4ba2",
+        "frames\\frame_002918.jpg": "ddc7dfacd4dc875469954910c3643f3249239016ec339976935783ddbeae2708",
+        "frames\\frame_002919.jpg": "9c48b342b66eb543ea2a9ac01a6632742564308dea88a775ea592a216a9e2541",
+        "frames\\frame_002920.jpg": "35c24b66e8d1d8dc6249e2d813ca115924e638ddea9248f03bb5b05383872c8f",
+        "frames\\frame_002921.jpg": "0c0739db8d2987b52a3e9d30dc9bd71f9cc9a499516092def1035166ac37b2dc",
+        "frames\\frame_002922.jpg": "19c8bbf002a6781e33b7f603ab36c412154f90b9775bc66a6dfcb0838766267a",
+        "frames\\frame_002923.jpg": "035e73013ed9a14541e23f075bf6b135e35352f5933b5141d75ff3f4e676a1c5",
+        "frames\\frame_002924.jpg": "ee753e33e0ede67e5b55b4015749d94f372ef4d4905d65d791b9a07019f0afe3",
+        "frames\\frame_002925.jpg": "098af11e284ae606ef7608596b476b05539855c382e9007f257a53e34532f437",
+        "frames\\frame_002926.jpg": "a9e4e820e3249fe9c20224422b9c9522cf666aeddd8a27c7c5be33374b1bceff",
+        "frames\\frame_002927.jpg": "31cd3e19494ee2eb13e93f6cf6657142261ffcacd2807c9a9ce5e440f8708800",
+        "frames\\frame_002928.jpg": "f55b251a8a0c1775a32e8e02c8d96f72e521975e445a12fdcc5fe6c970e33207"
+      }
+    }
+  ]
+}

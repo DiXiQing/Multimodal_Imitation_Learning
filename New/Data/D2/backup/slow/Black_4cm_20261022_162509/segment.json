@@ -1,0 +1,25 @@
+{
+  "segment": 39,
+  "start": 3857,
+  "onset": 3869,
+  "peak": 3881,
+  "stable": 3893,
+  "end": 3896,
+  "frames": 40,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 3,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.318690538406372,
+  "invalid_frames": 0,
+  "source_start_frame": 3857,
+  "source_end_frame": 3896,
+  "folder_name": "Black_4cm_20261022_162509",
+  "manual_tail_trims": [
+    {
+      "removed_frames": 4,
+      "previous_frames": 44,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Data\\D2\\slow\\backup\\manual_tail4_20261022_180949",
+      "reason": "User-selected four-frame tail trim"
+    }
+  ]
+}

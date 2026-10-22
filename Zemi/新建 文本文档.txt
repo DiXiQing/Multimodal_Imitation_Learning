@@ -10,3 +10,15 @@ In the related work have examined these relationships from different perspective
 Mangalam et al. investigated the factors associated with the onset of finger closure.
 Coats et al. examined how target distance and contact surface size affect grasping movements.
 These studies suggest that reach-to-grasp movements involve multiple interacting variables.
+
+5.这是实验配置，研究中使用web camera来收集数据。这个web camera，固定视角，俯视角度，收集抓取期间的视觉信息。
+
+6.这是一个实验例子
+
+7.关于视觉处理，研究中使用mediapipe和opencv去检测hand landmark和方块。将大拇指和食指的距离设置为fingertip aperture，两指连线中点到物体中点设为distance。他们的单位都是pixel。
+
+8.
+
+9.收集30组抓取20mm的红色cube，这是在抓取过程中两个变量的曲线叠加图。两者的叠加图高度相似，Fingertip Aperture Nomalized RMSE在0.0530，Hand–Object Distance的是0.0226，标准差也非常小。而在一些关键节点上也十分接近，手指在抓取过程中会先张开后闭合，此参与者的抓取中，开口最大的时刻在全程的44.42%左右，在距离134.77左右。
+After collected 30 trials of grasping the 20mm red cube. These graph is the overlay plots of two variable during reach-to-grasp movement.
+These graph show highly consistent patterns. The normalized Root Mean Squared Error was 0.0530 for fingertip apertrue and 0.0226 for hand-object distance, with relatively small standard deviations.

@@ -3,11 +3,82 @@ import argparse
 import csv
 import json
 import time
+import threading
+import queue
+import tempfile
+import wave
 from datetime import datetime
 from pathlib import Path
 
 import cv2
 import numpy as np
+
+
+class Metronome:
+    """Loop one pre-rendered audio cycle independently of camera/UI processing."""
+    def __init__(self, bpm, movement_beats, rest_beats):
+        self.bpm, self.movement_beats, self.rest_beats = bpm, movement_beats, rest_beats
+        self.events = queue.SimpleQueue()
+        self.cancel = threading.Event()
+        self.worker = threading.Thread(target=self.run, daemon=True)
+        self.audio_path = None
+
+    def audio_cycle(self, sample_rate=22050):
+        period = 60/self.bpm
+        cycle = self.movement_beats+self.rest_beats
+        samples = np.zeros(round(cycle*period*sample_rate),dtype=np.int16)
+        for beat in range(cycle):
+            frequency = 1400 if beat == 0 else 700 if beat == self.movement_beats else 1000
+            length = round(.065*sample_rate)
+            t = np.arange(length)/sample_rate
+            tone = (.5*32767*np.sin(2*np.pi*frequency*t)*np.hanning(length)).astype(np.int16)
+            start = round(beat*period*sample_rate)
+            samples[start:start+length] = tone
+        return samples
+
+    def start(self):
+        handle = tempfile.NamedTemporaryFile(prefix='grasp_metronome_',suffix='.wav',delete=False)
+        self.audio_path = Path(handle.name)
+        handle.close()
+        with wave.open(str(self.audio_path),'wb') as audio:
+            audio.setnchannels(1)
+            audio.setsampwidth(2)
+            audio.setframerate(22050)
+            audio.writeframes(self.audio_cycle().astype('<i2').tobytes())
+        self.worker.start()
+
+    def stop(self):
+        self.cancel.set()
+        self.worker.join(timeout=.3)
+        if not self.worker.is_alive() and self.audio_path is not None:
+            self.audio_path.unlink(missing_ok=True)
+
+    def run(self):
+        import winsound
+        period = 60/self.bpm
+        try:
+            winsound.PlaySound(str(self.audio_path), winsound.SND_FILENAME | winsound.SND_ASYNC |
+                               winsound.SND_LOOP | winsound.SND_NODEFAULT)
+        except RuntimeError:
+            self.events.put(dict(beat=0,cycle=1,cue='audio_error',unix_time_s=time.time(),lateness_ms=0))
+            return
+        deadline = time.perf_counter()
+        origin = deadline
+        beat = 0
+        cycle = self.movement_beats+self.rest_beats
+        while not self.cancel.wait(max(0, deadline-time.perf_counter())):
+            position = beat % cycle
+            cue = 'start' if position == 0 else 'finish' if position == self.movement_beats else 'beat'
+            actual = time.perf_counter()
+            self.events.put(dict(beat=beat,cycle=beat//cycle+1,cue=cue,
+                                 unix_time_s=time.time(),lateness_ms=max(0,actual-deadline)*1000))
+            beat += 1
+            deadline += period
+            # UI/log scheduling cannot change the looped audio's beat spacing.
+            if deadline < time.perf_counter():
+                beat = int((time.perf_counter()-origin)/period)+1
+                deadline = origin+beat*period
+        winsound.PlaySound(None, 0)
 
 
 def color_ranges(color, black_max=60, saturation_max=120, color_s_min=140, color_v_min=50):
@@ -22,7 +93,7 @@ def color_ranges(color, black_max=60, saturation_max=120, color_s_min=140, color
 
 
 def detect_cube(frame, black_max=60, saturation_max=120, min_area=500,
-                color='black', color_s_min=140, color_v_min=50):
+                color='black', color_s_min=140, color_v_min=50, max_area=None):
     # Same black HSV range, 5x5 opening/closing, fill filter and largest-box
     # selection as the config.detect_cube used by Record_mediapipe_continuous.
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -35,9 +106,13 @@ def detect_cube(frame, black_max=60, saturation_max=120, min_area=500,
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     candidates = []
     for contour in contours:
-        if cv2.contourArea(contour) < min_area:
+        contour_area = cv2.contourArea(contour)
+        if contour_area < min_area:
             continue
         x, y, w, h = cv2.boundingRect(contour)
+        # Match the displayed/saved object_area (bounding-box pixels), not contour area.
+        if max_area is not None and w*h > max_area:
+            continue
         if cv2.contourArea(contour) / max(w*h, 1) < .30:
             continue
         candidates.append((float(w*h), (x, y, w, h)))
@@ -197,13 +272,95 @@ def main():
             ('红/蓝：亮度下限 V', 'color_v_min', 50, 255),
             ('最小面积 px²', 'area', 500, 3000)]:
         value = tk.IntVar(value=default)
-        scale=tk.Scale(parameters, label=label, from_=0 if name != 'area' else 10, to=maximum,
+        scale=tk.Scale(parameters, label=label, from_=10 if name in ('area','max_area') else 0, to=maximum,
                  orient='horizontal', variable=value, length=290)
         scale.pack(fill='x',padx=5,pady=3)
         parameter_scales.append(scale)
         values[name] = value
+    values['max_area'] = tk.IntVar(value=args.width*args.height)
+    area_row = tk.Frame(parameters)
+    area_row.pack(fill='x',padx=5,pady=6)
+    tk.Label(area_row,text='最大面积 px²').pack(side='left')
+    max_area_text = tk.StringVar(value=str(values['max_area'].get()))
+    max_area_entry = tk.Entry(area_row,textvariable=max_area_text,width=10)
+    max_area_entry.pack(side='left',padx=5)
+    def apply_max_area(event=None):
+        try:
+            limit = int(max_area_text.get().strip())
+            if limit < values['area'].get():
+                raise ValueError('最大面积必须不小于最小面积')
+        except ValueError:
+            status.set('最大面积请输入不小于最小面积的整数；当前生效值：'+str(values['max_area'].get()))
+            return 'break'
+        values['max_area'].set(limit)
+        status.set(f'最大面积已应用：{limit} px²（与物体面积显示采用相同的外接框面积）')
+        return 'break'
+    max_area_button = tk.Button(area_row,text='应用',command=apply_max_area)
+    max_area_button.pack(side='left')
+    max_area_entry.bind('<Return>',apply_max_area)
+    parameter_scales.extend([max_area_entry,max_area_button])
     show_mask = tk.BooleanVar(value=False)
     tk.Checkbutton(parameters, text='显示颜色掩膜（白色为候选区域）', variable=show_mask).pack(pady=8)
+    metronome = None
+    metro_bpm = tk.StringVar(value='60')
+    metro_move = tk.StringVar(value='3')
+    metro_rest = tk.StringVar(value='3')
+    metro_config = None
+    metro_events = []
+    metro_info = tk.StringVar(value='节拍器关闭；先开启练习，再开始录制。')
+    metro_box = tk.LabelFrame(parameters,text='节拍器（独立于录制开关）')
+    metro_box.pack(fill='x',padx=5,pady=6)
+    metro_inputs = []
+    for text,variable in [('BPM',metro_bpm),('动作拍间隔数',metro_move),('保持/回位拍间隔数',metro_rest)]:
+        row = tk.Frame(metro_box)
+        row.pack(fill='x')
+        tk.Label(row,text=text).pack(side='left')
+        entry = tk.Entry(row,textvariable=variable,width=7)
+        entry.pack(side='right',padx=4,pady=2)
+        metro_inputs.append(entry)
+    tk.Label(metro_box,textvariable=metro_info,wraplength=290,justify='left').pack(fill='x')
+
+    def toggle_metronome():
+        nonlocal metronome,metro_config
+        if metronome is not None:
+            metronome.stop()
+            metronome = None
+            metro_button.config(text='开启节拍器')
+            for entry in metro_inputs:entry.config(state='normal')
+            metro_info.set('节拍器已关闭')
+            return
+        try:
+            bpm = float(metro_bpm.get())
+            movement,rest = int(metro_move.get()),int(metro_rest.get())
+            if not np.isfinite(bpm) or not 20 <= bpm <= 240 or not 1 <= movement <= 30 or not 1 <= rest <= 30:
+                raise ValueError()
+        except ValueError:
+            messagebox.showerror('节拍参数','BPM 填 20–240；动作和回位拍间隔数填 1–30 的整数。')
+            return
+        metro_config = dict(bpm=bpm,movement_beats=movement,rest_beats=rest,
+                            target_movement_s=movement*60/bpm,rest_s=rest*60/bpm)
+        metronome = Metronome(bpm,movement,rest)
+        metronome.start()
+        metro_button.config(text='关闭节拍器')
+        for entry in metro_inputs:entry.config(state='disabled')
+
+    metro_button = tk.Button(metro_box,text='开启节拍器',command=toggle_metronome)
+    metro_button.pack(pady=3)
+
+    def poll_metronome():
+        if closing:return
+        if metronome is not None:
+            while not metronome.events.empty():
+                event = metronome.events.get()
+                if trial is not None:
+                    metro_events.append(dict(**event,**metro_config))
+                if event['cue'] == 'audio_error':
+                    metro_info.set('提示音播放失败，请检查音频设备。')
+                elif event['cue'] != 'beat':
+                    text = '开始接近（高音）' if event['cue']=='start' else '预计完成，保持/回位（低音）'
+                    metro_info.set(f"第 {event['cycle']} 次：{text}\n动作目标 {metro_config['target_movement_s']:.2f} 秒；回位 {metro_config['rest_s']:.2f} 秒")
+        window.after(20,poll_metronome)
+    window.after(20,poll_metronome)
     bind_scroll(parameter_container)
 
     def reset_detection(*_):
@@ -217,6 +374,11 @@ def main():
     def stop(event=None):
         nonlocal trial
         if trial is not None:
+            with (trial.path/'metronome_events.csv').open('w',newline='',encoding='utf-8-sig') as f:
+                fields = ['beat','cycle','cue','unix_time_s','lateness_ms','bpm','movement_beats','rest_beats','target_movement_s','rest_s']
+                writer = csv.DictWriter(f,fieldnames=fields)
+                writer.writeheader()
+                writer.writerows(metro_events)
             trial.close()
             trial = None
         color_selector.config(state='readonly')
@@ -236,6 +398,7 @@ def main():
             if latest is None or latest['box'] is None or latest['thumb'] is None:
                 raise ValueError('需同时检测到所选颜色物体和手部；检查掩膜并调整阈值。')
             settings = {name: value.get() for name, value in values.items()}
+            settings['metronome_at_recording_start'] = metro_config if metronome is not None else None
             settings.update(camera=args.camera, width=latest['width'], height=latest['height'],
                 object_color=color.get(),object_id=f'{color.get()}_{object_size:g}cm',
                 hsv_ranges=color_ranges(color.get(),settings['v'],settings['s'],settings['color_s_min'],settings['color_v_min']),
@@ -243,6 +406,7 @@ def main():
                 locked_center=locked.tolist() if locked is not None else None,
                 base_workflow='Record_mediapipe_continuous.py', fingertip_method='MediaPipe landmarks 4,8')
             trial = Trial(args.output, object_size, latest['width'], latest['height'], args.fps, settings)
+            metro_events.clear()
             color_selector.config(state='disabled')
             size_entry.config(state='disabled')
             for scale in parameter_scales:
@@ -270,6 +434,8 @@ def main():
         if closing:
             return
         closing = True
+        if metronome is not None:
+            metronome.stop()
         stop()
         cap.release()
         hands.close()
@@ -296,7 +462,8 @@ def main():
             display = raw.copy()
             thumb, index, landmarks = detect_fingers(raw,hands)
             (area,box), mask = detect_cube(raw, values['v'].get(), values['s'].get(), values['area'].get(),
-                color=color.get(),color_s_min=values['color_s_min'].get(),color_v_min=values['color_v_min'].get())
+                color=color.get(),color_s_min=values['color_s_min'].get(),color_v_min=values['color_v_min'].get(),
+                max_area=values['max_area'].get())
             a = locked.copy() if locked is not None else None
             if box is not None:
                 x,y,w,h = box
