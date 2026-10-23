@@ -8,10 +8,10 @@ import hashlib
 import numpy as np
 from matplotlib.figure import Figure
 
-DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1\Train')
+DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Color_black_Size_3cm_20261023_183754_203502\grasp_segments\slow')
 
 
-def read_trials(base):
+def read_trials(base, distance_mode='auto'):
     trials = []
     # Immediate trial folders only; also read backup to allow restoring them.
     for home, group in [(base,'usable'),(base/'backup','reserve')]:
@@ -27,15 +27,21 @@ def read_trials(base):
                     try:result.append(float(row[key]))
                     except (KeyError,ValueError,TypeError):result.append(np.nan)
                 return np.asarray(result)
-            d,b,frame = values('hand_object_distance'),values('finger_width'),values('frame')
+            signed_key = 'hand_object_signed_distance'
+            distance_key = signed_key if distance_mode == 'signed' or (distance_mode == 'auto' and signed_key in rows[0]) else 'hand_object_distance'
+            if distance_key not in rows[0]:
+                raise ValueError(f'{folder.name}: missing {distance_key}; cannot use the requested distance type')
+            d,b,frame = values(distance_key),values('finger_width'),values('frame')
             valid = np.array([r.get('valid','1')=='1' for r in rows])&np.isfinite(d)&np.isfinite(b)
             d[~valid] = np.nan;b[~valid] = np.nan
             if not valid.any():print('[Skip]',folder.name,'no valid measurements');continue
             if not np.isfinite(frame).all() or np.any(np.diff(frame)<=0):
                 raise ValueError(f'{folder.name}: invalid source frame sequence')
             trials.append(dict(path=folder.resolve(),label=folder.name,group=group,
-                frame=frame-frame[0],distance=d,aperture=b,rows=len(rows),invalid=int((~valid).sum())))
+                frame=frame-frame[0],distance=d,distance_key=distance_key,aperture=b,rows=len(rows),invalid=int((~valid).sum())))
     if not trials:raise ValueError(f'No camera.csv / segment.json trials found: {base}')
+    if len({t['distance_key'] for t in trials}) != 1:
+        raise ValueError('Mixed signed/unsigned distance datasets. Select --distance unsigned to compare the original distance consistently.')
     return trials
 
 
@@ -50,9 +56,14 @@ def plot_lines(fig,trials,groups,view='usable'):
             line, = ax.plot(x,y,color=color,lw=1.1,picker=6)
             line.set_visible(view=='all' or groups[i]==view)
             lines.append((line,i))
-    axes[0].set(xlabel='Hand-object distance (px)',ylabel='Aperture (px)')
+    signed = trials[0]['distance_key'] == 'hand_object_signed_distance'
+    distance_label = 'Signed hand-object distance (px)' if signed else 'Hand-object distance (px)'
+    axes[0].set(xlabel=distance_label,ylabel='Aperture (px)')
     axes[1].set(xlabel='Source frames from segment start',ylabel='Aperture (px)')
-    axes[2].set(xlabel='Source frames from segment start',ylabel='Hand-object distance (px)')
+    axes[2].set(xlabel='Source frames from segment start',ylabel=distance_label)
+    if signed:
+        axes[0].axvline(0,color='gray',lw=.7,ls='--')
+        axes[2].axhline(0,color='gray',lw=.7,ls='--')
     for ax in axes:ax.grid(alpha=.2)
     fig.tight_layout()
     return axes,lines
@@ -68,10 +79,10 @@ def export_plot(trials,groups,view,output,dpi):
     fig.savefig(output/f'overlay_{view}.png',dpi=dpi)
     fig.savefig(output/f'overlay_{view}.pdf')
     with (output/'trial_mapping.csv').open('w',newline='',encoding='utf-8-sig') as f:
-        writer=csv.DictWriter(f,fieldnames=['trial','folder','group','path','frames','invalid_frames'])
+        writer=csv.DictWriter(f,fieldnames=['trial','folder','group','path','frames','invalid_frames','distance_column'])
         writer.writeheader()
         writer.writerows(dict(trial=i+1,folder=t['label'],group=groups[i],path=str(t['path']),
-            frames=t['rows'],invalid_frames=t['invalid']) for i,t in enumerate(trials))
+            frames=t['rows'],invalid_frames=t['invalid'],distance_column=t['distance_key']) for i,t in enumerate(trials))
 
 
 def save_groups(base,trials,groups,output):
@@ -203,9 +214,10 @@ def main():
     parser.add_argument('--output-dir',type=Path)
     parser.add_argument('--static',action='store_true',help='Export plots only; never move trials')
     parser.add_argument('--dpi',type=int,default=160)
+    parser.add_argument('--distance',choices=['auto','signed','unsigned'],default='auto',help='auto prefers recorded signed distance; unsigned uses the original Euclidean distance')
     args=parser.parse_args();base=args.data_root.resolve()
     if not base.is_dir():parser.error(f'Dataset not found: {base}')
-    try:trials=read_trials(base)
+    try:trials=read_trials(base,args.distance)
     except (ValueError,OSError) as exc:parser.error(str(exc))
     output=args.output_dir or base/'manual_overlay_plots'
     if args.static:

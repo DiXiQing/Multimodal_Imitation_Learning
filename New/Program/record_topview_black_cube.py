@@ -108,37 +108,6 @@ def signed_hand_distance(object_center, fingertip_midpoint, axis):
     return float(np.dot(np.asarray(fingertip_midpoint)-np.asarray(object_center),axis))
 
 
-def draw_hand_reference_points(display, landmarks):
-    """Visualization only; do not replace the current fingertip-midpoint measurement."""
-    h,w = display.shape[:2]
-    def point(index):
-        p = landmarks.landmark[index]
-        return np.array([p.x*w,p.y*h],dtype=float)
-    centers = {
-        'Palm center': np.mean([point(i) for i in (0,5,9,13,17)],axis=0),
-        'Middle MCP (9)': point(9),
-        'Wrist (0)': point(0),
-    }
-    styles = [('Palm center',(255,0,255),(14,-12)),
-              ('Middle MCP (9)',(255,255,0),(14,-32)),
-              ('Wrist (0)',(0,165,255),(14,28))]
-    for label,color,offset in styles:
-        p = centers[label]
-        if not np.isfinite(p).all() or not (0 <= p[0] < w and 0 <= p[1] < h):
-            continue
-        xy = tuple(np.rint(p).astype(int))
-        cv2.circle(display,xy,9,(0,0,0),-1,cv2.LINE_AA)
-        cv2.circle(display,xy,7,color,-1,cv2.LINE_AA)
-        cv2.circle(display,xy,2,(255,255,255),-1,cv2.LINE_AA)
-        text_width = cv2.getTextSize(label,cv2.FONT_HERSHEY_SIMPLEX,.48,1)[0][0]
-        text_xy = (max(2,min(w-text_width-3,xy[0]+offset[0])),
-                   max(16,min(h-5,xy[1]+offset[1])))
-        cv2.line(display,xy,text_xy,color,1,cv2.LINE_AA)
-        cv2.putText(display,label,text_xy,cv2.FONT_HERSHEY_SIMPLEX,.48,(0,0,0),3,cv2.LINE_AA)
-        cv2.putText(display,label,text_xy,cv2.FONT_HERSHEY_SIMPLEX,.48,color,1,cv2.LINE_AA)
-    return centers
-
-
 def color_ranges(color, black_max=60, saturation_max=120, color_s_min=140, color_v_min=50):
     if color == 'black':
         return [((0, 0, 0), (179, saturation_max, black_max))]
@@ -404,11 +373,6 @@ def main():
         parameter_scales.append(button)
     show_mask = tk.BooleanVar(value=False)
     tk.Checkbutton(parameters, text='显示颜色掩膜（白色为候选区域）', variable=show_mask).pack(pady=8)
-    show_hand_reference = tk.BooleanVar(value=True)
-    tk.Checkbutton(parameters,text='标亮掌部中心 / 中指指根 / 手腕',variable=show_hand_reference).pack(fill='x')
-    tk.Label(parameters,text='紫色 Palm center：掌部中心（0、5、9、13、17平均）',fg='#aa00aa',wraplength=290,justify='left').pack(fill='x')
-    tk.Label(parameters,text='青色 Middle MCP (9)：中指指根',fg='#007f8b').pack(fill='x')
-    tk.Label(parameters,text='橙色 Wrist (0)：手腕',fg='#b56800').pack(fill='x')
     metronome = None
     metro_bpm = tk.StringVar(value='60')
     metro_move = tk.StringVar(value='3')
@@ -516,9 +480,6 @@ def main():
             settings['camera_source_width'],settings['camera_source_height'] = source_dimensions
             settings['crop_margins_px'] = dict(zip(('left','top','right','bottom'),crop_margins))
             settings['coordinate_origin'] = 'Top-left of cropped image; add crop left/top for source coordinates.'
-            settings['hand_reference_overlay'] = dict(enabled=show_hand_reference.get(),
-                palm_center_landmarks=[0,5,9,13,17],middle_mcp_landmark=9,wrist_landmark=0,
-                note='Visualization only; hand_object_distance still uses thumb/index fingertip midpoint.')
             settings.update(camera=args.camera, width=latest['width'], height=latest['height'],
                 object_color=color.get(),object_id=f'{color.get()}_{object_size:g}cm',
                 hsv_ranges=color_ranges(color.get(),settings['v'],settings['s'],settings['color_s_min'],settings['color_v_min']),
@@ -595,8 +556,6 @@ def main():
                     a = np.array([x+w/2,y+h/2])
             if landmarks is not None:
                 mp.solutions.drawing_utils.draw_landmarks(display,landmarks,mp_hands.HAND_CONNECTIONS)
-                if show_hand_reference.get():
-                    draw_hand_reference_points(display,landmarks)
             aperture = float(np.linalg.norm(thumb-index)) if thumb is not None else None
             if a is not None:
                 cv2.circle(display,tuple(a.astype(int)),5,(0,0,255),-1)
