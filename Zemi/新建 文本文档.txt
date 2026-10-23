@@ -22,3 +22,12 @@ These studies suggest that reach-to-grasp movements involve multiple interacting
 9.收集30组抓取20mm的红色cube，这是在抓取过程中两个变量的曲线叠加图。两者的叠加图高度相似，Fingertip Aperture Nomalized RMSE在0.0530，Hand–Object Distance的是0.0226，标准差也非常小。而在一些关键节点上也十分接近，手指在抓取过程中会先张开后闭合，此参与者的抓取中，开口最大的时刻在全程的44.42%左右，在距离134.77左右。
 After collected 30 trials of grasping the 20mm red cube. These graph is the overlay plots of two variable during reach-to-grasp movement.
 These graph show highly consistent patterns. The normalized Root Mean Squared Error was 0.0530 for fingertip apertrue and 0.0226 for hand-object distance, with relatively small standard deviations.
+
+10.那么是否可以通过hand object distance 来预测手指开合呢？
+为此我想通过构建一个MLP模型来实现，首先输入是hand object distance，输出是fingertip aperture，2个隐藏层，每层32个神经元。并且我还设置了5帧的时间窗口，让模型可以学习之前的历史趋势。Loss Function 学习的是MAE，输出进行了Normalization，训练数据集采用了30个。
+
+11.在离线测试中，每种cube准备了9组trial。结果是总体的MAE为3.87，RMSE为5.91，R平方为0.956，每项的标准差也偏小。在离线测试中，可以看出距离是可以预测手指开合的。
+
+12.而如果将整个抓取过程分为三段，初始阶段，也就是手静止的阶段，中间的抓取阶段，最后的闭合保持阶段。中间的抓取阶段张开再闭合，里所以当时误差最大的，结果也证明了这一点。
+
+13.

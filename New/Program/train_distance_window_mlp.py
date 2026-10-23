@@ -1,4 +1,4 @@
-"""Compare current-distance MLP with causal five-frame-distance MLP. No IMU/EMG."""
+"""Compare current-distance MLP with causal configurable-window-distance MLP. No IMU/EMG."""
 from __future__ import annotations
 
 import argparse
@@ -24,7 +24,7 @@ SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1'
 TRAIN_FOLDER = 'Train'
 VALIDATION_FOLDER = 'Validation'
 SEED = 20261016
-WINDOW_SIZE = 5                  # Fixed: [d(t-4), ..., d(t)] -> B(t)
+WINDOW_SIZE = 10                 # Includes current frame; change here or use --window-size
 EPOCHS = 1000                    # Maximum epochs for internal-validation stage
 PATIENCE = 80
 BATCH_SIZE = 64
@@ -33,8 +33,10 @@ WEIGHT_DECAY = 1e-4
 HIDDEN_SIZE = 32
 LOSS = 'mae'
 MAX_FRAME_GAP_S = .10            # Reject a window crossing a larger timestamp gap
-MODEL_SPECS = {'distance_current': 1, 'distance_window5': WINDOW_SIZE}
-LABELS = {'distance_current': 'Current distance', 'distance_window5': 'Past 5 distances'}
+WINDOW_MODEL = f'distance_window{WINDOW_SIZE}'
+PREDICTION_KEY = f'predicted_window{WINDOW_SIZE}_px'
+MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: WINDOW_SIZE}
+LABELS = {'distance_current': 'Current distance', WINDOW_MODEL: f'Past {WINDOW_SIZE} distances'}
 
 
 class DistanceMLP(nn.Module):
@@ -99,7 +101,7 @@ def load_trials(source, max_gap):
         valid = np.array([r.get('valid') == '1' for r in rows])
         windows, indices = make_windows(d, y, t, frame, valid, max_gap)
         if not len(indices):
-            raise ValueError(f'{folder.name}: no valid continuous five-frame window.')
+            raise ValueError(f'{folder.name}: no valid continuous {WINDOW_SIZE}-frame window.')
         meta = json.loads((folder / 'segment.json').read_text(encoding='utf-8-sig'))
         settings = json.loads((folder / 'settings.json').read_text(encoding='utf-8-sig'))
         phase = np.where(frame[indices] < meta['onset'], 'rest',
@@ -250,12 +252,22 @@ def load_folder_partitions(source, max_gap):
     return train,validation
 
 
+def configure_window(size):
+    global WINDOW_SIZE, WINDOW_MODEL, PREDICTION_KEY, MODEL_SPECS, LABELS
+    WINDOW_SIZE = size
+    WINDOW_MODEL = f'distance_window{size}'
+    PREDICTION_KEY = f'predicted_window{size}_px'
+    MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: size}
+    LABELS = {'distance_current': 'Current distance', WINDOW_MODEL: f'Past {size} distances'}
+
+
 def main():
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, 'reconfigure'):
             stream.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', default=SOURCE)
+    parser.add_argument('--window-size', type=int, default=WINDOW_SIZE, help='History length including current frame')
     parser.add_argument('--epochs', type=int, default=EPOCHS)
     parser.add_argument('--patience', type=int, default=PATIENCE)
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE)
@@ -269,6 +281,9 @@ def main():
     parser.add_argument('--log-every', type=int, default=25)
     parser.add_argument('--output', '--output-dir', type=Path)
     args = parser.parse_args()
+    if args.window_size < 2:
+        parser.error('--window-size must be at least 2')
+    configure_window(args.window_size)
     text = str(args.source).strip() or input('请输入数据文件夹绝对路径：\n> ').strip()
     source = Path(text.strip('\"\''))
     if not source.is_absolute() or not source.is_dir():
@@ -288,7 +303,7 @@ def main():
         parser.error(str(exc))
     trials = fit_trials + val_trials
     validation = val_trials
-    output = args.output or source / 'Result' / f'distance_mlp_window5_{datetime.now():%Y%m%d_%H%M%S_%f}'
+    output = args.output or source / 'Result' / f'distance_mlp_window{WINDOW_SIZE}_{datetime.now():%Y%m%d_%H%M%S_%f}'
     if output.exists():
         parser.error(f'Output already exists: {output}')
     (output / 'models').mkdir(parents=True)
@@ -298,12 +313,12 @@ def main():
         with (output / 'training_log.txt').open('a', encoding='utf-8') as f:
             f.write(message + '\n')
     started = time.perf_counter()
-    log('=== Current-distance MLP vs causal five-frame MLP ===')
+    log(f'=== Current-distance MLP vs causal {WINDOW_SIZE}-frame MLP ===')
     log(f'Data: {source}\nDevice: {device} | Loss: {args.loss} | Seed: {args.seed}')
     log(f'Train: {len(fit_trials)} trials from {source / TRAIN_FOLDER}')
     log(f'Validation: {len(val_trials)} trials from {source / VALIDATION_FOLDER}')
     log('Validation selects the best checkpoint; these are validation metrics, not independent test metrics.')
-    log('Both models predict the SAME target frames; first four frames and discontinuous windows are omitted.')
+    log(f'Both models predict the SAME target frames; first {WINDOW_SIZE-1} frames and discontinuous windows are omitted.')
     log(f'Maximum selection epochs: {args.epochs}; early-stop patience: {args.patience}')
     log(f'Results: {output.resolve()}')
     split = dict(seed=args.seed, strategy='Fixed folders; no random trial split.',
@@ -323,7 +338,7 @@ def main():
     settings = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
     settings.update(source=str(source), output=str(output), window_size=WINDOW_SIZE,
                     normalization='Input MinMax and output standardization, fitted only on the fitting partition at each stage.',
-                    window_rule='Five consecutive valid source frames, increasing actual timestamps, no gap over max_gap.',
+                    window_rule=f'{WINDOW_SIZE} consecutive valid source frames, increasing actual timestamps, no gap over max_gap.',
                     models=MODEL_SPECS)
     (output / 'model_information.json').write_text(json.dumps(settings, indent=2), encoding='utf-8')
     trained, histories, selections = {}, [], []
@@ -359,7 +374,7 @@ def main():
                 time_s=float(g['time'][i]), phase=str(g['phase'][i]), distance_px=float(g['windows'][i, -1]),
                 actual_aperture_px=float(g['y'][i]),
                 predicted_current_px=float(predictions['distance_current'][i]),
-                predicted_window5_px=float(predictions['distance_window5'][i]))
+                **{PREDICTION_KEY: float(predictions[WINDOW_MODEL][i])})
             trial_rows.append(row)
         all_predictions.extend(trial_rows)
         write_csv(output / 'validation_predictions' / f'{g["name"]}.csv', trial_rows)
@@ -383,7 +398,7 @@ def main():
         if not subset:
             continue
         actual = np.array([r['actual_aperture_px'] for r in subset])
-        for name, key in [('distance_current', 'predicted_current_px'), ('distance_window5', 'predicted_window5_px')]:
+        for name, key in [('distance_current', 'predicted_current_px'), (WINDOW_MODEL, PREDICTION_KEY)]:
             phase_rows.append(dict(model=name, phase=phase, frames=len(subset),
                 **scores(actual, np.array([r[key] for r in subset]))))
     write_csv(output / 'validation_phase_metrics.csv', phase_rows)
@@ -398,7 +413,7 @@ def main():
     for name in ['validation_model_comparison.png', 'validation_metrics_chart.png', 'validation_predictions/*.png',
                  'training_curves.png', 'overall_model_summary.csv', 'validation_phase_metrics.csv',
                  'validation_phase_errors.png', 'validation_trial_phase_metrics.csv', 'validation_phase_summary.csv',
-                 'data_split.csv', 'models/distance_current.pth', 'models/distance_window5.pth']:
+                 'data_split.csv', 'models/distance_current.pth', f'models/{WINDOW_MODEL}.pth']:
         log('  ' + name)
     (output / 'RESULT.txt').write_text((output / 'training_log.txt').read_text(encoding='utf-8'), encoding='utf-8')
 
@@ -413,10 +428,10 @@ def export_phase_errors(output, predictions, prefix='test'):
             if not subset:
                 continue
             y = np.asarray([float(r['actual_aperture_px']) for r in subset])
-            p = np.asarray([float(r['predicted_window5_px']) for r in subset])
+            p = np.asarray([float(r[PREDICTION_KEY]) for r in subset])
             valid = np.isfinite(y) & np.isfinite(p)
             if valid.any():
-                per_trial.append(dict(model='distance_window5', trial=trial, phase=phase,
+                per_trial.append(dict(model=WINDOW_MODEL, trial=trial, phase=phase,
                                       frames=int(valid.sum()), mae_px=float(np.mean(abs(p[valid]-y[valid])))))
     if not per_trial:
         raise ValueError('No finite phase predictions available.')
@@ -424,7 +439,7 @@ def export_phase_errors(output, predictions, prefix='test'):
     for phase, _ in PHASES:
         part = [r for r in per_trial if r['phase'] == phase]
         values = [r['mae_px'] for r in part]
-        summary.append(dict(model='distance_window5', phase=phase, grasps=len(part),
+        summary.append(dict(model=WINDOW_MODEL, phase=phase, grasps=len(part),
             frames=sum(r['frames'] for r in part), mean_trial_mae_px=float(np.mean(values)) if values else None,
             sd_trial_mae_px=float(np.std(values, ddof=1)) if len(values)>1 else 0. if values else None))
     write_csv(output/f'{prefix}_trial_phase_metrics.csv', per_trial)
@@ -451,10 +466,10 @@ def plot_results(output, summary, per_trial, histories, validation):
     fig, axs = plt.subplots(1, 3, figsize=(12, 4.5))
     for ax, key, title in zip(axs, ['mae', 'rmse', 'r2'], ['MAE (px)', 'RMSE (px)', 'R\u00b2']):
         values = [r[key] if r[key] is not None else np.nan for r in summary]
-        bars = ax.bar(['Current', 'Window 5'], values, color=colors)
+        bars = ax.bar(['Current', f'Window {WINDOW_SIZE}'], values, color=colors)
         ax.bar_label(bars, fmt='%.3f' if key == 'r2' else '%.2f', padding=3)
         ax.set_title(title); ax.margins(y=.2); ax.grid(axis='y', alpha=.2); ax.set_axisbelow(True)
-    fig.suptitle('Same validation trials and target frames | current distance vs five-frame history')
+    fig.suptitle(f'Same validation trials and target frames | current distance vs {WINDOW_SIZE}-frame history')
     fig.tight_layout(rect=(0, 0, 1, .92)); fig.savefig(output / 'validation_model_comparison.png', dpi=180)
     fig.savefig(output / 'validation_model_comparison.pdf'); plt.close(fig)
     fig, axs = plt.subplots(1, 3, figsize=(14, max(4.5, .45 * (len(validation) + 1) + 2)))

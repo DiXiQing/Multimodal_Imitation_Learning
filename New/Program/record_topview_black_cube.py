@@ -81,6 +81,64 @@ class Metronome:
         winsound.PlaySound(None, 0)
 
 
+def crop_camera_frame(frame, margins):
+    """Crop without rescaling; all following coordinates use this cropped origin."""
+    left, top, right, bottom = margins
+    h, w = frame.shape[:2]
+    if any(not isinstance(v, int) or v < 0 for v in margins):
+        raise ValueError('裁剪值必须为非负整数')
+    cw, ch = w-left-right, h-top-bottom
+    if cw < 64 or ch < 64:
+        raise ValueError('裁剪后宽、高均需至少 64 px')
+    if cw % 2 or ch % 2:
+        raise ValueError('为保证视频尺寸一致，裁剪后宽、高需为偶数；请将对应裁剪值调整 1 px')
+    return frame[top:h-bottom, left:w-right].copy()
+
+
+def approach_axis(object_center, fingertip_midpoint):
+    """Positive direction points from the object toward the initial hand position."""
+    delta = np.asarray(fingertip_midpoint,dtype=float)-np.asarray(object_center,dtype=float)
+    length = float(np.linalg.norm(delta))
+    if delta.shape != (2,) or not np.isfinite(delta).all() or length < 1:
+        raise ValueError('起始指尖中点与物体中心太近，无法确定接近方向；请将手放回初始位置。')
+    return delta/length
+
+
+def signed_hand_distance(object_center, fingertip_midpoint, axis):
+    return float(np.dot(np.asarray(fingertip_midpoint)-np.asarray(object_center),axis))
+
+
+def draw_hand_reference_points(display, landmarks):
+    """Visualization only; do not replace the current fingertip-midpoint measurement."""
+    h,w = display.shape[:2]
+    def point(index):
+        p = landmarks.landmark[index]
+        return np.array([p.x*w,p.y*h],dtype=float)
+    centers = {
+        'Palm center': np.mean([point(i) for i in (0,5,9,13,17)],axis=0),
+        'Middle MCP (9)': point(9),
+        'Wrist (0)': point(0),
+    }
+    styles = [('Palm center',(255,0,255),(14,-12)),
+              ('Middle MCP (9)',(255,255,0),(14,-32)),
+              ('Wrist (0)',(0,165,255),(14,28))]
+    for label,color,offset in styles:
+        p = centers[label]
+        if not np.isfinite(p).all() or not (0 <= p[0] < w and 0 <= p[1] < h):
+            continue
+        xy = tuple(np.rint(p).astype(int))
+        cv2.circle(display,xy,9,(0,0,0),-1,cv2.LINE_AA)
+        cv2.circle(display,xy,7,color,-1,cv2.LINE_AA)
+        cv2.circle(display,xy,2,(255,255,255),-1,cv2.LINE_AA)
+        text_width = cv2.getTextSize(label,cv2.FONT_HERSHEY_SIMPLEX,.48,1)[0][0]
+        text_xy = (max(2,min(w-text_width-3,xy[0]+offset[0])),
+                   max(16,min(h-5,xy[1]+offset[1])))
+        cv2.line(display,xy,text_xy,color,1,cv2.LINE_AA)
+        cv2.putText(display,label,text_xy,cv2.FONT_HERSHEY_SIMPLEX,.48,(0,0,0),3,cv2.LINE_AA)
+        cv2.putText(display,label,text_xy,cv2.FONT_HERSHEY_SIMPLEX,.48,color,1,cv2.LINE_AA)
+    return centers
+
+
 def color_ranges(color, black_max=60, saturation_max=120, color_s_min=140, color_v_min=50):
     if color == 'black':
         return [((0, 0, 0), (179, saturation_max, black_max))]
@@ -136,6 +194,8 @@ class Trial:
         self.color=settings.get('object_color','black')
         self.object_id=settings.get('object_id',f'{self.color}_{size:g}cm')
         self.size=size
+        axis = settings.get('signed_distance_axis_xy')
+        self.signed_axis = np.asarray(axis,dtype=float) if axis is not None else None
         self.path = root / f'TRIAL_Color_{self.color}_Size_{size:g}cm_{datetime.now():%Y%m%d_%H%M%S_%f}'
         self.frames = self.path / 'frames'
         self.frames.mkdir(parents=True, exist_ok=False)
@@ -152,7 +212,7 @@ class Trial:
             self.writer.writerow(['frame','t_camera','elapsed_s','finger_width','object_area',
                 'object_x','object_y','thumb_x','thumb_y','index_x','index_y','hand_center_x',
                 'hand_center_y','hand_object_distance','valid','object_center_source',
-                'object_color','size_cm','object_id'])
+                'object_color','size_cm','object_id','hand_object_signed_distance'])
             (self.path/'settings.json').write_text(json.dumps(settings, indent=2), encoding='utf-8')
             self.started = time.perf_counter()
         except Exception:
@@ -170,7 +230,8 @@ class Trial:
         self.writer.writerow([self.frame_count, timestamp, time.perf_counter()-self.started,
             aperture if c is not None else '', area, *xy(a), *xy(thumb), *xy(index), *xy(c),
             float(np.linalg.norm(a-c)) if valid else '', int(valid), source,
-            self.color,self.size,self.object_id])
+            self.color,self.size,self.object_id,
+            signed_hand_distance(a,c,self.signed_axis) if valid and self.signed_axis is not None else ''])
         self.video.write(display)
         self.frame_count += 1
         if self.frame_count % 30 == 0:
@@ -223,6 +284,9 @@ def main():
                           min_detection_confidence=.6, min_tracking_confidence=.6)
     trial = None
     latest = None
+    signed_axis = None
+    source_dimensions = None
+    crop_margins = (0, 0, 0, 0)
     locked = None
     closing = False
     status = tk.StringVar(value='先选择目标颜色和尺寸，检查绿框是否正确，再开始。')
@@ -299,8 +363,52 @@ def main():
     max_area_button.pack(side='left')
     max_area_entry.bind('<Return>',apply_max_area)
     parameter_scales.extend([max_area_entry,max_area_button])
+    crop_box = tk.LabelFrame(parameters,text='视野裁剪（像素，不拉伸）')
+    crop_box.pack(fill='x',padx=5,pady=6)
+    crop_text = [tk.StringVar(value='0') for _ in range(4)]
+    for label,variable in zip(['裁掉左侧','裁掉顶部','裁掉右侧','裁掉底部'],crop_text):
+        row = tk.Frame(crop_box)
+        row.pack(fill='x')
+        tk.Label(row,text=label).pack(side='left')
+        entry = tk.Entry(row,textvariable=variable,width=8)
+        entry.pack(side='right',padx=4,pady=2)
+        parameter_scales.append(entry)
+    crop_info = tk.StringVar(value='当前不裁剪。输入数值后点击应用。')
+    tk.Label(crop_box,textvariable=crop_info,wraplength=285,justify='left').pack(fill='x')
+
+    def apply_crop(reset=False):
+        nonlocal crop_margins,locked,latest,signed_axis
+        if trial is not None:
+            return
+        try:
+            margins = (0,0,0,0) if reset else tuple(int(v.get().strip()) for v in crop_text)
+            if source_dimensions is None:
+                raise ValueError('等待摄像头预览后再应用裁剪')
+            w,h = source_dimensions
+            # Same validation as the real processing path, using the actual camera dimensions.
+            cropped = crop_camera_frame(np.empty((h,w,3),dtype=np.uint8),margins)
+        except ValueError as exc:
+            messagebox.showerror('裁剪范围',str(exc))
+            return
+        crop_margins = margins
+        for variable,value in zip(crop_text,margins):variable.set(str(value))
+        locked = None
+        latest = None
+        signed_axis = None
+        crop_info.set(f'原画面 {w}×{h} → 保存 {cropped.shape[1]}×{cropped.shape[0]}；左上原点随裁剪移动。')
+        status.set('裁剪已应用，旧中心锁定已清除；请重新确认物体和手部。')
+
+    for label,command in [('应用裁剪',apply_crop),('恢复完整视野',lambda:apply_crop(True))]:
+        button = tk.Button(crop_box,text=label,command=command)
+        button.pack(side='left',padx=4,pady=4)
+        parameter_scales.append(button)
     show_mask = tk.BooleanVar(value=False)
     tk.Checkbutton(parameters, text='显示颜色掩膜（白色为候选区域）', variable=show_mask).pack(pady=8)
+    show_hand_reference = tk.BooleanVar(value=True)
+    tk.Checkbutton(parameters,text='标亮掌部中心 / 中指指根 / 手腕',variable=show_hand_reference).pack(fill='x')
+    tk.Label(parameters,text='紫色 Palm center：掌部中心（0、5、9、13、17平均）',fg='#aa00aa',wraplength=290,justify='left').pack(fill='x')
+    tk.Label(parameters,text='青色 Middle MCP (9)：中指指根',fg='#007f8b').pack(fill='x')
+    tk.Label(parameters,text='橙色 Wrist (0)：手腕',fg='#b56800').pack(fill='x')
     metronome = None
     metro_bpm = tk.StringVar(value='60')
     metro_move = tk.StringVar(value='3')
@@ -364,9 +472,9 @@ def main():
     bind_scroll(parameter_container)
 
     def reset_detection(*_):
-        nonlocal locked,latest
+        nonlocal locked,latest,signed_axis
         if trial is None:
-            locked=None;latest=None
+            locked=None;latest=None;signed_axis=None
             status.set(f'目标：{color.get()}；已清除旧中心锁定，请重新确认绿框。')
     color.trace_add('write',reset_detection)
     for value in values.values():value.trace_add('write',reset_detection)
@@ -388,7 +496,7 @@ def main():
         status.set('已结束本次，预览继续；可以移动物体后开始下一次。')
 
     def start(event=None):
-        nonlocal trial
+        nonlocal trial,signed_axis
         if trial is not None:
             return
         try:
@@ -397,8 +505,20 @@ def main():
                 raise ValueError('物体尺寸必须大于 0')
             if latest is None or latest['box'] is None or latest['thumb'] is None:
                 raise ValueError('需同时检测到所选颜色物体和手部；检查掩膜并调整阈值。')
+            initial_center = (latest['thumb']+latest['index'])/2
+            new_axis = approach_axis(latest['object_center'],initial_center)
             settings = {name: value.get() for name, value in values.items()}
+            settings['signed_distance_axis_xy'] = new_axis.tolist()
+            settings['signed_distance_initial_object_center_xy'] = latest['object_center'].tolist()
+            settings['signed_distance_initial_hand_center_xy'] = initial_center.tolist()
+            settings['signed_distance_definition'] = '(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.'
             settings['metronome_at_recording_start'] = metro_config if metronome is not None else None
+            settings['camera_source_width'],settings['camera_source_height'] = source_dimensions
+            settings['crop_margins_px'] = dict(zip(('left','top','right','bottom'),crop_margins))
+            settings['coordinate_origin'] = 'Top-left of cropped image; add crop left/top for source coordinates.'
+            settings['hand_reference_overlay'] = dict(enabled=show_hand_reference.get(),
+                palm_center_landmarks=[0,5,9,13,17],middle_mcp_landmark=9,wrist_landmark=0,
+                note='Visualization only; hand_object_distance still uses thumb/index fingertip midpoint.')
             settings.update(camera=args.camera, width=latest['width'], height=latest['height'],
                 object_color=color.get(),object_id=f'{color.get()}_{object_size:g}cm',
                 hsv_ranges=color_ranges(color.get(),settings['v'],settings['s'],settings['color_s_min'],settings['color_v_min']),
@@ -406,6 +526,7 @@ def main():
                 locked_center=locked.tolist() if locked is not None else None,
                 base_workflow='Record_mediapipe_continuous.py', fingertip_method='MediaPipe landmarks 4,8')
             trial = Trial(args.output, object_size, latest['width'], latest['height'], args.fps, settings)
+            signed_axis = new_axis
             metro_events.clear()
             color_selector.config(state='disabled')
             size_entry.config(state='disabled')
@@ -450,7 +571,7 @@ def main():
     window.protocol('WM_DELETE_WINDOW',close)
 
     def update():
-        nonlocal latest
+        nonlocal latest,source_dimensions
         if closing:
             return
         began = time.perf_counter()
@@ -459,6 +580,8 @@ def main():
             if not ret:
                 raise RuntimeError('Camera read failed')
             timestamp = time.time()
+            source_dimensions = (raw.shape[1],raw.shape[0])
+            raw = crop_camera_frame(raw,crop_margins)
             display = raw.copy()
             thumb, index, landmarks = detect_fingers(raw,hands)
             (area,box), mask = detect_cube(raw, values['v'].get(), values['s'].get(), values['area'].get(),
@@ -472,6 +595,8 @@ def main():
                     a = np.array([x+w/2,y+h/2])
             if landmarks is not None:
                 mp.solutions.drawing_utils.draw_landmarks(display,landmarks,mp_hands.HAND_CONNECTIONS)
+                if show_hand_reference.get():
+                    draw_hand_reference_points(display,landmarks)
             aperture = float(np.linalg.norm(thumb-index)) if thumb is not None else None
             if a is not None:
                 cv2.circle(display,tuple(a.astype(int)),5,(0,0,255),-1)
@@ -480,14 +605,30 @@ def main():
                 c = (thumb+index)/2
                 distance = float(np.linalg.norm(a-c))
                 cv2.line(display,tuple(a.astype(int)),tuple(c.astype(int)),(0,255,255),2)
-            latest = dict(box=box, thumb=thumb, width=raw.shape[1], height=raw.shape[0])
+            latest = dict(box=box, thumb=thumb, index=index, object_center=a,
+                          width=raw.shape[1], height=raw.shape[0])
+            signed_distance = None
+            if a is not None and thumb is not None and signed_axis is not None:
+                c = (thumb+index)/2
+                signed_distance = signed_hand_distance(a,c,signed_axis)
+                # Display the fixed projection axis and its perpendicular zero reference.
+                h,w = display.shape[:2]
+                perpendicular = np.array([-signed_axis[1],signed_axis[0]])
+                endpoints = [tuple(np.rint(a+sign*perpendicular*max(w,h)).astype(int)) for sign in [-1,1]]
+                cv2.line(display,endpoints[0],endpoints[1],(200,100,255),1,cv2.LINE_AA)
+                cv2.arrowedLine(display,tuple(np.rint(a).astype(int)),
+                    tuple(np.rint(a+signed_axis*60).astype(int)),(200,100,255),2,tipLength=.18)
+                label = f'Signed distance: {signed_distance:+.1f} px'
+                cv2.putText(display,label,(10,h-12),cv2.FONT_HERSHEY_SIMPLEX,.55,(0,0,0),3,cv2.LINE_AA)
+                cv2.putText(display,label,(10,h-12),cv2.FONT_HERSHEY_SIMPLEX,.55,(200,100,255),1,cv2.LINE_AA)
             source = 'locked' if locked is not None else ('detected' if box is not None else 'missing')
             if trial is not None:
                 cv2.putText(display,'REC',(10,30),cv2.FONT_HERSHEY_SIMPLEX,.8,(0,0,255),2)
                 trial.save(raw,display,timestamp,aperture,area,a,thumb,index,source)
             fw = f'{aperture:.1f}' if aperture is not None else '未检测'
             dist = f'{distance:.1f}' if distance is not None else '无效'
-            info.set(f'{color.get()} | 指间距 B={fw}px | 手物距离={dist}px | 物体面积={area:.0f}px² | 中心={source} | Frames={trial.frame_count if trial else 0}')
+            signed_text = f'{signed_distance:+.1f}px' if signed_distance is not None else '开始录制时确定方向'
+            info.set(f'{color.get()} | 指间距 B={fw}px | 手物距离={dist}px | 有符号距离={signed_text} | 物体面积={area:.0f}px² | 中心={source} | Frames={trial.frame_count if trial else 0}')
             if show_mask.get():
                 shown = cv2.cvtColor(mask,cv2.COLOR_GRAY2RGB)
             else:

@@ -1,4 +1,4 @@
-"""Evaluate a saved five-frame distance MLP on recorded grasp CSVs. Never trains."""
+"""Evaluate a saved distance-history MLP on recorded grasp CSVs. Never trains."""
 import argparse
 import csv
 import json
@@ -14,8 +14,8 @@ from torch import nn
 
 ROOT = Path(__file__).resolve().parents[2]
 # Edit these two paths to run directly from an IDE.
-MODEL_PATH = ROOT / 'New/Data/D2/fast/Result/distance_mlp_window5_20261022_185040_407871/models/distance_window5.pth'
-TEST_FOLDER = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Color_black_Size_4cm_20261022_191928_869177\grasp_segments'
+MODEL_PATH = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1\Result\distance_mlp_window5_20261022_195625_668325\models/distance_window5.pth'
+TEST_FOLDER = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1\Train'
 
 
 class DistanceMLP(nn.Module):
@@ -97,22 +97,27 @@ def main():
     args = parser.parse_args()
     model_path = args.model
     if model_path.is_dir():
-        model_path = (model_path/'distance_window5.pth' if (model_path/'distance_window5.pth').exists()
-                      else model_path/'models/distance_window5.pth')
+        home = model_path if list(model_path.glob('distance_window[0-9]*.pth')) else model_path/'models'
+        candidates = [p for p in home.glob('distance_window[0-9]*.pth') if not p.stem.endswith('_validation')]
+        if len(candidates) != 1:
+            raise ValueError('Select one exact distance_windowN.pth file; model folder is empty or ambiguous.')
+        model_path = candidates[0]
     saved = torch.load(model_path, map_location='cpu', weights_only=True)
-    if saved.get('schema') != 'distance_mlp_v1' or saved.get('input_size') != 5 or saved.get('window_size') != 5:
-        raise ValueError('Select a distance_mlp_v1 checkpoint with a five-frame input.')
+    window_size = saved.get('window_size')
+    if saved.get('schema') != 'distance_mlp_v1' or not isinstance(window_size,int) or window_size < 2 or saved.get('input_size') != window_size:
+        raise ValueError('Select a distance_mlp_v1 checkpoint with a matching history input.')
+    prediction_key = f'predicted_window{window_size}_px'
     scaler = saved['scaler']
     if not all(np.isfinite(scaler[k]) for k in ('x_min', 'x_scale', 'y_mean', 'y_scale')) or min(scaler['x_scale'], scaler['y_scale']) <= 0:
         raise ValueError('Invalid checkpoint normalization.')
     gap = float(saved['max_frame_gap_s'])
     if not np.isfinite(gap) or gap <= 0:
         raise ValueError('Invalid checkpoint maximum frame gap.')
-    net = DistanceMLP(5, saved['hidden_size'])
+    net = DistanceMLP(window_size, saved['hidden_size'])
     net.load_state_dict(saved['state_dict'], strict=True)
     net.eval()
     folders = discover(args.source)
-    out = args.output or ROOT/'New/Result'/f'offline_window5_test_{datetime.now():%Y%m%d_%H%M%S_%f}'
+    out = args.output or ROOT/'New/Result'/f'offline_window{window_size}_test_{datetime.now():%Y%m%d_%H%M%S_%f}'
     out.mkdir(parents=True, exist_ok=False)
     (out/'test_predictions').mkdir()
     all_rows, per_trial, per_phase, coverage, warnings = [], [], [], [], []
@@ -130,8 +135,8 @@ def main():
         finite = np.isfinite(d) & np.isfinite(t) & np.isfinite(frames)
         valid = finite & np.array([number(r, 'valid') == 1 for r in rows])
         indices, windows = [], []
-        for i in range(4, len(rows)):
-            sl = slice(i-4, i+1)
+        for i in range(window_size-1, len(rows)):
+            sl = slice(i-window_size+1, i+1)
             dt = np.diff(t[sl])
             if valid[sl].all() and np.all(np.diff(frames[sl]) == 1) and np.all(dt > 0) and np.all(dt <= gap):
                 indices.append(i)
@@ -157,7 +162,7 @@ def main():
                 frame=row.get('frame', ''),time_s=float(t[i]-t0) if np.isfinite(t[i]) else '',
                 distance_px=float(d[i]) if np.isfinite(d[i]) else '',
                 actual_aperture_px=float(y[i]) if np.isfinite(y[i]) else '',
-                predicted_window5_px=float(p[i]) if np.isfinite(p[i]) else '',
+                **{prediction_key: float(p[i]) if np.isfinite(p[i]) else ''},
                 phase=phase,status='ready' if np.isfinite(p[i]) else 'invalid_detection' if not valid[i] else 'window_not_ready'))
         all_rows.extend(trial_rows)
         write_csv(out/'test_predictions'/f'{folder.name}.csv', trial_rows)
@@ -182,7 +187,7 @@ def main():
     if not all_rows:
         raise ValueError('No nonempty trial CSVs.')
     actual = np.array([number(r, 'actual_aperture_px') for r in all_rows])
-    predicted = np.array([number(r, 'predicted_window5_px') for r in all_rows])
+    predicted = np.array([number(r, prediction_key) for r in all_rows])
     overall = metrics(actual, predicted)
     if not overall['frames']:
         raise ValueError('No scorable predictions; inspect detection validity/timestamps/frame gaps.')
@@ -219,7 +224,7 @@ def main():
         ax.set_axisbelow(True)
         save(fig, out/'02_phase_errors')
     details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),
-        overall=overall,warnings=warnings,method='Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal 5-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
+        overall=overall,warnings=warnings,window_size=window_size,method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal {window_size}-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
         model_recording_settings=model_settings)
     (out/'evaluation_info.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
     for warning in warnings:

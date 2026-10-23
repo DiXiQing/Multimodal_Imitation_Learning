@@ -1,0 +1,11 @@
+{
+  "primary": "Black 40 mm, D=52 current Train+Validation, SONG=39 current Train+Validation, Khairy=55 direct trials. Also supplementary available 30 mm /35 mm results. Backups and model results excluded.",
+  "events": "Centered 3-point median for event localization only. Initial aperture=first 5 median; peak=max median; final hold=last5 median. Opening onset=first 3 samples above initial+10% opening amplitude. Early closure=3 samples below peak-10%*(peak-final hold). Near-maximum duration=contiguous interval around peak above initial+90%*(peak-initial). Action endpoint=90% closure; not independently verified contact.",
+  "limitations": [
+    "Khairy has apparent area, not hand-object distance, and a different camera perspective; no pixel-scale cross-person comparison or area-to-distance substitution.",
+    "Only D has documented speed conditions; cannot establish other participants speed responses.",
+    "D/SONG sources were manually cropped/selected; groups are different sessions and not randomized matched controls.",
+    "Three-point median can suppress short peaks and timing endpoints are operational; CSV original values unchanged.",
+    "Long near-maximum aperture duration does not by itself prove stationary finger hold; slopes may remain."
+  ]
+}
