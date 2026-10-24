@@ -103,6 +103,11 @@ def main():
             raise ValueError('Select one exact distance_windowN.pth file; model folder is empty or ambiguous.')
         model_path = candidates[0]
     saved = torch.load(model_path, map_location='cpu', weights_only=True)
+    # Legacy checkpoints were trained using Euclidean distance.
+    distance_column = saved.get('distance_column', 'hand_object_distance')
+    if distance_column not in ('hand_object_distance', 'hand_object_signed_distance'):
+        raise ValueError(f'Unsupported checkpoint distance column: {distance_column}')
+    print(f'Input distance column: {distance_column}')
     window_size = saved.get('window_size')
     if saved.get('schema') != 'distance_mlp_v1' or not isinstance(window_size,int) or window_size < 2 or saved.get('input_size') != window_size:
         raise ValueError('Select a distance_mlp_v1 checkpoint with a matching history input.')
@@ -129,8 +134,10 @@ def main():
         if not rows:
             warnings.append(f'{folder.name}: empty CSV')
             continue
+        if distance_column not in rows[0]:
+            raise ValueError(f'{folder.name}: missing model input column {distance_column}; no automatic fallback.')
         d, y, t, frames = [np.array([number(r, k) for r in rows]) for k in
-                           ('hand_object_distance', 'finger_width', 't_camera', 'frame')]
+                           (distance_column, 'finger_width', 't_camera', 'frame')]
         t0 = t[np.flatnonzero(np.isfinite(t))[0]] if np.isfinite(t).any() else 0
         finite = np.isfinite(d) & np.isfinite(t) & np.isfinite(frames)
         valid = finite & np.array([number(r, 'valid') == 1 for r in rows])
@@ -223,7 +230,7 @@ def main():
         ax.grid(axis='y', alpha=.2)
         ax.set_axisbelow(True)
         save(fig, out/'02_phase_errors')
-    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),
+    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),distance_column=distance_column,
         overall=overall,warnings=warnings,window_size=window_size,method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal {window_size}-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
         model_recording_settings=model_settings)
     (out/'evaluation_info.json').write_text(json.dumps(details, indent=2), encoding='utf-8')

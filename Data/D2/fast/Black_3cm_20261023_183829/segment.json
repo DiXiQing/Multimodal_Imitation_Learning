@@ -1,0 +1,26 @@
+{
+  "segment": 14,
+  "start": 1024,
+  "onset": 1035,
+  "peak": 1047,
+  "stable": 1066,
+  "end": 1082,
+  "frames": 59,
+  "pre_onset_frames": 11,
+  "post_stable_frames": 16,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.9438159465789795,
+  "invalid_frames": 0,
+  "source_start_frame": 1024,
+  "source_end_frame": 1082,
+  "folder_name": "Black_3cm_20261023_183829",
+  "manual_curve_crops": [
+    {
+      "first": 2,
+      "last": 60,
+      "original_frames": 64,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D2\\fast\\backup\\curve_crop_20261024_132353_972739_Black_3cm_20261023_183829\\original",
+      "timestamp": "2026-10-24T13:23:54.520984"
+    }
+  ]
+}

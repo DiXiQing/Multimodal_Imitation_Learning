@@ -1,0 +1,88 @@
+=== Current-distance MLP vs causal 5-frame MLP ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2
+Device: cuda | Loss: mae | Seed: 20261016
+Train: 32 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Train
+Validation: 12 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Validation
+Validation selects the best checkpoint; these are validation metrics, not independent test metrics.
+Both models predict the SAME target frames; first 4 frames and discontinuous windows are omitted.
+Maximum selection epochs: 1000; early-stop patience: 80
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Result\distance_mlp_window5_20261024_134658_950165
+
+[distance_current] Select epoch using 32 fit / 12 validation trials
+  epoch    1/1000 | train MAE=20.770px | val MAE=19.230px | best epoch=1
+  epoch   25/1000 | train MAE=7.876px | val MAE=8.846px | best epoch=22
+  epoch   50/1000 | train MAE=7.741px | val MAE=7.988px | best epoch=38
+  epoch   75/1000 | train MAE=7.501px | val MAE=8.389px | best epoch=38
+  epoch  100/1000 | train MAE=7.268px | val MAE=8.551px | best epoch=90
+  epoch  125/1000 | train MAE=7.102px | val MAE=7.331px | best epoch=90
+  epoch  150/1000 | train MAE=6.841px | val MAE=7.677px | best epoch=139
+  epoch  175/1000 | train MAE=6.779px | val MAE=7.847px | best epoch=164
+  epoch  200/1000 | train MAE=6.687px | val MAE=8.578px | best epoch=182
+  epoch  225/1000 | train MAE=6.647px | val MAE=8.057px | best epoch=182
+  epoch  250/1000 | train MAE=6.631px | val MAE=7.541px | best epoch=240
+  epoch  275/1000 | train MAE=6.530px | val MAE=8.075px | best epoch=264
+  epoch  300/1000 | train MAE=6.486px | val MAE=7.935px | best epoch=296
+  epoch  325/1000 | train MAE=6.412px | val MAE=7.452px | best epoch=296
+  epoch  350/1000 | train MAE=6.347px | val MAE=7.923px | best epoch=327
+  epoch  375/1000 | train MAE=6.364px | val MAE=7.607px | best epoch=327
+  epoch  400/1000 | train MAE=6.369px | val MAE=7.540px | best epoch=327
+  epoch  407/1000 | train MAE=6.382px | val MAE=7.535px | best epoch=327
+  Early stopping: 80 epochs without validation improvement.
+[distance_current] Saved best checkpoint at epoch 327; validation is never added to training.
+
+[distance_window5] Select epoch using 32 fit / 12 validation trials
+  epoch    1/1000 | train MAE=20.829px | val MAE=19.142px | best epoch=1
+  epoch   25/1000 | train MAE=6.824px | val MAE=7.314px | best epoch=22
+  epoch   50/1000 | train MAE=6.122px | val MAE=7.625px | best epoch=41
+  epoch   75/1000 | train MAE=5.818px | val MAE=7.034px | best epoch=41
+  epoch  100/1000 | train MAE=5.443px | val MAE=7.726px | best epoch=80
+  epoch  125/1000 | train MAE=5.268px | val MAE=7.342px | best epoch=80
+  epoch  150/1000 | train MAE=5.293px | val MAE=6.400px | best epoch=80
+  epoch  160/1000 | train MAE=5.097px | val MAE=7.046px | best epoch=80
+  Early stopping: 80 epochs without validation improvement.
+[distance_window5] Saved best checkpoint at epoch 80; validation is never added to training.
+
+=== Validation evaluation: identical target frames for both models ===
+  Black_3cm_20261023_183806 | distance_current: MAE=4.76px | RMSE=6.94px
+  Black_3cm_20261023_183806 | distance_window5: MAE=5.50px | RMSE=6.39px
+  Black_3cm_20261023_183808 | distance_current: MAE=9.49px | RMSE=12.44px
+  Black_3cm_20261023_183808 | distance_window5: MAE=6.73px | RMSE=8.49px
+  Black_3cm_20261023_183811 | distance_current: MAE=11.06px | RMSE=14.71px
+  Black_3cm_20261023_183811 | distance_window5: MAE=7.47px | RMSE=10.25px
+  Black_3cm_20261023_183820 | distance_current: MAE=4.80px | RMSE=6.95px
+  Black_3cm_20261023_183820 | distance_window5: MAE=3.06px | RMSE=4.33px
+  Black_3cm_20261023_183823 | distance_current: MAE=6.10px | RMSE=8.78px
+  Black_3cm_20261023_183823 | distance_window5: MAE=4.10px | RMSE=4.89px
+  Black_3cm_20261023_183826 | distance_current: MAE=7.85px | RMSE=10.43px
+  Black_3cm_20261023_183826 | distance_window5: MAE=6.18px | RMSE=8.52px
+  Black_3cm_20261023_183930 | distance_current: MAE=6.44px | RMSE=8.07px
+  Black_3cm_20261023_183930 | distance_window5: MAE=7.17px | RMSE=8.97px
+  Black_3cm_20261023_183937 | distance_current: MAE=7.31px | RMSE=9.06px
+  Black_3cm_20261023_183937 | distance_window5: MAE=7.17px | RMSE=8.76px
+  Black_3cm_20261023_183944 | distance_current: MAE=8.21px | RMSE=10.13px
+  Black_3cm_20261023_183944 | distance_window5: MAE=8.57px | RMSE=10.19px
+  Black_3cm_20261023_183951 | distance_current: MAE=5.53px | RMSE=8.03px
+  Black_3cm_20261023_183951 | distance_window5: MAE=5.88px | RMSE=8.00px
+  Black_3cm_20261023_183958 | distance_current: MAE=4.81px | RMSE=7.16px
+  Black_3cm_20261023_183958 | distance_window5: MAE=5.65px | RMSE=7.49px
+  Black_3cm_20261023_184013 | distance_current: MAE=5.15px | RMSE=9.31px
+  Black_3cm_20261023_184013 | distance_window5: MAE=4.74px | RMSE=8.62px
+
+=== Overall validation metrics (all eligible validation frames pooled) ===
+Current distance: MAE=6.49px | RMSE=9.16px | R2=0.829
+Past 5 distances: MAE=6.15px | RMSE=8.31px | R2=0.859
+Total time: 259.8s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Result\distance_mlp_window5_20261024_134658_950165
+  validation_model_comparison.png
+  validation_metrics_chart.png
+  validation_predictions/*.png
+  training_curves.png
+  overall_model_summary.csv
+  validation_phase_metrics.csv
+  validation_phase_errors.png
+  validation_trial_phase_metrics.csv
+  validation_phase_summary.csv
+  data_split.csv
+  models/distance_current.pth
+  models/distance_window5.pth

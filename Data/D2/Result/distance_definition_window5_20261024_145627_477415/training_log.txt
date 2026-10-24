@@ -1,0 +1,32 @@
+Old distance: hand_object_distance; 5 input units -> 1 output unit
+
+[distance_unsigned] Select epoch using 32 fit / 8 validation trials
+  epoch    1/1000 | train MAE=20.829px | val MAE=19.664px | best epoch=1
+  epoch   25/1000 | train MAE=6.824px | val MAE=6.492px | best epoch=22
+  epoch   50/1000 | train MAE=6.122px | val MAE=6.738px | best epoch=41
+  epoch   75/1000 | train MAE=5.818px | val MAE=6.042px | best epoch=41
+  epoch  100/1000 | train MAE=5.443px | val MAE=6.489px | best epoch=80
+  epoch  125/1000 | train MAE=5.268px | val MAE=6.158px | best epoch=80
+  epoch  150/1000 | train MAE=5.293px | val MAE=5.487px | best epoch=80
+  epoch  160/1000 | train MAE=5.097px | val MAE=6.008px | best epoch=80
+  Early stopping: 80 epochs without validation improvement.
+[distance_unsigned] Saved best checkpoint at epoch 80; validation is never added to training.
+Signed distance: hand_object_signed_distance; 5 input units -> 1 output unit
+
+[distance_signed] Select epoch using 32 fit / 8 validation trials
+  epoch    1/1000 | train MAE=20.786px | val MAE=19.546px | best epoch=1
+  epoch   25/1000 | train MAE=5.659px | val MAE=5.156px | best epoch=16
+  epoch   50/1000 | train MAE=5.096px | val MAE=5.639px | best epoch=41
+  epoch   75/1000 | train MAE=4.808px | val MAE=4.983px | best epoch=59
+  epoch  100/1000 | train MAE=4.556px | val MAE=5.403px | best epoch=80
+  epoch  125/1000 | train MAE=4.417px | val MAE=4.934px | best epoch=105
+  epoch  150/1000 | train MAE=4.507px | val MAE=4.189px | best epoch=150
+  epoch  175/1000 | train MAE=4.227px | val MAE=5.212px | best epoch=150
+  epoch  200/1000 | train MAE=4.266px | val MAE=5.339px | best epoch=150
+  epoch  225/1000 | train MAE=4.182px | val MAE=5.495px | best epoch=150
+  epoch  230/1000 | train MAE=4.194px | val MAE=4.263px | best epoch=150
+  Early stopping: 80 epochs without validation improvement.
+[distance_signed] Saved best checkpoint at epoch 150; validation is never added to training.
+{'model': 'distance_unsigned', 'frames': 714, 'mae': 5.503313672642748, 'rmse': 7.722429175833147, 'r2': 0.8816488500932591, 'bias': -0.6634696601819592}
+{'model': 'distance_signed', 'frames': 714, 'mae': 4.192703897879571, 'rmse': 5.457798049640935, 'r2': 0.940884749049808, 'bias': 1.2858753434750212}
+Saved to C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Result\distance_definition_window5_20261024_145627_477415

@@ -20,11 +20,12 @@ from torch.utils.data import DataLoader, TensorDataset
 from trial_paths import grasp_folders
 
 # Edit here when running directly from an IDE. Empty SOURCE prompts for a path.
-SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D1'
+SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2'
 TRAIN_FOLDER = 'Train'
 VALIDATION_FOLDER = 'Validation'
 SEED = 20261016
-WINDOW_SIZE = 10                 # Includes current frame; change here or use --window-size
+WINDOW_SIZE = 5                 # Includes current frame; change here or use --window-size
+DISTANCE_COLUMN = 'hand_object_signed_distance'  # Signed projection; old models used hand_object_distance
 EPOCHS = 1000                    # Maximum epochs for internal-validation stage
 PATIENCE = 80
 BATCH_SIZE = 64
@@ -91,13 +92,15 @@ def make_windows(distance, target, timestamp, frame, valid, max_gap=MAX_FRAME_GA
     return np.asarray(windows, dtype=np.float32).reshape(-1, WINDOW_SIZE), np.asarray(indices, dtype=int)
 
 
-def load_trials(source, max_gap):
+def load_trials(source, max_gap, distance_column=DISTANCE_COLUMN):
     trials = []
     for folder in grasp_folders(source):
         with (folder / 'camera.csv').open(encoding='utf-8-sig') as f:
             rows = list(csv.DictReader(f))
+        if not rows or distance_column not in rows[0]:
+            raise ValueError(f'{folder.name}: missing {distance_column}; no automatic distance fallback.')
         d, y, t, frame = [np.array([numeric(r, key) for r in rows]) for key in
-                           ('hand_object_distance', 'finger_width', 't_camera', 'frame')]
+                           (distance_column, 'finger_width', 't_camera', 'frame')]
         valid = np.array([r.get('valid') == '1' for r in rows])
         windows, indices = make_windows(d, y, t, frame, valid, max_gap)
         if not len(indices):
@@ -189,6 +192,7 @@ def checkpoint(model, name, inputs, scaler, args, epoch, trials):
                 input_order='oldest to newest; current frame included',
                 target='current-frame fingertip aperture; no historical aperture inputs',
                 scaler=scaler, loss=args.loss, epochs=epoch, seed=args.seed,
+                distance_column=args.distance_column,
                 max_frame_gap_s=args.max_gap, recording_settings=trials[0]['settings'],
                 fitted_trials=[g['name'] for g in trials])
 
@@ -231,12 +235,12 @@ def train_one(name, inputs, fit_trials, val_trials, args, output, device, log):
                                       best_validation_mae_px=best_mae)
 
 
-def load_folder_partitions(source, max_gap):
+def load_folder_partitions(source, max_gap, distance_column=DISTANCE_COLUMN):
     import hashlib
     train_dir, validation_dir = source / TRAIN_FOLDER, source / VALIDATION_FOLDER
     if not train_dir.is_dir() or not validation_dir.is_dir():
         raise ValueError(f'Required folders: {train_dir} and {validation_dir}')
-    train, validation = load_trials(train_dir, max_gap), load_trials(validation_dir, max_gap)
+    train, validation = load_trials(train_dir, max_gap, distance_column), load_trials(validation_dir, max_gap, distance_column)
     if not train or not validation:
         raise ValueError('Train and Validation must both contain grasp trial folders.')
     if {g['name'] for g in train} & {g['name'] for g in validation}:
@@ -268,6 +272,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', default=SOURCE)
     parser.add_argument('--window-size', type=int, default=WINDOW_SIZE, help='History length including current frame')
+    parser.add_argument('--distance-column', choices=['hand_object_signed_distance', 'hand_object_distance'], default=DISTANCE_COLUMN)
     parser.add_argument('--epochs', type=int, default=EPOCHS)
     parser.add_argument('--patience', type=int, default=PATIENCE)
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE)
@@ -298,7 +303,7 @@ def main():
                           (args.device == 'auto' and torch.cuda.is_available()) else 'cpu')
     torch.set_num_threads(min(4, torch.get_num_threads()))
     try:
-        fit_trials, val_trials = load_folder_partitions(source, args.max_gap)
+        fit_trials, val_trials = load_folder_partitions(source, args.max_gap, args.distance_column)
     except (ValueError, KeyError, OSError) as exc:
         parser.error(str(exc))
     trials = fit_trials + val_trials
@@ -315,6 +320,7 @@ def main():
     started = time.perf_counter()
     log(f'=== Current-distance MLP vs causal {WINDOW_SIZE}-frame MLP ===')
     log(f'Data: {source}\nDevice: {device} | Loss: {args.loss} | Seed: {args.seed}')
+    log(f'Input distance column: {args.distance_column}')
     log(f'Train: {len(fit_trials)} trials from {source / TRAIN_FOLDER}')
     log(f'Validation: {len(val_trials)} trials from {source / VALIDATION_FOLDER}')
     log('Validation selects the best checkpoint; these are validation metrics, not independent test metrics.')

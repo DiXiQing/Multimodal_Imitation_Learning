@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = ROOT/'New/Data/D2/fast'
+DATA_ROOT = ROOT/'Data/D2/fast'
 VIDEO_SUFFIXES = {'.mp4', '.avi', '.mov', '.mkv'}
 
 

@@ -8,7 +8,7 @@ import hashlib
 import numpy as np
 from matplotlib.figure import Figure
 
-DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\TopView\TRIAL_Color_black_Size_3cm_20261023_183754_203502\grasp_segments\slow')
+DATA_ROOT = Path(r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Validation')
 
 
 def read_trials(base, distance_mode='auto'):
