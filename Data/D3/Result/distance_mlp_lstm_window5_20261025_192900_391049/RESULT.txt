@@ -1,0 +1,193 @@
+=== Current-frame MLP vs 5-frame MLP vs 5-frame LSTM ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3
+Device: cuda | Loss: mae | Seed: 20261016
+Input distance column: hand_object_signed_distance
+Train: 63 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3\Train
+Validation: 27 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3\Validation
+Validation selects the best checkpoint; these are validation metrics, not independent test metrics.
+All three models predict the SAME target frames; first 4 frames and discontinuous windows are omitted.
+Maximum selection epochs: 1000; early-stop patience: 80
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3\Result\distance_mlp_lstm_window5_20261025_192900_391049
+
+[distance_current] Select epoch using 63 fit / 27 validation trials
+  epoch    1/1000 | train MAE=19.282px | val MAE=18.526px | best epoch=1
+  epoch   25/1000 | train MAE=4.831px | val MAE=4.265px | best epoch=24
+  epoch   50/1000 | train MAE=4.484px | val MAE=3.822px | best epoch=46
+  epoch   75/1000 | train MAE=3.910px | val MAE=3.703px | best epoch=71
+  epoch  100/1000 | train MAE=3.693px | val MAE=3.618px | best epoch=97
+  epoch  125/1000 | train MAE=3.676px | val MAE=3.245px | best epoch=104
+  epoch  150/1000 | train MAE=3.550px | val MAE=3.370px | best epoch=104
+  epoch  175/1000 | train MAE=3.487px | val MAE=3.416px | best epoch=153
+  epoch  200/1000 | train MAE=3.418px | val MAE=3.219px | best epoch=198
+  epoch  225/1000 | train MAE=3.327px | val MAE=3.085px | best epoch=210
+  epoch  250/1000 | train MAE=3.373px | val MAE=3.349px | best epoch=210
+  epoch  275/1000 | train MAE=3.222px | val MAE=3.203px | best epoch=259
+  epoch  300/1000 | train MAE=3.225px | val MAE=3.157px | best epoch=293
+  epoch  325/1000 | train MAE=3.189px | val MAE=3.353px | best epoch=306
+  epoch  350/1000 | train MAE=3.666px | val MAE=3.199px | best epoch=306
+  epoch  375/1000 | train MAE=3.191px | val MAE=3.144px | best epoch=306
+  epoch  386/1000 | train MAE=3.226px | val MAE=3.423px | best epoch=306
+  Early stopping: 80 epochs without validation improvement.
+[distance_current] Saved best checkpoint at epoch 306; validation is never added to training.
+
+[distance_window5] Select epoch using 63 fit / 27 validation trials
+  epoch    1/1000 | train MAE=19.202px | val MAE=17.799px | best epoch=1
+  epoch   25/1000 | train MAE=4.042px | val MAE=3.794px | best epoch=23
+  epoch   50/1000 | train MAE=3.968px | val MAE=3.863px | best epoch=37
+  epoch   75/1000 | train MAE=3.425px | val MAE=3.200px | best epoch=61
+  epoch  100/1000 | train MAE=3.047px | val MAE=2.906px | best epoch=87
+  epoch  125/1000 | train MAE=3.075px | val MAE=3.044px | best epoch=118
+  epoch  150/1000 | train MAE=3.244px | val MAE=2.655px | best epoch=146
+  epoch  175/1000 | train MAE=2.976px | val MAE=3.136px | best epoch=165
+  epoch  200/1000 | train MAE=3.083px | val MAE=2.631px | best epoch=187
+  epoch  225/1000 | train MAE=2.893px | val MAE=2.579px | best epoch=209
+  epoch  250/1000 | train MAE=2.992px | val MAE=2.740px | best epoch=209
+  epoch  275/1000 | train MAE=2.880px | val MAE=2.611px | best epoch=209
+  epoch  300/1000 | train MAE=2.869px | val MAE=2.842px | best epoch=289
+  epoch  325/1000 | train MAE=2.873px | val MAE=3.984px | best epoch=306
+  epoch  350/1000 | train MAE=3.760px | val MAE=2.813px | best epoch=326
+  epoch  375/1000 | train MAE=2.917px | val MAE=2.687px | best epoch=326
+  epoch  400/1000 | train MAE=2.784px | val MAE=2.480px | best epoch=326
+  epoch  406/1000 | train MAE=2.782px | val MAE=2.685px | best epoch=326
+  Early stopping: 80 epochs without validation improvement.
+[distance_window5] Saved best checkpoint at epoch 326; validation is never added to training.
+
+[distance_lstm_window5] Select epoch using 63 fit / 27 validation trials
+  epoch    1/1000 | train MAE=19.984px | val MAE=19.985px | best epoch=1
+  epoch   25/1000 | train MAE=4.985px | val MAE=4.726px | best epoch=25
+  epoch   50/1000 | train MAE=5.249px | val MAE=4.643px | best epoch=38
+  epoch   75/1000 | train MAE=4.698px | val MAE=4.500px | best epoch=69
+  epoch  100/1000 | train MAE=4.466px | val MAE=4.501px | best epoch=79
+  epoch  125/1000 | train MAE=4.304px | val MAE=4.255px | best epoch=125
+  epoch  150/1000 | train MAE=4.686px | val MAE=4.257px | best epoch=140
+  epoch  175/1000 | train MAE=4.491px | val MAE=4.714px | best epoch=154
+  epoch  200/1000 | train MAE=4.988px | val MAE=4.039px | best epoch=197
+  epoch  225/1000 | train MAE=4.112px | val MAE=4.262px | best epoch=217
+  epoch  250/1000 | train MAE=3.969px | val MAE=3.825px | best epoch=247
+  epoch  275/1000 | train MAE=3.777px | val MAE=3.663px | best epoch=271
+  epoch  300/1000 | train MAE=3.662px | val MAE=3.421px | best epoch=289
+  epoch  325/1000 | train MAE=3.739px | val MAE=4.784px | best epoch=321
+  epoch  350/1000 | train MAE=3.717px | val MAE=3.343px | best epoch=348
+  epoch  375/1000 | train MAE=3.852px | val MAE=3.640px | best epoch=373
+  epoch  400/1000 | train MAE=3.476px | val MAE=3.533px | best epoch=399
+  epoch  425/1000 | train MAE=3.279px | val MAE=3.058px | best epoch=408
+  epoch  450/1000 | train MAE=3.216px | val MAE=2.831px | best epoch=450
+  epoch  475/1000 | train MAE=3.229px | val MAE=3.012px | best epoch=469
+  epoch  500/1000 | train MAE=3.194px | val MAE=2.686px | best epoch=500
+  epoch  525/1000 | train MAE=3.250px | val MAE=2.788px | best epoch=500
+  epoch  550/1000 | train MAE=3.202px | val MAE=2.804px | best epoch=543
+  epoch  575/1000 | train MAE=3.181px | val MAE=2.702px | best epoch=566
+  epoch  600/1000 | train MAE=3.158px | val MAE=2.939px | best epoch=578
+  epoch  625/1000 | train MAE=3.214px | val MAE=2.653px | best epoch=608
+  epoch  650/1000 | train MAE=3.047px | val MAE=2.705px | best epoch=637
+  epoch  675/1000 | train MAE=3.093px | val MAE=2.637px | best epoch=637
+  epoch  700/1000 | train MAE=3.056px | val MAE=2.710px | best epoch=637
+  epoch  717/1000 | train MAE=3.050px | val MAE=2.715px | best epoch=637
+  Early stopping: 80 epochs without validation improvement.
+[distance_lstm_window5] Saved best checkpoint at epoch 637; validation is never added to training.
+
+=== Validation evaluation: identical target frames for all three models ===
+  Black_4cm_20261025_143940 | distance_current: MAE=2.26px | RMSE=3.57px
+  Black_4cm_20261025_143940 | distance_window5: MAE=2.03px | RMSE=3.51px
+  Black_4cm_20261025_143940 | distance_lstm_window5: MAE=2.52px | RMSE=4.75px
+  Black_4cm_20261025_143945 | distance_current: MAE=2.37px | RMSE=4.71px
+  Black_4cm_20261025_143945 | distance_window5: MAE=2.31px | RMSE=3.32px
+  Black_4cm_20261025_143945 | distance_lstm_window5: MAE=2.28px | RMSE=2.95px
+  Black_4cm_20261025_143955 | distance_current: MAE=3.82px | RMSE=5.18px
+  Black_4cm_20261025_143955 | distance_window5: MAE=2.70px | RMSE=3.74px
+  Black_4cm_20261025_143955 | distance_lstm_window5: MAE=2.85px | RMSE=4.04px
+  Black_4cm_20261025_144000 | distance_current: MAE=3.06px | RMSE=4.61px
+  Black_4cm_20261025_144000 | distance_window5: MAE=2.66px | RMSE=4.26px
+  Black_4cm_20261025_144000 | distance_lstm_window5: MAE=3.27px | RMSE=5.56px
+  Black_4cm_20261025_144025 | distance_current: MAE=1.52px | RMSE=2.36px
+  Black_4cm_20261025_144025 | distance_window5: MAE=1.58px | RMSE=2.53px
+  Black_4cm_20261025_144025 | distance_lstm_window5: MAE=2.05px | RMSE=3.02px
+  Black_4cm_20261025_144035 | distance_current: MAE=4.07px | RMSE=5.41px
+  Black_4cm_20261025_144035 | distance_window5: MAE=2.87px | RMSE=3.81px
+  Black_4cm_20261025_144035 | distance_lstm_window5: MAE=2.39px | RMSE=3.29px
+  Black_4cm_20261025_144045 | distance_current: MAE=1.70px | RMSE=2.65px
+  Black_4cm_20261025_144045 | distance_window5: MAE=2.06px | RMSE=2.46px
+  Black_4cm_20261025_144045 | distance_lstm_window5: MAE=2.90px | RMSE=3.90px
+  Black_4cm_20261025_144055 | distance_current: MAE=3.42px | RMSE=5.30px
+  Black_4cm_20261025_144055 | distance_window5: MAE=1.94px | RMSE=2.80px
+  Black_4cm_20261025_144055 | distance_lstm_window5: MAE=1.91px | RMSE=2.60px
+  Black_4cm_20261025_144100 | distance_current: MAE=2.03px | RMSE=3.39px
+  Black_4cm_20261025_144100 | distance_window5: MAE=1.49px | RMSE=1.97px
+  Black_4cm_20261025_144100 | distance_lstm_window5: MAE=1.32px | RMSE=1.99px
+  Black_4cm_20261025_150227 | distance_current: MAE=2.80px | RMSE=5.04px
+  Black_4cm_20261025_150227 | distance_window5: MAE=2.26px | RMSE=3.78px
+  Black_4cm_20261025_150227 | distance_lstm_window5: MAE=2.65px | RMSE=4.51px
+  Black_4cm_20261025_150234 | distance_current: MAE=2.45px | RMSE=3.13px
+  Black_4cm_20261025_150234 | distance_window5: MAE=2.61px | RMSE=3.14px
+  Black_4cm_20261025_150234 | distance_lstm_window5: MAE=2.57px | RMSE=2.96px
+  Black_4cm_20261025_150240 | distance_current: MAE=2.72px | RMSE=4.02px
+  Black_4cm_20261025_150240 | distance_window5: MAE=2.49px | RMSE=3.11px
+  Black_4cm_20261025_150240 | distance_lstm_window5: MAE=2.45px | RMSE=3.69px
+  Black_4cm_20261025_150246 | distance_current: MAE=2.08px | RMSE=3.68px
+  Black_4cm_20261025_150246 | distance_window5: MAE=1.50px | RMSE=2.37px
+  Black_4cm_20261025_150246 | distance_lstm_window5: MAE=1.63px | RMSE=2.73px
+  Black_4cm_20261025_150304 | distance_current: MAE=1.30px | RMSE=2.11px
+  Black_4cm_20261025_150304 | distance_window5: MAE=1.00px | RMSE=1.52px
+  Black_4cm_20261025_150304 | distance_lstm_window5: MAE=1.47px | RMSE=2.62px
+  Black_4cm_20261025_150310 | distance_current: MAE=2.16px | RMSE=2.87px
+  Black_4cm_20261025_150310 | distance_window5: MAE=2.07px | RMSE=2.38px
+  Black_4cm_20261025_150310 | distance_lstm_window5: MAE=2.00px | RMSE=2.57px
+  Black_4cm_20261025_150316 | distance_current: MAE=3.52px | RMSE=4.52px
+  Black_4cm_20261025_150316 | distance_window5: MAE=2.79px | RMSE=3.37px
+  Black_4cm_20261025_150316 | distance_lstm_window5: MAE=2.78px | RMSE=3.24px
+  Black_4cm_20261025_150334 | distance_current: MAE=3.08px | RMSE=3.67px
+  Black_4cm_20261025_150334 | distance_window5: MAE=2.85px | RMSE=3.17px
+  Black_4cm_20261025_150334 | distance_lstm_window5: MAE=2.93px | RMSE=3.49px
+  Black_4cm_20261025_150340 | distance_current: MAE=2.39px | RMSE=3.24px
+  Black_4cm_20261025_150340 | distance_window5: MAE=1.72px | RMSE=2.14px
+  Black_4cm_20261025_150340 | distance_lstm_window5: MAE=2.39px | RMSE=2.77px
+  Black_4cm_20261025_151119 | distance_current: MAE=3.74px | RMSE=5.22px
+  Black_4cm_20261025_151119 | distance_window5: MAE=3.16px | RMSE=4.20px
+  Black_4cm_20261025_151119 | distance_lstm_window5: MAE=2.97px | RMSE=3.86px
+  Black_4cm_20261025_151126 | distance_current: MAE=2.83px | RMSE=3.88px
+  Black_4cm_20261025_151126 | distance_window5: MAE=2.64px | RMSE=3.18px
+  Black_4cm_20261025_151126 | distance_lstm_window5: MAE=2.75px | RMSE=3.43px
+  Black_4cm_20261025_151133 | distance_current: MAE=2.83px | RMSE=4.17px
+  Black_4cm_20261025_151133 | distance_window5: MAE=2.31px | RMSE=3.24px
+  Black_4cm_20261025_151133 | distance_lstm_window5: MAE=2.39px | RMSE=3.25px
+  Black_4cm_20261025_151147 | distance_current: MAE=3.58px | RMSE=5.56px
+  Black_4cm_20261025_151147 | distance_window5: MAE=3.72px | RMSE=5.02px
+  Black_4cm_20261025_151147 | distance_lstm_window5: MAE=2.94px | RMSE=4.19px
+  Black_4cm_20261025_151215 | distance_current: MAE=4.75px | RMSE=6.37px
+  Black_4cm_20261025_151215 | distance_window5: MAE=3.89px | RMSE=5.15px
+  Black_4cm_20261025_151215 | distance_lstm_window5: MAE=4.03px | RMSE=5.04px
+  Black_4cm_20261025_151222 | distance_current: MAE=4.84px | RMSE=6.18px
+  Black_4cm_20261025_151222 | distance_window5: MAE=3.98px | RMSE=4.96px
+  Black_4cm_20261025_151222 | distance_lstm_window5: MAE=4.05px | RMSE=5.15px
+  Black_4cm_20261025_151229 | distance_current: MAE=3.34px | RMSE=4.83px
+  Black_4cm_20261025_151229 | distance_window5: MAE=2.66px | RMSE=3.78px
+  Black_4cm_20261025_151229 | distance_lstm_window5: MAE=2.68px | RMSE=3.36px
+  Black_4cm_20261025_151236 | distance_current: MAE=3.73px | RMSE=5.87px
+  Black_4cm_20261025_151236 | distance_window5: MAE=3.13px | RMSE=4.65px
+  Black_4cm_20261025_151236 | distance_lstm_window5: MAE=3.25px | RMSE=4.80px
+  Black_4cm_20261025_151244 | distance_current: MAE=2.76px | RMSE=3.38px
+  Black_4cm_20261025_151244 | distance_window5: MAE=2.15px | RMSE=2.62px
+  Black_4cm_20261025_151244 | distance_lstm_window5: MAE=2.69px | RMSE=3.09px
+
+=== Overall validation metrics (all eligible validation frames pooled) ===
+MLP (current frame): MAE=3.04px | RMSE=4.50px | R2=0.962
+MLP (5 frames): MAE=2.58px | RMSE=3.58px | R2=0.976
+LSTM (5 frames): MAE=2.68px | RMSE=3.73px | R2=0.974
+Total time: 464.5s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3\Result\distance_mlp_lstm_window5_20261025_192900_391049
+  validation_model_comparison.png
+  validation_metrics_chart.png
+  validation_predictions/*.png
+  training_curves.png
+  overall_model_summary.csv
+  validation_phase_metrics.csv
+  validation_phase_errors.png
+  validation_trial_phase_metrics.csv
+  validation_phase_summary.csv
+  data_split.csv
+  validation_condition_metrics.csv
+  validation_metrics_by_condition.png
+  models/distance_current.pth
+  models/distance_window5.pth
+  models/distance_lstm_window5.pth

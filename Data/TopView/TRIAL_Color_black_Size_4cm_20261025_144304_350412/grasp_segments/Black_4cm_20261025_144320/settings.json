@@ -1,0 +1,65 @@
+{
+  "v": 60,
+  "s": 120,
+  "color_s_min": 140,
+  "color_v_min": 50,
+  "area": 500,
+  "max_area": 640000,
+  "signed_distance_axis_xy": [
+    0.9952697365096975,
+    0.09715014970609834
+  ],
+  "signed_distance_initial_object_center_xy": [
+    219.5,
+    294.5
+  ],
+  "signed_distance_initial_hand_center_xy": [
+    467.62863636016846,
+    318.7203025817871
+  ],
+  "signed_distance_definition": "(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.",
+  "metronome_at_recording_start": {
+    "mode": "spoken_count_loop",
+    "target_movement_s": 2,
+    "return_counts": 2
+  },
+  "approach_guide": {
+    "mode": "spoken_count_loop",
+    "target_movement_s": 2,
+    "return_counts": 2
+  },
+  "camera_source_width": 640,
+  "camera_source_height": 480,
+  "crop_margins_px": {
+    "left": 100,
+    "top": 0,
+    "right": 0,
+    "bottom": 0
+  },
+  "coordinate_origin": "Top-left of cropped image; add crop left/top for source coordinates.",
+  "camera": 1,
+  "width": 540,
+  "height": 480,
+  "object_color": "black",
+  "object_id": "black_4cm",
+  "hsv_ranges": [
+    [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        179,
+        120,
+        60
+      ]
+    ]
+  ],
+  "fps": 30.0,
+  "size_cm": 4.0,
+  "center_source": "detected",
+  "locked_center": null,
+  "base_workflow": "Record_mediapipe_continuous.py",
+  "fingertip_method": "MediaPipe landmarks 4,8"
+}

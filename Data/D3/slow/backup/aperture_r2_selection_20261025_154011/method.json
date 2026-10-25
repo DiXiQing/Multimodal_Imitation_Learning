@@ -1,0 +1,11 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D3\\slow",
+  "original_trials": 48,
+  "keep": 30,
+  "moved": 18,
+  "signal": "finger_width (aperture), unchanged px values",
+  "alignment": "Full current segment, frame axis normalized to 0-1, linearly interpolated to 101 equally spaced progress points",
+  "score": "R2 = 1 - sum((own_curve - mean_others)^2) / sum((own_curve - own_curve_mean)^2); highest first; mean of all OTHER original trials, fixed cohort computed once before any move; no iterative rescoring",
+  "ties": "Trial folder name ascending",
+  "note": "Curve-consistency selection, not proof of measurement error. Data moved intact; originals recoverable from excluded folder. This selection can narrow variability; report filtering and evaluate on a separately defined test set."
+}

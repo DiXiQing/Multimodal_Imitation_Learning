@@ -1,15 +1,21 @@
-2.In the field of hand gesture recognition
+2.
 To reproduce natural human grasping movements, a regression model is a better choice.
 In the field of hand gesture recognition, many methods focus on classification.
 However, classification alone cannot fully describe continuous finger movements during natural grasping.
 Therefore, regression models may be a suitable approach for predicting continuous finger movements.
 
-3.To develop a regression model for grasping movements, it is important to investigate the relationships between relevant movement variables.
-In the related work have examined these relationships from different perspectives.
+3.
+To develop a regression model for grasping movements, it is important to investigate the relationships between relevant movement variables.
 
-Mangalam et al. investigated the factors associated with the onset of finger closure.
-Coats et al. examined how target distance and contact surface size affect grasping movements.
-These studies suggest that reach-to-grasp movements involve multiple interacting variables.
+In research of Mangalam et al. investigated the factors associated with the onset of finger closure.
+In research of Coats et al. examined how target distance and contact surface size affect grasping movements.
+These studies show that reach-to-grasp movements involve multiple interacting variables.
+
+4.
+本研究的目的是 investigate the relationship between hand–object distance and fingertip aperture during reach-to-grasp movements.
+And further examine whether a regression model can predict fingertip aperture from hand–object distance in real time.
+
+
 
 5.这是实验配置，研究中使用web camera来收集数据。这个web camera，固定视角，俯视角度，收集抓取期间的视觉信息。
 
@@ -28,6 +34,10 @@ These graph show highly consistent patterns. The normalized Root Mean Squared Er
 
 11.在离线测试中，每种cube准备了9组trial。结果是总体的MAE为3.87，RMSE为5.91，R平方为0.956，每项的标准差也偏小。在离线测试中，可以看出距离是可以预测手指开合的。
 
-12.而如果将整个抓取过程分为三段，初始阶段，也就是手静止的阶段，中间的抓取阶段，最后的闭合保持阶段。中间的抓取阶段张开再闭合，里所以当时误差最大的，结果也证明了这一点。
+13.而如果将整个抓取过程分为三段，初始阶段，也就是手静止的阶段，中间的抓取阶段，最后的闭合保持阶段。中间的抓取阶段张开再闭合，里所以当时误差最大的，结果也证明了这一点。
 
-13.
+14.而在研究，我们也发现了时间窗口在此研究中的优势所在。Without a temporal window : The model learns only the mapping between distance and fingertip aperture, resulting in larger errors during rapid changes.
+With a temporal window : The model can utilize short-term motion context to learn temporal trends, improving prediction accuracy.
+从图中可以明显看到，橙色曲线为带了时间窗口的MLP，在红色区域，也就是闭合简短，能更好的预测。
+
+15.同时我也进行了实时实验，系统能通过颜色识别物体，并读取相应模型。实验中，三种方块按随机顺序抓取，各抓3次。The model achieved an R² above 0.89 in 8 out of 9 real-time trials, demonstrating promising prediction performance.

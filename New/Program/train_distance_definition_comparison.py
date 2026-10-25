@@ -12,8 +12,8 @@ import torch
 import matplotlib.pyplot as plt
 import train_distance_window_mlp as core
 
-SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2'
-WINDOW_SIZE = 10  # Both models use this context; set 1 for no history.
+SOURCE = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3'
+WINDOW_SIZE = 5  # Both models use this context; set 1 for no history.
 SPECS = {'distance_unsigned': 'hand_object_distance',
          'distance_signed': 'hand_object_signed_distance'}
 LABELS = {'distance_unsigned': 'Old distance', 'distance_signed': 'Signed distance'}

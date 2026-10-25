@@ -16,11 +16,11 @@ from median_regression import fit_median_spline
 
 # Optional absolute path, e.g. r'C:\MineApp\Code\...\grasp_segments'.
 # Leave empty to paste the absolute path when the program starts.
-SOURCE=r'C:\MineApp\Code\Multimodal_Imitation_Learning\New\Data\2'
+SOURCE=r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D3'
 SEED=20261016
 # Defaults for running directly from an IDE; CLI flags override these values.
-TRAIN_COUNT=40
-TEST_COUNT=20
+TRAIN_COUNT=63
+TEST_COUNT=27
 MODEL_MODE='mean'  # median: middle-value regression; mean: previous models; auto: compare all
 SELECTION_METRIC='mae'  # Optimize median models using validation MAE by default.
 

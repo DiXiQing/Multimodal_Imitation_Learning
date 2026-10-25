@@ -1,0 +1,30 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D2",
+  "window_size": 10,
+  "epochs": 1000,
+  "patience": 80,
+  "batch_size": 64,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "hidden": 32,
+  "loss": "mae",
+  "seed": 20261016,
+  "max_gap": 0.1,
+  "device": "auto",
+  "log_every": 25,
+  "output": "Current-frame fingertip aperture in px.",
+  "check_data": false,
+  "distance_columns": {
+    "distance_unsigned": "hand_object_distance",
+    "distance_signed": "hand_object_signed_distance"
+  },
+  "input_units": 10,
+  "output_units": 1,
+  "input_order": "Oldest to current signed/Euclidean distance; no aperture history.",
+  "hidden_layers": [
+    32,
+    32
+  ],
+  "comparison": "Same trial split, common valid target frames, seed, architecture and hyperparameters. Each scaler uses aligned Train only.",
+  "evaluation": "Validation selects checkpoints; not independent testing."
+}

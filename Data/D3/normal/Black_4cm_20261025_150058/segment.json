@@ -1,0 +1,17 @@
+{
+  "segment": 24,
+  "start": 4269,
+  "onset": 4281,
+  "peak": 4300,
+  "stable": 4340,
+  "end": 4358,
+  "frames": 90,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 18,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 2.966262102127075,
+  "invalid_frames": 0,
+  "source_start_frame": 4269,
+  "source_end_frame": 4358,
+  "folder_name": "Black_4cm_20261025_150058"
+}

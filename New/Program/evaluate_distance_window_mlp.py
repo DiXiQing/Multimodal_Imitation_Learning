@@ -1,4 +1,4 @@
-"""Evaluate a saved distance-history MLP on recorded grasp CSVs. Never trains."""
+"""Evaluate a saved current/window MLP or fixed-window LSTM. Never trains."""
 import argparse
 import csv
 import json
@@ -109,16 +109,24 @@ def main():
         raise ValueError(f'Unsupported checkpoint distance column: {distance_column}')
     print(f'Input distance column: {distance_column}')
     window_size = saved.get('window_size')
-    if saved.get('schema') != 'distance_mlp_v1' or not isinstance(window_size,int) or window_size < 2 or saved.get('input_size') != window_size:
-        raise ValueError('Select a distance_mlp_v1 checkpoint with a matching history input.')
+    is_lstm = saved.get('schema') == 'distance_lstm_v1'
+    if saved.get('schema') not in ('distance_mlp_v1','distance_lstm_v1') or not isinstance(window_size,int) or window_size < 1 or saved.get('input_size') != (1 if is_lstm else window_size):
+        raise ValueError('Select a compatible saved MLP or LSTM checkpoint.')
     prediction_key = f'predicted_window{window_size}_px'
+    comparison_context = saved.get('comparison_required_context', window_size)
+    if not isinstance(comparison_context,int) or comparison_context < window_size:
+        raise ValueError('Invalid checkpoint comparison context.')
     scaler = saved['scaler']
     if not all(np.isfinite(scaler[k]) for k in ('x_min', 'x_scale', 'y_mean', 'y_scale')) or min(scaler['x_scale'], scaler['y_scale']) <= 0:
         raise ValueError('Invalid checkpoint normalization.')
     gap = float(saved['max_frame_gap_s'])
     if not np.isfinite(gap) or gap <= 0:
         raise ValueError('Invalid checkpoint maximum frame gap.')
-    net = DistanceMLP(window_size, saved['hidden_size'])
+    if is_lstm:
+        from train_mlp_lstm_comparison import DistanceLSTM
+        net = DistanceLSTM(saved['hidden_size'])
+    else:
+        net = DistanceMLP(window_size, saved['hidden_size'])
     net.load_state_dict(saved['state_dict'], strict=True)
     net.eval()
     folders = discover(args.source)
@@ -142,12 +150,12 @@ def main():
         finite = np.isfinite(d) & np.isfinite(t) & np.isfinite(frames)
         valid = finite & np.array([number(r, 'valid') == 1 for r in rows])
         indices, windows = [], []
-        for i in range(window_size-1, len(rows)):
-            sl = slice(i-window_size+1, i+1)
+        for i in range(comparison_context-1, len(rows)):
+            sl = slice(i-comparison_context+1, i+1)
             dt = np.diff(t[sl])
             if valid[sl].all() and np.all(np.diff(frames[sl]) == 1) and np.all(dt > 0) and np.all(dt <= gap):
                 indices.append(i)
-                windows.append(d[sl])
+                windows.append(d[i-window_size+1:i+1])
         p = np.full(len(rows), np.nan)
         if windows:
             x = (np.asarray(windows, dtype=np.float32)-scaler['x_min'])/scaler['x_scale']
@@ -230,8 +238,8 @@ def main():
         ax.grid(axis='y', alpha=.2)
         ax.set_axisbelow(True)
         save(fig, out/'02_phase_errors')
-    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),distance_column=distance_column,
-        overall=overall,warnings=warnings,window_size=window_size,method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal {window_size}-frame windows reset at each trial or invalid/gapped frame. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
+    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),distance_column=distance_column,comparison_required_context=comparison_context,
+        overall=overall,warnings=warnings,window_size=window_size,architecture='LSTM' if is_lstm else 'MLP',method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal {window_size}-frame windows reset at each trial or invalid/gapped frame. LSTM state resets for every window. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
         model_recording_settings=model_settings)
     (out/'evaluation_info.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
     for warning in warnings:

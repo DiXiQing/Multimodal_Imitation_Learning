@@ -1,0 +1,69 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D3",
+  "check_data": false,
+  "window_size": 5,
+  "distance_column": "hand_object_signed_distance",
+  "epochs": 1000,
+  "patience": 80,
+  "batch_size": 64,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "hidden": 32,
+  "loss": "mae",
+  "seed": 20261016,
+  "max_gap": 0.1,
+  "device": "auto",
+  "log_every": 25,
+  "output": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D3\\Result\\distance_mlp_lstm_window5_20261025_192900_391049",
+  "normalization": "Input MinMax and output standardization, fitted only on the fitting partition at each stage.",
+  "window_rule": "5 consecutive valid source frames, increasing actual timestamps, no gap over max_gap.",
+  "models": {
+    "distance_current": 1,
+    "distance_window5": 5,
+    "distance_lstm_window5": 5
+  },
+  "model_information": {
+    "distance_current": {
+      "architecture": "MLP",
+      "input_units": 1,
+      "sequence_steps": 1,
+      "input_correspondence": "Current-frame distance only",
+      "output_units": 1,
+      "output_correspondence": "Current-frame finger_width (px)",
+      "hidden_layers": [
+        32,
+        32
+      ],
+      "parameter_count": 1153,
+      "state_reset": "Stateless"
+    },
+    "distance_window5": {
+      "architecture": "MLP",
+      "input_units": 5,
+      "sequence_steps": 1,
+      "input_correspondence": "One distance per unit, oldest to current",
+      "output_units": 1,
+      "output_correspondence": "Current-frame finger_width (px)",
+      "hidden_layers": [
+        32,
+        32
+      ],
+      "parameter_count": 1281,
+      "state_reset": "Stateless"
+    },
+    "distance_lstm_window5": {
+      "architecture": "LSTM",
+      "input_units": 1,
+      "sequence_steps": 5,
+      "input_correspondence": "One distance feature at each step, oldest to current",
+      "output_units": 1,
+      "output_correspondence": "Current-frame finger_width (px)",
+      "hidden_layers": [
+        32
+      ],
+      "parameter_count": 4513,
+      "state_reset": "Every independent window"
+    }
+  },
+  "lstm_state": "Reset hidden/cell state for every window, no state carry between windows or trials."
+}

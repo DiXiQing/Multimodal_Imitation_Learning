@@ -1,0 +1,43 @@
+Old distance: hand_object_distance; 10 input units -> 1 output unit
+
+[distance_unsigned] Select epoch using 32 fit / 8 validation trials
+  epoch    1/1000 | train MAE=17.898px | val MAE=17.231px | best epoch=1
+  epoch   25/1000 | train MAE=6.297px | val MAE=5.939px | best epoch=24
+  epoch   50/1000 | train MAE=5.424px | val MAE=5.937px | best epoch=35
+  epoch   75/1000 | train MAE=4.832px | val MAE=5.445px | best epoch=70
+  epoch  100/1000 | train MAE=4.708px | val MAE=5.560px | best epoch=70
+  epoch  125/1000 | train MAE=4.633px | val MAE=5.527px | best epoch=120
+  epoch  150/1000 | train MAE=4.537px | val MAE=5.303px | best epoch=139
+  epoch  175/1000 | train MAE=4.354px | val MAE=4.910px | best epoch=173
+  epoch  200/1000 | train MAE=4.222px | val MAE=5.198px | best epoch=184
+  epoch  225/1000 | train MAE=4.012px | val MAE=5.845px | best epoch=184
+  epoch  250/1000 | train MAE=4.038px | val MAE=6.916px | best epoch=184
+  epoch  264/1000 | train MAE=3.898px | val MAE=4.893px | best epoch=184
+  Early stopping: 80 epochs without validation improvement.
+[distance_unsigned] Saved best checkpoint at epoch 184; validation is never added to training.
+Signed distance: hand_object_signed_distance; 10 input units -> 1 output unit
+
+[distance_signed] Select epoch using 32 fit / 8 validation trials
+  epoch    1/1000 | train MAE=17.863px | val MAE=17.211px | best epoch=1
+  epoch   25/1000 | train MAE=5.435px | val MAE=5.226px | best epoch=24
+  epoch   50/1000 | train MAE=4.752px | val MAE=5.334px | best epoch=45
+  epoch   75/1000 | train MAE=4.349px | val MAE=4.710px | best epoch=70
+  epoch  100/1000 | train MAE=4.221px | val MAE=4.848px | best epoch=70
+  epoch  125/1000 | train MAE=4.184px | val MAE=4.911px | best epoch=118
+  epoch  150/1000 | train MAE=4.147px | val MAE=4.464px | best epoch=118
+  epoch  175/1000 | train MAE=3.974px | val MAE=4.613px | best epoch=118
+  epoch  200/1000 | train MAE=3.966px | val MAE=5.079px | best epoch=199
+  epoch  225/1000 | train MAE=3.926px | val MAE=5.642px | best epoch=199
+  epoch  250/1000 | train MAE=3.818px | val MAE=6.063px | best epoch=199
+  epoch  275/1000 | train MAE=3.991px | val MAE=4.639px | best epoch=274
+  epoch  300/1000 | train MAE=3.692px | val MAE=4.197px | best epoch=298
+  epoch  325/1000 | train MAE=3.653px | val MAE=4.713px | best epoch=298
+  epoch  350/1000 | train MAE=3.800px | val MAE=5.416px | best epoch=335
+  epoch  375/1000 | train MAE=3.656px | val MAE=4.693px | best epoch=335
+  epoch  400/1000 | train MAE=3.616px | val MAE=4.827px | best epoch=335
+  epoch  415/1000 | train MAE=3.650px | val MAE=4.347px | best epoch=335
+  Early stopping: 80 epochs without validation improvement.
+[distance_signed] Saved best checkpoint at epoch 335; validation is never added to training.
+{'model': 'distance_unsigned', 'frames': 674, 'mae': 4.565176651102853, 'rmse': 6.236931426353782, 'r2': 0.8967186022195259, 'bias': 0.9366162113336852}
+{'model': 'distance_signed', 'frames': 674, 'mae': 4.010657577910834, 'rmse': 5.350881920808632, 'r2': 0.9239794681787113, 'bias': 1.9730419008951159}
+Saved to C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D2\Result\distance_definition_window10_20261025_160502_793404

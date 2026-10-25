@@ -1,0 +1,18 @@
+{
+  "segment": 20,
+  "start": 3667,
+  "onset": 3679,
+  "peak": 3709,
+  "stable": 3726,
+  "end": 3746,
+  "frames": 80,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 20,
+  "boundary_rule": "Aperture >20 px action run; stable: five frames within 5 px of post-peak 25th percentile; 12 pre-onset and up to 20 post-stable frames. Distance not used because object tracking jumps.",
+  "duration_s": 2.697751998901367,
+  "invalid_frames": 0,
+  "distance_tracking_review": true,
+  "source_start_frame": 3667,
+  "source_end_frame": 3746,
+  "folder_name": "Black_4cm_20261025_144508"
+}
