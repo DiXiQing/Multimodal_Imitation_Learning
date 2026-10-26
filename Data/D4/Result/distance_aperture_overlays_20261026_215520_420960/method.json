@@ -1,0 +1,14 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D4",
+  "conditions": {
+    "1": 28,
+    "2": 28,
+    "3": 28
+  },
+  "cohorts": "Train 21 + Test 7 per condition; all 84 trials included, no additional selection.",
+  "x": "hand_object_signed_distance (px)",
+  "y": "finger_width (px)",
+  "processing": "Original chronological curves; no smoothing, time/amplitude normalization, interpolation or unit conversion. Invalid values break lines.",
+  "titles": "1/2/3 s are target-duration labels from acquisition settings, not measured duration guarantees.",
+  "source_unchanged": true
+}

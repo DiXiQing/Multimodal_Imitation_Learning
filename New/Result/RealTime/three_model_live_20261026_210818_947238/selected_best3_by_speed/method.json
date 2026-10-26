@@ -1,0 +1,8 @@
+{
+  "grouping": "User-approved grouping by measured approach duration, because all recorded target labels are 1 s. fast <1.5 s; normal 1.5..<3 s; slow >=3 s.",
+  "timing": "Median of first 10 valid signed distances as baseline; 3-point median signal only for event finding. Onset: baseline minus 8px sustained 3 valid frames. Arrival: signed distance <=15px sustained 3 valid frames. Actual CSV timestamps; threshold proxy, not contact detection.",
+  "ranking": "Ascending mean of three saved per-trial MAEs, all evaluated on common eligible frames over the whole recorded trial, including waiting/holding. Not ranked on cropped movement-only frames.",
+  "purpose": "Selected examples for presentation; not a replacement for all-trial evaluation.",
+  "source_unchanged": true,
+  "copied_files": "All original trial files copied and SHA256 verified; inferred grouping stored separately without overwriting original 1 s target metadata."
+}

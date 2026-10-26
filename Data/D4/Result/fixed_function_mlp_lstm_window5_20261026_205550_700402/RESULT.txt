@@ -1,0 +1,183 @@
+=== Single-point function approximation vs 5-frame MLP vs continuous-history LSTM ===
+Data: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D4
+Device: cuda | Loss: mae | Seed: 20261016
+Input distance column: hand_object_signed_distance
+Train: 63 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D4\Train
+Test: 21 trials from C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D4\Test
+Fixed epochs and fixed function parameters. Test evaluated only after all fitting is complete.
+All three models predict the SAME target frames; first 4 frames and discontinuous windows are omitted.
+Fixed training epochs: 1000; no early stopping; last epoch saved.
+Results: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D4\Result\fixed_function_mlp_lstm_window5_20261026_205550_700402
+Fixed function: smoothing_spline; no candidate selection.
+[distance_window5] epoch 1/1000 | Train MAE=18.990px
+[distance_window5] epoch 25/1000 | Train MAE=4.362px
+[distance_window5] epoch 50/1000 | Train MAE=3.873px
+[distance_window5] epoch 75/1000 | Train MAE=3.573px
+[distance_window5] epoch 100/1000 | Train MAE=3.500px
+[distance_window5] epoch 125/1000 | Train MAE=3.468px
+[distance_window5] epoch 150/1000 | Train MAE=3.362px
+[distance_window5] epoch 175/1000 | Train MAE=3.411px
+[distance_window5] epoch 200/1000 | Train MAE=3.401px
+[distance_window5] epoch 225/1000 | Train MAE=3.286px
+[distance_window5] epoch 250/1000 | Train MAE=3.324px
+[distance_window5] epoch 275/1000 | Train MAE=3.325px
+[distance_window5] epoch 300/1000 | Train MAE=3.303px
+[distance_window5] epoch 325/1000 | Train MAE=3.287px
+[distance_window5] epoch 350/1000 | Train MAE=3.258px
+[distance_window5] epoch 375/1000 | Train MAE=3.297px
+[distance_window5] epoch 400/1000 | Train MAE=3.244px
+[distance_window5] epoch 425/1000 | Train MAE=3.202px
+[distance_window5] epoch 450/1000 | Train MAE=3.249px
+[distance_window5] epoch 475/1000 | Train MAE=3.158px
+[distance_window5] epoch 500/1000 | Train MAE=3.192px
+[distance_window5] epoch 525/1000 | Train MAE=3.205px
+[distance_window5] epoch 550/1000 | Train MAE=3.169px
+[distance_window5] epoch 575/1000 | Train MAE=3.166px
+[distance_window5] epoch 600/1000 | Train MAE=3.206px
+[distance_window5] epoch 625/1000 | Train MAE=3.153px
+[distance_window5] epoch 650/1000 | Train MAE=3.144px
+[distance_window5] epoch 675/1000 | Train MAE=3.159px
+[distance_window5] epoch 700/1000 | Train MAE=3.130px
+[distance_window5] epoch 725/1000 | Train MAE=3.108px
+[distance_window5] epoch 750/1000 | Train MAE=3.162px
+[distance_window5] epoch 775/1000 | Train MAE=3.111px
+[distance_window5] epoch 800/1000 | Train MAE=3.067px
+[distance_window5] epoch 825/1000 | Train MAE=3.108px
+[distance_window5] epoch 850/1000 | Train MAE=3.076px
+[distance_window5] epoch 875/1000 | Train MAE=3.047px
+[distance_window5] epoch 900/1000 | Train MAE=3.018px
+[distance_window5] epoch 925/1000 | Train MAE=3.043px
+[distance_window5] epoch 950/1000 | Train MAE=3.030px
+[distance_window5] epoch 975/1000 | Train MAE=2.981px
+[distance_window5] epoch 1000/1000 | Train MAE=3.019px
+[distance_window5] Saved LAST epoch 1000; Test not evaluated during training.
+[distance_lstm_continuous] epoch 1/1000 | Train MAE=21.341px
+[distance_lstm_continuous] epoch 25/1000 | Train MAE=21.058px
+[distance_lstm_continuous] epoch 50/1000 | Train MAE=16.329px
+[distance_lstm_continuous] epoch 75/1000 | Train MAE=12.535px
+[distance_lstm_continuous] epoch 100/1000 | Train MAE=11.727px
+[distance_lstm_continuous] epoch 125/1000 | Train MAE=10.926px
+[distance_lstm_continuous] epoch 150/1000 | Train MAE=9.786px
+[distance_lstm_continuous] epoch 175/1000 | Train MAE=7.731px
+[distance_lstm_continuous] epoch 200/1000 | Train MAE=5.903px
+[distance_lstm_continuous] epoch 225/1000 | Train MAE=5.729px
+[distance_lstm_continuous] epoch 250/1000 | Train MAE=5.437px
+[distance_lstm_continuous] epoch 275/1000 | Train MAE=5.271px
+[distance_lstm_continuous] epoch 300/1000 | Train MAE=5.098px
+[distance_lstm_continuous] epoch 325/1000 | Train MAE=4.965px
+[distance_lstm_continuous] epoch 350/1000 | Train MAE=4.880px
+[distance_lstm_continuous] epoch 375/1000 | Train MAE=4.854px
+[distance_lstm_continuous] epoch 400/1000 | Train MAE=4.730px
+[distance_lstm_continuous] epoch 425/1000 | Train MAE=4.629px
+[distance_lstm_continuous] epoch 450/1000 | Train MAE=4.618px
+[distance_lstm_continuous] epoch 475/1000 | Train MAE=4.480px
+[distance_lstm_continuous] epoch 500/1000 | Train MAE=4.450px
+[distance_lstm_continuous] epoch 525/1000 | Train MAE=4.419px
+[distance_lstm_continuous] epoch 550/1000 | Train MAE=4.320px
+[distance_lstm_continuous] epoch 575/1000 | Train MAE=4.196px
+[distance_lstm_continuous] epoch 600/1000 | Train MAE=4.138px
+[distance_lstm_continuous] epoch 625/1000 | Train MAE=4.055px
+[distance_lstm_continuous] epoch 650/1000 | Train MAE=4.034px
+[distance_lstm_continuous] epoch 675/1000 | Train MAE=4.067px
+[distance_lstm_continuous] epoch 700/1000 | Train MAE=3.894px
+[distance_lstm_continuous] epoch 725/1000 | Train MAE=3.913px
+[distance_lstm_continuous] epoch 750/1000 | Train MAE=3.846px
+[distance_lstm_continuous] epoch 775/1000 | Train MAE=3.801px
+[distance_lstm_continuous] epoch 800/1000 | Train MAE=3.777px
+[distance_lstm_continuous] epoch 825/1000 | Train MAE=3.747px
+[distance_lstm_continuous] epoch 850/1000 | Train MAE=3.674px
+[distance_lstm_continuous] epoch 875/1000 | Train MAE=3.651px
+[distance_lstm_continuous] epoch 900/1000 | Train MAE=3.661px
+[distance_lstm_continuous] epoch 925/1000 | Train MAE=3.578px
+[distance_lstm_continuous] epoch 950/1000 | Train MAE=3.596px
+[distance_lstm_continuous] epoch 975/1000 | Train MAE=3.532px
+[distance_lstm_continuous] epoch 1000/1000 | Train MAE=3.568px
+[distance_lstm_continuous] Saved LAST epoch 1000; Test not evaluated during training.
+
+=== Test evaluation: identical target frames for all three models ===
+  Black_4cm_20261025_143725 | function_approximation: MAE=2.11px | RMSE=2.82px
+  Black_4cm_20261025_143725 | distance_window5: MAE=2.06px | RMSE=2.30px
+  Black_4cm_20261025_143725 | distance_lstm_continuous: MAE=1.77px | RMSE=2.85px
+  Black_4cm_20261025_143750 | function_approximation: MAE=3.17px | RMSE=3.55px
+  Black_4cm_20261025_143750 | distance_window5: MAE=1.91px | RMSE=2.38px
+  Black_4cm_20261025_143750 | distance_lstm_continuous: MAE=1.74px | RMSE=2.30px
+  Black_4cm_20261025_143905 | function_approximation: MAE=3.51px | RMSE=5.71px
+  Black_4cm_20261025_143905 | distance_window5: MAE=3.29px | RMSE=4.92px
+  Black_4cm_20261025_143905 | distance_lstm_continuous: MAE=3.29px | RMSE=5.29px
+  Black_4cm_20261025_143925 | function_approximation: MAE=3.27px | RMSE=4.16px
+  Black_4cm_20261025_143925 | distance_window5: MAE=3.19px | RMSE=4.04px
+  Black_4cm_20261025_143925 | distance_lstm_continuous: MAE=2.22px | RMSE=3.08px
+  Black_4cm_20261025_143935 | function_approximation: MAE=1.92px | RMSE=2.41px
+  Black_4cm_20261025_143935 | distance_window5: MAE=2.05px | RMSE=2.85px
+  Black_4cm_20261025_143935 | distance_lstm_continuous: MAE=1.69px | RMSE=2.55px
+  Black_4cm_20261025_143945 | function_approximation: MAE=3.21px | RMSE=4.71px
+  Black_4cm_20261025_143945 | distance_window5: MAE=2.87px | RMSE=4.42px
+  Black_4cm_20261025_143945 | distance_lstm_continuous: MAE=3.02px | RMSE=4.11px
+  Black_4cm_20261025_144015 | function_approximation: MAE=3.11px | RMSE=4.15px
+  Black_4cm_20261025_144015 | distance_window5: MAE=3.03px | RMSE=3.99px
+  Black_4cm_20261025_144015 | distance_lstm_continuous: MAE=4.17px | RMSE=6.27px
+  Black_4cm_20261025_150010 | function_approximation: MAE=5.77px | RMSE=7.19px
+  Black_4cm_20261025_150010 | distance_window5: MAE=4.20px | RMSE=4.82px
+  Black_4cm_20261025_150010 | distance_lstm_continuous: MAE=3.74px | RMSE=4.49px
+  Black_4cm_20261025_150052 | function_approximation: MAE=1.96px | RMSE=2.47px
+  Black_4cm_20261025_150052 | distance_window5: MAE=2.74px | RMSE=3.12px
+  Black_4cm_20261025_150052 | distance_lstm_continuous: MAE=3.04px | RMSE=3.56px
+  Black_4cm_20261025_150204 | function_approximation: MAE=2.61px | RMSE=2.98px
+  Black_4cm_20261025_150204 | distance_window5: MAE=2.69px | RMSE=3.78px
+  Black_4cm_20261025_150204 | distance_lstm_continuous: MAE=2.55px | RMSE=3.11px
+  Black_4cm_20261025_150222 | function_approximation: MAE=3.93px | RMSE=5.22px
+  Black_4cm_20261025_150222 | distance_window5: MAE=4.96px | RMSE=6.72px
+  Black_4cm_20261025_150222 | distance_lstm_continuous: MAE=3.78px | RMSE=4.81px
+  Black_4cm_20261025_150257 | function_approximation: MAE=2.38px | RMSE=3.90px
+  Black_4cm_20261025_150257 | distance_window5: MAE=1.67px | RMSE=2.23px
+  Black_4cm_20261025_150257 | distance_lstm_continuous: MAE=1.82px | RMSE=2.20px
+  Black_4cm_20261025_150310 | function_approximation: MAE=2.10px | RMSE=2.65px
+  Black_4cm_20261025_150310 | distance_window5: MAE=2.79px | RMSE=2.97px
+  Black_4cm_20261025_150310 | distance_lstm_continuous: MAE=2.50px | RMSE=3.17px
+  Black_4cm_20261025_150328 | function_approximation: MAE=1.98px | RMSE=2.68px
+  Black_4cm_20261025_150328 | distance_window5: MAE=2.09px | RMSE=2.95px
+  Black_4cm_20261025_150328 | distance_lstm_continuous: MAE=3.76px | RMSE=4.96px
+  Black_4cm_20261025_150803 | function_approximation: MAE=1.96px | RMSE=2.73px
+  Black_4cm_20261025_150803 | distance_window5: MAE=2.02px | RMSE=2.59px
+  Black_4cm_20261025_150803 | distance_lstm_continuous: MAE=1.95px | RMSE=3.35px
+  Black_4cm_20261025_150838 | function_approximation: MAE=3.03px | RMSE=4.91px
+  Black_4cm_20261025_150838 | distance_window5: MAE=2.93px | RMSE=5.36px
+  Black_4cm_20261025_150838 | distance_lstm_continuous: MAE=1.53px | RMSE=2.00px
+  Black_4cm_20261025_150948 | function_approximation: MAE=3.91px | RMSE=5.13px
+  Black_4cm_20261025_150948 | distance_window5: MAE=3.56px | RMSE=4.25px
+  Black_4cm_20261025_150948 | distance_lstm_continuous: MAE=2.84px | RMSE=3.49px
+  Black_4cm_20261025_151002 | function_approximation: MAE=2.78px | RMSE=3.64px
+  Black_4cm_20261025_151002 | distance_window5: MAE=3.59px | RMSE=4.46px
+  Black_4cm_20261025_151002 | distance_lstm_continuous: MAE=2.19px | RMSE=2.64px
+  Black_4cm_20261025_151105 | function_approximation: MAE=4.80px | RMSE=6.03px
+  Black_4cm_20261025_151105 | distance_window5: MAE=4.24px | RMSE=5.01px
+  Black_4cm_20261025_151105 | distance_lstm_continuous: MAE=4.02px | RMSE=4.75px
+  Black_4cm_20261025_151112 | function_approximation: MAE=2.60px | RMSE=4.23px
+  Black_4cm_20261025_151112 | distance_window5: MAE=2.86px | RMSE=4.20px
+  Black_4cm_20261025_151112 | distance_lstm_continuous: MAE=2.21px | RMSE=3.17px
+  Black_4cm_20261025_151147 | function_approximation: MAE=3.90px | RMSE=5.55px
+  Black_4cm_20261025_151147 | distance_window5: MAE=4.52px | RMSE=5.78px
+  Black_4cm_20261025_151147 | distance_lstm_continuous: MAE=3.85px | RMSE=4.65px
+
+=== Overall test metrics (all eligible test frames pooled) ===
+Function approximation: MAE=3.07px | RMSE=4.39px | R2=0.961
+MLP (5 frames): MAE=3.08px | RMSE=4.21px | R2=0.964
+LSTM (full history): MAE=2.73px | RMSE=3.73px | R2=0.972
+Total time: 500.4s
+
+Saved results to: C:\MineApp\Code\Multimodal_Imitation_Learning\Data\D4\Result\fixed_function_mlp_lstm_window5_20261026_205550_700402
+  test_model_comparison.png
+  test_metrics_chart.png
+  test_predictions/*.png
+  training_curves.png
+  overall_model_summary.csv
+  test_phase_metrics.csv
+  test_phase_errors.png
+  test_trial_phase_metrics.csv
+  test_phase_summary.csv
+  data_split.csv
+  test_condition_metrics.csv
+  test_metrics_by_condition.png
+  models/function_approximation.json
+  models/distance_window5.pth
+  models/distance_lstm_continuous.pth

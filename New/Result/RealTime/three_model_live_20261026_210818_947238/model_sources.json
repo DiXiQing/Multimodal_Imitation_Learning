@@ -1,0 +1,12 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D4\\Result\\fixed_function_mlp_lstm_window5_20261026_205550_700402\\models",
+  "files": [
+    "function_approximation.json",
+    "distance_window5.pth",
+    "distance_lstm_continuous.pth"
+  ],
+  "distance": "hand_object_signed_distance",
+  "common_frame_rule": "Five consecutive valid inputs after every reset; LSTM observes all valid inputs, including warmup",
+  "units": "px",
+  "video_timing": "Nominal FPS video; use CSV timestamps for actual time"
+}

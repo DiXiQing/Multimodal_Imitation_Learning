@@ -21,8 +21,8 @@ with tempfile.TemporaryDirectory(prefix='three_model_check_',dir=ROOT/'tool') as
             with (folder/'camera.csv').open('w',newline='') as f:
                 w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
     def no_training(name,inputs,fit,val,args,out,device,log):
-        model=(m.DistanceLSTM(args.hidden) if name==m.LSTM_MODEL else m.DistanceMLP(inputs,args.hidden)).to(device)
-        scale=m.fit_scaler(fit)
+        model=(m.ContinuousDistanceLSTM(args.hidden) if name==m.LSTM_MODEL else m.DistanceMLP(inputs,args.hidden)).to(device)
+        scale=m.fit_sequence_scaler(fit) if name==m.LSTM_MODEL else m.fit_scaler(fit)
         torch.save(m.checkpoint(model,name,inputs,scale,args,0,fit),out/'models'/f'{name}.pth')
         history=[dict(model=name,stage='check_only',epoch=0,train_loss=0.,train_mae_px=0.,validation_mae_px=0.)]
         return model,scale,history,dict(model=name,selected_epoch=0,best_validation_mae_px=0.)
@@ -35,13 +35,22 @@ with tempfile.TemporaryDirectory(prefix='three_model_check_',dir=ROOT/'tool') as
     with (out/'overall_model_summary.csv').open(encoding='utf-8-sig') as f:
         assert len(list(csv.DictReader(f)))==3
     saved=torch.load(out/'models'/f'{m.LSTM_MODEL}.pth',weights_only=True)
-    net=m.DistanceLSTM(saved['hidden_size']);net.load_state_dict(saved['state_dict']);net.eval()
-    x=torch.randn(3,5)
+    assert saved['schema']=='distance_lstm_continuous_v1'
+    net=m.ContinuousDistanceLSTM(saved['hidden_size']);net.load_state_dict(saved['state_dict']);net.eval()
+    x=torch.randn(3,12,1)
     with torch.no_grad():
-        assert torch.allclose(net(x),torch.cat([net(x[i:i+1]) for i in range(3)]),atol=1e-6)
+        whole,_=net(x)
+        assert torch.allclose(whole,torch.cat([net(x[i:i+1])[0] for i in range(3)]),atol=1e-6)
+        state=None;stream=[]
+        for i in range(x.shape[1]):
+            value,state=net(x[:,i:i+1],state);stream.append(value)
+        assert torch.allclose(whole,torch.cat(stream,dim=1),atol=1e-6)
+        altered=x.clone();altered[:,8:]+=100
+        assert torch.allclose(whole[:,:8],net(altered)[0][:,:8],atol=1e-6), 'Future leakage'
+    assert len(list((out/'validation_lstm_full_predictions').glob('*.csv')))==3
     for name in m.MODEL_SPECS:
         sys.argv=['evaluate','--model',str(out/'models'/f'{name}.pth'),'--source',str(root/'Validation'),'--output',str(root/('test_'+name))]
         evaluator.main()
         result=json.loads((root/('test_'+name)/'evaluation_info.json').read_text(encoding='utf-8'))
         assert result['overall']['frames']==93, 'All three models must use identical eligible targets'
-print('PASS: three-model reports, checkpoint loading, offline inference and window state isolation. No training. Temporary outputs removed.')
+print('PASS: reports, continuous checkpoint loading, full-sequence/streaming equivalence, trial isolation and causality. No training. Temporary outputs removed.')

@@ -5,14 +5,27 @@ However, classification alone cannot fully describe continuous finger movements 
 Therefore, regression models may be a suitable approach for predicting continuous finger movements.
 
 在这个世界上约有57.7m人患有肢体残疾，This issue is especially serious in Asia，East Asia and South Asia accounting for about 11.2 million and 9.7 million cases。
-研究者致力于开发能还原人手功能的义手。
+义手的技术也随着科技快速发展。
 尽管目前义手的动作识别效率发展快速，But the rejection rate of prosthetic hands is as high as 44%。
-这里面使用起来非常累占大部分原因
+其中的主要原因之一是使用义手时会产生大量的认知负荷
 
-3.写人手自然抓取能减少认知负荷
+3.
+在传统义手操作中，用户往往需要有意识地监控和调整动作，这增加了认知负荷和学习成本。
+Conventional prosthetic hand operation often requires users to consciously select and adjust movements.
+而在人类自然抓取中，许多细微调整能够自动完成，无需逐一进行有意识的控制。
+如果义手也能自动承担一部分调整，用户就可能不必持续关注每个操作细节。
+基于这一思路，研究者探索了由用户与系统共同完成动作的半自动控制方法。
 
 4.相关研究
+利用压力传感器，实现半自动控制
+Vasile et al，利用视觉传感器，在抓取过程中将手腕的朝向控制交给了系统，用户只需要控制抓取与放开指令
 
+5.
+我们人类在识别目标物体的位置和大小，以及用眼睛观察手逐渐接近物体的动作时，会在无意识中调整两根手指之间的宽度。我们希望将这一事实应用于控制。
+
+RQ1:在抓取过程中，是否可以通过抓取位置与开合大小进行建模。
+Can fingertip aperture during reach-to-grasp movements be predicted from the hand–object distance
+RQ2:通过应用在机械手，是否可以降低用户的认知负荷。
 
 
 3.

@@ -1,4 +1,4 @@
-"""Compare current-frame MLP, window MLP and fixed-window LSTM on identical target frames. No training with --check-data."""
+"""Compare current-frame MLP, window MLP and full-trial causal LSTM on identical target frames. No training with --check-data."""
 from __future__ import annotations
 
 import argparse
@@ -36,10 +36,10 @@ LOSS = 'mae'
 MAX_FRAME_GAP_S = .10            # Reject a window crossing a larger timestamp gap
 WINDOW_MODEL = f'distance_window{WINDOW_SIZE}'
 PREDICTION_KEY = f'predicted_window{WINDOW_SIZE}_px'
-LSTM_MODEL = f'distance_lstm_window{WINDOW_SIZE}'
-LSTM_PREDICTION_KEY = f'predicted_lstm_window{WINDOW_SIZE}_px'
-MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: WINDOW_SIZE, LSTM_MODEL: WINDOW_SIZE}
-LABELS = {'distance_current': 'MLP (current frame)', WINDOW_MODEL: f'MLP ({WINDOW_SIZE} frames)', LSTM_MODEL: f'LSTM ({WINDOW_SIZE} frames)'}
+LSTM_MODEL = 'distance_lstm_continuous'
+LSTM_PREDICTION_KEY = 'predicted_lstm_continuous_px'
+MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: WINDOW_SIZE, LSTM_MODEL: 0}
+LABELS = {'distance_current': 'MLP (current frame)', WINDOW_MODEL: f'MLP ({WINDOW_SIZE} frames)', LSTM_MODEL: 'LSTM (full history)'}
 
 
 class DistanceMLP(nn.Module):
@@ -66,6 +66,76 @@ class DistanceLSTM(nn.Module):
     def forward(self, x):
         sequence, _ = self.lstm(x.unsqueeze(-1))
         return self.head(sequence[:, -1, :]).squeeze(-1)
+
+
+class ContinuousDistanceLSTM(nn.Module):
+    """Causal many-to-many LSTM. One state per trial, never shared across trials."""
+    def __init__(self, hidden=HIDDEN_SIZE):
+        super().__init__()
+        self.lstm = nn.LSTM(1, hidden, num_layers=1, batch_first=True)
+        self.head = nn.Sequential(nn.Dropout(.10), nn.Linear(hidden, 1))
+
+    def forward(self, x, state=None):
+        sequence, state = self.lstm(x, state)
+        return self.head(sequence).squeeze(-1), state
+
+
+def continuous_segments(distance, target, timestamp, frame, valid, max_gap):
+    """Break only on missing input, bad timing or missing source frames."""
+    usable = np.isfinite(distance) & np.isfinite(timestamp) & np.isfinite(frame) & valid
+    segments, current = [], []
+    for i in range(len(distance)):
+        if not usable[i]:
+            if current:segments.append(np.asarray(current));current=[]
+            continue
+        if current:
+            j=current[-1]
+            if frame[i]-frame[j]!=1 or not 0<timestamp[i]-timestamp[j]<=max_gap:
+                segments.append(np.asarray(current));current=[]
+        current.append(i)
+    if current:segments.append(np.asarray(current))
+    return [dict(distance=distance[idx].astype(np.float32), y=target[idx].astype(np.float32),
+                 frame=frame[idx].astype(int), time=timestamp[idx]-timestamp[0]) for idx in segments]
+
+
+def continuous_predictions(model, trial, scaler, device):
+    model.eval()
+    result=[]
+    with torch.inference_mode():
+        for seq in trial['sequences']:
+            x=torch.tensor((seq['distance']-scaler['x_min'])/scaler['x_scale'],device=device).reshape(1,-1,1)
+            pred,_=model(x)  # No state supplied: zero state at this trial/segment start.
+            pred=pred[0].cpu().numpy()*scaler['y_scale']+scaler['y_mean']
+            result.extend(dict(frame=int(f),time=float(t),actual=float(y),predicted=float(p))
+                          for f,t,y,p in zip(seq['frame'],seq['time'],seq['y'],pred))
+    return result
+
+
+def sequence_epoch(model, loader, optimizer, loss_name, device, y_scale):
+    from torch.nn.utils.rnn import pad_sequence
+    model.train()
+    total_loss=total_mae=count=0
+    for batch in loader:
+        xs,ys,weights=[],[],[]
+        for sequences,scaler in batch:
+            n=sum(int(np.isfinite(seq['y']).sum()) for seq in sequences)
+            for seq in sequences:
+                mask=np.isfinite(seq['y'])
+                xs.append(torch.tensor((seq['distance']-scaler['x_min'])/scaler['x_scale']).reshape(-1,1))
+                ys.append(torch.tensor(np.where(mask,(seq['y']-scaler['y_mean'])/scaler['y_scale'],0)))
+                weights.append(torch.tensor(mask.astype(np.float32)/n/len(batch)))
+        x=pad_sequence(xs,batch_first=True).to(device)
+        y=pad_sequence(ys,batch_first=True).to(device)
+        weight=pad_sequence(weights,batch_first=True).to(device)
+        optimizer.zero_grad(set_to_none=True)
+        pred,_=model(x)
+        error=pred-y
+        loss=((error.abs() if loss_name=='mae' else error.square())*weight).sum()
+        loss.backward();optimizer.step()
+        total_loss+=float(loss.detach())*len(batch)
+        total_mae+=float((error.detach().abs()*weight).sum())*y_scale*len(batch)
+        count+=len(batch)
+    return total_loss/count,total_mae/count
 
 
 def seed_all(seed):
@@ -120,6 +190,7 @@ def load_trials(source, max_gap, distance_column=DISTANCE_COLUMN):
         d, y, t, frame = [np.array([numeric(r, key) for r in rows]) for key in
                            (distance_column, 'finger_width', 't_camera', 'frame')]
         valid = np.array([r.get('valid') == '1' for r in rows])
+        sequences=continuous_segments(d,y,t,frame,valid,max_gap)
         windows, indices = make_windows(d, y, t, frame, valid, max_gap)
         if not len(indices):
             raise ValueError(f'{folder.name}: no valid continuous {WINDOW_SIZE}-frame window.')
@@ -131,7 +202,7 @@ def load_trials(source, max_gap, distance_column=DISTANCE_COLUMN):
                            frame=frame[indices].astype(int), time=t[indices] - t[0],
                            window_start_frame=frame[indices - WINDOW_SIZE + 1].astype(int),
                            window_duration=t[indices] - t[indices - WINDOW_SIZE + 1],
-                           phase=phase, raw_rows=len(rows), settings=settings))
+                           phase=phase, raw_rows=len(rows), settings=settings,sequences=sequences))
     signatures = {(g['settings'].get('object_color', 'black'), g['settings']['size_cm'],
                    g['settings']['width'], g['settings']['height']) for g in trials}
     if len(signatures) > 1:
@@ -149,12 +220,25 @@ def fit_scaler(trials):
                 y_mean=float(np.mean(y)), y_scale=max(float(np.std(y)), 1e-6))
 
 
+def fit_sequence_scaler(trials):
+    sequences=[s for g in trials for s in g['sequences']]
+    x=np.concatenate([s['distance'] for s in sequences])
+    y=np.concatenate([s['y'][np.isfinite(s['y'])] for s in sequences])
+    scale=float(np.max(x)-np.min(x))
+    if scale<=0:raise ValueError('Training distances have zero range.')
+    return dict(x_min=float(x.min()),x_scale=scale,y_mean=float(y.mean()),y_scale=max(float(y.std()),1e-6))
+
+
 def inputs_for(trial, inputs, scaler):
     x = trial['windows'] if inputs == WINDOW_SIZE else trial['windows'][:, -1:]
     return ((x - scaler['x_min']) / scaler['x_scale']).astype(np.float32)
 
 
 def loader_for(trials, inputs, scaler, args):
+    if inputs == 0:
+        generator=torch.Generator().manual_seed(args.seed)
+        return DataLoader([(g['sequences'],scaler) for g in trials],batch_size=args.batch_size,
+                          shuffle=True,generator=generator,collate_fn=lambda batch:batch)
     x = np.concatenate([inputs_for(g, inputs, scaler) for g in trials])
     y = np.concatenate([(g['y'] - scaler['y_mean']) / scaler['y_scale'] for g in trials])
     # Uniform sampling of windows + these weights gives each trial equal total weight.
@@ -167,6 +251,9 @@ def loader_for(trials, inputs, scaler, args):
 
 
 def predict_trial(model, trial, inputs, scaler, device):
+    if isinstance(model,ContinuousDistanceLSTM):
+        values={r['frame']:r['predicted'] for r in continuous_predictions(model,trial,scaler,device)}
+        return np.array([values[int(f)] for f in trial['frame']])
     model.eval()
     with torch.no_grad():
         value = model(torch.from_numpy(inputs_for(trial, inputs, scaler)).to(device)).cpu().numpy()
@@ -187,6 +274,8 @@ def validation_mae(model, trials, inputs, scaler, device):
 
 
 def epoch_step(model, loader, optimizer, loss_name, device, y_scale):
+    if isinstance(model,ContinuousDistanceLSTM):
+        return sequence_epoch(model,loader,optimizer,loss_name,device,y_scale)
     model.train()
     total_loss = total_absolute = count = 0
     for x, y, weight in loader:
@@ -203,14 +292,24 @@ def epoch_step(model, loader, optimizer, loss_name, device, y_scale):
 
 
 def checkpoint(model, name, inputs, scaler, args, epoch, trials):
-    return dict(schema='distance_lstm_v1' if name == LSTM_MODEL else 'distance_mlp_v1', model_name=name,
-                architecture='LSTM' if name == LSTM_MODEL else 'MLP',
-                feature_size=1, sequence_length=inputs if name == LSTM_MODEL else 1,
-                lstm_layers=1 if name == LSTM_MODEL else 0,
-                state_policy='Zero hidden/cell state per input window; no state carried between windows' if name == LSTM_MODEL else 'Stateless',
+    if name == LSTM_MODEL:
+        return dict(schema='distance_lstm_continuous_v1',model_name=name,architecture='LSTM',
+            state_dict={k:v.detach().cpu() for k,v in model.state_dict().items()},
+            input_size=1,feature_size=1,output_size=1,hidden_size=args.hidden,lstm_layers=1,dropout=.1,
+            window_size=1,sequence_length='Full trial',comparison_required_context=WINDOW_SIZE,
+            state_policy='Retain state from trial start to current frame; reset at new trial or invalid/gapped input',
+            input_order='Chronological distance sequence from trial start; no future or aperture input',
+            target='Current-frame fingertip aperture at every valid labelled time step',
+            parameter_count=sum(p.numel() for p in model.parameters()),
+            scaler=scaler,loss=args.loss,epochs=epoch,seed=args.seed,
+            distance_column=args.distance_column,max_frame_gap_s=args.max_gap,
+            recording_settings=trials[0]['settings'],fitted_trials=[g['name'] for g in trials])
+    return dict(schema='distance_mlp_v1', model_name=name,
+                architecture='MLP', feature_size=1, sequence_length=1,
+                lstm_layers=0, state_policy='Stateless',
                 output_size=1, parameter_count=sum(p.numel() for p in model.parameters()),
                 state_dict={k: v.detach().cpu() for k, v in model.state_dict().items()},
-                input_size=1 if name == LSTM_MODEL else inputs, hidden_size=args.hidden, dropout=.10,
+                input_size=inputs, hidden_size=args.hidden, dropout=.10,
                 window_size=inputs, comparison_required_context=WINDOW_SIZE,
                 input_order='oldest to newest; current frame included',
                 target='current-frame fingertip aperture; no historical aperture inputs',
@@ -222,8 +321,8 @@ def checkpoint(model, name, inputs, scaler, args, epoch, trials):
 
 def train_one(name, inputs, fit_trials, val_trials, args, output, device, log):
     seed_all(args.seed)
-    scaler = fit_scaler(fit_trials)
-    model = (DistanceLSTM(args.hidden) if name == LSTM_MODEL else DistanceMLP(inputs, args.hidden)).to(device)
+    scaler = fit_sequence_scaler(fit_trials) if name == LSTM_MODEL else fit_scaler(fit_trials)
+    model = (ContinuousDistanceLSTM(args.hidden) if name == LSTM_MODEL else DistanceMLP(inputs, args.hidden)).to(device)
     loader = loader_for(fit_trials, inputs, scaler, args)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     best_mae, best_epoch, wait = float('inf'), 0, 0
@@ -284,10 +383,10 @@ def configure_window(size):
     WINDOW_SIZE = size
     WINDOW_MODEL = f'distance_window{size}'
     PREDICTION_KEY = f'predicted_window{size}_px'
-    LSTM_MODEL = f'distance_lstm_window{size}'
-    LSTM_PREDICTION_KEY = f'predicted_lstm_window{size}_px'
-    MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: size, LSTM_MODEL: size}
-    LABELS = {'distance_current': 'MLP (current frame)', WINDOW_MODEL: f'MLP ({size} frames)', LSTM_MODEL: f'LSTM ({size} frames)'}
+    LSTM_MODEL = 'distance_lstm_continuous'
+    LSTM_PREDICTION_KEY = 'predicted_lstm_continuous_px'
+    MODEL_SPECS = {'distance_current': 1, WINDOW_MODEL: size, LSTM_MODEL: 0}
+    LABELS = {'distance_current': 'MLP (current frame)', WINDOW_MODEL: f'MLP ({size} frames)', LSTM_MODEL: 'LSTM (full history)'}
 
 
 def main():
@@ -347,7 +446,7 @@ def main():
         with (output / 'training_log.txt').open('a', encoding='utf-8') as f:
             f.write(message + '\n')
     started = time.perf_counter()
-    log(f'=== Current-frame MLP vs {WINDOW_SIZE}-frame MLP vs {WINDOW_SIZE}-frame LSTM ===')
+    log(f'=== Current-frame MLP vs {WINDOW_SIZE}-frame MLP vs continuous-history LSTM ===')
     log(f'Data: {source}\nDevice: {device} | Loss: {args.loss} | Seed: {args.seed}')
     log(f'Input distance column: {args.distance_column}')
     log(f'Train: {len(fit_trials)} trials from {source / TRAIN_FOLDER}')
@@ -376,7 +475,9 @@ def main():
                     window_rule=f'{WINDOW_SIZE} consecutive valid source frames, increasing actual timestamps, no gap over max_gap.',
                     models=MODEL_SPECS,
                     model_information=model_descriptions(args.hidden),
-                    lstm_state='Reset hidden/cell state for every window, no state carry between windows or trials.')
+                    lstm_state='Full trial from first valid frame to current frame; reset at trial boundary or invalid/gapped input.',
+                    lstm_training='Full-sequence backpropagation; batch_size counts trials; padded target positions masked; each trial has equal total loss weight.',
+                    lstm_comparison='Main comparison uses the same eligible MLP target frames; full LSTM trajectories and metrics also exported separately.')
     (output / 'model_information.json').write_text(json.dumps(settings, indent=2), encoding='utf-8')
     trained, histories, selections = {}, [], []
     for name, inputs in MODEL_SPECS.items():
@@ -441,6 +542,7 @@ def main():
                 **scores(actual, np.array([r[key] for r in subset]))))
     write_csv(output / 'validation_phase_metrics.csv', phase_rows)
     export_phase_errors(output, all_predictions, prefix='validation')
+    export_full_lstm_results(output, validation, trained[LSTM_MODEL], device)
     plot_results(output, summary, metrics_rows, histories, validation)
     export_condition_results(output, all_predictions, validation)
     log('\n=== Overall validation metrics (all eligible validation frames pooled) ===')
@@ -461,6 +563,28 @@ def main():
 def prediction_keys():
     return {'distance_current': 'predicted_current_px', WINDOW_MODEL: PREDICTION_KEY,
             LSTM_MODEL: LSTM_PREDICTION_KEY}
+
+
+def export_full_lstm_results(output,trials,trained,device):
+    model,scaler=trained
+    dest=output/'validation_lstm_full_predictions';dest.mkdir()
+    metrics=[]
+    for g in trials:
+        rows=continuous_predictions(model,g,scaler,device)
+        write_csv(dest/f'{g["name"]}.csv',rows)
+        y=np.array([r['actual'] for r in rows]);p=np.array([r['predicted'] for r in rows])
+        valid=np.isfinite(y)&np.isfinite(p)
+        if valid.any():metrics.append(dict(trial=g['name'],condition=condition_label(g),frames=int(valid.sum()),**scores(y[valid],p[valid])))
+        fig,ax=plt.subplots(figsize=(11,4.5))
+        # Separate plotted segments prevent a line bridging a detection gap.
+        by_frame={r['frame']:r for r in rows}
+        for j,seq in enumerate(g['sequences']):
+            subset=[by_frame[int(f)] for f in seq['frame']]
+            ax.plot([r['time'] for r in subset],[r['actual'] for r in subset],color='#222222',label='Measured' if j==0 else None)
+            ax.plot([r['time'] for r in subset],[r['predicted'] for r in subset],color='#519e58',label='LSTM (full history)' if j==0 else None)
+        ax.set(title=g['name'],xlabel='Time from segment start (s)',ylabel='Aperture (px)');ax.legend();ax.grid(alpha=.2);fig.tight_layout()
+        fig.savefig(dest/f'{g["name"]}.png',dpi=160);plt.close(fig)
+    write_csv(output/'validation_lstm_full_trial_metrics.csv',metrics)
 
 
 def export_phase_errors(output, predictions, prefix='validation'):
@@ -533,15 +657,15 @@ def model_descriptions(hidden):
     result = {}
     for name, inputs in MODEL_SPECS.items():
         lstm = name == LSTM_MODEL
-        model = DistanceLSTM(hidden) if lstm else DistanceMLP(inputs, hidden)
+        model = ContinuousDistanceLSTM(hidden) if lstm else DistanceMLP(inputs, hidden)
         result[name] = dict(architecture='LSTM' if lstm else 'MLP',
-            input_units=1 if lstm else inputs, sequence_steps=inputs if lstm else 1,
+            input_units=1 if lstm else inputs, sequence_steps='From trial start to current frame' if lstm else 1,
             input_correspondence='One distance feature at each step, oldest to current' if lstm else
                                  'Current-frame distance only' if inputs == 1 else 'One distance per unit, oldest to current',
             output_units=1, output_correspondence='Current-frame finger_width (px)',
             hidden_layers=[hidden] if lstm else [hidden, hidden],
             parameter_count=sum(p.numel() for p in model.parameters()),
-            state_reset='Every independent window' if lstm else 'Stateless')
+            state_reset='Trial start or missing/gapped input; never reset at normal sliding-window boundaries' if lstm else 'Stateless')
     return result
 
 
@@ -557,9 +681,13 @@ def check_models_and_data(fit, validation, args):
     scaler = fit_scaler(fit)
     with torch.inference_mode():
         for name, inputs in MODEL_SPECS.items():
-            model = DistanceLSTM(args.hidden) if name == LSTM_MODEL else DistanceMLP(inputs,args.hidden)
-            x = torch.from_numpy(inputs_for(validation[0],inputs,scaler)[:3])
-            assert model(x).shape == (len(x),)
+            model = ContinuousDistanceLSTM(args.hidden) if name == LSTM_MODEL else DistanceMLP(inputs,args.hidden)
+            if name == LSTM_MODEL:
+                values = predict_trial(model,validation[0],inputs,scaler,torch.device('cpu'))
+                assert values.shape == validation[0]['y'].shape
+            else:
+                x = torch.from_numpy(inputs_for(validation[0],inputs,scaler)[:3])
+                assert model(x).shape == (len(x),)
     for split, trials in [('Train',fit),('Validation',validation)]:
         counts = {}
         for g in trials:

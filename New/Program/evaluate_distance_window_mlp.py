@@ -1,4 +1,4 @@
-"""Evaluate a saved current/window MLP or fixed-window LSTM. Never trains."""
+"""Evaluate saved function, MLP or LSTM models. Never trains."""
 import argparse
 import csv
 import json
@@ -102,17 +102,19 @@ def main():
         if len(candidates) != 1:
             raise ValueError('Select one exact distance_windowN.pth file; model folder is empty or ambiguous.')
         model_path = candidates[0]
-    saved = torch.load(model_path, map_location='cpu', weights_only=True)
+    is_function = model_path.suffix.lower()=='.json'
+    saved = json.loads(model_path.read_text(encoding='utf-8-sig')) if is_function else torch.load(model_path, map_location='cpu', weights_only=True)
     # Legacy checkpoints were trained using Euclidean distance.
     distance_column = saved.get('distance_column', 'hand_object_distance')
     if distance_column not in ('hand_object_distance', 'hand_object_signed_distance'):
         raise ValueError(f'Unsupported checkpoint distance column: {distance_column}')
     print(f'Input distance column: {distance_column}')
     window_size = saved.get('window_size')
-    is_lstm = saved.get('schema') == 'distance_lstm_v1'
-    if saved.get('schema') not in ('distance_mlp_v1','distance_lstm_v1') or not isinstance(window_size,int) or window_size < 1 or saved.get('input_size') != (1 if is_lstm else window_size):
+    is_continuous = saved.get('schema') == 'distance_lstm_continuous_v1'
+    is_lstm = saved.get('schema') in ('distance_lstm_v1','distance_lstm_continuous_v1')
+    if saved.get('schema') not in ('distance_mlp_v1','distance_lstm_v1','distance_lstm_continuous_v1','distance_function_v1') or is_function != (saved.get('schema')=='distance_function_v1') or not isinstance(window_size,int) or window_size < 1 or saved.get('input_size') != (1 if is_lstm else window_size):
         raise ValueError('Select a compatible saved MLP or LSTM checkpoint.')
-    prediction_key = f'predicted_window{window_size}_px'
+    prediction_key = 'predicted_function_px' if is_function else 'predicted_lstm_continuous_px' if is_continuous else f'predicted_window{window_size}_px'
     comparison_context = saved.get('comparison_required_context', window_size)
     if not isinstance(comparison_context,int) or comparison_context < window_size:
         raise ValueError('Invalid checkpoint comparison context.')
@@ -122,15 +124,23 @@ def main():
     gap = float(saved['max_frame_gap_s'])
     if not np.isfinite(gap) or gap <= 0:
         raise ValueError('Invalid checkpoint maximum frame gap.')
-    if is_lstm:
+    if is_function:
+        from train_function_mlp_lstm_comparison import FunctionApproximation
+        net = FunctionApproximation(saved['function'])
+    elif is_continuous:
+        from train_mlp_lstm_comparison import ContinuousDistanceLSTM
+        net = ContinuousDistanceLSTM(saved['hidden_size'])
+    elif is_lstm:
         from train_mlp_lstm_comparison import DistanceLSTM
         net = DistanceLSTM(saved['hidden_size'])
     else:
         net = DistanceMLP(window_size, saved['hidden_size'])
-    net.load_state_dict(saved['state_dict'], strict=True)
-    net.eval()
+    if not is_function:
+        net.load_state_dict(saved['state_dict'], strict=True)
+        net.eval()
     folders = discover(args.source)
-    out = args.output or ROOT/'New/Result'/f'offline_window{window_size}_test_{datetime.now():%Y%m%d_%H%M%S_%f}'
+    label='function' if is_function else 'lstm_continuous' if is_continuous else f'window{window_size}'
+    out = args.output or ROOT/'New/Result'/f'offline_{label}_test_{datetime.now():%Y%m%d_%H%M%S_%f}'
     out.mkdir(parents=True, exist_ok=False)
     (out/'test_predictions').mkdir()
     all_rows, per_trial, per_phase, coverage, warnings = [], [], [], [], []
@@ -157,10 +167,24 @@ def main():
                 indices.append(i)
                 windows.append(d[i-window_size+1:i+1])
         p = np.full(len(rows), np.nan)
-        if windows:
+        if is_continuous:
+            full = np.full(len(rows),np.nan)
+            # Streaming state starts at the first frame, including metric warmup.
+            state=None;previous=None
+            with torch.inference_mode():
+                for i in range(len(rows)):
+                    if not valid[i]:state=None;previous=None;continue
+                    if previous is not None and (frames[i]-frames[previous]!=1 or not 0<t[i]-t[previous]<=gap):state=None
+                    x=torch.tensor([[[float((d[i]-scaler['x_min'])/scaler['x_scale'])]]],dtype=torch.float32)
+                    predicted,state=net(x,state)
+                    full[i]=float(predicted[0,0])*scaler['y_scale']+scaler['y_mean']
+                    previous=i
+            if not np.isfinite(full[valid]).all():raise ValueError(f'Nonfinite continuous prediction: {folder.name}')
+            p[indices]=full[indices]
+        elif windows:
             x = (np.asarray(windows, dtype=np.float32)-scaler['x_min'])/scaler['x_scale']
             with torch.inference_mode():
-                predicted = net(torch.from_numpy(x)).numpy()*scaler['y_scale']+scaler['y_mean']
+                predicted = (net.predict(x[:,-1]) if is_function else net(torch.from_numpy(x)).numpy())*scaler['y_scale']+scaler['y_mean']
             if not np.isfinite(predicted).all():
                 raise ValueError(f'Nonfinite model output: {folder.name}')
             p[indices] = predicted
@@ -238,8 +262,9 @@ def main():
         ax.grid(axis='y', alpha=.2)
         ax.set_axisbelow(True)
         save(fig, out/'02_phase_errors')
-    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),distance_column=distance_column,comparison_required_context=comparison_context,
-        overall=overall,warnings=warnings,window_size=window_size,architecture='LSTM' if is_lstm else 'MLP',method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. Causal {window_size}-frame windows reset at each trial or invalid/gapped frame. LSTM state resets for every window. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
+    state_policy='Continuous LSTM state from trial start, reset at trial/input gaps' if is_continuous else 'Independent fixed windows; no carried state'
+    details = dict(model=str(model_path.resolve()),source=str(args.source.resolve()),trial_count=len(per_trial),distance_column=distance_column,comparison_required_context=comparison_context,state_policy=state_policy,
+        overall=overall,warnings=warnings,window_size=window_size,architecture='Function approximation' if is_function else 'LSTM' if is_lstm else 'MLP',method=f'Original CSV time/frame order; no smoothing, truncation, resampling, or training. {state_policy}. Scoring uses common {comparison_context}-frame eligibility from the checkpoint, including warmup even for single-point baselines. Checkpoint normalization only. Overall metrics pool all finite measured/predicted pairs. Phase bars: mean per-grasp MAE with sample SD. Missing predictions stay blank.',
         model_recording_settings=model_settings)
     (out/'evaluation_info.json').write_text(json.dumps(details, indent=2), encoding='utf-8')
     for warning in warnings:

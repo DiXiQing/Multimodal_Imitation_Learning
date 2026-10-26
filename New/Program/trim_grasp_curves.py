@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = ROOT/'Data/D2/fast'
+DATA_ROOT = ROOT/'New/Result/RealTime/three_model_live_20261026_210818_947238/selected_best3_by_speed'
 VIDEO_SUFFIXES = {'.mp4', '.avi', '.mov', '.mkv'}
 
 
@@ -30,17 +30,84 @@ def write_csv(path, fields, rows):
         writer.writerows(rows)
 
 
+def trial_csv(folder):
+    for name in ('camera.csv','predictions.csv'):
+        path=Path(folder)/name
+        if path.is_file():return path
+    raise ValueError(f'找不到 camera.csv 或 predictions.csv：{folder}')
+
+
+def discover_trials(base):
+    base=Path(base).resolve()
+    if any((base/name).is_file() for name in ('camera.csv','predictions.csv')):return [base]
+    found=set()
+    for name in ('camera.csv','predictions.csv'):
+        for path in base.rglob(name):
+            if any(p.lower() in ('backup','prepared','original') or p.startswith('.') for p in path.relative_to(base).parts[:-1]):continue
+            if path.is_file():found.add(path.parent)
+    return sorted(found)
+
+
+def refresh_live_results(folder,rows):
+    """Re-score retained predictions only; do not re-run any model."""
+    from matplotlib.figure import Figure
+    from matplotlib.backends.backend_agg import FigureCanvasAgg
+    keys=['predicted_function_px','predicted_mlp_px','predicted_lstm_px']
+    labels=['Function approximation','MLP (5 frames)','LSTM (full history)']
+    colors=['#3485b8','#e59a32','#519e58']
+    def number(r,k):
+        try:return float(r[k])
+        except (KeyError,ValueError,TypeError):return np.nan
+    common=[r for r in rows if r.get('common_valid','').lower() in ('true','1') and
+            all(np.isfinite(number(r,k)) for k in ['finger_width',*keys])]
+    scores=[]
+    for key,label in zip(keys,labels):
+        if not common:continue
+        y=np.array([number(r,'finger_width') for r in common]);p=np.array([number(r,key) for r in common]);e=p-y
+        den=np.sum((y-y.mean())**2)
+        scores.append(dict(model=label,frames=len(y),mae=float(abs(e).mean()),rmse=float(np.sqrt((e*e).mean())),r2=float(1-(e*e).sum()/den) if den>1e-12 else None))
+    score_path=folder/'metrics_common_frames.csv'
+    write_csv(score_path,['model','frames','mae','rmse','r2'],scores)
+    fig=Figure(figsize=(11,4.5));FigureCanvasAgg(fig);ax=fig.subplots()
+    t=[number(r,'elapsed_s') for r in rows]
+    ax.plot(t,[number(r,'finger_width') if r.get('valid','').lower() in ('true','1') else np.nan for r in rows],color='#222222',lw=2,label='Measured')
+    for key,label,color in zip(keys,labels,colors):ax.plot(t,[number(r,key) for r in rows],label=label,color=color,lw=1.4)
+    ax.set(xlabel='Time from cropped segment start (s)',ylabel='Aperture (px)');ax.legend();ax.grid(alpha=.2);fig.tight_layout()
+    for ext in ('png','pdf'):fig.savefig(folder/f'prediction_comparison.{ext}',dpi=180)
+    fig=Figure(figsize=(12,4));FigureCanvasAgg(fig);axes=fig.subplots(1,3)
+    for ax,key,title in zip(axes,['mae','rmse','r2'],['MAE (px)','RMSE (px)','R²']):
+        if scores:
+            bars=ax.bar(labels,[r[key] if r[key] is not None else np.nan for r in scores],color=colors)
+            ax.bar_label(bars,fmt='%.3f' if key=='r2' else '%.2f',padding=3)
+        ax.set_title(title);ax.tick_params(axis='x',labelsize=7);ax.grid(axis='y',alpha=.2);ax.set_axisbelow(True);ax.margins(y=.25)
+    fig.tight_layout()
+    for ext in ('png','pdf'):fig.savefig(folder/f'metrics_comparison.{ext}',dpi=180)
+    dt=np.diff([number(r,'t_camera') for r in rows])
+    info=dict(saved_frames=len(rows),valid_frames=sum(r.get('valid','').lower() in ('true','1') for r in rows),common_frames=len(common),
+              observed_fps=float(1/np.mean(dt)) if len(dt) and np.mean(dt)>0 else None,
+              note='Recomputed for manually retained interval. Predictions retain their ORIGINAL inference history; no model rerun or state reset.')
+    (folder/'timing_and_coverage.json').write_text(json.dumps(info,indent=2),encoding='utf-8')
+
+
 def crop_trial(folder, first, last, expected_csv):
     """1-based inclusive selection. Prepare/verify first, then swap; no source deletion."""
     folder = Path(folder).resolve()
-    if (folder/'camera.csv').read_bytes() != expected_csv:
+    csv_path=trial_csv(folder)
+    live=csv_path.name=='predictions.csv'
+    if csv_path.read_bytes() != expected_csv:
         raise ValueError('数据已被其他程序修改，请重新打开文件夹。')
-    fields, rows = read_csv(folder/'camera.csv')
+    fields, rows = read_csv(csv_path)
     if not 1 <= first < last <= len(rows):
         raise ValueError('请选择至少两帧，且范围不能超出原始帧数。')
     if first == 1 and last == len(rows):
         raise ValueError('当前选择包含全部帧，无需裁剪。')
     kept = [dict(r) for r in rows[first-1:last]]
+    if live and 'elapsed_s' in fields:
+        if 'source_elapsed_s' not in fields:fields.append('source_elapsed_s')
+        origin=float(kept[0]['t_camera'])
+        for row in kept:
+            row.setdefault('source_elapsed_s',row['elapsed_s'])
+            row['elapsed_s']=str(float(row['t_camera'])-origin)
     backup = folder.parent/'backup'/f'curve_crop_{datetime.now():%Y%m%d_%H%M%S_%f}_{folder.name}'
     backup.mkdir(parents=True, exist_ok=False)
     stage = backup/'prepared'
@@ -54,7 +121,7 @@ def crop_trial(folder, first, last, expected_csv):
         origin = float(rows[first-1][key])
         for i, row in enumerate(kept):
             row['segment_elapsed_s'] = str(float(rows[first-1+i][key])-origin)
-    write_csv(stage/'camera.csv', fields, kept)
+    write_csv(stage/csv_path.name, fields, kept)
     for video in folder.iterdir():
         if not video.is_file() or video.suffix.lower() not in VIDEO_SUFFIXES:
             continue
@@ -114,10 +181,15 @@ def crop_trial(folder, first, last, expected_csv):
         meta.setdefault('manual_curve_crops', []).append(dict(first=first, last=last,
             original_frames=len(rows), backup=str(backup/'original'), timestamp=datetime.now().isoformat()))
         meta_path.write_text(json.dumps(meta, indent=2), encoding='utf-8')
-    _, verified = read_csv(stage/'camera.csv')
+    if live:refresh_live_results(stage,kept)
+    crop_note=dict(first=first,last=last,original_frames=len(rows),retained_frames=len(kept),
+                   csv_name=csv_path.name,backup=str(backup/'original'),
+                   prediction_history='Retained original predictions, not rerun at crop start' if live else None)
+    (stage/'manual_crop_info.json').write_text(json.dumps(crop_note,indent=2),encoding='utf-8')
+    _, verified = read_csv(stage/csv_path.name)
     assert verified == kept
     # Recheck before replacing: edits made during preparation must not be lost.
-    if (folder/'camera.csv').read_bytes() != expected_csv:
+    if csv_path.read_bytes() != expected_csv:
         raise ValueError('准备期间数据发生变化，已停止；原数据未改动。')
     original = backup/'original'
     if not original.resolve().is_relative_to(folder.parent.resolve()):
@@ -130,7 +202,8 @@ def crop_trial(folder, first, last, expected_csv):
         raise
     manifest = dict(trial=folder.name, first=first, last=last, original_frames=len(rows),
                     retained_frames=len(kept), removed_frames=len(rows)-len(kept),
-                    backup=str(original), note='Only segment-relative CSV fields regenerated; other retained values unchanged. Existing analysis plots/results require regeneration.')
+                    backup=str(original), csv_name=csv_path.name,
+                    note='Live plots and metrics regenerated; predictions not rerun. Parent selection/ranking stays based on original full trials.' if live else 'Only segment-relative CSV fields regenerated; other retained values unchanged. Existing analysis plots/results require regeneration.')
     (backup/'crop_manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
     return manifest
 
@@ -192,14 +265,20 @@ def launch(initial):
             return
         state['index'] = max(0, min(len(state['folders'])-1, index))
         folder = state['folders'][state['index']]
-        state['bytes'] = (folder/'camera.csv').read_bytes()
-        _, state['rows'] = read_csv(folder/'camera.csv')
+        csv_path=trial_csv(folder)
+        state['bytes'] = csv_path.read_bytes()
+        _, state['rows'] = read_csv(csv_path)
         n = len(state['rows'])
         y = np.array([float(r['finger_width']) if r['finger_width'] else np.nan for r in state['rows']])
         selector.disconnect_events()
         ax.clear()
-        ax.plot(np.arange(1,n+1), y, color='#3485b8', lw=1.7)
-        ax.set(title=folder.name, xlabel='Frame', ylabel='Fingertip aperture (px)', xlim=(.5,n+.5))
+        ax.plot(np.arange(1,n+1), y, color='#222222' if csv_path.name=='predictions.csv' else '#3485b8', lw=1.7,label='Measured')
+        if csv_path.name=='predictions.csv':
+            for key,label,color in zip(['predicted_function_px','predicted_mlp_px','predicted_lstm_px'],['Function','MLP','LSTM'],['#3485b8','#e59a32','#519e58']):
+                pred=np.array([float(r[key]) if r.get(key) else np.nan for r in state['rows']])
+                ax.plot(np.arange(1,n+1),pred,color=color,lw=1,label=label)
+            ax.legend(fontsize=9)
+        ax.set(title=str(folder.relative_to(state['base'])) if folder!=state['base'] else folder.name, xlabel='Frame (row position, 1-based)', ylabel='Fingertip aperture (px)', xlim=(.5,n+.5))
         ax.grid(alpha=.2)
         # Use patches with axis-fraction Y coordinates, robust to autoscaling.
         from matplotlib.patches import Polygon
@@ -224,15 +303,15 @@ def launch(initial):
         if not path:
             return
         base = Path(path)
-        folders = [base] if (base/'camera.csv').exists() else sorted(p.parent for p in base.glob('*/camera.csv'))
+        folders = discover_trials(base)
         if not folders:
-            messagebox.showerror('未找到数据','请选择直接包含实验子文件夹的目录，例如 D2/fast 或 D2/slow。')
+            messagebox.showerror('未找到数据','请选择含 camera.csv 或 predictions.csv 的实验目录，或它们的上级目录；会自动查找 fast/normal/slow，跳过 backup。')
             return
         state.update(base=base, folders=folders, pending={})
         path_text.set(str(base))
         listing.delete(0,'end')
         for p in folders:
-            listing.insert('end',p.name)
+            listing.insert('end',str(p.relative_to(base)) if p!=base else p.name)
         show(0)
 
     def save_current():
@@ -265,7 +344,8 @@ def launch(initial):
             if kind == 'ok':
                 state['pending'].pop(state['folders'][state['index']],None)
                 show(state['index'])
-                status.set(f"已保存：保留 {result['retained_frames']} 帧，删除 {result['removed_frames']} 帧。备份：{result['backup']}。已有分析图需重新生成。")
+                extra='实时预测图和指标已重算；原始选择排名未改。' if result['csv_name']=='predictions.csv' else '已有分析图需重新生成。'
+                status.set(f"已保存：保留 {result['retained_frames']} 帧，删除 {result['removed_frames']} 帧。备份：{result['backup']}。{extra}")
             else:
                 status.set('保存失败：'+result)
                 messagebox.showerror('保存失败',result)
@@ -303,6 +383,12 @@ def launch(initial):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source',type=Path,default=None)
+    parser.add_argument('--source',type=Path,default=DATA_ROOT)
+    parser.add_argument('--check-data',action='store_true',help='List recognized trials only; do not open GUI or crop')
     args = parser.parse_args()
-    launch(args.source)
+    if args.check_data:
+        folders=discover_trials(args.source)
+        for folder in folders:print(str(folder.relative_to(args.source.resolve())),trial_csv(folder).name)
+        print(f'Found {len(folders)} trials. No data changed.')
+    else:
+        launch(args.source)

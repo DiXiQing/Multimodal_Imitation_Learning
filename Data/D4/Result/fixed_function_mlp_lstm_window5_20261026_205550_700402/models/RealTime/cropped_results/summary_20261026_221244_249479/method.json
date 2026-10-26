@@ -1,0 +1,20 @@
+{
+  "trials": 9,
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed",
+  "grouping": "Folder labels fast/normal/slow (inferred approach duration grouping from original selection; original target metadata was 1 s for all trials).",
+  "evaluation": "Common_valid AND valid AND finite measured/predicted values for all three models. Same rows for all model scores. Overall and speed scores pool frames; mean\u00b1SD figure averages per-trial scores with sample SD ddof=1.",
+  "predictions": "Existing saved predictions only, not rerun. Any pre-crop recurrent history is retained.",
+  "scope": "Nine previously selected best examples; not an unbiased summary of all live experiments.",
+  "units": "px; no mm calibration supplied.",
+  "source_hashes": {
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\fast\\trial_20261026_210948_513319\\predictions.csv": "89a42271b862e0c73d810450d9dcfb71007948213a79dd1f86b3ecf1dbc01130",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\fast\\trial_20261026_211253_102566\\predictions.csv": "8dfd9bdebd93fdff8d2527636d09e4a6bb5f99cc31ea5232bcd7f25887558c95",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\fast\\trial_20261026_211453_712710\\predictions.csv": "7a64d6587b4a856b229afc2945f5ba4ee10d37b34da1e192c29c0858e1868304",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\normal\\trial_20261026_210928_985332\\predictions.csv": "5ae78c868343ed9c5bacffa8842a3e71ab86eb403a097ade5bf318bd6a682754",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\normal\\trial_20261026_211036_399579\\predictions.csv": "eccf7ff0d60753ffb6612048142c6c197e23f7c27ed37c3c6e1c70df4ed64af5",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\normal\\trial_20261026_211305_451567\\predictions.csv": "e1420d89e7f808c951dc9470e12a0e29022632042752fb7cfba6200ab018ab79",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\slow\\trial_20261026_211054_859572\\predictions.csv": "4045b7a5de6ed6a79bc20a233938b4125aeb8f5637df51fc8bcf03c280c9b096",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\slow\\trial_20261026_211318_639782\\predictions.csv": "7da666ce85fbe65ce2fb96c0d676ea1a1c7872aea8f992c9eff2167aefc6d0ca",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\three_model_live_20261026_210818_947238\\selected_best3_by_speed\\slow\\trial_20261026_211403_263003\\predictions.csv": "c457e757a9326e036d879053dea20665102707112dcb9e9a3c1208fd37ab390f"
+  }
+}

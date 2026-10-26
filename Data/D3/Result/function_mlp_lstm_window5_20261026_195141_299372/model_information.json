@@ -1,0 +1,67 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D3",
+  "check_data": false,
+  "window_size": 5,
+  "distance_column": "hand_object_signed_distance",
+  "epochs": 1000,
+  "patience": 80,
+  "batch_size": 64,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "hidden": 32,
+  "loss": "mae",
+  "seed": 20261016,
+  "max_gap": 0.1,
+  "device": "auto",
+  "log_every": 25,
+  "output": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\D3\\Result\\function_mlp_lstm_window5_20261026_195141_299372",
+  "normalization": "Input MinMax and output standardization, fitted only on the fitting partition at each stage.",
+  "window_rule": "5 consecutive valid source frames, increasing actual timestamps, no gap over max_gap.",
+  "models": {
+    "function_approximation": 1,
+    "distance_window5": 5,
+    "distance_lstm_continuous": 0
+  },
+  "model_information": {
+    "function_approximation": {
+      "architecture": "Single-point function approximation",
+      "input_units": 1,
+      "output_units": 1,
+      "input_correspondence": "Current signed distance only",
+      "output_correspondence": "Current-frame finger_width (px)",
+      "candidates": "Weighted least-squares polynomial degrees 3..9 and cubic smoothing spline",
+      "selection": "Minimum validation macro-MAE; all fits use Train only",
+      "objective": "Squared-error fitting plus spline roughness penalty; neural models retain MAE loss"
+    },
+    "distance_window5": {
+      "architecture": "MLP",
+      "input_units": 5,
+      "sequence_steps": 1,
+      "input_correspondence": "One distance per unit, oldest to current",
+      "output_units": 1,
+      "output_correspondence": "Current-frame finger_width (px)",
+      "hidden_layers": [
+        32,
+        32
+      ],
+      "parameter_count": 1281,
+      "state_reset": "Stateless"
+    },
+    "distance_lstm_continuous": {
+      "architecture": "LSTM",
+      "input_units": 1,
+      "sequence_steps": "From trial start to current frame",
+      "input_correspondence": "One distance feature at each step, oldest to current",
+      "output_units": 1,
+      "output_correspondence": "Current-frame finger_width (px)",
+      "hidden_layers": [
+        32
+      ],
+      "parameter_count": 4513,
+      "state_reset": "Trial start or missing/gapped input; never reset at normal sliding-window boundaries"
+    }
+  },
+  "lstm_state": "Full trial from first valid frame to current frame; reset at trial boundary or invalid/gapped input.",
+  "lstm_training": "Full-sequence backpropagation; batch_size counts trials; padded target positions masked; each trial has equal total loss weight.",
+  "lstm_comparison": "Main comparison uses the same eligible MLP target frames; full LSTM trajectories and metrics also exported separately."
+}
