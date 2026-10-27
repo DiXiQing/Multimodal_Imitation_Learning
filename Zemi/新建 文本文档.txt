@@ -1,67 +1,77 @@
 2.
-To reproduce natural human grasping movements, a regression model is a better choice.
-In the field of hand gesture recognition, many methods focus on classification.
-However, classification alone cannot fully describe continuous finger movements during natural grasping.
-Therefore, regression models may be a suitable approach for predicting continuous finger movements.
-
-在这个世界上约有57.7m人患有肢体残疾，This issue is especially serious in Asia，East Asia and South Asia accounting for about 11.2 million and 9.7 million cases。
-义手的技术也随着科技快速发展。
-尽管目前义手的动作识别效率发展快速，But the rejection rate of prosthetic hands is as high as 44%。
-其中的主要原因之一是使用义手时会产生大量的认知负荷
+About 57.7 million people worldwide have traumatic limb amputation. Prosthetic hands aim to restore hand function after upper-limb loss.
+Although prosthetic hands have advanced rapidly，But the rejection rate of prosthetic hands is as high as 44%。
+One of the main reasons is the high cognitive load when using a prosthetic hand.
 
 3.
-在传统义手操作中，用户往往需要有意识地监控和调整动作，这增加了认知负荷和学习成本。
-Conventional prosthetic hand operation often requires users to consciously select and adjust movements.
-而在人类自然抓取中，许多细微调整能够自动完成，无需逐一进行有意识的控制。
-如果义手也能自动承担一部分调整，用户就可能不必持续关注每个操作细节。
-基于这一思路，研究者探索了由用户与系统共同完成动作的半自动控制方法。
 
-4.相关研究
-利用压力传感器，实现半自动控制
-Vasile et al，利用视觉传感器，在抓取过程中将手腕的朝向控制交给了系统，用户只需要控制抓取与放开指令
+In conventional prosthetic hand, users need to consciously select and adjust movements, which increases cognitive load and Learning costs.
+In human natural grasping, many fine adjustments occur automatically, without conscious control of each movement.
+如果与这种机制结合，Semi-autonomous control may reduce the need for constant user attention.
 
-5.
-我们人类在识别目标物体的位置和大小，以及用眼睛观察手逐渐接近物体的动作时，会在无意识中调整两根手指之间的宽度。我们希望将这一事实应用于控制。
-
-RQ1:在抓取过程中，是否可以通过抓取位置与开合大小进行建模。
-Can fingertip aperture during reach-to-grasp movements be predicted from the hand–object distance
-RQ2:通过应用在机械手，是否可以降低用户的认知负荷。
-
-
-3.
-To develop a regression model for grasping movements, it is important to investigate the relationships between relevant movement variables.
-
-In research of Mangalam et al. investigated the factors associated with the onset of finger closure.
-In research of Coats et al. examined how target distance and contact surface size affect grasping movements.
-These studies show that reach-to-grasp movements involve multiple interacting variables.
 
 4.
-本研究的目的是 investigate the relationship between hand–object distance and fingertip aperture during reach-to-grasp movements.
-And further examine whether a regression model can predict fingertip aperture from hand–object distance in real time.
+In Related Work.
+Thomas et al 的研究，研究将控制抓取力大小交给系统。系统会先学习用户抓取时的力。结果表明，用户使用半自动控制能提高其的神经效率
 
+Vasile et al 的研究，利用视觉传感器，在抓取过程中将手腕的朝向控制交给了系统，用户只需要控制抓取与放开指令。
 
+These studies show that, Semi-Autonomous control allows the system to handle part of the movement while preserving user control, offering a potential way to reduce the user’s congnitive load.
 
-5.这是实验配置，研究中使用web camera来收集数据。这个web camera，固定视角，俯视角度，收集抓取期间的视觉信息。
+5.
+我想基于 Humans naturally adjust fingertip aperture 会根据距离改变 during grasping
 
-6.这是一个实验例子
+6.
+这是系统架构，由Camera获取手与目标的距离，输入进模型中，当前使用的是，预测Fingertip Apeature。当有错误情况时，用户再通过EMG信号，进行微调。
+achieve control of the robotic hand
 
-7.关于视觉处理，研究中使用mediapipe和opencv去检测hand landmark和方块。将大拇指和食指的距离设置为fingertip aperture，两指连线中点到物体中点设为distance。他们的单位都是pixel。
+7.
+This is visual information processing，The camera is fixed in the world coordinate frame and provides a top-down view.
+The system use MediaPipe and OpenCV to detect hand landmarks and cube。
+The visual part will use two variable
+Hand–object distance is defined as distance from the fingertip midpoint to the object center. shown by the yellow line.
+Fingertip aperture is the distance between the thumb and index fingertips, shown by the blue line.
+Both measurements are currently in pixels and will be converted to millimeters in future work.
 
-8.
+8.当前模型使用的是一个带窗口的MLP，有两个隐藏层各32个神经元，输入是包含当前时间点和前四个时间点的距离的数组。输出是当前的Fingertip Aperture。Loss Function 采用了 MAE，所有输入会进行Normalization预处理，这次模型的训练使用了30组数据。
+In current，the model is used MLP with 5 frame temporal window。and two hidden layers，each 32 neurons。
+the input is a vector of distance from current frame and previous four frames。the output is the predicted fingertip aperture at the current frame。
+use MAE as the loss function。and normalize the input。this time the model was train using 30 grasping trial。
 
-9.收集30组抓取20mm的红色cube，这是在抓取过程中两个变量的曲线叠加图。两者的叠加图高度相似，Fingertip Aperture Nomalized RMSE在0.0530，Hand–Object Distance的是0.0226，标准差也非常小。而在一些关键节点上也十分接近，手指在抓取过程中会先张开后闭合，此参与者的抓取中，开口最大的时刻在全程的44.42%左右，在距离134.77左右。
-After collected 30 trials of grasping the 20mm red cube. These graph is the overlay plots of two variable during reach-to-grasp movement.
-These graph show highly consistent patterns. The normalized Root Mean Squared Error was 0.0530 for fingertip apertrue and 0.0226 for hand-object distance, with relatively small standard deviations.
+9.
+This slide shows the experimental setup. We use a webcam mounted in a fixed position above the workspace to capture visual information during grasping from a top-down view. The camera is mounted about 750 mm above the table.
+the hand initial position is 30mm away in front of the cube。
 
-10.那么是否可以通过hand object distance 来预测手指开合呢？
-为此我想通过构建一个MLP模型来实现，首先输入是hand object distance，输出是fingertip aperture，2个隐藏层，每层32个神经元。并且我还设置了5帧的时间窗口，让模型可以学习之前的历史趋势。Loss Function 学习的是MAE，输出进行了Normalization，训练数据集采用了30个。
+10.
+Each trial consists of one natural reach-to-grasp movement, as shown in the demonstration video. We used three cubes as experimental conditions: a 20 mm red cube, a 30 mm blue cube, and a 40 mm black cube.
 
-11.在离线测试中，每种cube准备了9组trial。结果是总体的MAE为3.87，RMSE为5.91，R平方为0.956，每项的标准差也偏小。在离线测试中，可以看出距离是可以预测手指开合的。
+11.
+Collecte 30 trials 20mm cube, overlaid the fingertip aperture and the distance curve。both show similar pattern。
 
-13.而如果将整个抓取过程分为三段，初始阶段，也就是手静止的阶段，中间的抓取阶段，最后的闭合保持阶段。中间的抓取阶段张开再闭合，里所以当时误差最大的，结果也证明了这一点。
+The fingertip aperture nomalize RMSE was 5.30 plus or minus 1.86 percent。The hand object distance was 2.26 plus or minus 1.12 percent。
 
-14.而在研究，我们也发现了时间窗口在此研究中的优势所在。Without a temporal window : The model learns only the mapping between distance and fingertip aperture, resulting in larger errors during rapid changes.
+the key event were also consistent，during the reach to grasp，the finger first open then close。reach maximum aperture at about 44.32 percent。when the distance was about 134.77pixel。
+
+The data showed high consistency, suggesting a consistent relationship between hand–object distance and fingertip aperture during reach-to-grasp movements.
+
+12.
+To evaluate how accurately the model predicts fingertip aperture, we first conducted offline validation using nine trials per cube size, for a total of 27 trials.
+
+Across trials, the mean MAE was 3.85 ± 1.43 pixels, the mean RMSE was 5.52 ± 2.06 pixels, and the mean R-squared was 0.956 ± 0.034.
+
+These results indicate relatively small prediction errors.
+
+13 14.
+如果把整个抓取过程拆开来分为三段，初始和结束阶段是手处于静止的阶段，而抓取阶段是手指开合变动的阶段。
+所以在抓取阶段，手的开合预测是更具备挑战的。
+所以抓取阶段会是我分析模型预测能力的一个重要指标，但在义手控制中三个阶段都有其的意义。
+The grasping process can be divided into three phases: Initial, Movement, and Hold. Fingertip aperture remains stable during the Initial and Hold phases, while it changes during the Movement phase.
+
+Predicting aperture is more challenging, making prediction performance in this phase an important measure of the model’s capability. However, all three phases are relevant to prosthetic hand control.
+
+15.
+
+Without a temporal window : The model learns only the mapping between distance and fingertip aperture, resulting in larger errors during rapid changes.
 With a temporal window : The model can utilize short-term motion context to learn temporal trends, improving prediction accuracy.
-从图中可以明显看到，橙色曲线为带了时间窗口的MLP，在红色区域，也就是闭合简短，能更好的预测。
 
 15.同时我也进行了实时实验，系统能通过颜色识别物体，并读取相应模型。实验中，三种方块按随机顺序抓取，各抓3次。The model achieved an R² above 0.89 in 8 out of 9 real-time trials, demonstrating promising prediction performance.
