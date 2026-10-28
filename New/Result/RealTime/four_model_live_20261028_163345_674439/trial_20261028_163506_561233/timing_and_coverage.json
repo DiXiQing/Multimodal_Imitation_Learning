@@ -1,0 +1,30 @@
+{
+  "saved_frames": 228,
+  "valid_frames": 228,
+  "common_frames": 224,
+  "input_gap_resets": 0,
+  "observed_fps": 29.302803326023742,
+  "mean_inference_ms": 1.323055700100795,
+  "per_model_inference_ms": {
+    "Function approximation": {
+      "samples": 228,
+      "mean": 0.2705096486718966,
+      "p95": 0.3838050120975821
+    },
+    "MLP (5 frames)": {
+      "samples": 224,
+      "mean": 0.23134240784981688,
+      "p95": 0.4124949977267533
+    },
+    "LSTM (5 frames)": {
+      "samples": 224,
+      "mean": 0.4918866075708398,
+      "p95": 0.7822700194083154
+    },
+    "LSTM (full history)": {
+      "samples": 228,
+      "mean": 0.2957118446366829,
+      "p95": 0.5522050138097254
+    }
+  }
+}

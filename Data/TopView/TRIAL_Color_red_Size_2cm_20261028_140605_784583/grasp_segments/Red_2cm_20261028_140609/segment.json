@@ -1,0 +1,17 @@
+{
+  "segment": 2,
+  "start": 111,
+  "onset": 123,
+  "peak": 131,
+  "stable": 144,
+  "end": 157,
+  "frames": 47,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 13,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.5213947296142578,
+  "invalid_frames": 0,
+  "source_start_frame": 111,
+  "source_end_frame": 157,
+  "folder_name": "Red_2cm_20261028_140609"
+}

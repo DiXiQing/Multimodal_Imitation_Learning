@@ -1,0 +1,5 @@
+﻿model,completed_epochs,training_rule
+function_approximation,0,Single fit; fixed function parameters
+distance_window5,1000,Fixed epochs; last checkpoint
+distance_lstm_window5,1000,Fixed epochs; last checkpoint
+distance_lstm_continuous,1000,Fixed epochs; last checkpoint

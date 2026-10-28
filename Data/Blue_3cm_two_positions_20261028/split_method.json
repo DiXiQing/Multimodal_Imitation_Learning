@@ -1,0 +1,26 @@
+{
+  "seed": 20261028,
+  "conditions": {
+    "far": {
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261028_161318_793352\\grasp_segments",
+      "available": 32,
+      "seed": 20261028,
+      "train": 24,
+      "test": 8,
+      "unused": 0
+    },
+    "near": {
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261028_161511_933606\\grasp_segments",
+      "available": 33,
+      "seed": 20261029,
+      "train": 25,
+      "test": 8,
+      "unused": 0
+    }
+  },
+  "selection": "Sorted original cropped cohort, independent seeded shuffle per condition; first 8 Test, remaining Train; far 24/8, near 25/8. No R2 or curve-consistency filtering.",
+  "source_unchanged": true,
+  "cropping": "Existing segments copied without recropping, normalization or signal edits.",
+  "verification": "All copied files SHA256 match sources; trial names and camera CSV hashes unique across Train and Test.",
+  "note": "Fixed whole-trial split for distance-only and distance-plus-speed comparisons. Separate recordings supply far/near conditions; do not use Test to select checkpoints or hyperparameters."
+}

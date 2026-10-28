@@ -1,0 +1,7 @@
+{
+  "method": "Measured signals only; no model predictions or prediction error used.",
+  "complete": "Opening followed by stable hold near object. Stability: five median-filtered aperture frames within 3 px of final hold; abs distance <20 px.",
+  "ranking": "Within each distance condition: RMSE from median measured aperture/distance shape, plus initial and final stability penalties. Analysis interval onset minus 0.3 s through stable plus 0.5 s, resampled to 101 points; aperture divided by 100, distance by initial distance. Invalid/gap penalties added.",
+  "data": "Original full trials copied unchanged and SHA256 verified. Analysis alignment does not trim saved trials.",
+  "purpose": "Typical presentation examples, not a replacement for all-trial evaluation."
+}

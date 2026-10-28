@@ -1,0 +1,22 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance",
+  "opening_onset": "First three consecutive median-filtered aperture samples > initial ten-frame median +5 px; search before maximum aperture.",
+  "stable_hold": "After peak: five consecutive median-filtered aperture samples within 3 px of final twenty-frame median and median absolute signed distance <20 px.",
+  "margins": "Exactly ten source rows before opening onset and ten hold rows including first stable row.",
+  "smoothing": "Three-point centered median for boundary detection only; saved/scored values unchanged.",
+  "scoring": "Pooled common-valid finite frames, separately near/far and combined; all four models use identical rows.",
+  "predictions": "Existing real-time predictions retained, including original LSTM history; no inference reset, re-training, clipping or prediction edits.",
+  "selection": "Ten previously selected representative trials; not an all-trial evaluation.",
+  "source_sha256": {
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\near\\trial_20261028_163458_854109\\predictions.csv": "354e346ad1ce02cb1ac1414ddab216a1eb9400f2b1c370e817fccd365872d81c",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\near\\trial_20261028_163519_041762\\predictions.csv": "fb9aedd5d140602a2253563abab7db86078735da200a48c7a22d72ebcfb84b14",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\near\\trial_20261028_163535_809859\\predictions.csv": "dd7e17244d71a28b0bca49cc39f56f64d3f03e483a04e8cc0cb6c782b981e5ae",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\near\\trial_20261028_163637_011524\\predictions.csv": "55972f883c4f6d6147147fe6d05b915dbcdc8b90cd5b5106793f245d58b86146",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\near\\trial_20261028_163656_742057\\predictions.csv": "247e5eb15253a6a2d3f3e4367054a855cfbc0026e942ae621b71243cc5c8e824",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\far\\trial_20261028_163446_585757\\predictions.csv": "2220bdc52dbb58309745858e1e1b46429988b1dda59d8f7c37513fa564cb755f",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\far\\trial_20261028_163506_561233\\predictions.csv": "3c7454aff8a3fec76e838c70c6cddbc12afe9084718d79745e1ef198aa0f289c",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\far\\trial_20261028_163527_358710\\predictions.csv": "8ab0ce602181a48afd6d11b13ab70f81e35af37578d9e8dcbfee1c4ee06cfb66",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\far\\trial_20261028_163546_311679\\predictions.csv": "d305b028c53a5e974c74c5d75faf6fadefe25f42b1f9704dfe107bc7c0a19c12",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\New\\Result\\RealTime\\four_model_live_20261028_163345_674439\\selected_standard5_by_distance\\far\\trial_20261028_163604_830347\\predictions.csv": "abaa74a9b1c8d573c65285995f02b2050ac91a80bb543f6dbeaa1b0607f2a34c"
+  }
+}

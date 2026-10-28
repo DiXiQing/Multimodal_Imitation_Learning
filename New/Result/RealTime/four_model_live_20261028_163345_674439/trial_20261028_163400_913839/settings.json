@@ -1,0 +1,92 @@
+{
+  "recording_settings": {
+    "v": 60,
+    "s": 120,
+    "color_s_min": 140,
+    "color_v_min": 50,
+    "area": 116,
+    "max_area": 640000,
+    "signed_distance_axis_xy": [
+      0.9965617991744938,
+      0.08285276353928031
+    ],
+    "signed_distance_initial_object_center_xy": [
+      223.0,
+      297.5
+    ],
+    "signed_distance_initial_hand_center_xy": [
+      476.1496442556381,
+      318.5465097427368
+    ],
+    "signed_distance_definition": "(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.",
+    "metronome_at_recording_start": null,
+    "approach_guide": {
+      "mode": "spoken_count_loop",
+      "target_movement_s": 3,
+      "return_counts": 2
+    },
+    "camera_source_width": 640,
+    "camera_source_height": 480,
+    "crop_margins_px": {
+      "left": 100,
+      "top": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "coordinate_origin": "Top-left of cropped image; add crop left/top for source coordinates.",
+    "camera": 1,
+    "width": 540,
+    "height": 480,
+    "object_color": "blue",
+    "object_id": "blue_3cm",
+    "hsv_ranges": [
+      [
+        [
+          90,
+          140,
+          50
+        ],
+        [
+          135,
+          255,
+          255
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 3.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8"
+  },
+  "detection": {
+    "v": 60,
+    "s": 120,
+    "area": 116,
+    "max_area": 640000,
+    "color_s_min": 140,
+    "color_v_min": 50
+  },
+  "crop_margins_px": [
+    100,
+    0,
+    0,
+    0
+  ],
+  "model_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\Blue_3cm_two_positions_20261028\\Result\\fixed_four_models_window5_20261028_162756_161585\\models",
+  "target_movement_s": 1,
+  "signed_distance_axis_xy": [
+    0.9907723491125158,
+    0.13553653468370577
+  ],
+  "initial_object_center_xy": [
+    221.0,
+    301.5
+  ],
+  "object_center_locked": false,
+  "common_frame_rule": "Five consecutive valid frames after trial/gap reset",
+  "max_frame_gap_s": 0.1,
+  "object_jump_reject_px": 40.0,
+  "units": "px"
+}

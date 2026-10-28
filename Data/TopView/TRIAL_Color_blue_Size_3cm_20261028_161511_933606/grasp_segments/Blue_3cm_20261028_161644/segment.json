@@ -1,0 +1,17 @@
+{
+  "segment": 33,
+  "start": 2749,
+  "onset": 2761,
+  "peak": 2769,
+  "stable": 2777,
+  "end": 2797,
+  "frames": 49,
+  "pre_onset_frames": 12,
+  "post_stable_frames": 20,
+  "boundary_rule": "Onset: 20 px aperture threshold; stable: 5 frames within 5 px of hold, median distance <25 px; 12-frame pre-onset, 20-frame post-stable, capped before withdrawal",
+  "duration_s": 1.6157984733581543,
+  "invalid_frames": 0,
+  "source_start_frame": 2749,
+  "source_end_frame": 2797,
+  "folder_name": "Blue_3cm_20261028_161644"
+}
