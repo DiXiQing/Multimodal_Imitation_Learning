@@ -1,0 +1,10 @@
+﻿type,segment,source_start_frame,source_end_frame,reason
+suspicious_segment,17,2262,2326,Missing measurements; 2 invalid detections
+suspicious_segment,37,4983,5041,Pre-action stillness uncertain
+suspicious_segment,40,5349,5443,Missing measurements; 4 invalid detections
+suspicious_segment,43,5841,5915,Missing measurements; 2 invalid detections
+missing_detection,,2310,2311,2 missing measurement frames; original retained
+missing_detection,,5425,5428,4 missing measurement frames; original retained
+missing_detection,,5899,5900,2 missing measurement frames; original retained
+missing_detection,,9667,9667,1 missing measurement frames; original retained
+missing_detection,,9669,9722,54 missing measurement frames; original retained

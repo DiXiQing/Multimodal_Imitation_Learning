@@ -1,0 +1,24 @@
+{
+  "sources": [
+    {
+      "object": "20 mm",
+      "result_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_162159_416592",
+      "overall_metrics_sha256": "cfd5c1ee67bd54d819fe908cec28fd2e0e39bc5b2dc1a50d43acf6c344d88d7b"
+    },
+    {
+      "object": "30 mm",
+      "result_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_163209_654090",
+      "overall_metrics_sha256": "61bcc4e4a37a944d694aa613c4cb0fefcdfb0f4977d42a6ea0efc0d76f74c2d8"
+    },
+    {
+      "object": "40 mm",
+      "result_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057",
+      "overall_metrics_sha256": "37f6b3aa384ab97bf111cd1483854a360a34207263eba464fefecd9eebfa7a9b"
+    }
+  ],
+  "scope": "Test only; pooled common valid frames for the three models within each object",
+  "layout": "Metric panels MAE/RMSE/R2; object size groups; model colours fixed across all panels",
+  "labels": "MAE/RMSE 2 decimals in mm, R2 3 decimals unitless",
+  "error_bars": "None: pooled test metrics, not mean +/- per-trial SD",
+  "training_performed": false
+}

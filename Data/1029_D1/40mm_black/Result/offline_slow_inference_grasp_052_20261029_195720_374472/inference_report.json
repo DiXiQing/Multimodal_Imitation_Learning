@@ -1,0 +1,55 @@
+{
+  "trial": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\backup\\grasp_052",
+  "model_run": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057",
+  "initial_distance_mm": 403.20724906308834,
+  "normalization": "current distance / first recorded distance",
+  "total_duration_s": 4.822961330413818,
+  "movement_duration_s": 4.158062219619751,
+  "movement_definition": "Annotated onset to five-frame closure confirmation, excluding pre-roll/post-hold",
+  "source_frames": 146,
+  "common_frames": 142,
+  "continuous_sequences": 1,
+  "gap_or_missing_resets": 0,
+  "max_gap_s": 0.1,
+  "review_flags": [],
+  "independent_of_existing_train_and_test": true,
+  "common_frame_metrics": [
+    {
+      "model": "Function",
+      "frames": 142,
+      "mae_mm": 9.361082909471806,
+      "rmse_mm": 12.883932077405028,
+      "r2": 0.8721234183515996
+    },
+    {
+      "model": "MLP 5f",
+      "frames": 142,
+      "mae_mm": 8.5872804555104,
+      "rmse_mm": 11.146201184104855,
+      "r2": 0.9042920706394174
+    },
+    {
+      "model": "LSTM Full",
+      "frames": 142,
+      "mae_mm": 7.022105552749648,
+      "rmse_mm": 9.621615256823745,
+      "r2": 0.9286834807514949
+    }
+  ],
+  "lstm_full_metrics": {
+    "model": "LSTM Full",
+    "frames": 146,
+    "mae_mm": 7.052316120316078,
+    "rmse_mm": 9.722337148662408,
+    "r2": 0.9358662381848034
+  },
+  "training_performed": false,
+  "original_file_sha256": {
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\backup\\grasp_052\\camera.csv": "3c04d3f130af30c84e2dac13a111d6eb9a0dac161c6c98d2b5511fc67494ff5a",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\backup\\grasp_052\\settings.json": "c6424e1276b13b32f8b505c3ddc8f092403471eb033782a88993be21dd53a1a8",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\backup\\grasp_052\\segment.json": "3e855b0168945306ce55d71890f551dcd3fdfcf7ebd2de752edf0baa1e856ec7",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\models\\function.json": "d9f7e53ada49bab9160e72d621b668874562e796585e156eecf7c86792ce09a1",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\models\\mlp_5f.pth": "a4c235e3e626e2c3309bc87168e47dd6438732481707c86a7b3fb5e43f98a307",
+    "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\models\\lstm_full.pth": "54ff5debbc9840a24166b6b8e8591180872abe0314734c6b1eb16270566447a9"
+  }
+}

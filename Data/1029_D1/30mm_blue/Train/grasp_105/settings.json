@@ -1,0 +1,99 @@
+{
+  "v": 60,
+  "s": 120,
+  "color_s_min": 140,
+  "color_v_min": 50,
+  "area": 42,
+  "max_area": 640000,
+  "signed_distance_axis_xy": [
+    0.9824852942559368,
+    0.1863401367682911
+  ],
+  "signed_distance_initial_object_center_xy": [
+    317.0,
+    302.5
+  ],
+  "signed_distance_initial_hand_center_xy": [
+    551.3342666625977,
+    346.9443082809448
+  ],
+  "signed_distance_definition": "(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.",
+  "metronome_at_recording_start": null,
+  "approach_guide": {
+    "mode": "spoken_count_loop",
+    "target_movement_s": 3,
+    "return_counts": 2
+  },
+  "camera_source_width": 640,
+  "camera_source_height": 480,
+  "crop_margins_px": {
+    "left": 0,
+    "top": 0,
+    "right": 0,
+    "bottom": 0
+  },
+  "coordinate_origin": "Top-left of cropped image; add crop left/top for source coordinates.",
+  "camera": 1,
+  "width": 640,
+  "height": 480,
+  "object_color": "blue",
+  "object_id": "blue_3cm",
+  "hsv_ranges": [
+    [
+      [
+        90,
+        140,
+        50
+      ],
+      [
+        135,
+        255,
+        255
+      ]
+    ]
+  ],
+  "fps": 30.0,
+  "size_cm": 3.0,
+  "center_source": "detected",
+  "locked_center": null,
+  "base_workflow": "Record_mediapipe_continuous.py",
+  "fingertip_method": "MediaPipe landmarks 4,8",
+  "distance_measurements": {
+    "hand_object_distance": "Euclidean distance from landmarks 4/8 midpoint to object centre (legacy)",
+    "index_mcp_object_distance": "Euclidean distance from index MCP landmark 5 (display node 2) to object centre",
+    "wrist_object_distance": "Euclidean distance from wrist landmark 0 (display node 1) to object centre",
+    "units": "px",
+    "primary_display": "index_mcp_object_distance",
+    "hand_object_signed_distance": "Legacy signed midpoint projection retained separately"
+  },
+  "speed_estimation": {
+    "distance_column": "index_mcp_object_distance",
+    "method": "Least-squares slope over trailing 5 consecutive valid distance/time samples",
+    "window_frames": 5,
+    "max_gap_s": 0.1,
+    "units": "px/s",
+    "velocity_sign": "Distance derivative; negative approaching",
+    "approach_speed_sign": "Negative distance derivative; positive approaching"
+  },
+  "pixel_calibration": {
+    "mm_per_px": 1.4634146341463414,
+    "side_mm": 30.0,
+    "measured_edges_px": [
+      20.0,
+      21.0
+    ],
+    "method": "Mean sides of rotated minimum-area rectangle of detected colour contour",
+    "limitation": "Approximate scale at cube top-face height; perspective/hand-height differences remain.",
+    "calibration_time_unix_s": 1793247761.2692416
+  },
+  "start_position_guide": {
+    "target_distance": 400.0,
+    "tolerance": 5.0,
+    "units": "mm",
+    "hold_s": 0.0,
+    "direction_constraint": false,
+    "ready_at_recording_start": true,
+    "initial_index_mcp_distance_px": 274.3833331874917,
+    "enforce_recording_start": false
+  }
+}

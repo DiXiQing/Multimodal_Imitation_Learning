@@ -1,0 +1,28 @@
+{
+  "input_column": "index_mcp_object_distance_mm",
+  "target_column": "finger_width_mm",
+  "units": {
+    "input": "dimensionless l/l0",
+    "output": "mm",
+    "time": "s"
+  },
+  "physical_normalization": "l/l0; l0 = first recorded frame index_mcp_object_distance_mm; no future data; do not rebase after gaps",
+  "numeric_scaler": {
+    "x_mean": 0.0,
+    "x_std": 1.0,
+    "y_mean": 66.29553453041619,
+    "y_std": 38.224184790660054
+  },
+  "scaler_fitted_on": "Input identity fixed; output mean/std fitted on Train only",
+  "epochs": 0,
+  "simulated_untrained": true,
+  "hidden_size": 32,
+  "dropout": 0.1,
+  "window": 5,
+  "state_policy": "Reset at trial start, missing/invalid input OR target, nonconsecutive frame, nonpositive dt or dt>0.10s",
+  "physical_processing": "Distance divided by its initial value; no velocity, time normalization, aperture normalization, smoothing or interpolation",
+  "architecture": "Current-distance cubic smoothing spline",
+  "definition": {
+    "kind": "mock_constant"
+  }
+}

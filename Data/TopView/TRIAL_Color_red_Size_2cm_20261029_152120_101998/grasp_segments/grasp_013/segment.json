@@ -1,0 +1,33 @@
+{
+  "segment": 13,
+  "start_row": 1681,
+  "end_row": 1732,
+  "onset_row": 1691,
+  "peak_row": 1706,
+  "closure_confirmed_row": 1722,
+  "near_rows": [
+    1712,
+    2291
+  ],
+  "source_start_frame": 1681,
+  "source_end_frame": 1732,
+  "frames": 52,
+  "pre_action_frames": 10,
+  "post_closure_frames": 10,
+  "duration_s": 1.713371753692627,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.4285714285714286,
+  "review_flags": [
+    "Prolonged near-object stay >120 frames; possible manipulation after grasp; retained for review",
+    "Pre-action stillness uncertain"
+  ],
+  "validation": {
+    "csv_rows": 52,
+    "image_frames": 52,
+    "decoded_video_frames": 52,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

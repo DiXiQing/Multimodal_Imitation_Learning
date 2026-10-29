@@ -1,0 +1,55 @@
+﻿type,segment,source_start_frame,source_end_frame,reason
+suspicious_segment,13,1681,1732,Prolonged near-object stay >120 frames; possible manipulation after grasp; retained for review; Pre-action stillness uncertain
+suspicious_segment,20,3215,3270,Distance jump >45 px/frame
+suspicious_segment,26,4062,4128,No confirmed closure plus 10-frame hold; retained for review; Missing measurements; 35 invalid detections
+suspicious_segment,27,4494,4543,Distance jump >45 px/frame
+suspicious_segment,29,5216,5278,Distance jump >45 px/frame
+suspicious_segment,31,5452,5527,Prolonged near-object stay >120 frames; possible manipulation after grasp; retained for review
+suspicious_segment,33,5842,5895,Distance jump >45 px/frame
+suspicious_segment,35,6126,6175,Missing measurements; 1 invalid detections
+short_detection_event,,2690,2691,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,3227,3227,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,3830,3830,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,4138,4139,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,4152,4153,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,4505,4505,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,4591,4594,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,4825,4830,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5027,5027,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5075,5076,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5188,5197,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5215,5215,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5227,5236,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5310,5310,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5424,5424,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5823,5823,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5853,5853,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,5930,5930,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,6614,6614,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,6845,6845,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,7498,7498,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,7973,7976,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,8085,8085,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,8303,8310,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,8422,8423,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,8754,8754,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,8984,8985,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+short_detection_event,,9106,9106,Near-distance event shorter than 15 frames; not a confirmed full grasp; original data retained
+missing_detection,,4073,4080,8 missing measurement frames; source retained
+missing_detection,,4082,4083,2 missing measurement frames; source retained
+missing_detection,,4085,4085,1 missing measurement frames; source retained
+missing_detection,,4087,4091,5 missing measurement frames; source retained
+missing_detection,,4093,4093,1 missing measurement frames; source retained
+missing_detection,,4096,4098,3 missing measurement frames; source retained
+missing_detection,,4101,4102,2 missing measurement frames; source retained
+missing_detection,,4104,4104,1 missing measurement frames; source retained
+missing_detection,,4106,4106,1 missing measurement frames; source retained
+missing_detection,,4108,4109,2 missing measurement frames; source retained
+missing_detection,,4111,4116,6 missing measurement frames; source retained
+missing_detection,,4118,4119,2 missing measurement frames; source retained
+missing_detection,,4122,4122,1 missing measurement frames; source retained
+missing_detection,,4168,4168,1 missing measurement frames; source retained
+missing_detection,,4173,4174,2 missing measurement frames; source retained
+missing_detection,,4243,4256,14 missing measurement frames; source retained
+missing_detection,,6160,6160,1 missing measurement frames; source retained
+missing_detection,,9295,9339,45 missing measurement frames; source retained

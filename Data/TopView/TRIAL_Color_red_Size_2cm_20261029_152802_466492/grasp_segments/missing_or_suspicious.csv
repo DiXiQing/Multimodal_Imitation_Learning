@@ -1,0 +1,28 @@
+﻿type,segment,source_start_frame,source_end_frame,reason
+suspicious_segment,9,1579,1640,Pre-action stillness uncertain
+suspicious_segment,17,2645,2708,Pre-action stillness uncertain
+suspicious_segment,18,2775,2841,Distance jump >45 px/frame
+suspicious_segment,27,4058,4137,Distance jump >45 px/frame
+suspicious_segment,36,5332,5394,Missing measurements; 2 invalid detections
+short_detection_event,,300,310,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,399,403,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,415,421,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,439,441,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,655,658,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,1440,1442,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,1565,1568,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,2076,2076,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,2210,2210,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,2631,2631,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,2748,2751,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,2788,2788,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,3027,3028,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,3363,3364,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,4069,4069,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,4903,4904,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,5311,5311,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,5670,5670,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+short_detection_event,,5984,5987,Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained
+missing_detection,,5377,5378,2 missing measurement frames; original source retained
+missing_detection,,5646,5646,1 missing measurement frames; original source retained
+missing_detection,,6603,6639,37 missing measurement frames; original source retained

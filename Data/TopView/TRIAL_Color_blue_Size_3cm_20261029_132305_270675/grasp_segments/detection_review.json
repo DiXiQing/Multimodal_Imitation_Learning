@@ -1,0 +1,14 @@
+{
+  "suspicious_segments": [],
+  "missing_intervals": [
+    {
+      "start_row": 6993,
+      "end_row": 7076,
+      "source_start_frame": "6993",
+      "source_end_frame": "7076",
+      "frames": 84
+    }
+  ],
+  "near_candidate_count": 44,
+  "supplemental_rule": "Pre-action 10-frame raw distance range >6 px or aperture range >4 px: review only; keep segment."
+}

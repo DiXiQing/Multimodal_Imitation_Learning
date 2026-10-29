@@ -1,0 +1,23 @@
+{
+  "groups": [
+    {
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261029_122729_581083",
+      "label": "Previous 12:27:29",
+      "color": "#2171b5",
+      "segments": 87,
+      "mm_per_px": 1.5,
+      "flagged_segments": []
+    },
+    {
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261029_132305_270675",
+      "label": "New 13:23:05",
+      "color": "#e66b18",
+      "segments": 44,
+      "mm_per_px": 1.4634146341463414,
+      "flagged_segments": []
+    }
+  ],
+  "distance": "index_mcp_object_distance_mm",
+  "aperture": "finger_width_mm",
+  "processing": "All individual raw segment curves; no smoothing, interpolation, averaging, normalization or rescaling between groups. Each uses its own settings calibration. All exported candidates included."
+}

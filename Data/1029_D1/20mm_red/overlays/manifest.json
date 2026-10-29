@@ -1,0 +1,24 @@
+{
+  "count": 100,
+  "frames": 6162,
+  "groups": [
+    {
+      "time": "15:21:20",
+      "color": "#2171b5",
+      "experiments": 39
+    },
+    {
+      "time": "15:28:02",
+      "color": "#e87519",
+      "experiments": 22
+    },
+    {
+      "time": "15:39:34",
+      "color": "#249447",
+      "experiments": 39
+    }
+  ],
+  "distance": "index_mcp_object_distance_mm",
+  "aperture": "finger_width_mm",
+  "processing": "All active experiments only; excluded flagged segments remain at their original recording directories. Raw data in time order; no smoothing, interpolation, time or amplitude normalization. Per-recording settings calibration verified. Actual elapsed time from first frame."
+}

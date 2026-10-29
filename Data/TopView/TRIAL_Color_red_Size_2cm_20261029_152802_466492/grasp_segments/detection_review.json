@@ -1,0 +1,270 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 9,
+      "start_row": 1579,
+      "end_row": 1640,
+      "onset_row": 1589,
+      "peak_row": 1609,
+      "closure_confirmed_row": 1630,
+      "near_rows": [
+        1617,
+        1669
+      ],
+      "source_start_frame": 1579,
+      "source_end_frame": 1640,
+      "frames": 62,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.1090619564056396,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.4285714285714286,
+      "review_flags": [
+        "Pre-action stillness uncertain"
+      ]
+    },
+    {
+      "segment": 17,
+      "start_row": 2645,
+      "end_row": 2708,
+      "onset_row": 2655,
+      "peak_row": 2669,
+      "closure_confirmed_row": 2698,
+      "near_rows": [
+        2681,
+        2730
+      ],
+      "source_start_frame": 2645,
+      "source_end_frame": 2708,
+      "frames": 64,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.1021127700805664,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.4285714285714286,
+      "review_flags": [
+        "Pre-action stillness uncertain"
+      ]
+    },
+    {
+      "segment": 18,
+      "start_row": 2775,
+      "end_row": 2841,
+      "onset_row": 2785,
+      "peak_row": 2805,
+      "closure_confirmed_row": 2831,
+      "near_rows": [
+        2814,
+        2869
+      ],
+      "source_start_frame": 2775,
+      "source_end_frame": 2841,
+      "frames": 67,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.197809934616089,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.4285714285714286,
+      "review_flags": [
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "segment": 27,
+      "start_row": 4058,
+      "end_row": 4137,
+      "onset_row": 4068,
+      "peak_row": 4087,
+      "closure_confirmed_row": 4127,
+      "near_rows": [
+        4099,
+        4155
+      ],
+      "source_start_frame": 4058,
+      "source_end_frame": 4137,
+      "frames": 80,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.7008447647094727,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.4285714285714286,
+      "review_flags": [
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "segment": 36,
+      "start_row": 5332,
+      "end_row": 5394,
+      "onset_row": 5342,
+      "peak_row": 5358,
+      "closure_confirmed_row": 5384,
+      "near_rows": [
+        5371,
+        5430
+      ],
+      "source_start_frame": 5332,
+      "source_end_frame": 5394,
+      "frames": 63,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.090620994567871,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.4285714285714286,
+      "review_flags": [
+        "Missing measurements",
+        "2 invalid detections"
+      ]
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 5377,
+      "end_row": 5378,
+      "source_start_frame": "5377",
+      "source_end_frame": "5378",
+      "frames": 2
+    },
+    {
+      "start_row": 5646,
+      "end_row": 5646,
+      "source_start_frame": "5646",
+      "source_end_frame": "5646",
+      "frames": 1
+    },
+    {
+      "start_row": 6603,
+      "end_row": 6639,
+      "source_start_frame": "6603",
+      "source_end_frame": "6639",
+      "frames": 37
+    }
+  ],
+  "near_candidate_count": 42,
+  "short_detection_events": [
+    {
+      "start_row": 300,
+      "end_row": 310,
+      "frames": 11,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 399,
+      "end_row": 403,
+      "frames": 5,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 415,
+      "end_row": 421,
+      "frames": 7,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 439,
+      "end_row": 441,
+      "frames": 3,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 655,
+      "end_row": 658,
+      "frames": 4,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 1440,
+      "end_row": 1442,
+      "frames": 3,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 1565,
+      "end_row": 1568,
+      "frames": 4,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 2076,
+      "end_row": 2076,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 2210,
+      "end_row": 2210,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 2631,
+      "end_row": 2631,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 2748,
+      "end_row": 2751,
+      "frames": 4,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 2788,
+      "end_row": 2788,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 3027,
+      "end_row": 3028,
+      "frames": 2,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 3363,
+      "end_row": 3364,
+      "frames": 2,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 4069,
+      "end_row": 4069,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 4903,
+      "end_row": 4904,
+      "frames": 2,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 5311,
+      "end_row": 5311,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 5670,
+      "end_row": 5670,
+      "frames": 1,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    },
+    {
+      "start_row": 5984,
+      "end_row": 5987,
+      "frames": 4,
+      "reason": "Near-distance event with fewer than 15 actual near frames; not a confirmed full grasp; original data retained"
+    }
+  ]
+}

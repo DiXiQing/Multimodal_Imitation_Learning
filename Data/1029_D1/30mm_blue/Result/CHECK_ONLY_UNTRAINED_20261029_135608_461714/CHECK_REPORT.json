@@ -1,0 +1,736 @@
+{
+  "status": "PASS; NO TRAINING OR FUNCTION FIT",
+  "epochs_run": 0,
+  "optimizer_steps": 0,
+  "train_experiments": 75,
+  "test_experiments": 25,
+  "total_rows": 7115,
+  "common_frames": 6715,
+  "full_history_frames": 7115,
+  "excluded_root_directories": [
+    "backup",
+    "Result"
+  ],
+  "split_preview": {
+    "seed": 20261029,
+    "strategy": "whole-experiment random 75/25",
+    "train": [
+      "grasp_032",
+      "grasp_033",
+      "grasp_034",
+      "grasp_035",
+      "grasp_036",
+      "grasp_037",
+      "grasp_038",
+      "grasp_039",
+      "grasp_040",
+      "grasp_041",
+      "grasp_042",
+      "grasp_044",
+      "grasp_046",
+      "grasp_047",
+      "grasp_048",
+      "grasp_051",
+      "grasp_052",
+      "grasp_053",
+      "grasp_054",
+      "grasp_056",
+      "grasp_057",
+      "grasp_058",
+      "grasp_059",
+      "grasp_062",
+      "grasp_067",
+      "grasp_069",
+      "grasp_070",
+      "grasp_071",
+      "grasp_072",
+      "grasp_073",
+      "grasp_074",
+      "grasp_075",
+      "grasp_077",
+      "grasp_079",
+      "grasp_080",
+      "grasp_081",
+      "grasp_082",
+      "grasp_083",
+      "grasp_084",
+      "grasp_085",
+      "grasp_087",
+      "grasp_089",
+      "grasp_091",
+      "grasp_092",
+      "grasp_093",
+      "grasp_094",
+      "grasp_095",
+      "grasp_097",
+      "grasp_098",
+      "grasp_099",
+      "grasp_101",
+      "grasp_102",
+      "grasp_103",
+      "grasp_104",
+      "grasp_105",
+      "grasp_107",
+      "grasp_108",
+      "grasp_109",
+      "grasp_110",
+      "grasp_111",
+      "grasp_112",
+      "grasp_114",
+      "grasp_115",
+      "grasp_116",
+      "grasp_117",
+      "grasp_118",
+      "grasp_122",
+      "grasp_123",
+      "grasp_124",
+      "grasp_125",
+      "grasp_127",
+      "grasp_128",
+      "grasp_129",
+      "grasp_130",
+      "grasp_131"
+    ],
+    "test": [
+      "grasp_043",
+      "grasp_045",
+      "grasp_049",
+      "grasp_050",
+      "grasp_055",
+      "grasp_060",
+      "grasp_061",
+      "grasp_063",
+      "grasp_064",
+      "grasp_065",
+      "grasp_066",
+      "grasp_068",
+      "grasp_076",
+      "grasp_078",
+      "grasp_086",
+      "grasp_088",
+      "grasp_090",
+      "grasp_096",
+      "grasp_100",
+      "grasp_106",
+      "grasp_113",
+      "grasp_119",
+      "grasp_120",
+      "grasp_121",
+      "grasp_126"
+    ],
+    "records": [
+      {
+        "split": "Train",
+        "trial": "grasp_032",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_032",
+        "csv_sha256": "6453b2920ecad705146c78249ed07ea0a86916bc44bbbbe2126df93fe0b4787d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_033",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_033",
+        "csv_sha256": "9d690da24a5c4e2967b8b9069a7fa2deaf56b5df246177eddf6d993c4df019ac"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_034",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_034",
+        "csv_sha256": "b0150abce363ca348873bb69ecd57b58e77cc0d0778de583e6b44fb145817961"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_035",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_035",
+        "csv_sha256": "9adb2d13e43e894b1b1100d88c2ec18574b088f79ab29326ca4e239d7b26e919"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_036",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_036",
+        "csv_sha256": "8bb14abb6e09f508894a9e957d2b76bb32e608d2811fbc10d24cf693baa45298"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_037",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_037",
+        "csv_sha256": "fedac11abbd69343402e559b61ff0ad4ae92013f15b18b5743efcb5e9e1f5873"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_038",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_038",
+        "csv_sha256": "a141fd2215e364ca6c7dea00e80c47a90fdca2f8fb5acaa17d57ffbc50af84c0"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_039",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_039",
+        "csv_sha256": "11443502eb718cb5b369a9625e32dbc67ee34a80155549a0ffa06f930d502eb5"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_040",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_040",
+        "csv_sha256": "91e8b5a8e6f16efb854b3c7f6665627d1d57586d5b5ab5e38f86c68324815344"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_041",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_041",
+        "csv_sha256": "5129762812048968a42fea36c0ce711e05fc1a872086fc39b44fa5e0278bd67f"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_042",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_042",
+        "csv_sha256": "b063d651f0253a1a045fefe56f97fda5bb26717e47548103a642da200bda2651"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_044",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_044",
+        "csv_sha256": "e87da837dd659a419539ed52a947bf2652ca2112d76121934bbd5860256e6260"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_046",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_046",
+        "csv_sha256": "ed647a6ffd2dd800660799550eabdc33a93ea79933b36db2c01c0fdedcffd9a9"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_047",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_047",
+        "csv_sha256": "05ebee9ad34b03fc590d8d78e89ea4d6fce5dd82c22d0178256d40710b73d6ae"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_048",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_048",
+        "csv_sha256": "0895a0846d030112b4bd1498330348ed751396ffc627832ed661dbd2685a9e6a"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_051",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_051",
+        "csv_sha256": "42148a75f5aae5fa5f3efc4180e1fca233b7c7b150d0334630599b9fa0633c47"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_052",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_052",
+        "csv_sha256": "ad7e0e2e3a90872123d28a534dd6bc0bc1a2404ccff58f2327ca4d9dc871a0b2"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_053",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_053",
+        "csv_sha256": "f82f4c204a27cc0973de224c2e4aa1c6ba3ae04f37fe02603c8528be2e0568b3"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_054",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_054",
+        "csv_sha256": "ca7527956af6bfa981538134b0d357a7ca67a42100b068041b7f7d1e0940d0f4"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_056",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_056",
+        "csv_sha256": "683b993b18d68feecaf1d9ef58c09649fa96a4976698d5496139b704990dbc38"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_057",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_057",
+        "csv_sha256": "3bc7b5e879dc145809544a474eb79b06bc076627ebcf3ccc3d8160ce0dbe861b"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_058",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_058",
+        "csv_sha256": "e21b2335da8246c570c75852cf533b82875a22d284f8efae3d573fd94b9e9ad3"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_059",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_059",
+        "csv_sha256": "28e9b4748f97a20f1efb9bc915d1eb625d627096719c3038162bdc72f8be5c0d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_062",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_062",
+        "csv_sha256": "3700b13ee32ec509bdc6926b2f731310963b02d5b65b1ff17e0e12334f2a720d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_067",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_067",
+        "csv_sha256": "0f2e64c13bfb07551f3ceda30c753d222f51fb578e655c6c257ccb6e49231ee3"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_069",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_069",
+        "csv_sha256": "a0a7af03d5b8128965ac94be14de239d5181549f962d5ff3d200e175261d7afe"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_070",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_070",
+        "csv_sha256": "3ae08d2a9274fe71c294d7f5b65b91398a03381f13fc8874bcb5e8b845a6299e"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_071",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_071",
+        "csv_sha256": "bbf856c4de78d5df2c9cd9efe4b17ed9ac35c2108d21f765212531473aa2bda7"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_072",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_072",
+        "csv_sha256": "b63c3cb6652d63c3052e1c703c65fe0a3605913d29ea675243f9526d06981cc3"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_073",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_073",
+        "csv_sha256": "7bba636bfe808db83796c021b45a96e1bebdcef26787ff87366e3b384760d2b0"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_074",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_074",
+        "csv_sha256": "5007fc326c79701304659d876446fc8da65d3e3c06b0e144d3ba0c8b88c03658"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_075",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_075",
+        "csv_sha256": "33926a545373ce9116c6bbdf63b0ec1b3c39a1e795d36e7e14b5cf4fc45e6deb"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_077",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_077",
+        "csv_sha256": "5c32644ce88f085c96afba4fbee5d312b3e9ef314e18118bbe0ecac8f80b7d7a"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_079",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_079",
+        "csv_sha256": "4c5abd0d65d8af4bc8060d0926d58146b8b0800cfc65438c6ca3f9e8cb44a972"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_080",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_080",
+        "csv_sha256": "f800a9fc62d36c6f56b2045646e7282333f6b2a788f79190d517353cbd4b4c54"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_081",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_081",
+        "csv_sha256": "518081ab9c24f7ba253637f4738ae0a662a094189a33747cbfdbdd85e8c0ab11"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_082",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_082",
+        "csv_sha256": "4f1edc65b41936836bb45b58f465b0617b48ce1628f137425e0b6da471923e6b"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_083",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_083",
+        "csv_sha256": "adcc216ca2b76b0441223747ba4cd0b1f7464aec040f865bd0d4e1aae310c1df"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_084",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_084",
+        "csv_sha256": "18650e701d7362d441d05ae5dd4025cc91584ca60bc0b3ecf70c812217b50b17"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_085",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_085",
+        "csv_sha256": "bbf7d2e9131f52169a9306f0b9bb6069b01822a43482bcb0beef5d01427bda8c"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_087",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_087",
+        "csv_sha256": "f0041c5c4f3a17456f96056574b636786da5b955f36fe4fa2275fa7371d22198"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_089",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_089",
+        "csv_sha256": "3be2fe6760f7b8e6162d52ba54d3e205903d2d87798c8fbd441fa300126f9b89"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_091",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_091",
+        "csv_sha256": "e5ee136637b046069e9545b3ad7410777413b06222b6412306ec5a1bc353e080"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_092",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_092",
+        "csv_sha256": "2a599d4e0ffd69bfadca78f9b5fd0ad6e6e08c8e0cbbfaa3dbabaa88e736cf29"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_093",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_093",
+        "csv_sha256": "354fb3ac6a9838d15dd5cc3c5789f650dd3abb3f81a726472ce28b8d9beb5c4d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_094",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_094",
+        "csv_sha256": "61cb0a711d09548478aacc51cf9d5e1bcfd777b68d6a5c6a304bbfc2c3fb8617"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_095",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_095",
+        "csv_sha256": "f17838cfe1fce79a2e5ec0b1bb1970559b820468018ba452668c3b15ad2c3324"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_097",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_097",
+        "csv_sha256": "ec5295d9d690ed43e2e6ae979a9c0601e5cbb577cc6ff575588aa64f077b8141"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_098",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_098",
+        "csv_sha256": "df0346fc64983aa051f2200b3d8696f684fa5af7456f8be6f3297012ab0ac55a"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_099",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_099",
+        "csv_sha256": "d64e965b3ad21ff7f56209f6d5991cb01e4d0de2184db496a8ea4c2ebc47be51"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_101",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_101",
+        "csv_sha256": "0f71b82ec94385be1d2309ff664416934e7850759b0c65ef62659862bff9d787"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_102",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_102",
+        "csv_sha256": "e276f5192a0e1b8fd6dbfcca660b336e3c4088d6bf3933850a52e21b70c5fd20"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_103",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_103",
+        "csv_sha256": "40167c77c3710793e68c119f7a4f85d63bf6982a634d470c76be1f0e7779c397"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_104",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_104",
+        "csv_sha256": "c4b5e4669a293cb91bdac4cba1cdfa8cf9800d1abfa9e3de185b4fa4f59e0318"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_105",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_105",
+        "csv_sha256": "aac3db2912420902a40782213c25f4fce84d2924b8fd789b06214e83c7b112f7"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_107",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_107",
+        "csv_sha256": "7e9bc31d58a8e402d0d9bb793d8c309e684d008eed19037f949477451eb6f435"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_108",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_108",
+        "csv_sha256": "82425686c43dbc3a00c1f96ed8679629eef8eea45670756f88db0e24c5f0c614"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_109",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_109",
+        "csv_sha256": "de751fa37b08d932f578dbb4116a12675e0565f24e86eba5e7c65fb7653a1025"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_110",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_110",
+        "csv_sha256": "b970023db1f0f5642526443b227cba157f1c14be0ce7d6c49c76fb70883c0d02"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_111",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_111",
+        "csv_sha256": "6ce800ffe22fe97b6225207a4341440ab4e1923b46f9228d2fb6cc2f0a86b63d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_112",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_112",
+        "csv_sha256": "3edfc73215c5a6023d4359aacee2cb0b11fed6a875851e576123cb3d78002ffb"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_114",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_114",
+        "csv_sha256": "593fde14ce3bdd80ddfe3a457fbcb4d4573b8b819bbf3fd47f9f1dbdb0acbf13"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_115",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_115",
+        "csv_sha256": "5f1be8bcb06e07d697d7160e15bc956b2f39f42d3648169df2320ed1acda51a4"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_116",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_116",
+        "csv_sha256": "314695f105add26a0d868f9e085c8dbe5a003800bd9954f14be3e4cf05f106b5"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_117",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_117",
+        "csv_sha256": "40c733d285fed1c9b1afe20b25ef7afb25e4b7d7fc78230ff0e95c242cb08105"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_118",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_118",
+        "csv_sha256": "fd58646a3ea8b47c91b9e6af40c0add1afd73044d4709c0726e13e2de99dfde7"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_122",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_122",
+        "csv_sha256": "de8a1b31d389d39ea577d932c6a5e9e7b4d6e3bdf2fce16ce1ce5fc613afcb1f"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_123",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_123",
+        "csv_sha256": "dffc8b41192e54fe29b92d3d72034552a1dd9cf06a12aa6e1ba713f2ea9eeb62"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_124",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_124",
+        "csv_sha256": "d99563723f85f839c31c6866fd63c6c126e5371dfbeadff88eb39c78de363b82"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_125",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_125",
+        "csv_sha256": "5cfae008c89bedef3b8843a50363926b916d8195621c1b56e61475acc4f09e7d"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_127",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_127",
+        "csv_sha256": "39e0a90e5ebf9496256b4e3ec6e77be33ea0f868efe954836b8938e66c2a1bf0"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_128",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_128",
+        "csv_sha256": "29c45dcc46df85cde800b7547ab7a01ceb6f69098e585915b101cb87978b7e68"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_129",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_129",
+        "csv_sha256": "99bdf5e91bf1ef8071ff5cf7ae92fb21516ae98538d6f69999f406d50376e41c"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_130",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_130",
+        "csv_sha256": "3a9a41f0b9a46d7f588912faae8145fb3b925a185a23315bf6c424668560745f"
+      },
+      {
+        "split": "Train",
+        "trial": "grasp_131",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_131",
+        "csv_sha256": "7d76d22f2419ab2c5afe11a21bee8f7f62655d6b0eb9304d23e00883436b9a3f"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_043",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_043",
+        "csv_sha256": "e301c84f111523c84250575f69c8c4a63d37fac887cdbfaab8f03432cc3217d6"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_045",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_045",
+        "csv_sha256": "2845ea24da744084e7b23fe9e92453849460aad045bbb750f2469b070f0d928f"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_049",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_049",
+        "csv_sha256": "2a5a2ca06fd88c1761c1be2950d4dfd16cf0885748b2b25976d24641297fc993"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_050",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_050",
+        "csv_sha256": "77f5c6d4424122c7255f5688059ce30639136e2f143577d9fb525a1b009cb5f1"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_055",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_055",
+        "csv_sha256": "b9c37c0b6459092582c5eecede15fa6667f81195c7abfa5a0161e2b47e7f096d"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_060",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_060",
+        "csv_sha256": "df283972d01664933eaaee974eab707aab6ba8a14d039935de03e44126b44741"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_061",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_061",
+        "csv_sha256": "97f269c7c989b20b1c9b5ffbe8cffade67d2a4bac766f0b00ec17748304bbc41"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_063",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_063",
+        "csv_sha256": "d6b8d2a4f79e7d307558cb1ad518fb575d41b8e42a6517ad085af31630ffdaa9"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_064",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_064",
+        "csv_sha256": "b761ea289409a45e0fea02b36e9122dd6827f5c8bd03c4270f4c175e1eac2eea"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_065",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_065",
+        "csv_sha256": "c1bb3cda0daaebfe63629d42a5e21728aea383274be2bd195858f1a6f5c9845f"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_066",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_066",
+        "csv_sha256": "074249747ab9fb712f87b8d2d3783005e9569fd18e410d6341733da462f8dcf5"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_068",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_068",
+        "csv_sha256": "a96f05d61f7d6d5b54ae074f0f666e7654c9f2fe96e64133d21279239d5adfc7"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_076",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_076",
+        "csv_sha256": "9f6254e6645f9a52281a998c2f07380f822603c218995c30612e5724a0ee1aa5"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_078",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_078",
+        "csv_sha256": "fc53ce24399810c2876538511dae2d0064e7c86eb9787a8e7ebe2420625fd85e"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_086",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_086",
+        "csv_sha256": "7c794abbede1db58b970924e9a5be4570d17f9caea2526acee70e05f5385c702"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_088",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_088",
+        "csv_sha256": "de5cbe443021b4ae9fa4b3276487c09206261e7a2f5a2ac0e08f411008744fb7"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_090",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_090",
+        "csv_sha256": "2d8393f2865c7e0184f301f637b0a6239afee6a30fed1744c8f36815befbed4f"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_096",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_096",
+        "csv_sha256": "a2c3987f052cecb659f3cb17e9a2a7c50a8eee88b3b5737b2732743b29cdf5e1"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_100",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_100",
+        "csv_sha256": "5076a4312eaae3f0f27b9e3a4f74052d2b1eeed349427935fd0916d1c32c01af"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_106",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_106",
+        "csv_sha256": "2e2b8efa6437c4ce89edbd04a9ca57f06f2b8b33541cd38bb472c09b9cb6c1c1"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_113",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_113",
+        "csv_sha256": "11de0535ff8a5b80d9b64bbd008366940401ea85ab48afd86c9c2b5c837a2344"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_119",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_119",
+        "csv_sha256": "f843b3c21bc1f4db3428243b5fa69cd5ed49ecbd9acfc3c84046a81b4cf933c1"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_120",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_120",
+        "csv_sha256": "430e6795ccc5b1c96f021ea4893c927eb6d892f5152bc8e6a5ad6866f2750cfa"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_121",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_121",
+        "csv_sha256": "224f8887c641763bc3bec478a0b42c36bd9c0a10b77637caa267d69c159df344"
+      },
+      {
+        "split": "Test",
+        "trial": "grasp_126",
+        "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\3mm_blue\\grasp_126",
+        "csv_sha256": "bcc70be2f0e9cb33a339ef529f3c927b7f62dbcc3cee019f4df90746557df9a6"
+      }
+    ]
+  },
+  "checks": [
+    "Calibration, required mm columns and landmark-5 Euclidean geometry",
+    "No trial/frame leakage",
+    "5-input MLP",
+    "1-feature unidirectional LSTM",
+    "Full forward = stateful stepwise",
+    "Future changes cannot affect past outputs",
+    "Missing/invalid/timing resets",
+    "No weights changed",
+    "Predefined spline serialization without fitting",
+    "Mock CSV/plots/model save-load roundtrip"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 42,
+      "start_row": 7354,
+      "end_row": 7424,
+      "onset_row": 7364,
+      "peak_row": 7385,
+      "closure_confirmed_row": 7414,
+      "near_rows": [
+        7397,
+        7449
+      ],
+      "source_start_frame": 7354,
+      "source_end_frame": 7424,
+      "frames": 71,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.367601156234741,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.6216216216216217,
+      "review_flags": [
+        "Pre-action near-rest only; rapid succession, aperture settling during 10-frame pre-roll; retained for review"
+      ],
+      "validation": {
+        "csv_rows": 71,
+        "image_frames": 71,
+        "decoded_video_frames": 71,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      },
+      "manual_boundary_review": "Start moved to frame 7354 after visual/raw-signal review, excluding previous withdrawal; onset 7364, 10 pre-roll frames; 10 post-closure frames unchanged."
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 20108,
+      "end_row": 20156,
+      "source_start_frame": "20108",
+      "source_end_frame": "20156",
+      "frames": 49
+    }
+  ],
+  "near_candidate_count": 109
+}

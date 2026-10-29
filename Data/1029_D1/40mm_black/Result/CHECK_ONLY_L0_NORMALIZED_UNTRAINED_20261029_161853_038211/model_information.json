@@ -1,0 +1,32 @@
+{
+  "input_column": "index_mcp_object_distance_mm",
+  "target_column": "finger_width_mm",
+  "units": {
+    "input": "dimensionless l/l0",
+    "output": "mm",
+    "time": "s"
+  },
+  "physical_normalization": "l/l0; l0 = first recorded frame index_mcp_object_distance_mm; no future data; do not rebase after gaps",
+  "numeric_scaler": {
+    "x_mean": 0.0,
+    "x_std": 1.0,
+    "y_mean": 73.89265064300935,
+    "y_std": 40.846696954187614
+  },
+  "scaler_fitted_on": "Input identity fixed; output mean/std fitted on Train only",
+  "epochs": 0,
+  "simulated_untrained": true,
+  "hidden_size": 32,
+  "dropout": 0.1,
+  "window": 5,
+  "state_policy": "Reset at trial start, missing/invalid input OR target, nonconsecutive frame, nonpositive dt or dt>0.10s",
+  "physical_processing": "Distance divided by its initial value; no velocity, time normalization, aperture normalization, smoothing or interpolation",
+  "models": {
+    "Function": "one scalar current l/l0 -> current aperture in mm; fixed spline lambda=1e-6",
+    "MLP 5f": "5 l/l0 values oldest-to-current -> Linear(5,32), ReLU, Dropout(.1), Linear(32,32), ReLU, Linear(32,1)",
+    "LSTM Full": "one l/l0 feature per step; causal unidirectional LSTM(1,32), Dropout(.1), Linear(32,1); full chronological prefix, full BPTT; no state transfer across experiments"
+  },
+  "fairness": "Same common five-consecutive-frame targets for fitting losses and main scoring. LSTM consumes all earlier continuous inputs; separate from-start full metrics.",
+  "loss": "MAE; equal loss weight per experiment; Adam lr=0.001 weight_decay=0.0001",
+  "selection": "Fixed 400 epochs, last epoch only; Function fit once on Train; Test evaluated only after fitting all models."
+}

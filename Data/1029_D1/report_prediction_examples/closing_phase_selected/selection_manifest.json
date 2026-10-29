@@ -1,0 +1,74 @@
+{
+  "selection": "Illustrative cases deliberately selected for closing-phase MAE Function > MLP 5f > LSTM Full, and Function overall MAE worse than both networks. Not random or median-representative examples. Train/Test source disclosed here and must be disclosed when presented.",
+  "phase_definition": "Measured aperture maximum up to annotated closure confirmation; common valid frames only.",
+  "interpretation": "Shows behaviour of these selected trials, not a controlled window-size experiment or proof of a universal ordering.",
+  "data_processing": "Saved predictions unchanged; actual timestamps, mm outputs; no smoothing, temporal shift or prediction adjustment.",
+  "cases": [
+    {
+      "object_directory": "20mm_red",
+      "split": "Train",
+      "trial": "grasp_051",
+      "prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_162159_416592\\Train\\predictions\\grasp_051.csv",
+      "closing_interval_s": [
+        1.084064245223999,
+        1.9542100429534912
+      ],
+      "closing_samples": 27,
+      "closing_mae_mm": {
+        "Function": 10.030089204588467,
+        "MLP 5f": 6.3374535522462745,
+        "LSTM Full": 2.1564079726622682
+      },
+      "overall_mae_mm": {
+        "Function": 9.418915514051106,
+        "MLP 5f": 8.69000130129185,
+        "LSTM Full": 4.897271005717375
+      },
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\closing_phase_selected\\20mm_Train_grasp_051.png"
+    },
+    {
+      "object_directory": "40mm_black",
+      "split": "Test",
+      "trial": "grasp_092",
+      "prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\Test\\predictions\\grasp_092.csv",
+      "closing_interval_s": [
+        1.1085622310638428,
+        2.1378626823425293
+      ],
+      "closing_samples": 32,
+      "closing_mae_mm": {
+        "Function": 7.240351899344537,
+        "MLP 5f": 4.94386130166037,
+        "LSTM Full": 2.312795149803405
+      },
+      "overall_mae_mm": {
+        "Function": 6.592133506588175,
+        "MLP 5f": 4.885050321487104,
+        "LSTM Full": 3.0073002818283006
+      },
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\closing_phase_selected\\40mm_Test_grasp_092.png"
+    },
+    {
+      "object_directory": "20mm_red",
+      "split": "Test",
+      "trial": "grasp_094",
+      "prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_162159_416592\\Test\\predictions\\grasp_094.csv",
+      "closing_interval_s": [
+        0.70485520362854,
+        1.302488088607788
+      ],
+      "closing_samples": 19,
+      "closing_mae_mm": {
+        "Function": 23.20970857963807,
+        "MLP 5f": 17.441793091902962,
+        "LSTM Full": 9.523318397571469
+      },
+      "overall_mae_mm": {
+        "Function": 17.021221278447538,
+        "MLP 5f": 11.353260265716374,
+        "LSTM Full": 5.836410562982929
+      },
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\closing_phase_selected\\20mm_Test_grasp_094_alternative.png"
+    }
+  ]
+}
