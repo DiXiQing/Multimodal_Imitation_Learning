@@ -1,0 +1,1531 @@
+{
+  "source_policy": "Current camera.csv files under Train and Test only; backup, root duplicates and derived results excluded. Train+Test included once per trial. Current manually edited 20mm Train grasp_051 included as stored.",
+  "processing": "Original finger_width_mm, no smoothing or aperture normalization. Normalized time=(t_camera-t_first)/(t_last-t_first). Missing aperture shown as gaps.",
+  "groups": [
+    {
+      "size": 20,
+      "count": 100,
+      "train": 75,
+      "test": 25,
+      "trials": [
+        {
+          "split": "Train",
+          "trial": "grasp_002",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_002\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_006",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_006\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_010",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_010\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_012",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_012\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_013",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_013\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_014",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_014\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_015",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_015\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_016",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_016\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_018",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_018\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_019",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_019\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_023",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_023\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_025",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_025\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_028",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_028\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_029",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_029\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_033",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_033\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_039",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_039\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_041",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_041\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_042",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_042\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_044",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_044\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_047",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_047\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_051",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_051\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_052",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_052\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_055",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_055\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_059",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_059\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_065",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_065\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_069",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_069\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_070",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_070\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_071",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_071\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_072",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_072\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_073",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_073\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_074",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_074\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_075",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_075\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_077",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_077\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_079",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_079\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_081",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_081\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_082",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_082\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_084",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_084\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_085",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_085\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_086",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_086\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_087",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_087\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_089",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_089\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_093",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_093\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_096",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_096\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_097",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_097\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_099",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_099\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_101",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_101\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_102",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_102\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_105",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_105\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_106",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_106\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_107",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_107\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_110",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_110\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_111",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_111\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_113",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_113\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_115",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_115\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_116",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_116\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_118",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_118\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_119",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_119\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_120",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_120\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_122",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_122\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_123",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_123\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_126",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_126\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_132",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_132\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_133",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_133\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_135",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_135\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_136",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_136\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_137",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_137\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_144",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_144\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_145",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_145\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_146",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_146\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_147",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_147\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_150",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_150\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_154",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_154\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_156",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_156\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_157",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_157\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_158",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Train\\grasp_158\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_024",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_024\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_027",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_027\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_035",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_035\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_036",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_036\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_045",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_045\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_056",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_056\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_058",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_058\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_060",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_060\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_061",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_061\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_062",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_062\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_064",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_064\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_067",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_067\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_076",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_076\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_078",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_078\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_088",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_088\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_090",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_090\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_094",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_094\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_104",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_104\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_109",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_109\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_117",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_117\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_131",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_131\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_138",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_138\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_140",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_140\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_141",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_141\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_148",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_148\\camera.csv"
+        }
+      ]
+    },
+    {
+      "size": 30,
+      "count": 100,
+      "train": 75,
+      "test": 25,
+      "trials": [
+        {
+          "split": "Train",
+          "trial": "grasp_032",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_032\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_033",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_033\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_034",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_034\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_035",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_035\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_036",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_036\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_037",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_037\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_038",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_038\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_039",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_039\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_040",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_040\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_041",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_041\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_042",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_042\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_044",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_044\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_046",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_046\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_047",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_047\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_048",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_048\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_051",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_051\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_052",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_052\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_053",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_053\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_054",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_054\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_056",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_056\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_057",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_057\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_058",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_058\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_059",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_059\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_062",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_062\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_067",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_067\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_069",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_069\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_070",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_070\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_071",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_071\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_072",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_072\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_073",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_073\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_074",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_074\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_075",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_075\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_077",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_077\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_079",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_079\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_080",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_080\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_081",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_081\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_082",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_082\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_083",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_083\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_084",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_084\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_085",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_085\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_087",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_087\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_089",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_089\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_091",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_091\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_092",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_092\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_093",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_093\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_094",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_094\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_095",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_095\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_097",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_097\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_098",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_098\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_099",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_099\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_101",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_101\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_102",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_102\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_103",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_103\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_104",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_104\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_105",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_105\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_107",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_107\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_108",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_108\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_109",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_109\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_110",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_110\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_111",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_111\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_112",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_112\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_114",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_114\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_115",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_115\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_116",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_116\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_117",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_117\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_118",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_118\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_122",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_122\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_123",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_123\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_124",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_124\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_125",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_125\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_127",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_127\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_128",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_128\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_129",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_129\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_130",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_130\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_131",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Train\\grasp_131\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_043",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_043\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_045",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_045\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_049",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_049\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_050",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_050\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_055",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_055\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_060",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_060\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_061",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_061\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_063",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_063\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_064",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_064\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_065",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_065\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_066",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_066\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_068",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_068\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_076",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_076\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_078",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_078\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_086",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_086\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_088",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_088\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_090",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_090\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_096",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_096\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_100",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_100\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_106",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_106\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_113",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_113\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_119",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_119\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_120",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_120\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_121",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_121\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_126",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_126\\camera.csv"
+        }
+      ]
+    },
+    {
+      "size": 40,
+      "count": 100,
+      "train": 75,
+      "test": 25,
+      "trials": [
+        {
+          "split": "Train",
+          "trial": "grasp_001",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_001\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_002",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_002\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_003",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_003\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_004",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_004\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_005",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_005\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_006",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_006\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_007",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_007\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_008",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_008\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_009",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_009\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_010",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_010\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_011",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_011\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_013",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_013\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_015",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_015\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_016",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_016\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_017",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_017\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_020",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_020\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_021",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_021\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_022",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_022\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_023",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_023\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_025",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_025\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_026",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_026\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_027",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_027\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_028",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_028\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_031",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_031\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_064",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_064\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_066",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_066\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_067",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_067\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_068",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_068\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_069",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_069\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_070",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_070\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_071",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_071\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_072",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_072\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_074",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_074\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_076",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_076\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_077",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_077\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_078",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_078\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_080",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_080\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_083",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_083\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_085",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_085\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_086",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_086\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_090",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_090\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_093",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_093\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_095",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_095\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_096",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_096\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_097",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_097\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_098",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_098\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_103",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_103\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_110",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_110\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_111",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_111\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_112",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_112\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_114",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_114\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_115",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_115\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_116",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_116\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_117",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_117\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_118",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_118\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_120",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_120\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_121",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_121\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_122",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_122\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_123",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_123\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_124",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_124\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_125",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_125\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_127",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_127\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_128",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_128\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_129",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_129\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_130",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_130\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_131",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_131\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_135",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_135\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_136",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_136\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_137",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_137\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_138",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_138\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_140",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_140\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_141",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_141\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_142",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_142\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_143",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_143\\camera.csv"
+        },
+        {
+          "split": "Train",
+          "trial": "grasp_144",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Train\\grasp_144\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_012",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_012\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_014",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_014\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_018",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_018\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_019",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_019\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_024",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_024\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_029",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_029\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_030",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_030\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_039",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_039\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_041",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_041\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_042",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_042\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_048",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_048\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_065",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_065\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_073",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_073\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_075",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_075\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_087",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_087\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_092",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_092\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_094",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_094\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_104",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_104\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_113",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_113\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_119",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_119\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_126",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_126\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_132",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_132\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_133",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_133\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_134",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_134\\camera.csv"
+        },
+        {
+          "split": "Test",
+          "trial": "grasp_139",
+          "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_139\\camera.csv"
+        }
+      ]
+    }
+  ],
+  "issues": []
+}

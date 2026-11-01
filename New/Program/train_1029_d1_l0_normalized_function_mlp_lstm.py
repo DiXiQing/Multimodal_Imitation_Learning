@@ -30,7 +30,7 @@ from scipy.interpolate import BSpline, make_smoothing_spline
 
 # Choose one object dataset here, or pass --source on the command line.
 # Available: 20mm_red, 3cm_blue, 40mm_black.
-SOURCE = Path(__file__).resolve().parents[2] / 'Data/1029_D1/40mm_black'
+SOURCE = Path(__file__).resolve().parents[2] / 'Data/1031_D/30mm'
 DISTANCE = 'index_mcp_object_distance_mm'
 TARGET = 'finger_width_mm'
 EPOCHS, WINDOW, SEED, MAX_GAP = 400, 5, 20261029, .10

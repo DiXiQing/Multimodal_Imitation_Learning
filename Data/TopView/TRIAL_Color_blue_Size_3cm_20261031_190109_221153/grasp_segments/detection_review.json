@@ -1,0 +1,54 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 31,
+      "start_row": 5409,
+      "end_row": 5465,
+      "onset_row": 5419,
+      "peak_row": 5432,
+      "closure_confirmed_row": 5455,
+      "near_rows": [
+        5443,
+        5497
+      ],
+      "source_start_frame": 5409,
+      "source_end_frame": 5465,
+      "frames": 57,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 1.8798506259918213,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "Peak aperture outside session Tukey 1.5 IQR fences; retain for review"
+      ],
+      "validation": {
+        "csv_rows": 57,
+        "image_frames": 57,
+        "decoded_video_frames": 57,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 12633,
+      "end_row": 12633,
+      "source_start_frame": "12633",
+      "source_end_frame": "12633",
+      "frames": 1
+    },
+    {
+      "start_row": 12635,
+      "end_row": 12699,
+      "source_start_frame": "12635",
+      "source_end_frame": "12699",
+      "frames": 65
+    }
+  ],
+  "near_candidate_count": 65,
+  "postcheck_rule": "Peak aperture Tukey 1.5 IQR fences and aperture jumps >25 px/frame. Flags are review prompts, not exclusion decisions."
+}

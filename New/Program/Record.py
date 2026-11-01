@@ -371,8 +371,9 @@ def main():
     latest = None
     signed_axis = None
     source_dimensions = None
-    crop_margins = (0, 0, 0, 0)
+    crop_margins = (100, 100, 0, 0)
     locked = None
+    locked_box = None
     closing = False
     status = tk.StringVar(value='先选择目标颜色和尺寸，检查绿框是否正确，再开始。')
     info = tk.StringVar()
@@ -451,6 +452,7 @@ def main():
             except (ImportError,RuntimeError):pass
         threading.Thread(target=play,daemon=True).start()
     calibration_text=tk.StringVar(value='未标定：仅保存 px；将方块完整放入画面，手移开后测算。')
+    manual_scale_text=tk.StringVar()
     tk.Label(parameters,textvariable=calibration_text,wraplength=300,justify='left').pack(fill='x',padx=5,pady=4)
     def current_calibration_signature():
         # Scale belongs to the camera geometry, not the selected object.
@@ -466,9 +468,36 @@ def main():
             measured=calibrate_cube_scale(calibration_sample['mask'],calibration_sample['box'],float(size.get())*10)
             calibration=measured
             calibration_signature=current_calibration_signature()
+            manual_scale_text.set(format(measured['mm_per_px'],'.12g'))
             calibration_text.set(f"已标定：{measured['mm_per_px']:.5f} mm/px；边长 {measured['side_mm']:g} mm。切换颜色/尺寸保留比例；摄像头移动后请重新测算。")
         except (ValueError,TypeError) as exc:messagebox.showerror('测算失败',str(exc))
     tk.Button(parameters,text='用当前方块测算 mm/px（尺寸使用上方 cm）',command=measure_scale).pack(fill='x',padx=5,pady=4)
+    def apply_manual_scale():
+        nonlocal calibration,calibration_signature,guide_ready_latched
+        if trial is not None:
+            messagebox.showinfo('标定','请先结束录制，再修改比例；同一次录制中比例固定。')
+            return
+        try:
+            coefficient=float(manual_scale_text.get().strip())
+            if not np.isfinite(coefficient) or coefficient<=0:
+                raise ValueError('mm/px 系数必须为有限正数。')
+            if source_dimensions is None:
+                raise ValueError('请等待摄像头画面显示后再应用系数。')
+            calibration=dict(mm_per_px=coefficient,method='Manual mm_per_px input',
+                calibration_time_unix_s=time.time())
+            calibration_signature=current_calibration_signature()
+            start_guide.since=start_guide.previous=None
+            guide_ready_latched=False
+            calibration_text.set(f'手动标定：{coefficient:.6g} mm/px。切换颜色/尺寸保留比例；摄像头移动后请重新标定。')
+        except (ValueError,TypeError) as exc:
+            messagebox.showerror('手动标定失败',str(exc))
+    manual_scale_row=tk.Frame(parameters)
+    manual_scale_row.pack(fill='x',padx=5,pady=4)
+    tk.Label(manual_scale_row,text='手动 mm/px').pack(side='left')
+    manual_scale_entry=tk.Entry(manual_scale_row,textvariable=manual_scale_text,width=12)
+    manual_scale_entry.pack(side='left',padx=4)
+    manual_scale_entry.bind('<Return>',lambda event:apply_manual_scale())
+    tk.Button(manual_scale_row,text='应用',command=apply_manual_scale).pack(side='left')
 
     values = {}
     parameter_scales=[]
@@ -507,7 +536,7 @@ def main():
     parameter_scales.extend([max_area_entry,max_area_button])
     crop_box = tk.LabelFrame(parameters,text='视野裁剪（像素，不拉伸）')
     crop_box.pack(fill='x',padx=5,pady=6)
-    crop_text = [tk.StringVar(value='0') for _ in range(4)]
+    crop_text = [tk.StringVar(value=str(value)) for value in crop_margins]
     for label,variable in zip(['裁掉左侧','裁掉顶部','裁掉右侧','裁掉底部'],crop_text):
         row = tk.Frame(crop_box)
         row.pack(fill='x')
@@ -515,11 +544,11 @@ def main():
         entry = tk.Entry(row,textvariable=variable,width=8)
         entry.pack(side='right',padx=4,pady=2)
         parameter_scales.append(entry)
-    crop_info = tk.StringVar(value='当前不裁剪。输入数值后点击应用。')
+    crop_info = tk.StringVar(value='默认已裁剪左侧100、顶部100 px，右侧和底部不裁剪；不拉伸画面。')
     tk.Label(crop_box,textvariable=crop_info,wraplength=285,justify='left').pack(fill='x')
 
     def apply_crop(reset=False):
-        nonlocal crop_margins,locked,latest,signed_axis
+        nonlocal crop_margins,locked,locked_box,latest,signed_axis
         if trial is not None:
             return
         try:
@@ -535,6 +564,7 @@ def main():
         crop_margins = margins
         for variable,value in zip(crop_text,margins):variable.set(str(value))
         locked = None
+        locked_box = None
         latest = None
         signed_axis = None
         crop_info.set(f'原画面 {w}×{h} → 保存 {cropped.shape[1]}×{cropped.shape[0]}；左上原点随裁剪移动。')
@@ -596,9 +626,9 @@ def main():
     bind_scroll(parameter_container)
 
     def reset_detection(*_):
-        nonlocal locked,latest,signed_axis
+        nonlocal locked,locked_box,latest,signed_axis
         if trial is None:
-            locked=None;latest=None;signed_axis=None
+            locked=None;locked_box=None;latest=None;signed_axis=None
             status.set(f'目标：{color.get()}；已清除旧中心锁定，请重新确认绿框。')
     color.trace_add('write',reset_detection)
     for value in values.values():value.trace_add('write',reset_detection)
@@ -647,6 +677,7 @@ def main():
                 hsv_ranges=color_ranges(color.get(),settings['v'],settings['s'],settings['color_s_min'],settings['color_v_min']),
                 fps=args.fps, size_cm=object_size, center_source='locked' if locked is not None else 'detected',
                 locked_center=locked.tolist() if locked is not None else None,
+                locked_bounding_box_xywh=list(locked_box) if locked_box is not None else None,
                 base_workflow='Record_mediapipe_continuous.py', fingertip_method='MediaPipe landmarks 4,8')
             settings['distance_measurements'] = {
                 'hand_object_distance': 'Euclidean distance from landmarks 4/8 midpoint to object centre (legacy)',
@@ -677,16 +708,18 @@ def main():
             messagebox.showerror('无法开始', str(exc))
 
     def lock_center(event=None):
-        nonlocal locked
+        nonlocal locked,locked_box
         if trial is not None:
             return
         if locked is not None:
             locked = None
-            status.set('已恢复每帧实时检测中心。')
+            locked_box = None
+            status.set('已恢复每帧实时检测框和中心。')
         elif latest is not None and latest['box'] is not None:
             x,y,w,h = latest['box']
+            locked_box = (int(x),int(y),int(w),int(h))
             locked = np.array([x+w/2, y+h/2])
-            status.set('中心已锁定；物体必须保持不动。按 L 可解除。')
+            status.set('检测框位置、大小和物体中心已锁定；物体必须保持不动。按 L 可解除。')
         else:
             status.set('未检测到所选颜色物体，无法锁定。')
 
@@ -703,7 +736,7 @@ def main():
         window.destroy()
 
     for text, fn in [('下一次实验 / 开始 (N)',start), ('结束本次 (S)',stop),
-                     ('锁定 / 解除中心 (L)',lock_center), ('保存退出 (Q)',close)]:
+                     ('锁定 / 解除检测框及中心 (L)',lock_center), ('保存退出 (Q)',close)]:
         tk.Button(actions, text=text, command=fn).pack(side='left', padx=3)
     for key, fn in [('n',start),('s',stop),('l',lock_center),('q',close)]:
         window.bind('<'+key+'>',fn)
@@ -734,9 +767,12 @@ def main():
                 calibration=None;calibration_signature=None
                 calibration_text.set('裁剪或画面分辨率已变化，请重新测算 mm/px。')
             a = locked.copy() if locked is not None else None
+            display_box = locked_box if locked_box is not None else box
+            if display_box is not None:
+                x,y,w,h = display_box
+                cv2.rectangle(display,(x,y),(x+w,y+h),(0,255,0),2)
             if box is not None:
                 x,y,w,h = box
-                cv2.rectangle(display,(x,y),(x+w,y+h),(0,255,0),2)
                 if locked is None:
                     a = np.array([x+w/2,y+h/2])
             if landmarks is not None:

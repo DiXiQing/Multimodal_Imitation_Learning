@@ -1,0 +1,133 @@
+{
+  "candidates": 44,
+  "unflagged": 34,
+  "review": 10,
+  "main_plots_trials": [
+    "grasp_003",
+    "grasp_004",
+    "grasp_005",
+    "grasp_006",
+    "grasp_007",
+    "grasp_008",
+    "grasp_009",
+    "grasp_010",
+    "grasp_011",
+    "grasp_012",
+    "grasp_013",
+    "grasp_015",
+    "grasp_017",
+    "grasp_019",
+    "grasp_020",
+    "grasp_022",
+    "grasp_024",
+    "grasp_025",
+    "grasp_026",
+    "grasp_027",
+    "grasp_028",
+    "grasp_029",
+    "grasp_030",
+    "grasp_031",
+    "grasp_032",
+    "grasp_034",
+    "grasp_035",
+    "grasp_036",
+    "grasp_037",
+    "grasp_038",
+    "grasp_041",
+    "grasp_042",
+    "grasp_043",
+    "grasp_044"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.2617418766021729,
+    3.0405333042144775
+  ],
+  "initial_distance_range_mm": [
+    290.7209166616394,
+    318.9723349717034
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 3065,
+  "review_segments": [
+    {
+      "trial": "grasp_001",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_002",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_014",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_016",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_018",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_021",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "grasp_023",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "grasp_033",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "trial": "grasp_039",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "trial": "grasp_040",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Insufficient aperture excursion; incomplete action or detection artifact",
+        "Distance jump >45 px/frame"
+      ]
+    }
+  ]
+}

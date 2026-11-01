@@ -1,0 +1,97 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 58,
+      "start_row": 5584,
+      "end_row": 5640,
+      "onset_row": 5594,
+      "peak_row": 5611,
+      "closure_confirmed_row": null,
+      "near_rows": [
+        5614,
+        5640
+      ],
+      "source_start_frame": 5584,
+      "source_end_frame": 5640,
+      "frames": 57,
+      "pre_action_frames": 10,
+      "post_closure_frames": null,
+      "duration_s": 1.8633289337158203,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ],
+      "validation": {
+        "csv_rows": 57,
+        "image_frames": 57,
+        "decoded_video_frames": 57,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 6415,
+      "end_row": 6415,
+      "source_start_frame": "6415",
+      "source_end_frame": "6415",
+      "frames": 1
+    },
+    {
+      "start_row": 6417,
+      "end_row": 6488,
+      "source_start_frame": "6417",
+      "source_end_frame": "6488",
+      "frames": 72
+    }
+  ],
+  "near_candidate_count": 66,
+  "boundary_refinements": [
+    {
+      "segment": 10,
+      "old_start_row": 955,
+      "new_start_row": 973,
+      "flags": []
+    },
+    {
+      "segment": 14,
+      "old_start_row": 1343,
+      "new_start_row": 1364,
+      "flags": []
+    },
+    {
+      "segment": 28,
+      "old_start_row": 2727,
+      "new_start_row": 2745,
+      "flags": []
+    },
+    {
+      "segment": 30,
+      "old_start_row": 2913,
+      "new_start_row": 2930,
+      "flags": []
+    },
+    {
+      "segment": 39,
+      "old_start_row": 3772,
+      "new_start_row": 3793,
+      "flags": []
+    },
+    {
+      "segment": 43,
+      "old_start_row": 4146,
+      "new_start_row": 4171,
+      "flags": []
+    },
+    {
+      "segment": 46,
+      "old_start_row": 4415,
+      "new_start_row": 4439,
+      "flags": []
+    }
+  ]
+}

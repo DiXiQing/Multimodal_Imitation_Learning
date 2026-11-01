@@ -1,0 +1,15 @@
+{
+  "trials": 90,
+  "duration_definition": "t_camera at annotated five-frame closure confirmation minus t_camera at annotated action onset, excluding pre/post retained frames",
+  "initial_distance": "First retained frame index_mcp_object_distance_mm, unnormalized",
+  "duration_range_s": [
+    0.7997660636901855,
+    3.0405333042144775
+  ],
+  "initial_distance_range_mm": [
+    250.26845480238717,
+    345.1601183386058
+  ],
+  "source_data_modified": false,
+  "excluded": "backup, review_segments and derived folders"
+}

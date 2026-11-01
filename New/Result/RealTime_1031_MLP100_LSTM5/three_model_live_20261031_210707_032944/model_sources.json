@@ -1,0 +1,14 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1031_D\\30mm\\Result\\zscore_function_mlp100_lstm5_400ep_20261031_210048_772885\\models",
+  "files": [
+    "function.json",
+    "mlp_100f.pth",
+    "lstm_5f.pth"
+  ],
+  "distance": "index_mcp_object_distance_mm; global Train-only Z-score",
+  "settings_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1031_D\\30mm\\Train\\grasp_001\\settings.json",
+  "mm_per_px": 1.5,
+  "common_frame_rule": "Five consecutive valid inputs after every reset; LSTM observes all valid inputs, including warmup",
+  "units": "mm",
+  "video_timing": "Nominal FPS video; use CSV timestamps for actual time"
+}

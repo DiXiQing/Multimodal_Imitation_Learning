@@ -1,0 +1,20 @@
+{
+  "trials": 102,
+  "groups": [
+    {
+      "recording": "19:55 recording",
+      "color": "#287db5",
+      "trials": 68
+    },
+    {
+      "recording": "21:25 recording",
+      "color": "#e58b26",
+      "trials": 34
+    }
+  ],
+  "source_grouping": "Matched original timestamp rename manifests and CSV SHA256; no time-based guessing",
+  "normalization": "index_mcp_object_distance_mm divided by first recorded frame value per trial",
+  "aperture": "finger_width_mm",
+  "smoothing": false,
+  "source_data_modified": false
+}

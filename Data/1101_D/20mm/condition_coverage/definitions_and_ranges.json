@@ -1,0 +1,11 @@
+{
+  "included": 49,
+  "selection": "49 retained trials in dataset root; backup and review_segments excluded",
+  "duration_definition": "t_camera at five-frame closure confirmation minus t_camera at annotated action onset; excludes pre-action and post-closure retained frames.",
+  "distance_definition": "First recorded segment frame index_mcp_object_distance_mm; Euclidean MediaPipe landmark 5 to object centre. Unnormalized mm.",
+  "duration_min_s": 0.7997660636901855,
+  "duration_max_s": 2.7195465564727783,
+  "initial_distance_min_mm": 254.72622484289948,
+  "initial_distance_max_mm": 345.1601183386058,
+  "source_data_modified": false
+}

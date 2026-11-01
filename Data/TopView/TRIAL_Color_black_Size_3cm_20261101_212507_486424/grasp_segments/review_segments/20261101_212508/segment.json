@@ -1,0 +1,35 @@
+{
+  "segment": 1,
+  "start_row": 35,
+  "end_row": 98,
+  "onset_row": 45,
+  "peak_row": 60,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    69,
+    98
+  ],
+  "source_start_frame": 35,
+  "source_end_frame": 98,
+  "frames": 64,
+  "pre_action_frames": 10,
+  "post_closure_frames": null,
+  "duration_s": 2.0904808044433594,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "relative_folder": "review_segments/20261101_212508",
+  "validation": {
+    "csv_rows": 64,
+    "image_frames": 64,
+    "decoded_video_frames": 64,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "trial_name": "20261101_212508",
+  "original_folder_name": "grasp_001"
+}

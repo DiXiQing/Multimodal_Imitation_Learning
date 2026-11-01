@@ -1,0 +1,179 @@
+俯瞰視点からの無意識的な	Modeling Automatic Grasp Aperture
+把持開口幅のモデル化	Adjustment from an Overhead View
+電動義手の半自動的な開閉に向けて	Toward Semi-Autonomous Opening and Closing of Powered Prosthetic Hands
+DI XIQING（25742102）	DI XIQING (25742102)
+佐賀大学大学院 理工学研究科 福田研究室	Fukuda Laboratory, Graduate School of Science and Engineering, Saga University
+指導教員：福田 修 教授	Supervisor: Professor Osamu Fukuda
+背景：筋電義手はまだ使いにくい	Background: Challenges in Myoelectric Hand Use
+外傷による四肢切断者は世界で約5,770万人 [1]	57.7 million people worldwide live with traumatic limb amputation [1]
+義手の使用をやめる人の割合 [2]	Proportion of users who discontinue prosthesis use [2]
+これを超える制御遅延で操作性が低下 [3]	Control delays beyond this range impair usability [3]
+意識的な調整	Conscious Adjustment
+手を見ながら開き幅を合わせる → 認知負荷 [4]	Visually monitoring and adjusting aperture adds cognitive load [4]
+健常者が無意識に行うことを、義手ユーザーは意識して行っている	Prosthesis users consciously perform adjustments that occur automatically in natural grasping
+人は指の開き幅を無意識に調整している	Automatic Aperture Adjustment in Human Grasping
+① 閉じた状態	1. Fingers closed
+② 開き始める	2. Begin opening
+③ 大きく開く	3. Open wide
+④ 閉じてつかむ	4. Close and grasp
+実際の把持動作（俯瞰カメラの映像より）	Recorded grasping movement (overhead camera)
+開いて閉じる	Opening and Closing
+最大開口は動作時間の60–80%で [5]	Peak aperture at 60–80% of movement time [5]
+大きさに合わせる	Adjustment to Object Size
+物体が大きいほど広く開く [6]	Larger objects elicit wider aperture [6]
+速さに合わせる	Adjustment to Speed
+速い動作では約15%広く開く [7]	Aperture is about 15% wider in faster movements [7]
+意識せずに	Without Conscious Awareness
+大きさを答えられない患者も正しく開く [8]	Patients unable to report size can still scale aperture [8]
+アイデア：無意識の部分をモデルに任せる	Proposed Approach: Modeling Automatic Adjustments
+人間	Human
+目で手と物体を見る	Observe the hand and object
+脳の内部モデル	Internal model in the brain
+（無意識）	(automatic)
+指が開閉する	Fingers open and close
+提案	Proposed
+俯瞰カメラ	Overhead Camera
+把持モデル  l → d	Grasp model  l → d
+義手の指（将来）	Prosthetic fingers (future)
+ユーザー：筋電で	User: EMG-based
+開始・微調整（将来）	initiation and fine adjustment (future)
+なぜ距離？	Why Distance?
+指を閉じ始める時点は、手と物体の距離で決まる [9, 10]	Hand–object distance determines closure onset [9, 10]
+なぜ俯瞰？	Why an Overhead View?
+目と同じく、手と物体を同時に見られる	The hand and object can be observed together, as with vision
+関連研究：カメラの位置で見ると	Related Work: Camera Placement
+一人称カメラ（装着型）	First-Person Cameras (Wearable)
+義手制御の研究はほぼこちら [19]	Most prosthetic control studies use this view [19]
+眼鏡	Glasses
+頭部	Head
+手・義手	Hand / Prosthesis
+自動化の対象：把持の種類・手首の向きなど	Automation targets: grasp type, wrist orientation, etc.
+俯瞰カメラ（外部に固定）	Overhead Cameras (Externally Fixed)
+人の把持の計測では一般的	Common in human grasp measurement
+（モーションキャプチャ・マーカーレス）[20]	(marker-based and markerless motion capture) [20]
+義手制御では将来の可能性として	In prosthetic control, mainly discussed
+言及される程度 [18]	as a future possibility [18]
+本研究	This Study
+俯瞰カメラで、人の無意識の	Use an overhead camera to learn
+開き幅制御を学習する	automatic human aperture adjustment
+人の把持の計測と同じ視点を、義手の開き幅制御に使う	Apply the viewpoint used in grasp measurement to prosthetic aperture control
+研究課題	Research Question
+俯瞰カメラで観測した手と物体の距離から、	Can hand–object distance measured by an overhead camera
+指の無意識的な開閉を再現できるか？	reproduce automatic finger opening and closing?
+仮説：時系列の情報を多く使うモデルほど、人の開き幅に近づく	Hypothesis: More temporal information improves agreement with human aperture
+関数近似	Function Approximation
+履歴なし	No history
+直近5フレーム	Last 5 frames
+全履歴	Full history
+システム構成と特徴量抽出	System Overview and Feature Extraction
+モデル	Model
+俯瞰カメラ 30 fps	Overhead camera, 30 fps
+特徴量抽出	Feature extraction
+正規化	Normalization
+推定	Prediction
+義手（将来）	Prosthesis (future)
+本研究の範囲	Scope of this study
+筋電（将来）	EMG (future)
+指先間距離	Fingertip distance
+MediaPipe で指先を検出	Detect fingertips using MediaPipe
+手と物体の距離	Hand–object distance
+付け根マーカー → 物体中心	Finger-base marker to object center
+正規化距離	Normalized distance
+L / L0（L0 = 300 mm）	L / L0 (L0 = 300 mm)
+単位の換算	Unit conversion
+一辺の実寸 ÷ 画素数	Actual side length / side length in pixels
+30 Hz（約33 ms ごと）の時系列 (l_t, d_t) を作る	Generate (l_t, d_t) time series at 30 Hz (about every 33 ms)
+実験環境	Experimental Setup
+Z：カメラ方向（上）	Z: Upward, toward the camera
+X：左右　Y：手を伸ばす方向	X: Left–right; Y: Reaching direction
+X–Y 平面の動きだけを解析	Analyze movement in the X–Y plane only
+カメラ	Camera
+[機種]・[解像度]・30 fps	[Model], [resolution], 30 fps
+カメラ高さ	Camera height
+テーブルから 750 mm	750 mm above the table
+初期距離	Initial distance
+L0 = 300 mm・指を閉じた状態	L0 = 300 mm; fingers closed
+対象物	Objects
+立方体 20 / 30 / 40 mm	20 / 30 / 40 mm cubes
+マーカー	Marker
+指の付け根：[位置]	Finger base: [location]
+要記入  カメラの機種・解像度、マーカーの位置	To complete: camera model, resolution, and marker location
+入力 l と出力 d の関係	Relationship Between Input l and Output d
+l(t) = L(t) / L0　→ どの試行も 1 から始まる	l(t) = L(t) / L0: Every trial starts at 1
+L0：動作開始前の静止区間の平均	L0: Mean distance during the stationary period before movement
+データセットと手順	Dataset and Procedure
+試行（合計）	Trials in total
+試行／立方体	Trials per cube
+1〜3 秒	1–3 seconds
+動作時間をランダムに	Randomized movement duration
+立方体：赤20・青30・黒40 mm	Cubes: red 20, blue 30, black 40 mm
+試行の様子（旧セットアップ）	Example trial (previous setup)
+開始：物体から 300 mm、指を閉じる	Start: 300 mm from the object, fingers closed
+動作：自然に手を伸ばしてつかむ	Movement: Reach and grasp naturally
+速さ：1〜3 秒で自由に変える	Speed: Freely vary duration within 1–3 seconds
+被験者：1名（本人）	Participant: 1 (the researcher)
+動作時間のヒストグラム	Movement-duration histogram
+（計測後に作成）	(to be added after data collection)
+3つのモデルの構造と入出力	Three Models: Architectures, Inputs, and Outputs
+入力：1個	Input: 1 value
+平滑化スプライン	Smoothing spline
+3〜9次・交差検証で選択	Degrees 3–9; selected by cross-validation
+出力：1個	Output: 1 value
+入力：5個	Input: 5 values
+32（ReLU）	32 (ReLU)
+隠れ状態 h（32次元）を引き継ぐ	Carry forward hidden state h (32 dimensions)
+全結合	Fully connected
+毎時刻 1個	1 output per time step
+入力：各時刻 1個を順に	Input: 1 value at each time step
+共通：立方体ごとに学習・損失 MSE・Adam・early stopping（最終値は要記入）	Common: train per cube size; MSE, Adam, early stopping (final settings pending)
+評価：3モデル × 3サイズ ＝ 9条件	Evaluation: 3 Models × 3 Sizes = 9 Conditions
+MLP（5）	MLP (5 frames)
+LSTM（全）	LSTM (full history)
+指標	Metrics
+MAE・RMSE [mm]・R²	MAE / RMSE [mm] / R²
+分割	Data split
+試行単位の5分割交差検証	5-fold cross-validation by trial
+図	Plots
+波形例・誤差の棒グラフ	Example waveforms and error bar charts
+予想：関数近似 → MLP → LSTM の順に誤差が減る（特に指を閉じる区間）	Expected: Errors decrease from function approximation to MLP to LSTM, especially during closure
+結果①：データの確認（d–l 図）	Results 1: Data Inspection (d–l Plots)
+100試行の重ね描き	Overlay of 100 trials
+横軸 l・縦軸 d [mm]	Horizontal: l; vertical: d [mm]
+色：動作時間	Color: movement duration
+要記入  計測後に図を挿入	To complete: insert plots after data collection
+見る点：試行間の一貫性・最大開口の位置・サイズと速さの影響	Inspect: trial consistency, peak aperture location, and effects of size and speed
+結果②：推定誤差	Results 2: Prediction Errors
+MLP（5フレーム）	MLP (5-frame window)
+LSTM（全履歴）	LSTM (full history)
+モデル × サイズ別の MAE / RMSE / R²（棒グラフ・SDの誤差棒）	MAE / RMSE / R² by model and size (bar charts with SD error bars)
+要記入  新しい300試行のデータで記入	To complete: populate using the new 300-trial dataset
+結果③：波形の例と考察	Results 3: Example Waveforms and Discussion
+実測と3モデルの推定	Measured and predicted by 3 models
+考察の観点	Discussion Points
+時系列の情報はどの区間で効くか（開く・閉じる・保持）	Where does temporal information help: opening, closing, or holding?
+物体の大きさで推定の難しさは変わるか	Does prediction difficulty depend on object size?
+距離 l だけでは説明できないばらつきはどれくらいか	How much variability cannot be explained by distance l alone?
+限界と今後の展開	Limitations and Future Work
+現在	Current
+被験者1名	1 participant
+人の手のモデル化	Modeling the human hand
+次	Next
+被験者 約10名	About 10 participants
+被験者間の交差検証	Cross-validation across participants
+その後	Then
+義手の実機に組込み	Integration into a physical prosthesis
+制御の調整	Control tuning
+将来	Future
+筋電と統合	Integration with EMG
+半自動の開閉	Semi-autonomous opening and closing
+今回の限界	Current Limitations
+水平面・立方体のみ	Horizontal plane and cubes only
+筋電なし	No EMG
+実機未実装	Not yet implemented on a prosthesis
+まとめ	Summary
+着想	Motivation
+方法	Method
+俯瞰カメラ・正規化距離 l・3つのモデル	Overhead camera, normalized distance l, and 3 models
+次の一歩	Next Step
+300試行を計測し、d–l データを確認	Collect 300 trials and inspect the d–l data
+参考文献	References

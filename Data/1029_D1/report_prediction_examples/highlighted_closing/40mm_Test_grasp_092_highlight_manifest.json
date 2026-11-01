@@ -1,0 +1,18 @@
+{
+  "definition": "Main closing region: reference aperture decreases from hold+90%*(peak-hold) to hold+10%*(peak-hold); hold = last 10-frame median. Only boundary timestamps interpolated; all plotted measurements/predictions unchanged, no smoothing.",
+  "cases": [
+    {
+      "object_mm": 40,
+      "split": "Test",
+      "trial": "grasp_092",
+      "source_prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\Test\\predictions\\grasp_092.csv",
+      "reference_manually_edited": false,
+      "highlight_start_s": 1.494605409221584,
+      "highlight_end_s": 1.8878174819521862,
+      "high_threshold_mm": 127.84242410539076,
+      "low_threshold_mm": 64.41344237759074,
+      "holding_reference_mm": 56.48481966161573,
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\highlighted_closing\\40mm_Test_grasp_092_closing_highlight.png"
+    }
+  ]
+}

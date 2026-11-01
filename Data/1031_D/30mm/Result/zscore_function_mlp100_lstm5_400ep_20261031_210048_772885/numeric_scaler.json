@@ -1,0 +1,7 @@
+{
+  "x_mean": 191.63554857131658,
+  "x_std": 131.6375532739735,
+  "y_mean": 70.20945900528605,
+  "y_std": 38.81862519406149,
+  "definition": "x=(distance_mm-x_mean)/x_std; aperture_mm=y_pred_scaled*y_std+y_mean; Train only"
+}

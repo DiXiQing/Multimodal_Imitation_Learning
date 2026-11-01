@@ -1,0 +1,743 @@
+{
+  "normalization": "Each segment distance divided by its first recorded frame distance, not min/max. Aperture remains mm. No smoothing or time normalization. All active segments including review flags included; backup folders excluded.",
+  "groups": [
+    {
+      "recording": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261031_215856_066525",
+      "color": "#2474B5",
+      "trials": [
+        {
+          "trial": "grasp_001",
+          "initial_distance_mm": 337.4272872003878,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_002",
+          "initial_distance_mm": 331.3364014295384,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_003",
+          "initial_distance_mm": 333.40856763066006,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_004",
+          "initial_distance_mm": 333.95063767485243,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_005",
+          "initial_distance_mm": 338.5863430641253,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_006",
+          "initial_distance_mm": 342.8413889901227,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_007",
+          "initial_distance_mm": 340.3854302272913,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_008",
+          "initial_distance_mm": 346.98681125615343,
+          "frames": 42,
+          "review_flags": [
+            "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+          ]
+        },
+        {
+          "trial": "grasp_009",
+          "initial_distance_mm": 338.2406267440265,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_010",
+          "initial_distance_mm": 336.1779669566273,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_011",
+          "initial_distance_mm": 338.85474060907643,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_012",
+          "initial_distance_mm": 330.65200702036645,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_013",
+          "initial_distance_mm": 337.9731233653817,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_014",
+          "initial_distance_mm": 341.00729983993955,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_015",
+          "initial_distance_mm": 330.5149240801307,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_016",
+          "initial_distance_mm": 340.8845724291676,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_017",
+          "initial_distance_mm": 348.6064253181107,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_018",
+          "initial_distance_mm": 334.90138209566794,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_019",
+          "initial_distance_mm": 332.24178852092075,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_020",
+          "initial_distance_mm": 330.9064339755323,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_021",
+          "initial_distance_mm": 336.9638391046767,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_022",
+          "initial_distance_mm": 344.34472547125614,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_023",
+          "initial_distance_mm": 348.57103155602886,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_024",
+          "initial_distance_mm": 347.1987345604,
+          "frames": 45,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_025",
+          "initial_distance_mm": 342.2547388278949,
+          "frames": 45,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_026",
+          "initial_distance_mm": 347.2148163685656,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_027",
+          "initial_distance_mm": 351.456147263464,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_028",
+          "initial_distance_mm": 346.60641107141083,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_029",
+          "initial_distance_mm": 338.8017917980588,
+          "frames": 44,
+          "review_flags": [
+            "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+          ]
+        },
+        {
+          "trial": "grasp_030",
+          "initial_distance_mm": 342.61111359647833,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_031",
+          "initial_distance_mm": 341.21389340210715,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_032",
+          "initial_distance_mm": 341.66623454858325,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_033",
+          "initial_distance_mm": 342.18687202817455,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_034",
+          "initial_distance_mm": 339.274704723757,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_035",
+          "initial_distance_mm": 354.453362999894,
+          "frames": 45,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_036",
+          "initial_distance_mm": 338.1659877586662,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_037",
+          "initial_distance_mm": 338.56122570954005,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_038",
+          "initial_distance_mm": 341.2108041861041,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_039",
+          "initial_distance_mm": 348.6895168548967,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_040",
+          "initial_distance_mm": 343.1533968790614,
+          "frames": 41,
+          "review_flags": [
+            "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+          ]
+        },
+        {
+          "trial": "grasp_041",
+          "initial_distance_mm": 337.08895142565825,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_042",
+          "initial_distance_mm": 321.715892188851,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_043",
+          "initial_distance_mm": 323.85279453956537,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_044",
+          "initial_distance_mm": 334.44216583122056,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_045",
+          "initial_distance_mm": 329.08694893167564,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_046",
+          "initial_distance_mm": 339.439929117981,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_047",
+          "initial_distance_mm": 327.08445800470884,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_048",
+          "initial_distance_mm": 329.6893661664774,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_049",
+          "initial_distance_mm": 324.2203717894273,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_050",
+          "initial_distance_mm": 288.8852717422409,
+          "frames": 55,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_051",
+          "initial_distance_mm": 87.750534073236,
+          "frames": 78,
+          "review_flags": [
+            "No confirmed distant closed rest before action"
+          ]
+        },
+        {
+          "trial": "grasp_052",
+          "initial_distance_mm": 242.88137076281473,
+          "frames": 68,
+          "review_flags": [
+            "No confirmed distant closed rest before action"
+          ]
+        },
+        {
+          "trial": "grasp_053",
+          "initial_distance_mm": 302.70502827118725,
+          "frames": 48,
+          "review_flags": []
+        }
+      ]
+    },
+    {
+      "recording": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_blue_Size_3cm_20261031_220155_064690",
+      "color": "#E58A2B",
+      "trials": [
+        {
+          "trial": "grasp_001",
+          "initial_distance_mm": 267.7207345439682,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_002",
+          "initial_distance_mm": 265.1067764017506,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_003",
+          "initial_distance_mm": 268.7134144171947,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_004",
+          "initial_distance_mm": 277.7758419414291,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_005",
+          "initial_distance_mm": 265.6089380385135,
+          "frames": 53,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_006",
+          "initial_distance_mm": 265.30286871163304,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_007",
+          "initial_distance_mm": 276.51273254631803,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_008",
+          "initial_distance_mm": 275.49558009205873,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_009",
+          "initial_distance_mm": 280.6238338485306,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_010",
+          "initial_distance_mm": 277.19169543359055,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_011",
+          "initial_distance_mm": 281.76862751257653,
+          "frames": 53,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_012",
+          "initial_distance_mm": 277.68132608579003,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_013",
+          "initial_distance_mm": 260.58248889046826,
+          "frames": 53,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_014",
+          "initial_distance_mm": 276.0787505385205,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_015",
+          "initial_distance_mm": 255.96595190805783,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_016",
+          "initial_distance_mm": 272.14920263493207,
+          "frames": 53,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_017",
+          "initial_distance_mm": 272.8041782310707,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_018",
+          "initial_distance_mm": 271.4588854003052,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_019",
+          "initial_distance_mm": 260.6531676373394,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_020",
+          "initial_distance_mm": 268.41565440594457,
+          "frames": 53,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_021",
+          "initial_distance_mm": 259.8967870732105,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_022",
+          "initial_distance_mm": 273.8143235906568,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_023",
+          "initial_distance_mm": 270.98871555107996,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_024",
+          "initial_distance_mm": 270.5401812451045,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_025",
+          "initial_distance_mm": 261.38917899647356,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_026",
+          "initial_distance_mm": 276.0228582310352,
+          "frames": 56,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_027",
+          "initial_distance_mm": 267.68422867206175,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_028",
+          "initial_distance_mm": 272.90187484598624,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_029",
+          "initial_distance_mm": 267.478542535005,
+          "frames": 54,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_030",
+          "initial_distance_mm": 261.28553434909566,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_031",
+          "initial_distance_mm": 265.01433651541504,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_032",
+          "initial_distance_mm": 252.8887993330659,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_033",
+          "initial_distance_mm": 259.40921216994553,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_034",
+          "initial_distance_mm": 254.79033997092625,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_035",
+          "initial_distance_mm": 263.32599741343245,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_036",
+          "initial_distance_mm": 266.18886512610345,
+          "frames": 55,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_037",
+          "initial_distance_mm": 259.485870382202,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_038",
+          "initial_distance_mm": 266.41848255140457,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_039",
+          "initial_distance_mm": 260.4715490055519,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_040",
+          "initial_distance_mm": 257.2990202341623,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_041",
+          "initial_distance_mm": 263.8823872373668,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_042",
+          "initial_distance_mm": 255.14724523394847,
+          "frames": 58,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_043",
+          "initial_distance_mm": 269.7787649318465,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_044",
+          "initial_distance_mm": 261.13058518507637,
+          "frames": 56,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_045",
+          "initial_distance_mm": 254.19538033222707,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_046",
+          "initial_distance_mm": 261.2147322563417,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_047",
+          "initial_distance_mm": 254.81733705894356,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_048",
+          "initial_distance_mm": 255.63701949660583,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_049",
+          "initial_distance_mm": 260.9070366618688,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_050",
+          "initial_distance_mm": 250.5526907582897,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_051",
+          "initial_distance_mm": 259.3348843577933,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_052",
+          "initial_distance_mm": 254.77308115422008,
+          "frames": 52,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_053",
+          "initial_distance_mm": 252.95483758660407,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_054",
+          "initial_distance_mm": 256.0543630813633,
+          "frames": 48,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_055",
+          "initial_distance_mm": 260.5021415545891,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_056",
+          "initial_distance_mm": 256.321634121074,
+          "frames": 52,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_057",
+          "initial_distance_mm": 256.0365825112926,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_058",
+          "initial_distance_mm": 244.2571774197847,
+          "frames": 57,
+          "review_flags": [
+            "No confirmed closure plus 10-frame hold; retained for review"
+          ]
+        },
+        {
+          "trial": "grasp_059",
+          "initial_distance_mm": 259.88917763084885,
+          "frames": 50,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_060",
+          "initial_distance_mm": 255.14450875788725,
+          "frames": 47,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_061",
+          "initial_distance_mm": 255.503599931457,
+          "frames": 49,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_062",
+          "initial_distance_mm": 257.595268412624,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_063",
+          "initial_distance_mm": 261.7623041505635,
+          "frames": 45,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_064",
+          "initial_distance_mm": 257.6623312104957,
+          "frames": 51,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_065",
+          "initial_distance_mm": 255.14089947668526,
+          "frames": 46,
+          "review_flags": []
+        },
+        {
+          "trial": "grasp_066",
+          "initial_distance_mm": 253.66318482544216,
+          "frames": 55,
+          "review_flags": []
+        }
+      ]
+    }
+  ]
+}

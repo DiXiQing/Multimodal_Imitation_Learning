@@ -1,0 +1,33 @@
+{
+  "segment": 40,
+  "start_row": 3720,
+  "end_row": 3760,
+  "onset_row": 3730,
+  "peak_row": 3738,
+  "closure_confirmed_row": 3750,
+  "near_rows": [
+    3741,
+    3789
+  ],
+  "source_start_frame": 3720,
+  "source_end_frame": 3760,
+  "frames": 41,
+  "pre_action_frames": 10,
+  "post_closure_frames": 10,
+  "duration_s": 1.7047054767608643,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.5,
+  "review_flags": [
+    "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+  ],
+  "validation": {
+    "csv_rows": 41,
+    "image_frames": 41,
+    "decoded_video_frames": 41,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "boundary_refinement": "Removed preceding withdrawal; use last 10-frame distant closed rest before opening, preferring quiet rest"
+}

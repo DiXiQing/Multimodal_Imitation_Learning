@@ -1,0 +1,133 @@
+{
+  "candidates": 44,
+  "unflagged": 34,
+  "review": 10,
+  "main_plots_trials": [
+    "20261101_212518",
+    "20261101_212522",
+    "20261101_212527",
+    "20261101_212531",
+    "20261101_212536",
+    "20261101_212540",
+    "20261101_212545",
+    "20261101_212549",
+    "20261101_212556",
+    "20261101_212601",
+    "20261101_212606",
+    "20261101_212615",
+    "20261101_212628",
+    "20261101_212639",
+    "20261101_212644",
+    "20261101_212655",
+    "20261101_212706",
+    "20261101_212710",
+    "20261101_212716",
+    "20261101_212721",
+    "20261101_212726",
+    "20261101_212731",
+    "20261101_212736",
+    "20261101_212741",
+    "20261101_212748",
+    "20261101_212753",
+    "20261101_212758",
+    "20261101_212801",
+    "20261101_212805",
+    "20261101_212808",
+    "20261101_212814",
+    "20261101_212817",
+    "20261101_212821",
+    "20261101_212825"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.2617418766021729,
+    3.0405333042144775
+  ],
+  "initial_distance_range_mm": [
+    290.7209166616394,
+    318.9723349717034
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 3065,
+  "review_segments": [
+    {
+      "trial": "20261101_212508",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212514",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212610",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212619",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212632",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212649",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261101_212659",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261101_212752",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "trial": "20261101_212810",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "trial": "20261101_212813",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Insufficient aperture excursion; incomplete action or detection artifact",
+        "Distance jump >45 px/frame"
+      ]
+    }
+  ]
+}

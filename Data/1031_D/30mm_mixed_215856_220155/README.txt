@@ -1,0 +1,1 @@
+Mixed 30mm blue dataset, 113 retained trials from two recordings. Six flagged abnormal copied segments deleted from this dataset. Source recordings untouched. Whole-trial random 84 Train / 29 Test; seed 20261029. Each trial occurs in exactly one split. Manifest maps renamed trials to source recordings.

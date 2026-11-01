@@ -1,0 +1,17 @@
+{
+  "included": 65,
+  "excluded": [
+    {
+      "trial": "grasp_058",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    }
+  ],
+  "duration_definition": "t_camera at five-frame closure confirmation minus t_camera at annotated action onset; excludes 10-frame pre-roll and 10-frame post-hold.",
+  "distance_definition": "First recorded segment frame index_mcp_object_distance_mm, Euclidean landmark 5 to object centre. Unnormalized mm.",
+  "duration_min_s": 0.8320128917694092,
+  "duration_max_s": 1.239142894744873,
+  "initial_distance_min_mm": 250.5526907582897,
+  "initial_distance_max_mm": 281.76862751257653
+}

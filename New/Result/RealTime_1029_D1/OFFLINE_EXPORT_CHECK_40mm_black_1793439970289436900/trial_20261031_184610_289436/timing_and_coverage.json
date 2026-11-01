@@ -1,0 +1,11 @@
+{
+  "saved_frames": 56,
+  "valid_frames": 56,
+  "common_frames": 52,
+  "input_gap_resets": 0,
+  "observed_fps": 29.74713224102934,
+  "mean_inference_ms": 0.744430350355937,
+  "p95_inference_ms": 1.0184750135522336,
+  "mean_detection_ms": 0.0,
+  "timing_scope": "processing_before_save_ms excludes CSV/video writing, chart and display; observed_fps includes frame loop and pacing"
+}

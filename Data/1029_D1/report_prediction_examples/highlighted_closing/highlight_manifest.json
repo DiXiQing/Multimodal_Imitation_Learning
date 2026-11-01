@@ -1,0 +1,44 @@
+{
+  "definition": "Main closing region: reference aperture decreases from hold+90%*(peak-hold) to hold+10%*(peak-hold); hold = last 10-frame median. Only boundary timestamps interpolated; all plotted measurements/predictions unchanged, no smoothing.",
+  "cases": [
+    {
+      "object_mm": 20,
+      "split": "Train",
+      "trial": "grasp_051",
+      "source_prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_162159_416592\\Train\\predictions\\grasp_051.csv",
+      "reference_manually_edited": true,
+      "highlight_start_s": 1.3584934113485747,
+      "highlight_end_s": 1.7541767079951212,
+      "high_threshold_mm": 98.79020604801437,
+      "low_threshold_mm": 29.652422050309347,
+      "holding_reference_mm": 21.01019905059622,
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\highlighted_closing\\20mm_Train_grasp_051_closing_highlight.png"
+    },
+    {
+      "object_mm": 30,
+      "split": "Test",
+      "trial": "grasp_100",
+      "source_prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_163209_654090\\Test\\predictions\\grasp_100.csv",
+      "reference_manually_edited": false,
+      "highlight_start_s": 1.7587634921070423,
+      "highlight_end_s": 2.179385063274278,
+      "high_threshold_mm": 103.51540791525152,
+      "low_threshold_mm": 46.11017630466061,
+      "holding_reference_mm": 38.934522353336746,
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\highlighted_closing\\30mm_Test_grasp_100_closing_highlight.png"
+    },
+    {
+      "object_mm": 40,
+      "split": "Train",
+      "trial": "grasp_103",
+      "source_prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261029_164218_197057\\Train\\predictions\\grasp_103.csv",
+      "reference_manually_edited": false,
+      "highlight_start_s": 1.5983976117733483,
+      "highlight_end_s": 1.9883262239603394,
+      "high_threshold_mm": 135.29214733688352,
+      "low_threshold_mm": 69.65851840589124,
+      "holding_reference_mm": 61.454314789517205,
+      "figure": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\report_prediction_examples\\highlighted_closing\\40mm_Train_grasp_103_closing_highlight.png"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "input_column": "index_mcp_object_distance_mm",
+  "target_column": "finger_width_mm",
+  "units": "mm",
+  "numeric_scaler": {
+    "x_mean": 0.0,
+    "x_std": 1.0,
+    "y_mean": 70.20945900528605,
+    "y_std": 38.81862519406149
+  },
+  "scaler_fitted_on": "Output Train only; input identity after per-trial initial-distance division",
+  "input_normalization": "Per-trial first recorded distance ratio; no secondary input scaling",
+  "physical_normalization": "Current index MCP Euclidean distance / first recorded frame distance",
+  "output_normalization": "Train-only Z-score; predictions restored to mm",
+  "max_frame_gap_s": 0.1,
+  "epochs": 0,
+  "simulated_untrained": true,
+  "hidden_size": 32,
+  "dropout": 0.1,
+  "window": 100,
+  "mlp_history_frames": 100,
+  "mlp_short_history": "Causal left padding by first real value within each continuous sequence",
+  "common_min_real_frames": 5,
+  "lstm_history_frames": 5,
+  "lstm_short_history": "Use all available real frames; no padding/repetition",
+  "lstm_window_state": "zero state per rolling window",
+  "state_policy": "Reset at trial start, missing/invalid input OR target, nonconsecutive frame, nonpositive dt or dt>0.10s",
+  "physical_processing": "No velocity, time normalization, per-trial amplitude normalization, smoothing or interpolation",
+  "models": {
+    "Function": "one scalar current distance -> current aperture; fixed spline lambda=1e-6",
+    "MLP 100f": "100 distances oldest-to-current (causal first-value left padding for short history) -> Linear(100,32), ReLU, Dropout(.1), Linear(32,32), ReLU, Linear(32,1)",
+    "LSTM 5f": "LSTM(1,32), Dropout(.1), Linear(32,1); independent rolling windows of up to 5 frames; zero state each window"
+  },
+  "fairness": "Same common five-consecutive-frame targets for fitting losses and main scoring. LSTM consumes at most 5 consecutive real inputs per target; separate from-start metrics.",
+  "loss": "MAE; equal loss weight per experiment; Adam lr=0.001 weight_decay=0.0001",
+  "selection": "Fixed 400 epochs, last epoch only; Function fit once on Train; Test evaluated only after fitting all models."
+}

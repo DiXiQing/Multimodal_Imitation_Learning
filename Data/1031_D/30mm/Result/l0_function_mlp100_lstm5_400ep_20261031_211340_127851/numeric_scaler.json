@@ -1,0 +1,7 @@
+{
+  "x_mean": 0.0,
+  "x_std": 1.0,
+  "y_mean": 70.20945900528605,
+  "y_std": 38.81862519406149,
+  "definition": "x=distance_mm/first_recorded_distance_mm; aperture_mm=y_pred_scaled*y_std+y_mean; output scale Train only"
+}

@@ -1,0 +1,243 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 8,
+      "start_row": 717,
+      "end_row": 758,
+      "onset_row": 727,
+      "peak_row": 735,
+      "closure_confirmed_row": 748,
+      "near_rows": [
+        741,
+        784
+      ],
+      "source_start_frame": 717,
+      "source_end_frame": 758,
+      "frames": 42,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 1.368854284286499,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ],
+      "validation": {
+        "csv_rows": 42,
+        "image_frames": 42,
+        "decoded_video_frames": 42,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      },
+      "boundary_refinement": "Removed preceding withdrawal; use last 10-frame distant closed rest before opening, preferring quiet rest"
+    },
+    {
+      "segment": 29,
+      "start_row": 2674,
+      "end_row": 2717,
+      "onset_row": 2684,
+      "peak_row": 2693,
+      "closure_confirmed_row": 2707,
+      "near_rows": [
+        2698,
+        2746
+      ],
+      "source_start_frame": 2674,
+      "source_end_frame": 2717,
+      "frames": 44,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 1.4302420616149902,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ],
+      "validation": {
+        "csv_rows": 44,
+        "image_frames": 44,
+        "decoded_video_frames": 44,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      },
+      "boundary_refinement": "Removed preceding withdrawal; use last 10-frame distant closed rest before opening, preferring quiet rest"
+    },
+    {
+      "segment": 40,
+      "start_row": 3720,
+      "end_row": 3760,
+      "onset_row": 3730,
+      "peak_row": 3738,
+      "closure_confirmed_row": 3750,
+      "near_rows": [
+        3741,
+        3789
+      ],
+      "source_start_frame": 3720,
+      "source_end_frame": 3760,
+      "frames": 41,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 1.7047054767608643,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ],
+      "validation": {
+        "csv_rows": 41,
+        "image_frames": 41,
+        "decoded_video_frames": 41,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      },
+      "boundary_refinement": "Removed preceding withdrawal; use last 10-frame distant closed rest before opening, preferring quiet rest"
+    },
+    {
+      "segment": 51,
+      "start_row": 4776,
+      "end_row": 4853,
+      "onset_row": 4786,
+      "peak_row": 4829,
+      "closure_confirmed_row": 4843,
+      "near_rows": [
+        4835,
+        4884
+      ],
+      "source_start_frame": 4776,
+      "source_end_frame": 4853,
+      "frames": 78,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.563542366027832,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No confirmed distant closed rest before action"
+      ],
+      "validation": {
+        "csv_rows": 78,
+        "image_frames": 78,
+        "decoded_video_frames": 78,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    },
+    {
+      "segment": 52,
+      "start_row": 4925,
+      "end_row": 4992,
+      "onset_row": 4935,
+      "peak_row": 4968,
+      "closure_confirmed_row": 4982,
+      "near_rows": [
+        4973,
+        5018
+      ],
+      "source_start_frame": 4925,
+      "source_end_frame": 4992,
+      "frames": 68,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.238034248352051,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.5,
+      "review_flags": [
+        "No confirmed distant closed rest before action"
+      ],
+      "validation": {
+        "csv_rows": 68,
+        "image_frames": 68,
+        "decoded_video_frames": 68,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    }
+  ],
+  "missing_intervals": [],
+  "near_candidate_count": 53,
+  "boundary_refinements": [
+    {
+      "segment": 8,
+      "old_start_row": 701,
+      "new_start_row": 717,
+      "flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ]
+    },
+    {
+      "segment": 13,
+      "old_start_row": 1149,
+      "new_start_row": 1167,
+      "flags": []
+    },
+    {
+      "segment": 24,
+      "old_start_row": 2187,
+      "new_start_row": 2208,
+      "flags": []
+    },
+    {
+      "segment": 29,
+      "old_start_row": 2655,
+      "new_start_row": 2674,
+      "flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ]
+    },
+    {
+      "segment": 31,
+      "old_start_row": 2842,
+      "new_start_row": 2864,
+      "flags": []
+    },
+    {
+      "segment": 34,
+      "old_start_row": 3137,
+      "new_start_row": 3153,
+      "flags": []
+    },
+    {
+      "segment": 35,
+      "old_start_row": 3233,
+      "new_start_row": 3248,
+      "flags": []
+    },
+    {
+      "segment": 39,
+      "old_start_row": 3616,
+      "new_start_row": 3634,
+      "flags": []
+    },
+    {
+      "segment": 40,
+      "old_start_row": 3708,
+      "new_start_row": 3720,
+      "flags": [
+        "No quiet 10-frame initial rest (distance range<=8 px, aperture range<=4 px); closest distant closed rest retained"
+      ]
+    },
+    {
+      "segment": 42,
+      "old_start_row": 3885,
+      "new_start_row": 3905,
+      "flags": []
+    },
+    {
+      "segment": 45,
+      "old_start_row": 4174,
+      "new_start_row": 4195,
+      "flags": []
+    }
+  ]
+}

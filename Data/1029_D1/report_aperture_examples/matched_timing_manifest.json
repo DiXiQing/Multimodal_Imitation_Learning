@@ -1,0 +1,64 @@
+{
+  "selection": "Minimum across-object variance of actual timestamps for total duration, aperture opening 10/90%, peak, closing 90/10%, distance approach 10/90% progress. All candidates from Test. No model-error selection; approximately matched timing, not identical physical velocity.",
+  "feature_labels": [
+    "total_duration_s",
+    "opening_10_s",
+    "opening_90_s",
+    "peak_s",
+    "closing_90_s",
+    "closing_10_s",
+    "approach_10_s",
+    "approach_90_s"
+  ],
+  "score": 0.23498849756151696,
+  "trials": [
+    {
+      "size": 20,
+      "trial": "grasp_090",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_090\\camera.csv",
+      "features": [
+        1.8067069053649902,
+        0.4175793370101736,
+        0.6887444827208062,
+        0.7753462791442871,
+        0.983864579796406,
+        1.291301177262529,
+        0.5892997776305067,
+        1.0705213281122332
+      ],
+      "distance_change_mm": 349.65322919330407
+    },
+    {
+      "size": 30,
+      "trial": "grasp_078",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_078\\camera.csv",
+      "features": [
+        1.8043503761291504,
+        0.40181292291301635,
+        0.7196867476286707,
+        0.7968835830688477,
+        0.9810164672786668,
+        1.2918467328998555,
+        0.5814332105780521,
+        1.073702812933028
+      ],
+      "distance_change_mm": 362.6479304067623
+    },
+    {
+      "size": 40,
+      "trial": "grasp_073",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_073\\camera.csv",
+      "features": [
+        1.7826995849609375,
+        0.3971518312069118,
+        0.7552623580299557,
+        0.8868272304534912,
+        0.9897723006146716,
+        1.284575037530876,
+        0.5429796002391034,
+        1.0649659572782744
+      ],
+      "distance_change_mm": 354.7091392607176
+    }
+  ]
+}

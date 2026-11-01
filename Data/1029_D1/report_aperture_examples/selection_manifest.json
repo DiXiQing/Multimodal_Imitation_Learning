@@ -1,0 +1,51 @@
+{
+  "selection": "One measured Test trial per cube, closest to within-object medians of duration, peak aperture, starting aperture, final aperture and relative peak time, scored using sum of absolute IQR-scaled deviations. Selection uses no model errors.",
+  "plot": "Original recorded finger_width_mm vs t_camera minus first timestamp. No measurement smoothing, amplitude normalization or time normalization.",
+  "trials": [
+    {
+      "trial": "grasp_076",
+      "file": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\20mm_red\\Test\\grasp_076\\camera.csv",
+      "feature": [
+        2.175650119781494,
+        104.42708802946821,
+        11.15098602720193,
+        20.14428620793337,
+        0.41487033137841034
+      ],
+      "size": 20,
+      "split": "Test",
+      "candidate_count": 25,
+      "selection_score": 1.1779785313367697
+    },
+    {
+      "trial": "grasp_068",
+      "file": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\30mm_blue\\Test\\grasp_068\\camera.csv",
+      "feature": [
+        1.7584900856018066,
+        115.9219948931264,
+        9.630989446992313,
+        38.01737411361735,
+        0.452767501459534
+      ],
+      "size": 30,
+      "split": "Test",
+      "candidate_count": 25,
+      "selection_score": 0.7329685111999804
+    },
+    {
+      "trial": "grasp_134",
+      "file": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1029_D1\\40mm_black\\Test\\grasp_134\\camera.csv",
+      "feature": [
+        2.1245903968811035,
+        129.27872077881543,
+        9.907098890663832,
+        58.934707975133215,
+        0.4320615074684851
+      ],
+      "size": 40,
+      "split": "Test",
+      "candidate_count": 25,
+      "selection_score": 1.617391557192163
+    }
+  ]
+}

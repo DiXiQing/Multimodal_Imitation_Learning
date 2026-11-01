@@ -1,0 +1,127 @@
+{
+  "recording_settings": {
+    "v": 60,
+    "s": 118,
+    "color_s_min": 90,
+    "color_v_min": 32,
+    "area": 105,
+    "max_area": 640000,
+    "signed_distance_axis_xy": [
+      0.9830437307425899,
+      0.18337127214394958
+    ],
+    "signed_distance_initial_object_center_xy": [
+      220.5,
+      183.0
+    ],
+    "signed_distance_initial_hand_center_xy": [
+      415.2874195575714,
+      219.3345147371292
+    ],
+    "signed_distance_definition": "(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.",
+    "metronome_at_recording_start": null,
+    "approach_guide": {
+      "mode": "spoken_count_loop",
+      "target_movement_s": 3,
+      "return_counts": 2
+    },
+    "camera_source_width": 640,
+    "camera_source_height": 480,
+    "crop_margins_px": {
+      "left": 100,
+      "top": 100,
+      "right": 0,
+      "bottom": 0
+    },
+    "coordinate_origin": "Top-left of cropped image; add crop left/top for source coordinates.",
+    "camera": 1,
+    "width": 540,
+    "height": 380,
+    "object_color": "blue",
+    "object_id": "blue_3cm",
+    "hsv_ranges": [
+      [
+        [
+          90,
+          90,
+          32
+        ],
+        [
+          135,
+          255,
+          255
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 3.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8",
+    "distance_measurements": {
+      "hand_object_distance": "Euclidean distance from landmarks 4/8 midpoint to object centre (legacy)",
+      "index_mcp_object_distance": "Euclidean distance from index MCP landmark 5 (display node 2) to object centre",
+      "wrist_object_distance": "Euclidean distance from wrist landmark 0 (display node 1) to object centre",
+      "units": "px",
+      "primary_display": "index_mcp_object_distance",
+      "hand_object_signed_distance": "Legacy signed midpoint projection retained separately"
+    },
+    "speed_estimation": {
+      "distance_column": "index_mcp_object_distance",
+      "method": "Least-squares slope over trailing 5 consecutive valid distance/time samples",
+      "window_frames": 5,
+      "max_gap_s": 0.1,
+      "units": "px/s",
+      "velocity_sign": "Distance derivative; negative approaching",
+      "approach_speed_sign": "Negative distance derivative; positive approaching"
+    },
+    "pixel_calibration": {
+      "mm_per_px": 1.5,
+      "method": "Manual mm_per_px input",
+      "calibration_time_unix_s": 1793451481.1933897
+    },
+    "start_position_guide": {
+      "target_distance": 250.0,
+      "tolerance": 5.0,
+      "units": "px",
+      "hold_s": 0.0,
+      "direction_constraint": false,
+      "ready_at_recording_start": false,
+      "initial_index_mcp_distance_px": 225.36820225594775,
+      "enforce_recording_start": false
+    }
+  },
+  "detection": {
+    "v": 60,
+    "s": 118,
+    "area": 105,
+    "max_area": 640000,
+    "color_s_min": 90,
+    "color_v_min": 32
+  },
+  "crop_margins_px": [
+    100,
+    100,
+    0,
+    0
+  ],
+  "model_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1031_D\\30mm_mixed_215856_220155\\Result\\l0_normalized_function_mlp5_lstmfull_400ep_20261031_222231_720925\\models",
+  "target_movement_s": 1,
+  "distance_definition": "Euclidean MediaPipe landmark 5 to object centre",
+  "normalization": "distance / first recorded valid distance",
+  "pixel_calibration": {
+    "mm_per_px": 1.5,
+    "method": "Manual mm_per_px input",
+    "calibration_time_unix_s": 1793451481.1933897
+  },
+  "initial_object_center_xy": [
+    231.5,
+    182.5
+  ],
+  "object_center_locked": false,
+  "common_frame_rule": "Five consecutive valid frames after trial/gap reset",
+  "max_frame_gap_s": 0.1,
+  "object_jump_reject_px": 40.0,
+  "units": "mm"
+}
