@@ -1,0 +1,16 @@
+node:internal/fs/promises:1774
+  return await PromisePrototypeThen(
+         ^
+
+Error: EPERM: operation not permitted, link 'C:\MineApp\Code\Multimodal_Imitation_Learning\Report\Updated\.T_EN_latest_models.pptx.ec6c88ec-d146-4683-8a38-431488186828.validated' -> 'C:\MineApp\Code\Multimodal_Imitation_Learning\Report\Updated\T_EN_latest_models.pptx'
+    at async Object.link (node:internal/fs/promises:1774:10)
+    at async finalizePresentation (file:///C:/Users/Di/.codex/plugins/cache/openai-primary-runtime/presentations/26.1030.10813/skills/presentations/container_tools/artifact_tool_utils.mjs:1018:5)
+    at async file:///C:/MineApp/Code/Multimodal_Imitation_Learning/Report/.model_update/finalize.mjs:4:13 {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'link',
+  path: 'C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Report\\Updated\\.T_EN_latest_models.pptx.ec6c88ec-d146-4683-8a38-431488186828.validated',
+  dest: 'C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Report\\Updated\\T_EN_latest_models.pptx'
+}
+
+Node.js v24.22.1

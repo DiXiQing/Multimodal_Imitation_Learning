@@ -10,7 +10,7 @@ os.environ.setdefault('MPLCONFIGDIR',str(Path(__file__).parent/'.mplconfig'))
 import numpy as np
 from matplotlib.figure import Figure
 
-DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1101_D\40mm'
+DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1101_D\30mm'
 
 
 def read_trials(base, distance_mode=None):

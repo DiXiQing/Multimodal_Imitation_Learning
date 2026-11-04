@@ -1,0 +1,14 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\40mm_Static_LSTM_70_30_20261104_143531",
+  "size_cm": 4,
+  "lstm_samples": 1,
+  "files": [
+    "lstm_full.pth"
+  ],
+  "distance": "index_mcp_object_distance_mm / trial initial distance",
+  "settings_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261101_213007\\settings.json",
+  "mm_per_px": 1.2,
+  "common_frame_rule": "All valid frames; LSTM starts predicting on the first frame",
+  "units": "mm",
+  "video_timing": "Nominal FPS video; use CSV timestamps for actual time"
+}

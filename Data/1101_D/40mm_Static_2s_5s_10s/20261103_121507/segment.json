@@ -1,0 +1,65 @@
+{
+  "segment": 13,
+  "start_row": 0,
+  "end_row": 389,
+  "onset_row": 310,
+  "peak_row": 348,
+  "closure_confirmed_row": 379,
+  "near_rows": [
+    358,
+    435
+  ],
+  "source_start_frame": 2076,
+  "source_end_frame": 2165,
+  "frames": 390,
+  "pre_action_frames": 310,
+  "post_closure_frames": 10,
+  "duration_s": 12.959376811981201,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [],
+  "trial_name": "20261103_121507",
+  "relative_folder": "20261103_121507",
+  "validation": {
+    "csv_rows": 390,
+    "synthetic_hold_frames": 300,
+    "original_rows": 90
+  },
+  "synthetic_hold_s": 10,
+  "synthetic_hold_frames": 300,
+  "source_trial": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261103_121507",
+  "original_segment": {
+    "segment": 13,
+    "start_row": 2076,
+    "end_row": 2165,
+    "onset_row": 2086,
+    "peak_row": 2124,
+    "closure_confirmed_row": 2155,
+    "near_rows": [
+      2134,
+      2211
+    ],
+    "source_start_frame": 2076,
+    "source_end_frame": 2165,
+    "frames": 90,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.959376811981201,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261103_121507",
+    "relative_folder": "20261103_121507",
+    "validation": {
+      "csv_rows": 90,
+      "image_frames": 90,
+      "decoded_video_frames": 90,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  }
+}

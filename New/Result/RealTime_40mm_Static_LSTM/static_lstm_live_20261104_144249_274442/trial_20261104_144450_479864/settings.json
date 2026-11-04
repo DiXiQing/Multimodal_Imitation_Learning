@@ -1,0 +1,132 @@
+{
+  "size_cm": 4,
+  "object_color": "black",
+  "detection_settings_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261101_213007\\settings.json",
+  "lstm_samples": 1,
+  "recording_settings": {
+    "v": 60,
+    "s": 120,
+    "color_s_min": 140,
+    "color_v_min": 50,
+    "area": 500,
+    "max_area": 640000,
+    "signed_distance_axis_xy": [
+      0.9756468038285578,
+      0.21934747361006748
+    ],
+    "signed_distance_initial_object_center_xy": [
+      213.0,
+      205.5
+    ],
+    "signed_distance_initial_hand_center_xy": [
+      405.0323635339737,
+      248.67321968078613
+    ],
+    "signed_distance_definition": "(current fingertip midpoint - current object center) dot fixed initial axis; positive on initial-hand side, negative after crossing the perpendicular zero line. Pixels; not signed Euclidean distance.",
+    "metronome_at_recording_start": null,
+    "approach_guide": {
+      "mode": "spoken_count_loop",
+      "target_movement_s": 3,
+      "return_counts": 2
+    },
+    "camera_source_width": 640,
+    "camera_source_height": 480,
+    "crop_margins_px": {
+      "left": 100,
+      "top": 100,
+      "right": 0,
+      "bottom": 0
+    },
+    "coordinate_origin": "Top-left of cropped image; add crop left/top for source coordinates.",
+    "camera": 1,
+    "width": 540,
+    "height": 380,
+    "object_color": "black",
+    "object_id": "black_4cm",
+    "hsv_ranges": [
+      [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          179,
+          120,
+          60
+        ]
+      ]
+    ],
+    "fps": 30.0,
+    "size_cm": 4.0,
+    "center_source": "detected",
+    "locked_center": null,
+    "locked_bounding_box_xywh": null,
+    "base_workflow": "Record_mediapipe_continuous.py",
+    "fingertip_method": "MediaPipe landmarks 4,8",
+    "distance_measurements": {
+      "hand_object_distance": "Euclidean distance from landmarks 4/8 midpoint to object centre (legacy)",
+      "index_mcp_object_distance": "Euclidean distance from index MCP landmark 5 (display node 2) to object centre",
+      "wrist_object_distance": "Euclidean distance from wrist landmark 0 (display node 1) to object centre",
+      "units": "px",
+      "primary_display": "index_mcp_object_distance",
+      "hand_object_signed_distance": "Legacy signed midpoint projection retained separately"
+    },
+    "speed_estimation": {
+      "distance_column": "index_mcp_object_distance",
+      "method": "Least-squares slope over trailing 5 consecutive valid distance/time samples",
+      "window_frames": 5,
+      "max_gap_s": 0.1,
+      "units": "px/s",
+      "velocity_sign": "Distance derivative; negative approaching",
+      "approach_speed_sign": "Negative distance derivative; positive approaching"
+    },
+    "pixel_calibration": {
+      "mm_per_px": 1.2,
+      "method": "Manual mm_per_px input",
+      "calibration_time_unix_s": 1793536195.1539164
+    },
+    "start_position_guide": {
+      "target_distance": 250.0,
+      "tolerance": 5.0,
+      "units": "px",
+      "hold_s": 0.0,
+      "direction_constraint": false,
+      "ready_at_recording_start": false,
+      "initial_index_mcp_distance_px": 234.26792541936186,
+      "enforce_recording_start": false
+    }
+  },
+  "detection": {
+    "v": 60,
+    "s": 120,
+    "area": 500,
+    "max_area": 640000,
+    "color_s_min": 140,
+    "color_v_min": 50
+  },
+  "crop_margins_px": [
+    100,
+    100,
+    0,
+    0
+  ],
+  "model_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\40mm_Static_LSTM_70_30_20261104_143531",
+  "target_movement_s": 1,
+  "distance_definition": "Euclidean MediaPipe landmark 5 to object centre",
+  "normalization": "distance / first recorded valid distance",
+  "pixel_calibration": {
+    "mm_per_px": 1.2,
+    "method": "Manual mm_per_px input",
+    "calibration_time_unix_s": 1793536195.1539164
+  },
+  "initial_object_center_xy": [
+    247.0,
+    222.0
+  ],
+  "object_center_locked": false,
+  "common_frame_rule": "All valid frames",
+  "max_frame_gap_s": 0.1,
+  "object_jump_reject_px": 40.0,
+  "units": "mm"
+}

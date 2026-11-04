@@ -8,7 +8,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 PROJECT_ROOT=next((p for p in Path(__file__).resolve().parents
                    if (p/'Data').is_dir() and (p/'New/Program').is_dir()),Path(__file__).resolve().parent)
-DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1101_D\40mm'
+DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1101_D\30mm'
 
 
 def load_conditions(source):
