@@ -1,0 +1,20 @@
+{
+  "trials": 18,
+  "static_valid_frames": 108,
+  "definition": "Existing annotated onset; strictly preceding onset, valid MLP frames only; first4 no-output frames excluded",
+  "unit": "mm",
+  "actual_mean_mm": 5.9696863176245945,
+  "predicted_mean_mm": 10.71096822950575,
+  "bias_mm": 4.741281911881155,
+  "mae_mm": 4.741281911881155,
+  "rmse_mm": 5.073418097826381,
+  "first_valid_actual_mean_mm": 5.951076079078343,
+  "first_valid_predicted_mean_mm": 10.579364776611328,
+  "first_valid_bias_mm": 4.628288697532986,
+  "reference_MCP_same_frames": {
+    "predicted_mean_mm": 9.648291181634974,
+    "actual_mean_mm": 5.9696863176245945,
+    "bias_mm": 3.6786048640103775,
+    "mae_mm": 3.7065083038228237
+  }
+}

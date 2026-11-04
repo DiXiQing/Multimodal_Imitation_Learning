@@ -1,0 +1,17 @@
+{
+  "total_trials": 600,
+  "counts": {
+    "20mm": 200,
+    "30mm": 200,
+    "40mm": 200
+  },
+  "colors": {
+    "20mm": "red",
+    "30mm": "blue",
+    "40mm": "black"
+  },
+  "duration_definition": "Actual closure-confirmation timestamp minus annotated action-onset timestamp; margins excluded",
+  "distance_definition": "First recorded index_mcp_object_distance_mm; no normalization",
+  "excluded": "backup, Train, Test, Result, review_segments and derived folders; immediate trial folders only",
+  "raw_data_modified": false
+}

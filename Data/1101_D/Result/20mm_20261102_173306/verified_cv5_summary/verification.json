@@ -1,0 +1,10 @@
+{
+  "trials": 240,
+  "folds": 5,
+  "train_per_fold": 192,
+  "test_per_fold": 48,
+  "each_trial_tested_once": true,
+  "predictions_recomputed_and_match_saved_metrics": true,
+  "main_metrics": "Equal-weight trial mean and sample SD (ddof=1); identical common target frames; no Train rows included",
+  "no_training": true
+}

@@ -1,0 +1,49 @@
+{
+  "definition": {
+    "kind": "fixed_knot_cubic_B_spline_regression",
+    "degree": 3,
+    "knots": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.14285714285714285,
+      0.2857142857142857,
+      0.42857142857142855,
+      0.5714285714285714,
+      0.7142857142857142,
+      0.8571428571428571,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "coefficients": [
+      -0.7051884640101145,
+      -1.1698719167416927,
+      1.0317186489196408,
+      1.0532948104055173,
+      1.2471307393983269,
+      1.2308650229098874,
+      0.9600890169490445,
+      0.3251277607957284,
+      -1.1560962756432873,
+      -2.2810305630973784
+    ],
+    "train_x_min": 0.08742288562997223,
+    "train_x_range": 0.9405175722775331,
+    "lambda_fixed": 0.0001,
+    "basis_count": 10,
+    "loss": "Equal-trial weighted squared residuals + lambda*n_train_trials*sum(second coefficient differences squared)",
+    "secondary_x_scaling": "Train-only MinMax for B-spline basis construction; physical input remains l/l0"
+  },
+  "scaler": {
+    "x_mean": 0.0,
+    "x_std": 1.0,
+    "y_mean": 57.34842215775645,
+    "y_std": 30.429843776805455
+  },
+  "input_column": "index_mcp_object_distance_mm",
+  "target_column": "finger_width_mm",
+  "simulated_untrained": false
+}

@@ -1,0 +1,11 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_2cm_20261102_161038_464525\\grasp_segments",
+  "start_predictions": 5,
+  "start_weight": 1.0,
+  "epochs": 400,
+  "device": "cuda",
+  "seed": 20261029,
+  "window": 1,
+  "weighting": "Uniform MAE; all valid frames; no start weighting",
+  "selection": "Fixed in advance; final epoch; no Test tuning"
+}

@@ -1,0 +1,285 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 5,
+      "start_row": 750,
+      "end_row": 873,
+      "onset_row": 760,
+      "peak_row": 823,
+      "closure_confirmed_row": 863,
+      "near_rows": [
+        840,
+        902
+      ],
+      "source_start_frame": 750,
+      "source_end_frame": 873,
+      "frames": 124,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.095235824584961,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_143931",
+      "relative_folder": "review_segments/20261102_143931"
+    },
+    {
+      "segment": 20,
+      "start_row": 3470,
+      "end_row": 3666,
+      "onset_row": 3480,
+      "peak_row": 3626,
+      "closure_confirmed_row": 3656,
+      "near_rows": [
+        3629,
+        3699
+      ],
+      "source_start_frame": 3470,
+      "source_end_frame": 3666,
+      "frames": 197,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 6.530541896820068,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144101",
+      "relative_folder": "review_segments/20261102_144101"
+    },
+    {
+      "segment": 23,
+      "start_row": 4169,
+      "end_row": 4308,
+      "onset_row": 4179,
+      "peak_row": 4246,
+      "closure_confirmed_row": 4298,
+      "near_rows": [
+        4269,
+        4329
+      ],
+      "source_start_frame": 4169,
+      "source_end_frame": 4308,
+      "frames": 140,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.632367372512817,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144125",
+      "relative_folder": "review_segments/20261102_144125"
+    },
+    {
+      "segment": 24,
+      "start_row": 4363,
+      "end_row": 4522,
+      "onset_row": 4373,
+      "peak_row": 4467,
+      "closure_confirmed_row": 4512,
+      "near_rows": [
+        4490,
+        4538
+      ],
+      "source_start_frame": 4363,
+      "source_end_frame": 4522,
+      "frames": 160,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 5.295307874679565,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144131",
+      "relative_folder": "review_segments/20261102_144131"
+    },
+    {
+      "segment": 26,
+      "start_row": 4769,
+      "end_row": 4907,
+      "onset_row": 4779,
+      "peak_row": 4853,
+      "closure_confirmed_row": 4897,
+      "near_rows": [
+        4875,
+        4930
+      ],
+      "source_start_frame": 4769,
+      "source_end_frame": 4907,
+      "frames": 139,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.607243061065674,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144145",
+      "relative_folder": "review_segments/20261102_144145"
+    },
+    {
+      "segment": 29,
+      "start_row": 5400,
+      "end_row": 5544,
+      "onset_row": 5410,
+      "peak_row": 5484,
+      "closure_confirmed_row": 5534,
+      "near_rows": [
+        5514,
+        5570
+      ],
+      "source_start_frame": 5400,
+      "source_end_frame": 5544,
+      "frames": 145,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.8324809074401855,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144206",
+      "relative_folder": "review_segments/20261102_144206"
+    },
+    {
+      "segment": 30,
+      "start_row": 5609,
+      "end_row": 5738,
+      "onset_row": 5619,
+      "peak_row": 5701,
+      "closure_confirmed_row": 5728,
+      "near_rows": [
+        5708,
+        5751
+      ],
+      "source_start_frame": 5609,
+      "source_end_frame": 5738,
+      "frames": 130,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.292047023773193,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144213",
+      "relative_folder": "review_segments/20261102_144213"
+    },
+    {
+      "segment": 57,
+      "start_row": 11046,
+      "end_row": 11173,
+      "onset_row": 11056,
+      "peak_row": 11120,
+      "closure_confirmed_row": 11163,
+      "near_rows": [
+        11138,
+        11190
+      ],
+      "source_start_frame": 11046,
+      "source_end_frame": 11173,
+      "frames": 128,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 4.222532272338867,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144514",
+      "relative_folder": "review_segments/20261102_144514"
+    },
+    {
+      "segment": 59,
+      "start_row": 11462,
+      "end_row": 11653,
+      "onset_row": 11472,
+      "peak_row": 11581,
+      "closure_confirmed_row": 11643,
+      "near_rows": [
+        11619,
+        11671
+      ],
+      "source_start_frame": 11462,
+      "source_end_frame": 11653,
+      "frames": 192,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 6.368246793746948,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Opening attempt followed by >=8 closed frames before main opening; review repeated action or detection interruption",
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144528",
+      "relative_folder": "review_segments/20261102_144528"
+    },
+    {
+      "segment": 73,
+      "start_row": 14597,
+      "end_row": 14749,
+      "onset_row": 14607,
+      "peak_row": 14692,
+      "closure_confirmed_row": 14739,
+      "near_rows": [
+        14718,
+        14760
+      ],
+      "source_start_frame": 14597,
+      "source_end_frame": 14749,
+      "frames": 153,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 5.0565268993377686,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261102_144713",
+      "relative_folder": "review_segments/20261102_144713"
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 16256,
+      "end_row": 16298,
+      "source_start_frame": "16256",
+      "source_end_frame": "16298",
+      "frames": 43
+    }
+  ],
+  "near_candidate_count": 79
+}

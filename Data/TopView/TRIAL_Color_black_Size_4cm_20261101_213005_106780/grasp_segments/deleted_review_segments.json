@@ -1,0 +1,76 @@
+{
+  "action": "User explicitly requested deletion of both review trial folders",
+  "time": "2026-11-02T12:27:11.325588+09:00",
+  "deleted_trials": [
+    {
+      "segment": 12,
+      "start_row": 1399,
+      "end_row": 1496,
+      "onset_row": 1409,
+      "peak_row": 1468,
+      "closure_confirmed_row": 1486,
+      "near_rows": [
+        1474,
+        1508
+      ],
+      "source_start_frame": 1399,
+      "source_end_frame": 1496,
+      "frames": 98,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 3.2406508922576904,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Opening attempt followed by >=8 closed frames before main opening; review repeated action or detection interruption"
+      ],
+      "trial_name": "20261101_213052",
+      "relative_folder": "review_segments/20261101_213052",
+      "validation": {
+        "csv_rows": 98,
+        "image_frames": 98,
+        "decoded_video_frames": 98,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    },
+    {
+      "segment": 47,
+      "start_row": 6114,
+      "end_row": 6436,
+      "onset_row": 6124,
+      "peak_row": 6383,
+      "closure_confirmed_row": 6426,
+      "near_rows": [
+        6403,
+        6451
+      ],
+      "source_start_frame": 6114,
+      "source_end_frame": 6436,
+      "frames": 323,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 10.727864027023315,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261101_213329",
+      "relative_folder": "review_segments/20261101_213329",
+      "validation": {
+        "csv_rows": 323,
+        "image_frames": 323,
+        "decoded_video_frames": 323,
+        "original_fields_preserved": true,
+        "image_bytes_preserved": true
+      }
+    }
+  ],
+  "retained_trials": 55,
+  "original_recording_preserved": true
+}

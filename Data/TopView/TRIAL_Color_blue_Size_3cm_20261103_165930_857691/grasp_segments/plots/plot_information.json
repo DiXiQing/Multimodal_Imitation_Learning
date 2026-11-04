@@ -1,0 +1,78 @@
+{
+  "candidates": 47,
+  "unflagged": 46,
+  "review": 1,
+  "main_plots_trials": [
+    "20261103_165933",
+    "20261103_165938",
+    "20261103_165947",
+    "20261103_165954",
+    "20261103_170001",
+    "20261103_170009",
+    "20261103_170016",
+    "20261103_170023",
+    "20261103_170031",
+    "20261103_170037",
+    "20261103_170045",
+    "20261103_170052",
+    "20261103_170059",
+    "20261103_170106",
+    "20261103_170113",
+    "20261103_170119",
+    "20261103_170128",
+    "20261103_170135",
+    "20261103_170142",
+    "20261103_170148",
+    "20261103_170155",
+    "20261103_170202",
+    "20261103_170210",
+    "20261103_170217",
+    "20261103_170224",
+    "20261103_170232",
+    "20261103_170240",
+    "20261103_170247",
+    "20261103_170254",
+    "20261103_170301",
+    "20261103_170309",
+    "20261103_170317",
+    "20261103_170324",
+    "20261103_170332",
+    "20261103_170346",
+    "20261103_170354",
+    "20261103_170401",
+    "20261103_170410",
+    "20261103_170415",
+    "20261103_170421",
+    "20261103_170428",
+    "20261103_170433",
+    "20261103_170439",
+    "20261103_170444",
+    "20261103_170449",
+    "20261103_170454"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.7916605472564697,
+    3.026515245437622
+  ],
+  "initial_distance_range_mm": [
+    269.1392146573572,
+    358.0471785329088
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 4496,
+  "review_segments": [
+    {
+      "trial": "20261103_170337",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

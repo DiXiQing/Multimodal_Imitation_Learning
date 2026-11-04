@@ -1,0 +1,122 @@
+{
+  "candidates": 72,
+  "unflagged": 68,
+  "review": 4,
+  "main_plots_trials": [
+    "20261103_143901",
+    "20261103_143906",
+    "20261103_143910",
+    "20261103_143916",
+    "20261103_143923",
+    "20261103_143927",
+    "20261103_143933",
+    "20261103_143939",
+    "20261103_143945",
+    "20261103_143953",
+    "20261103_143959",
+    "20261103_144005",
+    "20261103_144011",
+    "20261103_144017",
+    "20261103_144023",
+    "20261103_144030",
+    "20261103_144036",
+    "20261103_144042",
+    "20261103_144047",
+    "20261103_144053",
+    "20261103_144100",
+    "20261103_144106",
+    "20261103_144111",
+    "20261103_144117",
+    "20261103_144129",
+    "20261103_144135",
+    "20261103_144141",
+    "20261103_144147",
+    "20261103_144153",
+    "20261103_144201",
+    "20261103_144206",
+    "20261103_144211",
+    "20261103_144217",
+    "20261103_144221",
+    "20261103_144226",
+    "20261103_144232",
+    "20261103_144238",
+    "20261103_144244",
+    "20261103_144250",
+    "20261103_144304",
+    "20261103_144310",
+    "20261103_144318",
+    "20261103_144327",
+    "20261103_144331",
+    "20261103_144337",
+    "20261103_144344",
+    "20261103_144355",
+    "20261103_144400",
+    "20261103_144405",
+    "20261103_144418",
+    "20261103_144423",
+    "20261103_144429",
+    "20261103_144434",
+    "20261103_144442",
+    "20261103_144448",
+    "20261103_144454",
+    "20261103_144500",
+    "20261103_144506",
+    "20261103_144512",
+    "20261103_144517",
+    "20261103_144523",
+    "20261103_144529",
+    "20261103_144535",
+    "20261103_144542",
+    "20261103_144548",
+    "20261103_144555",
+    "20261103_144600",
+    "20261103_144606"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.4080939292907715,
+    2.567511796951294
+  ],
+  "initial_distance_range_mm": [
+    265.4908783826652,
+    351.59720344050305
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 5696,
+  "review_segments": [
+    {
+      "trial": "20261103_144254",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_144314",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "No confirmed distant closed rest before action",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "Insufficient pre-action margin"
+      ]
+    },
+    {
+      "trial": "20261103_144348",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_144409",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    }
+  ]
+}

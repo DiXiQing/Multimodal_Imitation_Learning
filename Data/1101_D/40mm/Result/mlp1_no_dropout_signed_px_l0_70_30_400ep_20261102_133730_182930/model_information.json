@@ -1,0 +1,28 @@
+{
+  "architecture": "MLP 1f: Linear(1,32), ReLU, Identity (no dropout), Linear(32,32), ReLU, Linear(32,1)",
+  "input_column": "hand_object_signed_distance",
+  "input_processing": "Original signed midpoint distance divided by first recorded value; negative distances preserved, no clipping or absolute value; no secondary input scaling",
+  "output_column": "finger_width",
+  "units": {
+    "input": "dimensionless signed ratio",
+    "output": "px",
+    "metrics": "px; R2 dimensionless",
+    "time": "seconds"
+  },
+  "numeric_scaler": {
+    "y_mean": 49.68099436419611,
+    "y_std": 24.208637692171784,
+    "x_mean": 0.0,
+    "x_std": 1.0
+  },
+  "epochs": 400,
+  "simulated_untrained": false,
+  "dropout": 0.0,
+  "reference_run": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\Result\\holdout70_30_signed_px_l0_function_mlp5_lstmfull_400ep_20261102_124519_936822",
+  "seed": 20261029,
+  "training": "Current implementation: shuffle trial order; one Adam step per complete trial; equal trial mean absolute loss; lr=0.001, weight_decay=0.0001",
+  "selection": "Fixed 400 epochs; last epoch saved; no Test used for fitting, tuning, or epoch selection",
+  "window": "Only current signed-distance ratio is input, shape(N,1), no history or padding. For a controlled window-length comparison, fitting and main metrics retain the original5f eligible target frames. Separate full predictions start at the first valid frame.",
+  "split": "Exact38/17 names, order, main target frames and target scaler from signed-px baseline; input window reduced5to1, no dropout",
+  "diagnostic_scope": "Same data, split, main target frames, scaler, seed and optimizer settings; current-frame input only, no dropout. First layer is1to32 rather than5to32, so initialization cannot be identical across input shapes. 400 fixed epochs; final weights saved, no Test selection."
+}

@@ -1,0 +1,32 @@
+{
+  "segment": 39,
+  "start_row": 7040,
+  "end_row": 7124,
+  "onset_row": 7050,
+  "peak_row": 7077,
+  "closure_confirmed_row": 7114,
+  "near_rows": [
+    7098,
+    7181
+  ],
+  "source_start_frame": 7040,
+  "source_end_frame": 7124,
+  "frames": 85,
+  "pre_action_frames": 10,
+  "post_closure_frames": 10,
+  "duration_s": 2.789839029312134,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [],
+  "trial_name": "20261103_145833",
+  "relative_folder": "20261103_145833",
+  "validation": {
+    "csv_rows": 85,
+    "image_frames": 85,
+    "decoded_video_frames": 85,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

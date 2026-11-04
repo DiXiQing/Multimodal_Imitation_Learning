@@ -1,0 +1,145 @@
+{
+  "candidates": 51,
+  "unflagged": 38,
+  "review": 13,
+  "main_plots_trials": [
+    "20261103_121403",
+    "20261103_121408",
+    "20261103_121413",
+    "20261103_121417",
+    "20261103_121421",
+    "20261103_121428",
+    "20261103_121432",
+    "20261103_121437",
+    "20261103_121456",
+    "20261103_121507",
+    "20261103_121514",
+    "20261103_121520",
+    "20261103_121532",
+    "20261103_121537",
+    "20261103_121541",
+    "20261103_121551",
+    "20261103_121557",
+    "20261103_121602",
+    "20261103_121608",
+    "20261103_121615",
+    "20261103_121619",
+    "20261103_121623",
+    "20261103_121627",
+    "20261103_121632",
+    "20261103_121636",
+    "20261103_121641",
+    "20261103_121645",
+    "20261103_121649",
+    "20261103_121654",
+    "20261103_121703",
+    "20261103_121707",
+    "20261103_121720",
+    "20261103_121730",
+    "20261103_121735",
+    "20261103_121740",
+    "20261103_121746",
+    "20261103_121752",
+    "20261103_121814"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.7288563251495361,
+    3.2683660984039307
+  ],
+  "initial_distance_range_mm": [
+    269.68732643761575,
+    344.81394410030754
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 4930,
+  "review_segments": [
+    {
+      "trial": "20261103_121443",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121450",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121502",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121525",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121546",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121612",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121657",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121716",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121724",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_121757",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121803",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121809",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_121819",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    }
+  ]
+}

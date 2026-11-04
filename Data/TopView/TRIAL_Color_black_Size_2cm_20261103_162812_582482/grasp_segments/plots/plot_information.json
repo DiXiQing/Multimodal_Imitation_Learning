@@ -1,0 +1,148 @@
+{
+  "candidates": 92,
+  "unflagged": 86,
+  "review": 6,
+  "main_plots_trials": [
+    "20261103_162817",
+    "20261103_162825",
+    "20261103_162830",
+    "20261103_162838",
+    "20261103_162846",
+    "20261103_162853",
+    "20261103_162900",
+    "20261103_162908",
+    "20261103_162916",
+    "20261103_162924",
+    "20261103_162934",
+    "20261103_162941",
+    "20261103_162948",
+    "20261103_162955",
+    "20261103_163002",
+    "20261103_163010",
+    "20261103_163016",
+    "20261103_163023",
+    "20261103_163030",
+    "20261103_163036",
+    "20261103_163043",
+    "20261103_163100",
+    "20261103_163105",
+    "20261103_163113",
+    "20261103_163121",
+    "20261103_163126",
+    "20261103_163133",
+    "20261103_163140",
+    "20261103_163145",
+    "20261103_163151",
+    "20261103_163157",
+    "20261103_163202",
+    "20261103_163208",
+    "20261103_163213",
+    "20261103_163223",
+    "20261103_163229",
+    "20261103_163235",
+    "20261103_163241",
+    "20261103_163246",
+    "20261103_163252",
+    "20261103_163258",
+    "20261103_163304",
+    "20261103_163310",
+    "20261103_163315",
+    "20261103_163320",
+    "20261103_163328",
+    "20261103_163334",
+    "20261103_163339",
+    "20261103_163344",
+    "20261103_163349",
+    "20261103_163355",
+    "20261103_163400",
+    "20261103_163406",
+    "20261103_163411",
+    "20261103_163416",
+    "20261103_163429",
+    "20261103_163434",
+    "20261103_163445",
+    "20261103_163456",
+    "20261103_163501",
+    "20261103_163505",
+    "20261103_163510",
+    "20261103_163515",
+    "20261103_163519",
+    "20261103_163524",
+    "20261103_163528",
+    "20261103_163534",
+    "20261103_163538",
+    "20261103_163543",
+    "20261103_163547",
+    "20261103_163551",
+    "20261103_163607",
+    "20261103_163611",
+    "20261103_163615",
+    "20261103_163621",
+    "20261103_163625",
+    "20261103_163629",
+    "20261103_163632",
+    "20261103_163636",
+    "20261103_163640",
+    "20261103_163644",
+    "20261103_163648",
+    "20261103_163652",
+    "20261103_163655",
+    "20261103_163659",
+    "20261103_163711"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    0.8974332809448242,
+    2.78751277923584
+  ],
+  "initial_distance_range_mm": [
+    276.1581369259016,
+    349.6557648715272
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 6357,
+  "review_segments": [
+    {
+      "trial": "20261103_163422",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_163439",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_163601",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_163702",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_163706",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_163713",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

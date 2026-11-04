@@ -1,0 +1,194 @@
+{
+  "candidates": 101,
+  "unflagged": 88,
+  "review": 13,
+  "main_plots_trials": [
+    "20261102_152536",
+    "20261102_152540",
+    "20261102_152544",
+    "20261102_152548",
+    "20261102_152552",
+    "20261102_152557",
+    "20261102_152601",
+    "20261102_152606",
+    "20261102_152610",
+    "20261102_152613",
+    "20261102_152618",
+    "20261102_152622",
+    "20261102_152625",
+    "20261102_152630",
+    "20261102_152639",
+    "20261102_152643",
+    "20261102_152647",
+    "20261102_152651",
+    "20261102_152656",
+    "20261102_152701",
+    "20261102_152705",
+    "20261102_152710",
+    "20261102_152718",
+    "20261102_152723",
+    "20261102_152729",
+    "20261102_152734",
+    "20261102_152738",
+    "20261102_152744",
+    "20261102_152748",
+    "20261102_152808",
+    "20261102_152813",
+    "20261102_152820",
+    "20261102_152825",
+    "20261102_152830",
+    "20261102_152834",
+    "20261102_152840",
+    "20261102_152844",
+    "20261102_152855",
+    "20261102_152900",
+    "20261102_152905",
+    "20261102_152910",
+    "20261102_152922",
+    "20261102_152927",
+    "20261102_152931",
+    "20261102_152946",
+    "20261102_152957",
+    "20261102_153003",
+    "20261102_153008",
+    "20261102_153014",
+    "20261102_153019",
+    "20261102_153023",
+    "20261102_153027",
+    "20261102_153034",
+    "20261102_153038",
+    "20261102_153043",
+    "20261102_153048",
+    "20261102_153052",
+    "20261102_153059",
+    "20261102_153104",
+    "20261102_153110",
+    "20261102_153115",
+    "20261102_153123",
+    "20261102_153127",
+    "20261102_153133",
+    "20261102_153138",
+    "20261102_153144",
+    "20261102_153149",
+    "20261102_153154",
+    "20261102_153159",
+    "20261102_153204",
+    "20261102_153215",
+    "20261102_153221",
+    "20261102_153227",
+    "20261102_153232",
+    "20261102_153238",
+    "20261102_153242",
+    "20261102_153257",
+    "20261102_153302",
+    "20261102_153308",
+    "20261102_153313",
+    "20261102_153319",
+    "20261102_153331",
+    "20261102_153343",
+    "20261102_153348",
+    "20261102_153353",
+    "20261102_153358",
+    "20261102_153403",
+    "20261102_153409"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.1026268005371094,
+    3.056248426437378
+  ],
+  "initial_distance_range_mm": [
+    273.0555009374014,
+    367.3074648884621
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 8185,
+  "review_segments": [
+    {
+      "trial": "20261102_152634",
+      "reasons": [
+        "Opening attempt followed by >=8 closed frames before main opening; review repeated action or detection interruption"
+      ]
+    },
+    {
+      "trial": "20261102_152714",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_152754",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_152803",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_152849",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_152916",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_152938",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_152951",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_153030",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_153209",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_153250",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_153325",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_153336",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

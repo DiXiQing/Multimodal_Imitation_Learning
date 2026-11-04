@@ -1,0 +1,129 @@
+{
+  "candidates": 47,
+  "unflagged": 36,
+  "review": 11,
+  "main_plots_trials": [
+    "20261102_141331",
+    "20261102_141333",
+    "20261102_141336",
+    "20261102_141339",
+    "20261102_141342",
+    "20261102_141345",
+    "20261102_141348",
+    "20261102_141355",
+    "20261102_141358",
+    "20261102_141401",
+    "20261102_141404",
+    "20261102_141412",
+    "20261102_141415",
+    "20261102_141418",
+    "20261102_141424",
+    "20261102_141432",
+    "20261102_141435",
+    "20261102_141439",
+    "20261102_141442",
+    "20261102_141448",
+    "20261102_141451",
+    "20261102_141454",
+    "20261102_141457",
+    "20261102_141500",
+    "20261102_141503",
+    "20261102_141506",
+    "20261102_141509",
+    "20261102_141544",
+    "20261102_141550",
+    "20261102_141559",
+    "20261102_141607",
+    "20261102_141623",
+    "20261102_141630",
+    "20261102_141637",
+    "20261102_141644",
+    "20261102_141651"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    0.943326473236084,
+    4.1285974979400635
+  ],
+  "initial_distance_range_mm": [
+    288.98556017261495,
+    355.989334516359
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 3559,
+  "review_segments": [
+    {
+      "trial": "20261102_141353",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141407",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141421",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141430",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141445",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141511",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141514",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141520",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141523",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_141530",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261102_141614",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

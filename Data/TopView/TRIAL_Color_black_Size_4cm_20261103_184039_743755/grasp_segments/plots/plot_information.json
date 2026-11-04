@@ -1,0 +1,71 @@
+{
+  "candidates": 28,
+  "unflagged": 25,
+  "review": 3,
+  "main_plots_trials": [
+    "20261103_184042",
+    "20261103_184046",
+    "20261103_184050",
+    "20261103_184055",
+    "20261103_184104",
+    "20261103_184108",
+    "20261103_184112",
+    "20261103_184116",
+    "20261103_184123",
+    "20261103_184132",
+    "20261103_184136",
+    "20261103_184139",
+    "20261103_184143",
+    "20261103_184146",
+    "20261103_184149",
+    "20261103_184153",
+    "20261103_184157",
+    "20261103_184201",
+    "20261103_184205",
+    "20261103_184208",
+    "20261103_184212",
+    "20261103_184216",
+    "20261103_184220",
+    "20261103_184224",
+    "20261103_184227"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.295745611190796,
+    1.775181770324707
+  ],
+  "initial_distance_range_mm": [
+    284.4364407299864,
+    344.4619710081397
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 1895,
+  "review_segments": [
+    {
+      "trial": "20261103_184100",
+      "reasons": [
+        "Distance jump >45 px/frame"
+      ]
+    },
+    {
+      "trial": "20261103_184119",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_184127",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ]
+    }
+  ]
+}

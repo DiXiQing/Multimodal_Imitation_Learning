@@ -1,0 +1,41 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 35,
+      "start_row": 7393,
+      "end_row": 7558,
+      "onset_row": 7403,
+      "peak_row": 7503,
+      "closure_confirmed_row": 7548,
+      "near_rows": [
+        7528,
+        7579
+      ],
+      "source_start_frame": 7393,
+      "source_end_frame": 7558,
+      "frames": 166,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 5.517056941986084,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261103_170337",
+      "relative_folder": "review_segments/20261103_170337"
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 9793,
+      "end_row": 9833,
+      "source_start_frame": "9793",
+      "source_end_frame": "9833",
+      "frames": 41
+    }
+  ],
+  "near_candidate_count": 47
+}

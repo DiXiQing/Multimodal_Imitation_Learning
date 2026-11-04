@@ -1,0 +1,114 @@
+{
+  "main_trials": 86,
+  "within_conditions": 75,
+  "outside_conditions": 11,
+  "duration_range_s": [
+    0.8974332809448242,
+    2.78751277923584
+  ],
+  "distance_range_mm": [
+    276.1581369259016,
+    349.6557648715272
+  ],
+  "outside": [
+    {
+      "trial": "20261103_163534",
+      "grasp_duration_s": "0.9591629505157471",
+      "initial_distance_mm": "320.1876549030578",
+      "clip_duration_s": "1.6291954517364502",
+      "onset_source_frame": "13165",
+      "closure_confirmed_source_frame": "13194",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163551",
+      "grasp_duration_s": "0.9919157028198242",
+      "initial_distance_mm": "310.036344459598",
+      "clip_duration_s": "1.6622438430786133",
+      "onset_source_frame": "13684",
+      "closure_confirmed_source_frame": "13714",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163607",
+      "grasp_duration_s": "0.8974332809448242",
+      "initial_distance_mm": "280.0605071415126",
+      "clip_duration_s": "1.577223777770996",
+      "onset_source_frame": "14126",
+      "closure_confirmed_source_frame": "14153",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163611",
+      "grasp_duration_s": "0.9312870502471924",
+      "initial_distance_mm": "276.1581369259016",
+      "clip_duration_s": "1.5911364555358887",
+      "onset_source_frame": "14258",
+      "closure_confirmed_source_frame": "14286",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163615",
+      "grasp_duration_s": "0.9360592365264893",
+      "initial_distance_mm": "278.0165042419328",
+      "clip_duration_s": "1.5901069641113281",
+      "onset_source_frame": "14381",
+      "closure_confirmed_source_frame": "14409",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163621",
+      "grasp_duration_s": "0.9290125370025635",
+      "initial_distance_mm": "281.06341283542747",
+      "clip_duration_s": "1.5903441905975342",
+      "onset_source_frame": "14546",
+      "closure_confirmed_source_frame": "14574",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163625",
+      "grasp_duration_s": "0.9777376651763916",
+      "initial_distance_mm": "279.2707907477544",
+      "clip_duration_s": "1.6340153217315674",
+      "onset_source_frame": "14665",
+      "closure_confirmed_source_frame": "14694",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163629",
+      "grasp_duration_s": "0.9460861682891846",
+      "initial_distance_mm": "282.5738687672759",
+      "clip_duration_s": "1.6039419174194336",
+      "onset_source_frame": "14780",
+      "closure_confirmed_source_frame": "14808",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163632",
+      "grasp_duration_s": "0.9718472957611084",
+      "initial_distance_mm": "280.2798528320059",
+      "clip_duration_s": "1.6359999179840088",
+      "onset_source_frame": "14889",
+      "closure_confirmed_source_frame": "14918",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163636",
+      "grasp_duration_s": "0.965900182723999",
+      "initial_distance_mm": "285.4169929388364",
+      "clip_duration_s": "1.6323609352111816",
+      "onset_source_frame": "14998",
+      "closure_confirmed_source_frame": "15027",
+      "reasons": "duration outside 1\u20134 s"
+    },
+    {
+      "trial": "20261103_163648",
+      "grasp_duration_s": "0.9983491897583008",
+      "initial_distance_mm": "287.00962162901976",
+      "clip_duration_s": "1.6718437671661377",
+      "onset_source_frame": "15367",
+      "closure_confirmed_source_frame": "15397",
+      "reasons": "duration outside 1\u20134 s"
+    }
+  ]
+}

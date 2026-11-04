@@ -1,0 +1,111 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 5,
+      "start_row": 605,
+      "end_row": 688,
+      "onset_row": 615,
+      "peak_row": 639,
+      "closure_confirmed_row": 678,
+      "near_rows": [
+        653,
+        697
+      ],
+      "source_start_frame": 605,
+      "source_end_frame": 688,
+      "frames": 84,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.793095111846924,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Distance jump >45 px/frame"
+      ],
+      "trial_name": "20261103_184100",
+      "relative_folder": "review_segments/20261103_184100"
+    },
+    {
+      "segment": 10,
+      "start_row": 1173,
+      "end_row": 1256,
+      "onset_row": 1183,
+      "peak_row": 1227,
+      "closure_confirmed_row": 1246,
+      "near_rows": [
+        1235,
+        1272
+      ],
+      "source_start_frame": 1173,
+      "source_end_frame": 1256,
+      "frames": 84,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 2.767927408218384,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ],
+      "trial_name": "20261103_184119",
+      "relative_folder": "review_segments/20261103_184119"
+    },
+    {
+      "segment": 12,
+      "start_row": 1417,
+      "end_row": 1495,
+      "onset_row": 1427,
+      "peak_row": 1446,
+      "closure_confirmed_row": null,
+      "near_rows": [
+        1456,
+        1495
+      ],
+      "source_start_frame": 1417,
+      "source_end_frame": 1495,
+      "frames": 79,
+      "pre_action_frames": 10,
+      "post_closure_frames": null,
+      "duration_s": 2.6067190170288086,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Distance jump >45 px/frame"
+      ],
+      "trial_name": "20261103_184127",
+      "relative_folder": "review_segments/20261103_184127"
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 1535,
+      "end_row": 1548,
+      "source_start_frame": "1535",
+      "source_end_frame": "1548",
+      "frames": 14
+    },
+    {
+      "start_row": 1551,
+      "end_row": 1552,
+      "source_start_frame": "1551",
+      "source_end_frame": "1552",
+      "frames": 2
+    },
+    {
+      "start_row": 3316,
+      "end_row": 3359,
+      "source_start_frame": "3316",
+      "source_end_frame": "3359",
+      "frames": 44
+    }
+  ],
+  "near_candidate_count": 28
+}

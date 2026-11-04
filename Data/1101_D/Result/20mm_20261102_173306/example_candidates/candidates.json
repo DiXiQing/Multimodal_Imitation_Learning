@@ -1,0 +1,68 @@
+[
+  {
+    "condition": "Fast",
+    "trial": "20261101_195933",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_05\\Test\\predictions\\20261101_195933.csv",
+    "fold": "fold_05",
+    "duration": 0.9767088890075684,
+    "initial_mae_mm": 2.023004217005647,
+    "initial_bias_mm": 2.023004217005647,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 5.35628012926219
+  },
+  {
+    "condition": "Fast",
+    "trial": "20261101_195915",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_03\\Test\\predictions\\20261101_195915.csv",
+    "fold": "fold_03",
+    "duration": 0.972137451171875,
+    "initial_mae_mm": 2.1252084442854433,
+    "initial_bias_mm": 2.1252084442854433,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 3.533914837295078
+  },
+  {
+    "condition": "Medium",
+    "trial": "20261102_152910",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_02\\Test\\predictions\\20261102_152910.csv",
+    "fold": "fold_02",
+    "duration": 1.774407148361206,
+    "initial_mae_mm": 0.2507838929798322,
+    "initial_bias_mm": 0.08740488951543401,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 4.209654415043537
+  },
+  {
+    "condition": "Medium",
+    "trial": "20261102_152844",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_02\\Test\\predictions\\20261102_152844.csv",
+    "fold": "fold_02",
+    "duration": 1.8712503910064697,
+    "initial_mae_mm": 0.4893363984876646,
+    "initial_bias_mm": -0.3249956042924804,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 4.247390584775309
+  },
+  {
+    "condition": "Slow",
+    "trial": "20261102_144024",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_02\\Test\\predictions\\20261102_144024.csv",
+    "fold": "fold_02",
+    "duration": 2.751944065093994,
+    "initial_mae_mm": 0.6007990242758909,
+    "initial_bias_mm": -0.4586764476811096,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 10.29894488198516
+  },
+  {
+    "condition": "Slow",
+    "trial": "20261102_143959",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_05\\Test\\predictions\\20261102_143959.csv",
+    "fold": "fold_05",
+    "duration": 2.912729501724243,
+    "initial_mae_mm": 1.519902727010894,
+    "initial_bias_mm": 1.1989435194805915,
+    "initial_frames": 6,
+    "mlp_overall_mae_mm": 11.430947829357951
+  }
+]

@@ -1,0 +1,161 @@
+{
+  "candidates": 73,
+  "unflagged": 61,
+  "review": 12,
+  "main_plots_trials": [
+    "20261103_114135",
+    "20261103_114139",
+    "20261103_114143",
+    "20261103_114147",
+    "20261103_114151",
+    "20261103_114155",
+    "20261103_114158",
+    "20261103_114203",
+    "20261103_114214",
+    "20261103_114218",
+    "20261103_114223",
+    "20261103_114228",
+    "20261103_114232",
+    "20261103_114238",
+    "20261103_114243",
+    "20261103_114247",
+    "20261103_114252",
+    "20261103_114256",
+    "20261103_114259",
+    "20261103_114303",
+    "20261103_114306",
+    "20261103_114310",
+    "20261103_114313",
+    "20261103_114316",
+    "20261103_114320",
+    "20261103_114323",
+    "20261103_114329",
+    "20261103_114336",
+    "20261103_114341",
+    "20261103_114346",
+    "20261103_114350",
+    "20261103_114400",
+    "20261103_114413",
+    "20261103_114418",
+    "20261103_114422",
+    "20261103_114427",
+    "20261103_114433",
+    "20261103_114446",
+    "20261103_114450",
+    "20261103_114503",
+    "20261103_114509",
+    "20261103_114515",
+    "20261103_114519",
+    "20261103_114525",
+    "20261103_114531",
+    "20261103_114536",
+    "20261103_114541",
+    "20261103_114546",
+    "20261103_114552",
+    "20261103_114608",
+    "20261103_114616",
+    "20261103_114640",
+    "20261103_114647",
+    "20261103_114653",
+    "20261103_114700",
+    "20261103_114712",
+    "20261103_114718",
+    "20261103_114741",
+    "20261103_114754",
+    "20261103_114800",
+    "20261103_114807"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.3629648685455322,
+    3.8449692726135254
+  ],
+  "initial_distance_range_mm": [
+    261.1144894803966,
+    364.59904095916914
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 7060,
+  "review_segments": [
+    {
+      "trial": "20261103_114208",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114355",
+      "reasons": [
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_114408",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114438",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114456",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114559",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114623",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_114633",
+      "reasons": [
+        "Opening attempt followed by >=8 closed frames before main opening; review repeated action or detection interruption"
+      ]
+    },
+    {
+      "trial": "20261103_114706",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_114725",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114733",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_114746",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "candidate": {
+    "trial": "20261103_144201",
+    "path": "Data\\1101_D\\Result\\30mm_Combined_BSpline_MLP5_LSTMFull_20261103_195651\\fold_03\\Test\\predictions\\20261103_144201.csv",
+    "fold": "fold_03",
+    "maes": [
+      5.932185479527354,
+      3.750197555625438,
+      1.923496324875798
+    ],
+    "lstm_initial": 0.37118145373305894,
+    "lstm_end": 1.8171147159571817,
+    "mlp_initial": 0.2328183277509396,
+    "score": 3.075848991658653
+  },
+  "raw_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\20261103_144201\\camera.csv",
+  "prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\30mm_Combined_BSpline_MLP5_LSTMFull_20261103_195651\\fold_03\\Test\\predictions\\20261103_144201.csv",
+  "lstm_first_5_frames_hidden": true,
+  "raw_matches_prediction_actual": true
+}

@@ -1,0 +1,124 @@
+{
+  "candidates": 54,
+  "unflagged": 46,
+  "review": 8,
+  "main_plots_trials": [
+    "20261103_135904",
+    "20261103_135908",
+    "20261103_135911",
+    "20261103_135915",
+    "20261103_135923",
+    "20261103_135927",
+    "20261103_135930",
+    "20261103_135934",
+    "20261103_135938",
+    "20261103_135941",
+    "20261103_135944",
+    "20261103_135948",
+    "20261103_135951",
+    "20261103_135955",
+    "20261103_135958",
+    "20261103_140001",
+    "20261103_140004",
+    "20261103_140008",
+    "20261103_140021",
+    "20261103_140024",
+    "20261103_140027",
+    "20261103_140031",
+    "20261103_140034",
+    "20261103_140041",
+    "20261103_140108",
+    "20261103_140113",
+    "20261103_140117",
+    "20261103_140121",
+    "20261103_140131",
+    "20261103_140136",
+    "20261103_140140",
+    "20261103_140147",
+    "20261103_140152",
+    "20261103_140158",
+    "20261103_140202",
+    "20261103_140207",
+    "20261103_140212",
+    "20261103_140217",
+    "20261103_140223",
+    "20261103_140228",
+    "20261103_140233",
+    "20261103_140238",
+    "20261103_140245",
+    "20261103_140256",
+    "20261103_140301",
+    "20261103_140306"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.061394214630127,
+    1.885653018951416
+  ],
+  "initial_distance_range_mm": [
+    307.52177967514217,
+    363.8893272842785
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 3613,
+  "review_segments": [
+    {
+      "trial": "20261103_135918",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_140011",
+      "reasons": [
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_140014",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "No confirmed distant closed rest before action",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Insufficient pre-action margin"
+      ]
+    },
+    {
+      "trial": "20261103_140017",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_140038",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_140057",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_140124",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_140251",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    }
+  ]
+}

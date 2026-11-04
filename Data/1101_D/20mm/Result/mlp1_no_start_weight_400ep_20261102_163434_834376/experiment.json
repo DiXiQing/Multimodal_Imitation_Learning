@@ -1,0 +1,11 @@
+{
+  "baseline": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\Result\\holdout70_30_mm_l0_firstframe_function_mlp5_lstmfull_400ep_20261102_152043_536730",
+  "start_predictions": 5,
+  "start_weight": 1.0,
+  "epochs": 400,
+  "device": "cuda",
+  "seed": 20261029,
+  "window": 1,
+  "weighting": "Uniform MAE; all valid frames; no start weighting",
+  "selection": "Fixed in advance; final epoch; no Test tuning"
+}

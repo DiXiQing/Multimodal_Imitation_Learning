@@ -1,0 +1,70 @@
+{
+  "candidates": 25,
+  "unflagged": 22,
+  "review": 3,
+  "main_plots_trials": [
+    "20261103_143522",
+    "20261103_143525",
+    "20261103_143529",
+    "20261103_143533",
+    "20261103_143537",
+    "20261103_143540",
+    "20261103_143546",
+    "20261103_143551",
+    "20261103_143556",
+    "20261103_143601",
+    "20261103_143606",
+    "20261103_143613",
+    "20261103_143617",
+    "20261103_143625",
+    "20261103_143630",
+    "20261103_143649",
+    "20261103_143655",
+    "20261103_143659",
+    "20261103_143704",
+    "20261103_143711",
+    "20261103_143732",
+    "20261103_143738"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    0.9634029865264893,
+    1.236175298690796
+  ],
+  "initial_distance_range_mm": [
+    326.32470095490277,
+    341.3018571355556
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 1393,
+  "review_segments": [
+    {
+      "trial": "20261103_143519",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261103_143637",
+      "reasons": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ]
+    },
+    {
+      "trial": "20261103_143642",
+      "reasons": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "No confirmed distant closed rest before action",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "No confirmed closure plus 10-frame hold; retained for review",
+        "Insufficient pre-action margin"
+      ]
+    }
+  ]
+}

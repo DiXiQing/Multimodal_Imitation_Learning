@@ -1,0 +1,19 @@
+{
+  "selection": {
+    "trial": "20261102_152905",
+    "path": "Data\\1101_D\\Result\\20mm_20261103_185038\\fold_02\\Test\\predictions\\20261102_152905.csv",
+    "split": "Test",
+    "fold": "fold_02",
+    "initial_bias": 0.018778273937919938,
+    "initial_mae": 0.37207834998278894,
+    "actual_initial": 12.747810572904527,
+    "pred_initial": 12.766588846842447,
+    "overall_mae": 1.6656987820402913,
+    "lstm_mae": 2.2657346303535064,
+    "score": 0.5386482281868181
+  },
+  "raw_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_152905\\camera.csv",
+  "predictions": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\20mm_20261103_185038\\fold_02\\Test\\predictions\\20261102_152905.csv",
+  "initial_definition": "Common valid frames before annotated onset",
+  "lstm_first_5_frames_hidden": true
+}

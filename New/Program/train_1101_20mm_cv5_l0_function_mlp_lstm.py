@@ -1,4 +1,4 @@
-"""49-trial offline, trial-level 5-fold CV: Function / MLP 5f / LSTM Full.
+"""Offline trial-level 5-fold CV: Function / MLP 5f / LSTM Full.
 Run normally to train 400 epochs per neural model per fold.
 --check-data --smoke-export performs checks only, with temporary untrained exports.
 """
@@ -15,6 +15,31 @@ import train_1031_d_mixed_l0_function_mlp_lstm as core
 SOURCE=Path(__file__).resolve().parents[2]/'Data/1101_D/20mm'
 SEED=20261029
 N_FOLDS=5
+
+def load_dataset_trials(source):
+    metadata_path=source/'dataset_object_metadata.json'
+    metadata=json.loads(metadata_path.read_text(encoding='utf-8-sig')) if metadata_path.is_file() else {}
+    overrides=metadata.get('trial_overrides',{})
+    trial_folders=sorted(p for p in source.iterdir() if p.is_dir()
+                         and re.fullmatch(r'(?:grasp_\d+|\d{8}_\d{6})',p.name))
+    trials=[]
+    for folder in trial_folders:
+        g=core.load_trial(folder)
+        g['recorded_size_cm']=g['settings'].get('size_cm')
+        if folder.name in overrides:
+            correction=overrides[folder.name]
+            if g['recorded_size_cm']!=correction['recorded_size_cm']:
+                raise ValueError(f'{folder.name}: size label no longer matches the explicit correction; inspect dataset_object_metadata.json')
+            if not correction.get('reason'):
+                raise ValueError(f'{folder.name}: object-label correction requires a documented reason')
+            if metadata.get('object_color')!=g['settings'].get('object_color'):
+                raise ValueError(f'{folder.name}: color disagrees with confirmed dataset object')
+            g['settings']=dict(g['settings'],size_cm=correction['effective_size_cm'])
+        if metadata.get('physical_object_size_mm') is not None:
+            if not np.isclose(float(g['settings']['size_cm'])*10,float(metadata['physical_object_size_mm'])):
+                raise ValueError(f'{folder.name}: object size differs from confirmed dataset metadata; no implicit correction allowed')
+        trials.append(g)
+    return trials,metadata
 
 def make_folds(trials):
     if len(trials)<N_FOLDS:raise ValueError('Need at least five complete trials')
@@ -75,16 +100,16 @@ def main():
     torch.set_num_threads(min(4,torch.get_num_threads()))
     torch.backends.cudnn.benchmark=False;torch.backends.cudnn.deterministic=True
     try:
-        trial_folders=sorted(p for p in source.iterdir() if p.is_dir()
-                             and re.fullmatch(r'(?:grasp_\d+|\d{8}_\d{6})',p.name))
-        trials=[core.load_trial(p) for p in trial_folders]
+        trials,dataset_metadata=load_dataset_trials(source)
         folds=make_folds(trials)
     except (ValueError,OSError,KeyError) as exc:parser.error(str(exc))
     print(f'{len(trials)} trials | 5-fold trial-level CV | split seed {SEED}',flush=True)
     for n,train,test in folds:print(f'Fold {n}: {len(train)} Train / {len(test)} Test',flush=True)
     print('Input: index_mcp_object_distance_mm / first-frame distance. Output: finger_width_mm.',flush=True)
+    corrected=[g for g in trials if g['recorded_size_cm']!=g['settings'].get('size_cm')]
+    if corrected:print(f'Applied {len(corrected)} explicitly confirmed size-label corrections in memory only; calibration and raw files unchanged.',flush=True)
     hashes={g['folder']/'camera.csv':g['csv_sha256'] for g in trials}
-    manifest=dict(seed=SEED,strategy='5-fold whole-trial random split; identical folds for all models; each trial tested exactly once',trials=len(trials),folds=[dict(fold=n,training_seed=SEED+n,train=[g['name'] for g in train],test=[g['name'] for g in test]) for n,train,test in folds],records=[dict(trial=g['name'],source=str(g['folder']),csv_sha256=g['csv_sha256']) for g in trials])
+    manifest=dict(seed=SEED,strategy='5-fold whole-trial random split; identical folds for all models; each trial tested exactly once',trials=len(trials),dataset_object_metadata=dataset_metadata,folds=[dict(fold=n,training_seed=SEED+n,train=[g['name'] for g in train],test=[g['name'] for g in test]) for n,train,test in folds],records=[dict(trial=g['name'],source=str(g['folder']),csv_sha256=g['csv_sha256'],recorded_size_cm=g['recorded_size_cm'],effective_size_cm=g['settings'].get('size_cm')) for g in trials])
     if args.check_data:
         mock_rows=[]
         with tempfile.TemporaryDirectory(prefix='check_cv5_',dir=Path(__file__).resolve().parent) as temp:

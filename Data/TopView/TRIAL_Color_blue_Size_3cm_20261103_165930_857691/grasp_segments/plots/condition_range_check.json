@@ -1,0 +1,72 @@
+{
+  "main_trials": 46,
+  "within_conditions": 39,
+  "outside_conditions": 7,
+  "duration_range_s": [
+    1.7916605472564697,
+    3.026515245437622
+  ],
+  "distance_range_mm": [
+    269.1392146573572,
+    358.0471785329088
+  ],
+  "trials_3_to_4_s": 1,
+  "outside": [
+    {
+      "trial": "20261103_170421",
+      "grasp_duration_s": "2.3729612827301025",
+      "initial_distance_mm": "352.0538616883363",
+      "clip_duration_s": "3.0391223430633545",
+      "onset_source_frame": "8719",
+      "closure_confirmed_source_frame": "8789"
+    },
+    {
+      "trial": "20261103_170428",
+      "grasp_duration_s": "2.484455108642578",
+      "initial_distance_mm": "358.0401148811349",
+      "clip_duration_s": "3.1591663360595703",
+      "onset_source_frame": "8909",
+      "closure_confirmed_source_frame": "8983"
+    },
+    {
+      "trial": "20261103_170433",
+      "grasp_duration_s": "2.1551687717437744",
+      "initial_distance_mm": "352.2661019696932",
+      "clip_duration_s": "2.8223283290863037",
+      "onset_source_frame": "9063",
+      "closure_confirmed_source_frame": "9127"
+    },
+    {
+      "trial": "20261103_170439",
+      "grasp_duration_s": "2.2250478267669678",
+      "initial_distance_mm": "358.0471785329088",
+      "clip_duration_s": "2.8962032794952393",
+      "onset_source_frame": "9235",
+      "closure_confirmed_source_frame": "9302"
+    },
+    {
+      "trial": "20261103_170444",
+      "grasp_duration_s": "2.1973912715911865",
+      "initial_distance_mm": "357.149772823477",
+      "clip_duration_s": "2.864415168762207",
+      "onset_source_frame": "9385",
+      "closure_confirmed_source_frame": "9451"
+    },
+    {
+      "trial": "20261103_170449",
+      "grasp_duration_s": "2.168774366378784",
+      "initial_distance_mm": "355.6964657500561",
+      "clip_duration_s": "2.8379504680633545",
+      "onset_source_frame": "9536",
+      "closure_confirmed_source_frame": "9601"
+    },
+    {
+      "trial": "20261103_170454",
+      "grasp_duration_s": "2.0900070667266846",
+      "initial_distance_mm": "351.5533297116906",
+      "clip_duration_s": "2.758793830871582",
+      "onset_source_frame": "9681",
+      "closure_confirmed_source_frame": "9743"
+    }
+  ]
+}

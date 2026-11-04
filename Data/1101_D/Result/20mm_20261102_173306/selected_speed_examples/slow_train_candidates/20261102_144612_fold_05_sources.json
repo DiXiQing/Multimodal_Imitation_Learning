@@ -1,0 +1,18 @@
+{
+  "raw": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_144612\\camera.csv",
+  "prediction": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\20mm_20261102_173306\\fold_05\\Train\\predictions\\20261102_144612.csv",
+  "selection": {
+    "trial": "20261102_144612",
+    "path": "Data\\1101_D\\Result\\20mm_20261102_173306\\fold_05\\Train\\predictions\\20261102_144612.csv",
+    "split": "Train",
+    "fold": "fold_05",
+    "duration": 3.224252223968506,
+    "lstm_initial": 1.175520564303633,
+    "lstm_end": 0.2398695477266571,
+    "mlp_initial": 3.731609584079024,
+    "lstm_overall": 2.327874082544382,
+    "score": 5.191453862157798
+  },
+  "lstm_first_5_frames_hidden": true,
+  "raw_matches_prediction_actual": true
+}

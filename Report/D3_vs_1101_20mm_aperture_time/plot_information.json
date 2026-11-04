@@ -1,0 +1,34 @@
+{
+  "counts": {
+    "D3": 90,
+    "1101": 90
+  },
+  "colors": {
+    "D3": "#287db5",
+    "1101": "#e58b26"
+  },
+  "aperture": "finger_width (px), raw measured fingertip separation",
+  "time": "Actual t_camera minus each clip first timestamp; retained pre/post margins included",
+  "normalization": "None: no time or aperture normalization",
+  "smoothing": false,
+  "missing": "Invalid measurements and frame/time gaps shown as discontinuities",
+  "exclusions": "backup, review_segments, Result, duplicate speed folders",
+  "caveat": "D3 recording labels say 40mm, 540x480; 1101 actual object confirmed20mm, 540x380. D3 lacks mm calibration. Pixel amplitude differences are not directly comparable physical aperture differences.",
+  "source_files_unchanged": true,
+  "summary": {
+    "D3": {
+      "duration_range_s": [
+        1.401170015335083,
+        4.304975271224976
+      ],
+      "peak_aperture_median_px": 76.35598298113032
+    },
+    "1101": {
+      "duration_range_s": [
+        1.460831880569458,
+        3.5288033485412598
+      ],
+      "peak_aperture_median_px": 67.68002881318975
+    }
+  }
+}

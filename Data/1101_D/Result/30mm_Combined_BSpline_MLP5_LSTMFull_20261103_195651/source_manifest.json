@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "Function": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\30mm_BSpline_MLP5_20261103_194139",
+    "MLP 5f": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\30mm_BSpline_MLP5_20261103_194139",
+    "LSTM Full": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\30mm_20261103_184459"
+  },
+  "validation": {
+    "prediction_files": 1000,
+    "test_trials": 200,
+    "test_frames": 15224,
+    "matched_splits": true,
+    "matched_frames_inputs_targets_masks": true,
+    "recomputed_scores_match_sources": true
+  },
+  "method": "Existing predictions combined without retraining. Main scores use common_valid frames; equal-trial mean and sample SD (ddof=1)."
+}

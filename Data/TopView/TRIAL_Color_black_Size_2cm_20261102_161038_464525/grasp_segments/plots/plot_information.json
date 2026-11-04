@@ -1,0 +1,107 @@
+{
+  "candidates": 46,
+  "unflagged": 39,
+  "review": 7,
+  "main_plots_trials": [
+    "20261102_161041",
+    "20261102_161044",
+    "20261102_161047",
+    "20261102_161051",
+    "20261102_161054",
+    "20261102_161058",
+    "20261102_161102",
+    "20261102_161106",
+    "20261102_161109",
+    "20261102_161113",
+    "20261102_161116",
+    "20261102_161123",
+    "20261102_161127",
+    "20261102_161131",
+    "20261102_161134",
+    "20261102_161138",
+    "20261102_161142",
+    "20261102_161146",
+    "20261102_161149",
+    "20261102_161153",
+    "20261102_161157",
+    "20261102_161207",
+    "20261102_161211",
+    "20261102_161215",
+    "20261102_161218",
+    "20261102_161222",
+    "20261102_161229",
+    "20261102_161233",
+    "20261102_161237",
+    "20261102_161247",
+    "20261102_161251",
+    "20261102_161255",
+    "20261102_161259",
+    "20261102_161303",
+    "20261102_161306",
+    "20261102_161314",
+    "20261102_161318",
+    "20261102_161322",
+    "20261102_161325"
+  ],
+  "all_candidates_plots": "all_candidates includes review segments; not a validated dataset",
+  "scatter_definition": "Annotated action onset to five-frame closure confirmation, excluding pre/post margins; first recorded distance in mm",
+  "duration_range_s": [
+    1.2448978424072266,
+    2.1107726097106934
+  ],
+  "initial_distance_range_mm": [
+    304.4537426817873,
+    340.23917994242225
+  ],
+  "distance": "Euclidean index MCP landmark 5 to object centre",
+  "distance_normalization": "l/l0 only in distance-aperture plot; time-distance is raw mm",
+  "time": "actual t_camera minus first timestamp; no time normalization",
+  "smoothing": false,
+  "mm_per_px": 1.2,
+  "source_modified": false,
+  "total_exported_frames": 3125,
+  "review_segments": [
+    {
+      "trial": "20261102_161120",
+      "reasons": [
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161200",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161203",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161226",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161240",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161244",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    },
+    {
+      "trial": "20261102_161310",
+      "reasons": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ]
+    }
+  ]
+}

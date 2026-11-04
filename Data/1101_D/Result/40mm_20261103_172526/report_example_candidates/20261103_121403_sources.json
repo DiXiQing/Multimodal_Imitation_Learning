@@ -1,0 +1,21 @@
+{
+  "candidate": {
+    "trial": "20261103_121403",
+    "path": "Data\\1101_D\\Result\\40mm_20261103_172526\\fold_04\\Test\\predictions\\20261103_121403.csv",
+    "fold": "fold_04",
+    "maes": [
+      7.537237845053803,
+      5.181080479508607,
+      1.95797595212672
+    ],
+    "lstm_initial": 0.4098001330919887,
+    "lstm_end": 0.8325574324439536,
+    "mlp_initial": 3.7017358630724573,
+    "clip_duration": 2.928205728530884,
+    "score": 3.3195019075091827
+  },
+  "raw_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261103_121403\\camera.csv",
+  "prediction_csv": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\40mm_20261103_172526\\fold_04\\Test\\predictions\\20261103_121403.csv",
+  "lstm_first_5_frames_hidden": true,
+  "raw_matches_saved_actual": true
+}

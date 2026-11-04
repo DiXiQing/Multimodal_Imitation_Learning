@@ -1,0 +1,14 @@
+{
+  "trial": "20261101_195814",
+  "raw_first_distance_mm": 334.109031924413,
+  "first10_max_distance_mm": 340.5381452347663,
+  "first10_maximum_time_s": 0.20314478874206543,
+  "initial_outward_excursion_mm": 6.42911331035333,
+  "initial_raw_max_ratio": 1.0192425606495061,
+  "initial_filtered_max_ratio": 1.0158345978197065,
+  "filter": "Causal EMA with alpha=1-exp(-dt/tau); reset after invalid input or time gap >0.1s",
+  "tau_s": 0.08,
+  "normalization": "Original first measured distance; no future minimum/maximum or endpoint",
+  "raw_csv_unchanged": true,
+  "caution": "EMA reduces noise but adds response lag; a smooth initial drift may be real movement or landmark drift, not an isolated outlier. Do not enforce monotonic distance without video evidence."
+}

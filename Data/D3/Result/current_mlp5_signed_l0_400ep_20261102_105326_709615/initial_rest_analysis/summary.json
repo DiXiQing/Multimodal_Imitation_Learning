@@ -1,0 +1,26 @@
+{
+  "trials": 27,
+  "valid_rest_frames": 216,
+  "definition": "Frames strictly before existing annotated action onset; excludes first4 frames with no MLP output. Uses original source frame IDs.",
+  "unit": "px",
+  "actual_mean_px": 6.923661353378402,
+  "predicted_mean_px": 7.6195478439331055,
+  "bias_px": 0.6958864905547033,
+  "mae_px": 1.4418878483864412,
+  "rmse_px": 1.7900635158074047,
+  "trial_macro_bias_px": 0.6958864905547032,
+  "trial_macro_mae_px": 1.4418878483864412,
+  "trial_mae_sd_px": 0.740297053670932,
+  "positive_bias_trials": 21,
+  "actual_first_prediction_mean_px": 6.2600151108227875,
+  "predicted_first_prediction_mean_px": 7.33000988430447,
+  "first_prediction_bias_px": 1.0699947734816828,
+  "old_D3_same_frames": {
+    "frames": 216,
+    "actual_mean_px": 6.923661364449395,
+    "predicted_mean_px": 7.32910316961783,
+    "bias_px": 0.4054418051684344,
+    "mae_px": 1.4421803730505485,
+    "note": "Old model selected its epoch on this validation set; diagnostic comparison, not independent test evaluation"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "sources": {
+    "20": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\20mm_20261103_185038",
+    "30": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\30mm_Combined_BSpline_MLP5_LSTMFull_20261103_195651",
+    "40": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\40mm_20261103_172526"
+  },
+  "definition": "Equal-trial mean and sample SD (ddof=1) across 200 out-of-fold Test trials per size; common valid target frames. Bars show means; error bars SD.",
+  "function_note": "30mm Function uses fixed-knot cubic B-spline regression from specified combined run; 20mm and 40mm use their original smoothing-spline Function. No claim of identical function specification across sizes."
+}

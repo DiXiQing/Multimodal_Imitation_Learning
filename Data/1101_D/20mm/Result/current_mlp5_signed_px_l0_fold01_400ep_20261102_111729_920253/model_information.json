@@ -1,0 +1,26 @@
+{
+  "architecture": "MLP 5f: Linear(5,32), ReLU, Dropout(0.1), Linear(32,32), ReLU, Linear(32,1)",
+  "input_column": "hand_object_signed_distance",
+  "input_processing": "Original signed midpoint distance divided by first recorded value; negative distances preserved, no clipping or absolute value; no secondary input scaling",
+  "output_column": "finger_width",
+  "units": {
+    "input": "dimensionless signed ratio",
+    "output": "px",
+    "metrics": "px; R2 dimensionless",
+    "time": "seconds"
+  },
+  "numeric_scaler": {
+    "y_mean": 34.74017985719335,
+    "y_std": 21.877396093340085,
+    "x_mean": 0.0,
+    "x_std": 1.0
+  },
+  "epochs": 400,
+  "simulated_untrained": false,
+  "seed": 20261030,
+  "training": "Current implementation: shuffle trial order; one Adam step per complete trial; equal trial mean absolute loss; lr=0.001, weight_decay=0.0001",
+  "selection": "Fixed 400 epochs; last epoch saved; no Test used for fitting, tuning, or epoch selection",
+  "window": "Five consecutive real inputs oldest-to-current; no initial padding; discard windows across missing/invalid rows or frame/time gaps >0.1s",
+  "split": "Exact Train/Test names, order and valid target frames from reference MCP fold01; single fold only",
+  "diagnostic_scope": "Same data, split, target frames, architecture, training settings and seed as original MCP fold01. Pixel-unit counterpart of signed-midpoint-mm experiment; same recorded measurements and calibration, initial-distance ratio and train-only standardized targets. Differences after training may include numerical precision effects."
+}

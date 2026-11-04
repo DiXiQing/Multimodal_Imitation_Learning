@@ -1,0 +1,133 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 40,
+      "start_row": 7144,
+      "end_row": 7259,
+      "onset_row": 7154,
+      "peak_row": 7215,
+      "closure_confirmed_row": 7249,
+      "near_rows": [
+        7233,
+        7282
+      ],
+      "source_start_frame": 7144,
+      "source_end_frame": 7259,
+      "frames": 116,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 3.840419292449951,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261103_144254",
+      "relative_folder": "review_segments/20261103_144254"
+    },
+    {
+      "segment": 43,
+      "start_row": 7751,
+      "end_row": 7788,
+      "onset_row": 7751,
+      "peak_row": 7751,
+      "closure_confirmed_row": 7778,
+      "near_rows": [
+        7767,
+        7794
+      ],
+      "source_start_frame": 7751,
+      "source_end_frame": 7788,
+      "frames": 38,
+      "pre_action_frames": 0,
+      "post_closure_frames": 10,
+      "duration_s": 1.2468125820159912,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+        "No confirmed distant closed rest before action",
+        "Pre-action 10-frame rest not confirmed; retained for review",
+        "Insufficient pre-action margin"
+      ],
+      "trial_name": "20261103_144314",
+      "relative_folder": "review_segments/20261103_144314"
+    },
+    {
+      "segment": 49,
+      "start_row": 8775,
+      "end_row": 8891,
+      "onset_row": 8785,
+      "peak_row": 8845,
+      "closure_confirmed_row": 8881,
+      "near_rows": [
+        8863,
+        8922
+      ],
+      "source_start_frame": 8775,
+      "source_end_frame": 8891,
+      "frames": 117,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 3.8718535900115967,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review"
+      ],
+      "trial_name": "20261103_144348",
+      "relative_folder": "review_segments/20261103_144348"
+    },
+    {
+      "segment": 53,
+      "start_row": 9407,
+      "end_row": 9561,
+      "onset_row": 9417,
+      "peak_row": 9520,
+      "closure_confirmed_row": 9551,
+      "near_rows": [
+        9537,
+        9588
+      ],
+      "source_start_frame": 9407,
+      "source_end_frame": 9561,
+      "frames": 155,
+      "pre_action_frames": 10,
+      "post_closure_frames": 10,
+      "duration_s": 5.136306285858154,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Quiet pause between detected departure and main opening; onset requires review",
+        "Pre-action 10-frame rest not confirmed; retained for review"
+      ],
+      "trial_name": "20261103_144409",
+      "relative_folder": "review_segments/20261103_144409"
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 13052,
+      "end_row": 13052,
+      "source_start_frame": "13052",
+      "source_end_frame": "13052",
+      "frames": 1
+    },
+    {
+      "start_row": 13054,
+      "end_row": 13102,
+      "source_start_frame": "13054",
+      "source_end_frame": "13102",
+      "frames": 49
+    }
+  ],
+  "near_candidate_count": 72
+}

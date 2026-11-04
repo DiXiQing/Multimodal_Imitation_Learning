@@ -1,0 +1,16 @@
+{
+  "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm",
+  "trials": 230,
+  "duration_definition": "Actual t_camera at annotated five-frame closure confirmation minus t_camera at annotated action onset; pre/post margins excluded",
+  "distance_definition": "First recorded index_mcp_object_distance_mm; Euclidean landmark5 to object centre; no time/distance normalization",
+  "duration_range_s": [
+    0.7997660636901855,
+    3.7669734954833984
+  ],
+  "initial_distance_range_mm": [
+    250.26845480238717,
+    356.8385736238783
+  ],
+  "excluded": "backup, review_segments, Train, Test, Result and derived folders; discovery is not recursive",
+  "raw_data_modified": false
+}

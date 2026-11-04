@@ -1,0 +1,149 @@
+{
+  "active": 198,
+  "outside": 11,
+  "within": 187,
+  "outside_details": [
+    {
+      "trial": "20261103_143529",
+      "grasp_duration_s": 0.9634029865264893,
+      "initial_distance_mm": 327.77074868765123,
+      "clip_duration_s": 1.6311826705932617,
+      "action_onset_source_frame": 351,
+      "closure_confirmed_source_frame": 380,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\20261103_143529\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "20261103_144304",
+      "grasp_duration_s": 2.4320802688598633,
+      "initial_distance_mm": 351.551606595903,
+      "clip_duration_s": 3.103386640548706,
+      "action_onset_source_frame": 7449,
+      "closure_confirmed_source_frame": 7522,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\20261103_144304\\camera.csv",
+      "reason": "distance >350 mm"
+    },
+    {
+      "trial": "20261103_144535",
+      "grasp_duration_s": 2.1611781120300293,
+      "initial_distance_mm": 350.3241341856449,
+      "clip_duration_s": 2.8401012420654297,
+      "action_onset_source_frame": 11986,
+      "closure_confirmed_source_frame": 12051,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\20261103_144535\\camera.csv",
+      "reason": "distance >350 mm"
+    },
+    {
+      "trial": "grasp_003",
+      "grasp_duration_s": 0.8324835300445557,
+      "initial_distance_mm": 279.2832408272495,
+      "clip_duration_s": 1.504103183746338,
+      "action_onset_source_frame": 302,
+      "closure_confirmed_source_frame": 327,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_003\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_004",
+      "grasp_duration_s": 0.8960187435150146,
+      "initial_distance_mm": 280.91543568042255,
+      "clip_duration_s": 1.5642433166503906,
+      "action_onset_source_frame": 373,
+      "closure_confirmed_source_frame": 400,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_004\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_008",
+      "grasp_duration_s": 0.9386041164398193,
+      "initial_distance_mm": 283.95881232149094,
+      "clip_duration_s": 1.6052136421203613,
+      "action_onset_source_frame": 662,
+      "closure_confirmed_source_frame": 690,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_008\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_009",
+      "grasp_duration_s": 0.9650397300720215,
+      "initial_distance_mm": 290.4146381321514,
+      "clip_duration_s": 1.6314406394958496,
+      "action_onset_source_frame": 731,
+      "closure_confirmed_source_frame": 760,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_009\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_011",
+      "grasp_duration_s": 0.9746263027191162,
+      "initial_distance_mm": 282.30834405121885,
+      "clip_duration_s": 1.6372959613800049,
+      "action_onset_source_frame": 897,
+      "closure_confirmed_source_frame": 926,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_011\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_013",
+      "grasp_duration_s": 0.864875078201294,
+      "initial_distance_mm": 281.2299666710898,
+      "clip_duration_s": 1.535675048828125,
+      "action_onset_source_frame": 1063,
+      "closure_confirmed_source_frame": 1089,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_013\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_015",
+      "grasp_duration_s": 0.9604976177215576,
+      "initial_distance_mm": 289.98707520214083,
+      "clip_duration_s": 1.6319630146026611,
+      "action_onset_source_frame": 1216,
+      "closure_confirmed_source_frame": 1245,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_015\\camera.csv",
+      "reason": "duration <1 s"
+    },
+    {
+      "trial": "grasp_016",
+      "grasp_duration_s": 0.9629685878753662,
+      "initial_distance_mm": 286.2873777872955,
+      "clip_duration_s": 1.632197618484497,
+      "action_onset_source_frame": 1303,
+      "closure_confirmed_source_frame": 1332,
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\grasp_016\\camera.csv",
+      "reason": "duration <1 s"
+    }
+  ],
+  "coverage_grid": {
+    "distance_bins_mm": [
+      250,
+      283.3333333333,
+      316.6666666667,
+      350
+    ],
+    "duration_bins_s": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "counts_distance_rows_duration_columns": [
+      [
+        33,
+        15,
+        0
+      ],
+      [
+        31,
+        15,
+        0
+      ],
+      [
+        40,
+        53,
+        0
+      ]
+    ]
+  },
+  "all_moved_files_unchanged": true
+}
