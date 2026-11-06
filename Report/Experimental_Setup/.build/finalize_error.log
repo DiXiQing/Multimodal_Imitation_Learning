@@ -1,0 +1,15 @@
+node:internal/fs/promises:1327
+  return await PromisePrototypeThen(
+         ^
+
+Error: ENOENT: no such file or directory, copyfile 'C:\MineApp\Code\Multimodal_Imitation_Learning\Report\Experimental_Setup\Output\.Experimental_Setup.pptx.8eaa20af-fd00-41df-b1a1-1a4999dfbeca.validated' -> 'C:\MineApp\Code\Multimodal_Imitation_Learning\Report\Experimental_Setup\Output\Experimental_Setup.pptx'
+    at async Object.copyFile (node:internal/fs/promises:1327:10)
+    at async file:///C:/MineApp/Code/Multimodal_Imitation_Learning/Report/Experimental_Setup/.build/finalize.mjs:14:2 {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'copyfile',
+  path: 'C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Report\\Experimental_Setup\\Output\\.Experimental_Setup.pptx.8eaa20af-fd00-41df-b1a1-1a4999dfbeca.validated',
+  dest: 'C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Report\\Experimental_Setup\\Output\\Experimental_Setup.pptx'
+}
+
+Node.js v24.22.1
