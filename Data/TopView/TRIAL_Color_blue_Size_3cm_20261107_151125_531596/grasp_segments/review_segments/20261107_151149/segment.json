@@ -1,0 +1,35 @@
+{
+  "segment": 11,
+  "start_row": 718,
+  "end_row": 762,
+  "onset_row": 728,
+  "peak_row": 741,
+  "closure_confirmed_row": 753,
+  "near_rows": [
+    749,
+    767
+  ],
+  "source_start_frame": 718,
+  "source_end_frame": 762,
+  "frames": 45,
+  "pre_action_frames": 10,
+  "post_closure_frames": 9,
+  "duration_s": 1.4713826179504395,
+  "distance_column": "index_mcp_object_distance",
+  "aperture_column": "finger_width",
+  "unit": "px",
+  "mm_per_px": null,
+  "review_flags": [
+    "Pre-action window includes repositioning or lacks 10 quiet frames",
+    "Only 9 hold frames before reopening or retreat"
+  ],
+  "trial_name": "20261107_151149",
+  "relative_folder": "review_segments/20261107_151149",
+  "validation": {
+    "csv_rows": 45,
+    "image_frames": 45,
+    "decoded_video_frames": 45,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

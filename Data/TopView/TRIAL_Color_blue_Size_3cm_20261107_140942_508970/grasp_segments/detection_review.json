@@ -1,0 +1,42 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 5,
+      "start_row": 441,
+      "end_row": 496,
+      "onset_row": 451,
+      "peak_row": 468,
+      "closure_confirmed_row": 488,
+      "near_rows": [
+        474,
+        502
+      ],
+      "source_start_frame": 441,
+      "source_end_frame": 496,
+      "frames": 56,
+      "pre_action_frames": 10,
+      "post_closure_frames": 8,
+      "duration_s": 1.8391358852386475,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Only 8 post-confirmation hold frames before reopening; retained for review"
+      ],
+      "boundary_note": "Manually reviewed aperture and distance; 5-frame closure confirmation at 488; cut before reopening at 497.",
+      "trial_name": "20261107_140957",
+      "relative_folder": "review_segments/20261107_140957"
+    }
+  ],
+  "missing_intervals": [
+    {
+      "start_row": 612,
+      "end_row": 641,
+      "source_start_frame": "612",
+      "source_end_frame": "641",
+      "frames": 30
+    }
+  ],
+  "near_candidate_count": 6
+}

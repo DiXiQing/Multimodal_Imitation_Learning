@@ -814,6 +814,9 @@ def main():
             if index_mcp is not None:
                 cv2.circle(display,tuple(np.rint(index_mcp).astype(int)),4,(255,120,0),-1,cv2.LINE_AA)
             aperture = float(np.linalg.norm(thumb-index)) if thumb is not None else None
+            if a is not None and index_mcp is not None:
+                cv2.line(display, tuple(a.astype(int)), tuple(np.rint(index_mcp).astype(int)),
+                         (0, 235, 255), 2, cv2.LINE_AA)
             if a is not None:
                 cv2.circle(display,tuple(a.astype(int)),5,(0,0,255),-1)
             distance = None
@@ -841,8 +844,6 @@ def main():
             guide_label.config(fg='#16853b' if guide_state in ('holding','ready') else '#b06000')
             if index_mcp is not None and guide_state in ('holding','ready'):
                 cv2.circle(display,tuple(np.rint(index_mcp).astype(int)),4,(40,200,60),-1,cv2.LINE_AA)
-            if index_mcp_distance is not None:
-                cv2.line(display,tuple(a.astype(int)),tuple(np.rint(index_mcp).astype(int)),(255,120,0),1,cv2.LINE_AA)
             _, velocity, speed_span, _ = speed_estimator.step(
                 index_mcp_distance if index_mcp_distance is not None else np.nan,
                 timestamp, capture_frame_id)
