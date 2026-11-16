@@ -1,0 +1,22 @@
+{
+  "start_row": 39,
+  "onset_row": 49,
+  "closure_row": 93,
+  "end_row": 103,
+  "pre_action_frames": 10,
+  "post_closure_frames": 10,
+  "trial": "trial_20261113_191522_068339",
+  "frames": 65,
+  "common_frames": 65,
+  "duration_s": 2.211500883102417,
+  "lowest_MAE": "MLP 5f",
+  "function_MAE_mm": 4.651383246094807,
+  "function_RMSE_mm": 5.859435808125364,
+  "function_R2": 0.9654280277750974,
+  "mlp_MAE_mm": 4.288259347832547,
+  "mlp_RMSE_mm": 5.5603126612937706,
+  "mlp_R2": 0.9688677162649431,
+  "lstm_MAE_mm": 5.707671057580259,
+  "lstm_RMSE_mm": 7.8653706008051785,
+  "lstm_R2": 0.9377053234910622
+}

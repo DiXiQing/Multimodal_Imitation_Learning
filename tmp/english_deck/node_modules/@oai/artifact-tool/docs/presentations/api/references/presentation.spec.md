@@ -133,6 +133,7 @@ type SlideInsertOptions = SlideAddOptions & {
 };
 
 interface SlideCollection {
+  addCopy(copy: SlideCopy): Slide;
   keep(selection: readonly number[] | readonly string[]): void;
   delete(selection: number | string | readonly number[] | readonly string[]): void;
   reorder(ids: readonly string[]): void;
@@ -169,10 +170,6 @@ const snapshot = await presentation.inspect({
   select: "$.slides[*].elements[*]",
   include: ["id", "kind", "text"],
 });
-
-const target = presentation.resolve(anchorId);
-const targets = presentation.resolve(anchorIds);
-presentation.delete(anchorIds);
 ```
 
 `delete` accepts one ID or an array. It supports slides (`sl/`) and owned
@@ -190,7 +187,7 @@ const slide = presentation.slides.add();
 presentation.delete(slide.id);
 ```
 
-`inspect` returns stable anchor ids for slides, shapes, images, tables, charts, text ranges, speaker notes, and comment threads. `resolve` maps one anchor id to its facade, or an array of ids to facades in the same order. Layout records expose canonical `ly/...` IDs with `editable: false` for search and comparison; pass only `pr/`, `sl/`, `sh/`, `im/`, `tb/`, `ch/`, `nt/`, `th/`, and `tr/` anchors to `resolve`.
+`inspect` returns stable anchor ids for slides, shapes, images, tables, charts, text ranges, speaker notes, and comment threads. `resolve` maps one anchor id to its facade, or an array of ids to facades in the same order. Layout records expose canonical `ly/...` IDs with `editable: false` for search and comparison; pass only `pr/`, `sl/`, `sh/`, `im/`, `tb/`, `ch/`, `ea/`, `wg/`, `nt/`, `th/`, and `tr/` anchors to `resolve`.
 
 Copy the complete canonical ID from the current inspect or rendered layout
 result. Adding `sh/`, `ch/`, or another prefix to a facade's raw `.id` does not
@@ -214,13 +211,11 @@ presentation.resolve(headingId).text = "Updated headline";
 ```js
 // Delete only the currently inspected obsolete captions.
 const obsolete = await presentation.inspect({
-  select: "$.slides[*].elements[?(@.name == 'obsolete-caption')]",
-  include: ["id"],
+  select: "$.slides[*].elements[?((@.kind == 'shape' || @.kind == 'textbox') && @.name == 'obsolete-caption')].id",
 });
-const obsoleteIds = obsolete.records.map(record => record.id);
-if (obsoleteIds.length > 0) {
-  presentation.delete(obsoleteIds);
-}
+const ids = obsolete.records.filter(id => typeof id === "string");
+const captions = presentation.resolve(ids); // Optional if you need the live shapes.
+presentation.delete(ids);
 ```
 
 ## Inspect
@@ -324,9 +319,9 @@ pairs. Rendering a montage does not replace that per-slide set. See
 [the layout reference](layout.spec.md#read-a-rendered-slides-layout) for the schema.
 An empty deck or empty selection returns `[]` for individual slide rendering.
 
-In a Spaces presentation session, `return (await presentation.export({ format: "pptx" })).downloadUrl`
-returns a browser link to the latest saved PowerPoint. Opening the link requires access
-to the deck. Local sessions publish the PowerPoint file in the run's output directory.
+In a Spaces presentation session, await `presentation.export({ format: "pptx" })` inside the callback.
+After `const run = await artifactSession.run(...)` commits, share `run.result.downloadUrl` for the latest saved
+PowerPoint. Opening the link requires access to the deck. Local sessions publish the PowerPoint file in the run's output directory.
 
 Use `export({ format: "pptx" })` for the editable deliverable. Existing raster
 and montage `export` options remain supported; raster `export` without a montage

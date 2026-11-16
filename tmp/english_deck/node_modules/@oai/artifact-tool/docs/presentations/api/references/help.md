@@ -23,7 +23,7 @@ const exact = presentation.help({ query: "slide.images.add", include: ["examples
 Example output for `query = "*"` with `include = ["index", "examples"]`:
 
 ```text
-{"kind":"api","name":"presentation.help","summary":"Search the presentation JS API and template catalog.","tags":["help","docs","examples","presentation.help"],"examples":[{"summary":"Find shape editing APIs","code":"const result = presentation.help({\n  search: 'slide.shapes.delete|shape.delete|slide.shapes.add|deleteAll',\n  include: ['index', 'examples', 'notes'],\n  maxChars: 12000,\n});\nconsole.log(result.ndjson);"}]}
+{"kind":"api","name":"presentation.help","summary":"Search the presentation JS API and template catalog.","tags":["help","docs","examples","presentation.help"],"examples":[{"summary":"Find shape editing APIs","code":"const result = presentation.help({\n  search: 'shape.delete|slide.shapes.add|slide.shapes.deleteAll',\n  include: ['index', 'examples', 'notes'],\n  maxChars: 12000,\n});\nconsole.log(result.ndjson);"}]}
 {"kind":"api","name":"slide.shapes.add","summary":"Add a preset/custom/connector shape to a slide.","tags":["shape","shapes.add","rectangle","ellipse","connector","slide.shapes.add"],"examples":[{"summary":"Create a styled rectangle","code":"const shape = slide.shapes.add({\n  geometry: 'roundRect',\n  position: { left: 72, top: 96, width: 320, height: 120 },\n  fill: { type: 'solid', color: 'accent1' },\n  line: { style: 'solid', fill: 'accent2', width: 2 },\n});\nshape.text = 'Launch plan';"}]}
 {"kind":"template","name":"agenda","summary":"Agenda slide with a title and list body.","examples":[{"summary":"Apply the agenda template","code":"presentation.apply(presentation.template('agenda'));"}]}
 ```
@@ -53,7 +53,7 @@ the primary query has selected records:
 ```ts
 const focused = presentation.help({
   search:
-    "slide\\.shapes\\.delete|shape\\.delete|slide\\.shapes\\.add|deleteAll",
+    "shape\\.delete|slide\\.shapes\\.add|slide\\.shapes\\.deleteAll",
   include: ["index", "examples", "notes"],
   maxChars: 12000,
 });

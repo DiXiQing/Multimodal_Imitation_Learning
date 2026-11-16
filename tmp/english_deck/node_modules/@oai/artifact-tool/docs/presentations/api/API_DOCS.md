@@ -14,7 +14,7 @@ Use the presentation facades to create PowerPoint-style decks in TypeScript.
 - **Inline docs types**: reference pages include illustrative `type ... = { ... }` blocks. Treat them as schema-shaped authoring guidance, not imports.
 - Inspect with `presentation.inspect({ select, include, fileName })`: `select: "$.slides[0].elements[*]"` reads every element on the first slide; optional `include: ["id", "text"]` returns only their IDs and text. Optional `fileName: "content.ndjson"` chooses the local NDJSON output filename; omit it in Spaces and return the result's `.records`. See [inspection](./references/inspect.md).
 - **Authoring surfaces**: `slide.compose(...)` covers rows, columns, grids, layers, and token strings. Config-first facade APIs cover exact positions, fixed chrome, native charts/tables/images, and imported deck edits.
-- **Slide deletion**: `presentation.slides.delete([0, 2])` deletes the original zero-based indexes; `presentation.slides.delete(slide.id)` deletes one slide. `presentation.delete(id)` also accepts a current, unambiguous `Slide.id`; use canonical IDs from `inspect` or `layout` when IDs collide.
+- **Deletion**: Use `presentation.slides.delete([0, 2])` for original zero-based slide indexes or `presentation.slides.delete(slide.id)` for one slide. On a live shape or image, call `shape.delete()` or `image.delete()`. For `presentation.delete(idOrIds)`, use canonical IDs from inspect or layout records, or an unambiguous current `Slide.id`.
 
 ## Common Routes
 

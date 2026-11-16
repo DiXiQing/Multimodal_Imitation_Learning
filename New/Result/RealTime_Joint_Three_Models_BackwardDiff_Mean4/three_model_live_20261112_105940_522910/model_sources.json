@@ -1,0 +1,17 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\Result\\Joint_Three_Models_BackwardDiff_Mean4_CurrentV_CV5_20261111_141711\\fold_01",
+  "initial_size_cm": 3,
+  "mlp_samples": 128,
+  "lstm_samples": 1,
+  "files": [
+    "function.json",
+    "mlp5.pth",
+    "lstm_full.pth"
+  ],
+  "distance": "index_mcp_object_distance_mm / trial initial distance",
+  "settings_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\30mm\\20261103_143522\\settings.json",
+  "mm_per_px": 1.2,
+  "common_frame_rule": "Backward difference and trailing four-velocity mean; current-frame output; LSTM starts on first valid velocity target",
+  "units": "mm",
+  "video_timing": "Nominal FPS video; use CSV timestamps for actual time"
+}

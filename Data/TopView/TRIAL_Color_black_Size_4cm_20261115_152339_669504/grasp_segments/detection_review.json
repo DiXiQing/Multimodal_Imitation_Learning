@@ -1,0 +1,87 @@
+{
+  "suspicious_segments": [
+    {
+      "segment": 6,
+      "start_row": 1025,
+      "end_row": 1105,
+      "onset_row": 1041,
+      "peak_row": 1083,
+      "closure_confirmed_row": 1095,
+      "near_rows": [
+        1081,
+        1127
+      ],
+      "source_start_frame": 1025,
+      "source_end_frame": 1105,
+      "frames": 81,
+      "pre_action_frames": 16,
+      "post_closure_frames": 10,
+      "duration_s": 2.671738624572754,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Insufficient aperture excursion; incomplete action or detection artifact"
+      ],
+      "trial_name": "20261115_152414",
+      "relative_folder": "review_segments/20261115_152414"
+    },
+    {
+      "segment": 31,
+      "start_row": 4662,
+      "end_row": 4815,
+      "onset_row": 4678,
+      "peak_row": 4791,
+      "closure_confirmed_row": null,
+      "near_rows": [
+        4791,
+        4815
+      ],
+      "source_start_frame": 4662,
+      "source_end_frame": 4815,
+      "frames": 154,
+      "pre_action_frames": 16,
+      "post_closure_frames": null,
+      "duration_s": 5.269157648086548,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "No confirmed closure plus 10-frame hold; retained for review"
+      ],
+      "trial_name": "20261115_152615",
+      "relative_folder": "review_segments/20261115_152615"
+    },
+    {
+      "segment": 32,
+      "start_row": 4844,
+      "end_row": 4897,
+      "onset_row": 4860,
+      "peak_row": 4878,
+      "closure_confirmed_row": 4887,
+      "near_rows": [
+        4877,
+        4909
+      ],
+      "source_start_frame": 4844,
+      "source_end_frame": 4897,
+      "frames": 54,
+      "pre_action_frames": 16,
+      "post_closure_frames": 10,
+      "duration_s": 1.7493488788604736,
+      "distance_column": "index_mcp_object_distance_mm",
+      "aperture_column": "finger_width_mm",
+      "unit": "mm",
+      "mm_per_px": 1.2,
+      "review_flags": [
+        "Insufficient aperture excursion; incomplete action or detection artifact"
+      ],
+      "trial_name": "20261115_152621",
+      "relative_folder": "review_segments/20261115_152621"
+    }
+  ],
+  "missing_intervals": [],
+  "near_candidate_count": 45
+}

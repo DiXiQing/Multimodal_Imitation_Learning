@@ -1,0 +1,21 @@
+{
+  "start_row": 26,
+  "onset_row": 36,
+  "closure_row": 143,
+  "end_row": 153,
+  "trial": "trial_20261113_211159_740565",
+  "size_mm": 40,
+  "frames": 128,
+  "common_frames": 128,
+  "duration_s": 4.385776996612549,
+  "lowest_MAE": "lstm",
+  "function_MAE_mm": 5.274838835507861,
+  "function_RMSE_mm": 8.481860417044924,
+  "function_R2": 0.9235303207369804,
+  "mlp_MAE_mm": 7.391982123741832,
+  "mlp_RMSE_mm": 9.701472670519955,
+  "mlp_R2": 0.8999580022770881,
+  "lstm_MAE_mm": 5.259946526563957,
+  "lstm_RMSE_mm": 7.148785303917229,
+  "lstm_R2": 0.9456785273733999
+}
