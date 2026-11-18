@@ -1,0 +1,34 @@
+{
+  "segment": 23,
+  "start_row": 1955,
+  "end_row": 2009,
+  "onset_row": 1971,
+  "peak_row": 1988,
+  "closure_confirmed_row": 1999,
+  "near_rows": [
+    1988,
+    2015
+  ],
+  "source_start_frame": 1955,
+  "source_end_frame": 2009,
+  "frames": 55,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 1.2039625644683838,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Insufficient aperture excursion; incomplete action or detection artifact"
+  ],
+  "trial_name": "20261116_182402",
+  "relative_folder": "review_segments/20261116_182402",
+  "validation": {
+    "csv_rows": 55,
+    "image_frames": 55,
+    "decoded_video_frames": 55,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "segment": 37,
+  "start_row": 7535,
+  "end_row": 7616,
+  "onset_row": null,
+  "peak_row": 7591,
+  "closure_confirmed_row": 7606,
+  "near_rows": [
+    7593,
+    7633
+  ],
+  "source_start_frame": 7535,
+  "source_end_frame": 7616,
+  "frames": 82,
+  "pre_action_frames": null,
+  "post_closure_frames": 10,
+  "duration_s": 2.6998071670532227,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Quiet pause between detected departure and main opening; onset requires review",
+    "Manual crop excludes original onset_row; review action completeness"
+  ],
+  "trial_name": "20261118_123624",
+  "relative_folder": "review_segments/20261118_123624",
+  "validation": {
+    "csv_rows": 82,
+    "image_frames": 82,
+    "decoded_video_frames": 82,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_curve_crops": [
+    {
+      "first": 177,
+      "last": 258,
+      "original_frames": 258,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\crop_history\\20261118_131517\\20261118_123624\\original",
+      "timestamp": "2026-11-18T13:15:18.736494"
+    }
+  ]
+}

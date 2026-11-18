@@ -1,0 +1,41 @@
+{
+  "segment": 37,
+  "start_row": 3053,
+  "end_row": 3091,
+  "onset_row": 3063,
+  "peak_row": 3075,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    3075,
+    3091
+  ],
+  "source_start_frame": 3053,
+  "source_end_frame": 3091,
+  "frames": 39,
+  "pre_action_frames": 10,
+  "post_closure_frames": null,
+  "duration_s": 1.2649931907653809,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 10-frame rest not confirmed; retained for review",
+    "No confirmed closure plus 10-frame hold; retained for review",
+    "No confirmed 16-frame baseline"
+  ],
+  "trial_name": "20261116_174113",
+  "relative_folder": "review_segments/20261116_174113",
+  "validation": {
+    "csv_rows": 39,
+    "image_frames": 39,
+    "decoded_video_frames": 39,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_tail_trim": {
+    "previous_end_frame": 3101,
+    "reason": "User-marked cutoff before anomalous aperture rise"
+  }
+}

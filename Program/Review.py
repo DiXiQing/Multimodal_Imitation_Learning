@@ -10,7 +10,7 @@ os.environ.setdefault('MPLCONFIGDIR',str(Path(__file__).parent/'.mplconfig'))
 import numpy as np
 from matplotlib.figure import Figure
 
-DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1101_D\30mm'
+DATA_ROOT = r'C:\MineApp\Code\Multimodal_Imitation_Learning\Data\1115_Song\20\backup'
 
 
 def read_trials(base, distance_mode=None):
@@ -146,15 +146,18 @@ def open_selector(base,trials,output,dpi):
     root.geometry(f'{min(1800,root.winfo_screenwidth()-60)}x{min(950,root.winfo_screenheight()-100)}+20+20')
     root.minsize(1000,680)
     root.columnconfigure(0,weight=1)
-    root.rowconfigure(2,weight=1,minsize=300)
+    root.rowconfigure(3,weight=1,minsize=300)
     status=tk.StringVar(value='')
     path_label=ttk.Label(root,text=str(base),wraplength=1000)
     path_label.grid(row=0,column=0,sticky='ew',padx=8)
     status_label=ttk.Label(root,textvariable=status,wraplength=1000)
     status_label.grid(row=1,column=0,sticky='ew',padx=8,pady=4)
-    plot=ttk.Frame(root);plot.grid(row=2,column=0,sticky='nsew')
+    selection_text=tk.StringVar(value='当前选中：无')
+    selection_label=ttk.Label(root,textvariable=selection_text,foreground='#185a86')
+    selection_label.grid(row=2,column=0,sticky='e',padx=8,pady=(0,4))
+    plot=ttk.Frame(root);plot.grid(row=3,column=0,sticky='nsew')
     # Reserve the bottom controls independently of the canvas requested width.
-    panel=ttk.Frame(root,padding=(8,4));panel.grid(row=3,column=0,sticky='ew')
+    panel=ttk.Frame(root,padding=(8,4));panel.grid(row=4,column=0,sticky='ew')
     panel.columnconfigure(0,weight=1)
     panel.columnconfigure(1,weight=1)
     views=ttk.Frame(panel);views.grid(row=0,column=0,columnspan=3,sticky='w',pady=(0,3))
@@ -165,7 +168,7 @@ def open_selector(base,trials,output,dpi):
     for column,(key,title) in enumerate([('usable','可用'),('reserve','backup')]):
         frame=ttk.LabelFrame(panel,text=title,padding=4)
         frame.grid(row=1,column=column,sticky='nsew',padx=(0,8));headings[key]=frame
-        box=tk.Listbox(frame,selectmode='extended',exportselection=False,width=20,height=4)
+        box=tk.Listbox(frame,selectmode='browse',exportselection=False,width=20,height=4)
         scrollbar=ttk.Scrollbar(frame,command=box.yview);box.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side='right',fill='y');box.pack(fill='both',expand=True);boxes[key]=box
     actions=ttk.Frame(panel);actions.grid(row=1,column=2,sticky='nsew')
@@ -179,10 +182,12 @@ def open_selector(base,trials,output,dpi):
         if event.widget==root:
             path_label.configure(wraplength=max(300,event.width-20))
             status_label.configure(wraplength=max(300,event.width-20))
+            selection_label.configure(wraplength=max(300,event.width-20))
     root.bind('<Configure>',fit_header)
     def update_status():
         names=', '.join(trials[i]['label'] for i in sorted(selected))
-        status.set(f'选中 {len(selected)} 组：{names[:130]} | '+('有未保存分类' if groups!=saved else '分类已保存'))
+        selection_text.set(f'当前选中：{names}' if selected else '当前选中：无')
+        status.set('有未保存分类' if groups!=saved else '分类已保存')
     def redraw():
         for key,box in boxes.items():
             box.delete(0,'end');ids[key]=[i for i in groups if groups[i]==key]
@@ -216,10 +221,8 @@ def open_selector(base,trials,output,dpi):
                 if len(idx):candidates.append((float(np.nanmin(np.linalg.norm(points[idx]-[event.x,event.y],axis=1))),i))
         if not candidates:return
         i=min(candidates)[1]
-        if event.key and ('ctrl' in event.key or 'control' in event.key):
-            if i in selected:selected.remove(i)
-            else:selected.add(i)
-        else:selected.clear();selected.add(i)
+        selected.clear()
+        selected.add(i)
         redraw()
     def assign(group):
         for i in selected:groups[i]=group
@@ -254,7 +257,7 @@ def open_selector(base,trials,output,dpi):
         if p.is_file():os.startfile(str(p))
         else:messagebox.showerror('视频不存在',str(p),parent=root)
     ttk.Button(actions,text='打开选中实验视频',command=open_video).grid(row=2,column=1,sticky='ew',padx=3,pady=3)
-    ttk.Label(panel,text='点击曲线或列表选择，Ctrl 多选；分类按钮仅预览，保存才移动。左图距离按初始值归一化，时间与开合未归一化。',wraplength=960).grid(row=2,column=0,columnspan=3,sticky='w',pady=(4,0))
+    ttk.Label(panel,text='点击曲线或列表选择（单选）；分类按钮仅预览，保存才移动。左图距离按初始值归一化，时间与开合未归一化。',wraplength=960).grid(row=2,column=0,columnspan=3,sticky='w',pady=(4,0))
     canvas.mpl_connect('button_press_event',click);root.protocol('WM_DELETE_WINDOW',close)
     redraw();root.mainloop()
 

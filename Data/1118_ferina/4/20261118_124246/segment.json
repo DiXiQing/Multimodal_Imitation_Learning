@@ -1,0 +1,46 @@
+{
+  "segment": 29,
+  "start_row": 8661,
+  "end_row": 8696,
+  "onset_row": null,
+  "peak_row": 8682,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    8682,
+    8703
+  ],
+  "source_start_frame": 8661,
+  "source_end_frame": 8696,
+  "frames": 36,
+  "pre_action_frames": null,
+  "post_closure_frames": null,
+  "duration_s": 1.1797735691070557,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Opening attempt followed by >=8 closed frames before main opening; review repeated action or detection interruption",
+    "Quiet pause between detected departure and main opening; onset requires review",
+    "No confirmed closure plus 10-frame hold; retained for review",
+    "Manual crop excludes original onset_row; review action completeness"
+  ],
+  "trial_name": "20261118_124246",
+  "relative_folder": "review_segments/20261118_124246",
+  "validation": {
+    "csv_rows": 36,
+    "image_frames": 36,
+    "decoded_video_frames": 36,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_curve_crops": [
+    {
+      "first": 260,
+      "last": 295,
+      "original_frames": 302,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\crop_history\\20261118_130639\\20261118_124246\\original",
+      "timestamp": "2026-11-18T13:06:40.765186"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "segment": 38,
+  "start_row": 7699,
+  "end_row": 7756,
+  "onset_row": null,
+  "peak_row": 7729,
+  "closure_confirmed_row": 7746,
+  "near_rows": [
+    7732,
+    7771
+  ],
+  "source_start_frame": 7699,
+  "source_end_frame": 7756,
+  "frames": 58,
+  "pre_action_frames": null,
+  "post_closure_frames": 10,
+  "duration_s": 1.9038403034210205,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Manual crop excludes original onset_row; review action completeness"
+  ],
+  "trial_name": "20261118_123635",
+  "relative_folder": "20261118_123635",
+  "validation": {
+    "csv_rows": 58,
+    "image_frames": 58,
+    "decoded_video_frames": 58,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_curve_crops": [
+    {
+      "first": 16,
+      "last": 73,
+      "original_frames": 73,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\crop_history\\20261118_132147\\20261118_123635\\original",
+      "timestamp": "2026-11-18T13:21:48.101683"
+    }
+  ]
+}

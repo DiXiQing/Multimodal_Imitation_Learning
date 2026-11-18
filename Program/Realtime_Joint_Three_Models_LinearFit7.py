@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'New/Result/RealTime_Joint_Three_Models_LinearFit7'
-DEFAULT_MODELS = ROOT / 'Data/1101_D/Result/Joint_Three_Models_LinearFit7_Spline1e-2_Static_300_70_30_20261114_132009'
+DEFAULT_MODELS = ROOT / 'Data/1115_Song/R2_gt_0p7_all_sizes/Result/Joint_Three_Models_LinearFit7_Spline1e-2_Static_SongR2_AllSizes_70_30_20261118_145207_176861'
 KEYS = ['predicted_function_mm', 'predicted_mlp_mm', 'predicted_lstm_mm']
 LABELS = ['Function', 'MLP 5f (MC median)', 'LSTM Full']
 COLORS = ['#3485b8', '#e59a32', '#519e58']
@@ -262,6 +262,55 @@ def plot_scores(path,scores):
     for ext in ('png','pdf'):fig.savefig(Path(path).with_suffix('.'+ext),dpi=180)
     plt.close(fig)
 
+def export_synchronized_video(path, rows):
+    """Combine the recorded camera frames with the predictions available at each frame."""
+    source = path / 'annotated_video.mp4'
+    output = path / 'synchronized_demo.mp4'
+    temporary = path / 'synchronized_demo.partial.mp4'
+    cap = cv2.VideoCapture(str(source))
+    writer = None
+    try:
+        if not cap.isOpened():
+            raise RuntimeError(f'Cannot open {source.name}')
+        camera_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        camera_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        elapsed = rows[-1]['elapsed_s']
+        fps = (len(rows) - 1) / elapsed if elapsed > 0 else cap.get(cv2.CAP_PROP_FPS)
+        # Keep both panels at their original aspect ratio.
+        plot_height = camera_height + camera_height % 2
+        plot_width = round(plot_height * 720 / 300 / 2) * 2
+        width = camera_width + plot_width
+        width += width % 2
+        writer = cv2.VideoWriter(str(temporary), cv2.VideoWriter_fourcc(*'mp4v'),
+                                 fps, (width, plot_height))
+        if not writer.isOpened():
+            raise RuntimeError('Cannot create synchronized demo video')
+        for index in range(len(rows)):
+            ok, frame = cap.read()
+            if not ok:
+                raise RuntimeError(f'Camera video ended before CSV row {index + 1}')
+            graph = cv2.resize(chart(rows[:index + 1]), (plot_width, plot_height))
+            panel = np.full((plot_height, width, 3), 255, dtype=np.uint8)
+            panel[:camera_height, :camera_width] = frame
+            panel[:, camera_width:camera_width + plot_width] = graph
+            writer.write(panel)
+        if cap.read()[0]:
+            raise RuntimeError('Camera video contains more frames than the prediction CSV')
+        writer.release()
+        check = cv2.VideoCapture(str(temporary))
+        try:
+            if not check.isOpened() or int(check.get(cv2.CAP_PROP_FRAME_COUNT)) != len(rows):
+                raise RuntimeError('Synchronized demo frame count mismatch')
+        finally:
+            check.release()
+        temporary.replace(output)
+    finally:
+        cap.release()
+        if writer is not None:
+            writer.release()
+        temporary.unlink(missing_ok=True)
+
+
 class LiveTrial:
     def __init__(self,session,frame_shape,fps,metadata):
         self.path=session/f'trial_{datetime.now():%Y%m%d_%H%M%S_%f}';self.path.mkdir()
@@ -294,6 +343,15 @@ class LiveTrial:
     def close(self):
         if self.closed:return
         self.closed=True;self.file.close();self.raw_video.release();self.video.release()
+        self.demo_status = '这次没有录到画面。'
+        if self.rows:
+            try:
+                export_synchronized_video(self.path, self.rows)
+            except (RuntimeError, OSError, cv2.error) as exc:
+                self.demo_status = f'录像和预测已保存，同步视频导出失败：{exc}'
+            else:
+                self.demo_status = f"同步视频已保存：{(self.path / 'synchronized_demo.mp4').resolve()}"
+            print(self.demo_status, flush=True)
         scores=score_rows(self.rows);write_csv(self.path/'metrics_common_frames.csv',scores)
         plot_scores(self.path/'metrics_comparison',scores)
         dt=np.diff([r['t_camera'] for r in self.rows])
@@ -470,7 +528,12 @@ def main():
         nonlocal trial,axis,origin,last_plot
         if trial is not None:
             finished=trial;trial=None
+            status.set('正在保存试验和同步视频…')
+            ui.update_idletasks()
             scores=finished.close();last_plot=chart(finished.rows)
+            save_message = finished.demo_status
+            status.set(save_message)
+            ui.update_idletasks()
             for r in scores:
                 completed.append(dict(trial=finished.path.name,size_cm=finished.metadata['size_cm'],
                                       target_distance_mm=finished.metadata['target_distance_mm'],
@@ -499,7 +562,7 @@ def main():
             for condition in (1,2,3):
                 by_condition.extend(dict(target_s=condition,**score) for score in score_rows([r for r in all_rows if r['target_s']==condition]))
             write_csv(session/'condition_metrics.csv',by_condition)
-            status.set(f'已保存：{finished.path.name}；回位后按 N 开始下一次。')
+            status.set(save_message)
         engine.reset();axis=None;origin=None
         for widget in controls:widget.config(state='normal')
 
