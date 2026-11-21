@@ -1,0 +1,38 @@
+{
+  "segment": 44,
+  "start_row": 7167,
+  "end_row": 7249,
+  "onset_row": 7183,
+  "peak_row": 7229,
+  "closure_confirmed_row": 7245,
+  "near_rows": [
+    7229,
+    7276
+  ],
+  "source_start_frame": 7167,
+  "source_end_frame": 7249,
+  "frames": 83,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 2.7388250827789307,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [],
+  "trial_name": "20261118_180526",
+  "relative_folder": "20261118_180526",
+  "validation": {
+    "csv_rows": 83,
+    "image_frames": 83,
+    "decoded_video_frames": 83,
+    "original_fields_preserved": true
+  },
+  "manual_distance_recrop": {
+    "pre_frames": 16,
+    "post_frames": 10,
+    "end_confirmed": true,
+    "source": "Data\\TopView\\TRIAL_Color_black_Size_2cm_20261118_180126_120971",
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\20\\new_recrop_backup_20261119\\20261118_180526"
+  }
+}

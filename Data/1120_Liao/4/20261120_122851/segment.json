@@ -1,0 +1,35 @@
+{
+  "segment": 26,
+  "start_row": 2227,
+  "end_row": 2271,
+  "onset_row": 2243,
+  "peak_row": 2255,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    2258,
+    2271
+  ],
+  "source_start_frame": 2227,
+  "source_end_frame": 2271,
+  "frames": 45,
+  "pre_action_frames": 16,
+  "post_closure_frames": null,
+  "duration_s": 1.4715769290924072,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "trial_name": "20261120_122851",
+  "relative_folder": "review_segments/20261120_122851",
+  "validation": {
+    "csv_rows": 45,
+    "image_frames": 45,
+    "decoded_video_frames": 45,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

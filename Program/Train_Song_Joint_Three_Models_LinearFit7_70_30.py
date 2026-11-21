@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1] / 'Data/1115_Song'
 SIZES = (2, 3, 4)
 DISTANCE = 'index_mcp_object_distance_mm'
 TARGET = 'finger_width_mm'
-WINDOW, VELOCITY_WINDOW, MAX_GAP, SEED = 5, 7, .10, 20261029
+WINDOW, VELOCITY_WINDOW, MAX_GAP, SEED = 5, 7, .10, random.SystemRandom().randrange(2**32)
 SPLINE_LAMBDA = 1e-2
 MLP_WIDTH = 32
 

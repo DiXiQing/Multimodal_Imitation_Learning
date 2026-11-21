@@ -1,0 +1,37 @@
+{
+  "segment": 30,
+  "start_row": 4724,
+  "end_row": 4785,
+  "onset_row": 4740,
+  "peak_row": 4761,
+  "closure_confirmed_row": 4775,
+  "near_rows": [
+    4761,
+    4815
+  ],
+  "source_start_frame": 4724,
+  "source_end_frame": 4785,
+  "frames": 62,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 2.0403761863708496,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 16-frame baseline is not flat",
+    "Pre-action 10-frame rest not confirmed; retained for review",
+    "Insufficient aperture excursion; incomplete action or detection artifact"
+  ],
+  "trial_name": "20261118_180404",
+  "relative_folder": "review_segments/20261118_180404",
+  "validation": {
+    "csv_rows": 62,
+    "image_frames": 62,
+    "decoded_video_frames": 62,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "segment": 17,
+  "start_row": 4248,
+  "end_row": 4311,
+  "onset_row": 4264,
+  "peak_row": 4280,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    4498,
+    4533
+  ],
+  "source_start_frame": 4248,
+  "source_end_frame": 4311,
+  "frames": 64,
+  "pre_action_frames": 16,
+  "post_closure_frames": null,
+  "duration_s": 2.089207649230957,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "trial_name": "20261119_113022",
+  "relative_folder": "20261119_113022",
+  "validation": {
+    "csv_rows": 64,
+    "image_frames": 64,
+    "decoded_video_frames": 64,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_curve_crops": [
+    {
+      "first": 1,
+      "last": 64,
+      "original_frames": 286,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1119_Dou\\3\\backup\\crop_history\\20261120_121854\\20261119_113022\\original",
+      "timestamp": "2026-11-20T12:18:55.721422"
+    }
+  ],
+  "manual_split_source": "20261119_113022"
+}

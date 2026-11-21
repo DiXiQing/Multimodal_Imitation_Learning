@@ -1,0 +1,42 @@
+{
+  "segment": 19,
+  "start_row": 3173,
+  "end_row": 3248,
+  "onset_row": 3189,
+  "peak_row": 3228,
+  "closure_confirmed_row": 3244,
+  "near_rows": [
+    3228,
+    3295
+  ],
+  "source_start_frame": 3173,
+  "source_end_frame": 3248,
+  "frames": 76,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 2.5008492469787598,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 16-frame baseline is not flat",
+    "Pre-action 10-frame rest not confirmed; retained for review"
+  ],
+  "trial_name": "20261118_175440",
+  "relative_folder": "review_segments/20261118_175440",
+  "validation": {
+    "csv_rows": 76,
+    "image_frames": 76,
+    "decoded_video_frames": 76,
+    "original_fields_preserved": true
+  },
+  "manual_distance_recrop": {
+    "pre_frames": 16,
+    "post_frames": 10,
+    "end_confirmed": true,
+    "source": "Data\\TopView\\TRIAL_Color_black_Size_2cm_20261118_175254_052426",
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\20\\new_recrop_backup_20261119\\20261118_175440"
+  }
+}

@@ -1,0 +1,4 @@
+﻿Cube size,Model,Test trials,MAE [mm] (Mean ± SD),RMSE [mm] (Mean ± SD),R² (Mean ± SD)
+All,Function Approximation,180,3.06 ± 1.29,3.87 ± 1.59,0.900 ± 0.095
+All,MLP (5 frames),180,2.80 ± 1.35,3.64 ± 1.65,0.910 ± 0.097
+All,LSTM (Full history),180,2.64 ± 1.36,3.40 ± 1.64,0.921 ± 0.096

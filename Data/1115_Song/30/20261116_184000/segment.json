@@ -1,7 +1,7 @@
 {
   "segment": 62,
   "start_row": 6108,
-  "end_row": 6167,
+  "end_row": 6156,
   "onset_row": 6124,
   "peak_row": 6139,
   "closure_confirmed_row": null,
@@ -10,11 +10,11 @@
     6167
   ],
   "source_start_frame": 6108,
-  "source_end_frame": 6167,
-  "frames": 60,
+  "source_end_frame": 6156,
+  "frames": 49,
   "pre_action_frames": 16,
   "post_closure_frames": null,
-  "duration_s": 1.957496166229248,
+  "duration_s": 1.5903279781341553,
   "distance_column": "index_mcp_object_distance_mm",
   "aperture_column": "finger_width_mm",
   "unit": "mm",
@@ -25,10 +25,19 @@
   "trial_name": "20261116_184000",
   "relative_folder": "review_segments/20261116_184000",
   "validation": {
-    "csv_rows": 60,
-    "image_frames": 60,
-    "decoded_video_frames": 60,
+    "csv_rows": 49,
+    "image_frames": 49,
+    "decoded_video_frames": 49,
     "original_fields_preserved": true,
     "image_bytes_preserved": true
-  }
+  },
+  "manual_curve_crops": [
+    {
+      "first": 1,
+      "last": 49,
+      "original_frames": 60,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\30\\backup\\crop_history\\20261119_162652\\20261116_184000\\original",
+      "timestamp": "2026-11-19T16:26:52.397142"
+    }
+  ]
 }

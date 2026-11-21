@@ -1,32 +1,43 @@
 {
   "segment": 51,
-  "start_row": 7793,
+  "start_row": 7822,
   "end_row": 7906,
-  "onset_row": 7809,
+  "onset_row": null,
   "peak_row": 7876,
   "closure_confirmed_row": 7896,
   "near_rows": [
     7877,
     7924
   ],
-  "source_start_frame": 7793,
+  "source_start_frame": 7822,
   "source_end_frame": 7906,
-  "frames": 114,
-  "pre_action_frames": 16,
+  "frames": 85,
+  "pre_action_frames": null,
   "post_closure_frames": 10,
-  "duration_s": 3.7760283946990967,
+  "duration_s": 2.799102306365967,
   "distance_column": "index_mcp_object_distance_mm",
   "aperture_column": "finger_width_mm",
   "unit": "mm",
   "mm_per_px": 1.2,
-  "review_flags": [],
+  "review_flags": [
+    "Manual crop excludes original onset_row; review action completeness"
+  ],
   "trial_name": "20261116_180207",
   "relative_folder": "20261116_180207",
   "validation": {
-    "csv_rows": 114,
-    "image_frames": 114,
-    "decoded_video_frames": 114,
+    "csv_rows": 85,
+    "image_frames": 85,
+    "decoded_video_frames": 85,
     "original_fields_preserved": true,
     "image_bytes_preserved": true
-  }
+  },
+  "manual_curve_crops": [
+    {
+      "first": 30,
+      "last": 114,
+      "original_frames": 114,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\30\\backup\\crop_history\\20261119_162941\\20261116_180207\\original",
+      "timestamp": "2026-11-19T16:29:41.972172"
+    }
+  ]
 }

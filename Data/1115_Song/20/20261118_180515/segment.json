@@ -1,0 +1,43 @@
+{
+  "segment": 42,
+  "start_row": 6848,
+  "end_row": 6921,
+  "onset_row": 6864,
+  "peak_row": 6901,
+  "closure_confirmed_row": 6914,
+  "near_rows": [
+    6901,
+    6948
+  ],
+  "source_start_frame": 6848,
+  "source_end_frame": 6921,
+  "frames": 74,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 2.43186354637146,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 16-frame baseline is not flat",
+    "Pre-action 10-frame rest not confirmed; retained for review",
+    "Insufficient aperture excursion; incomplete action or detection artifact"
+  ],
+  "trial_name": "20261118_180515",
+  "relative_folder": "review_segments/20261118_180515",
+  "validation": {
+    "csv_rows": 74,
+    "image_frames": 74,
+    "decoded_video_frames": 74,
+    "original_fields_preserved": true
+  },
+  "manual_distance_recrop": {
+    "pre_frames": 16,
+    "post_frames": 10,
+    "end_confirmed": true,
+    "source": "Data\\TopView\\TRIAL_Color_black_Size_2cm_20261118_180126_120971",
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\20\\new_recrop_backup_20261119\\20261118_180515"
+  }
+}

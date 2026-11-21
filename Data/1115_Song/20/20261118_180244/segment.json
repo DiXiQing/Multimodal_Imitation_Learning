@@ -1,0 +1,47 @@
+{
+  "segment": 15,
+  "start_row": 2338,
+  "end_row": 2403,
+  "onset_row": 2354,
+  "peak_row": 2385,
+  "closure_confirmed_row": 2400,
+  "near_rows": [
+    2385,
+    2431
+  ],
+  "source_start_frame": 2338,
+  "source_end_frame": 2403,
+  "frames": 66,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 2.7063560485839844,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 16-frame baseline is not flat",
+    "Pre-action 10-frame rest not confirmed; retained for review"
+  ],
+  "trial_name": "20261118_180244",
+  "relative_folder": "review_segments/20261118_180244",
+  "validation": {
+    "csv_rows": 66,
+    "image_frames": 66,
+    "decoded_video_frames": 66,
+    "original_fields_preserved": true
+  },
+  "manual_distance_recrop": {
+    "pre_frames": 16,
+    "post_frames": 10,
+    "end_confirmed": true,
+    "source": "Data\\TopView\\TRIAL_Color_black_Size_2cm_20261118_180126_120971",
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\20\\new_recrop_backup_20261119\\20261118_180244"
+  },
+  "artificial_time_scaling": {
+    "speed_factor": 0.8,
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\Song20_slow08_backup_20261119\\20261118_180244",
+    "video_timing": "Original video retained"
+  }
+}

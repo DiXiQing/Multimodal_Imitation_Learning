@@ -1,0 +1,43 @@
+{
+  "segment": 20,
+  "start_row": 3222,
+  "end_row": 3297,
+  "onset_row": 3238,
+  "peak_row": 3277,
+  "closure_confirmed_row": 3292,
+  "near_rows": [
+    3277,
+    3326
+  ],
+  "source_start_frame": 3222,
+  "source_end_frame": 3297,
+  "frames": 76,
+  "pre_action_frames": 16,
+  "post_closure_frames": 10,
+  "duration_s": 3.1292598247528076,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [],
+  "trial_name": "20261118_180314",
+  "relative_folder": "20261118_180314",
+  "validation": {
+    "csv_rows": 76,
+    "image_frames": 76,
+    "decoded_video_frames": 76,
+    "original_fields_preserved": true
+  },
+  "manual_distance_recrop": {
+    "pre_frames": 16,
+    "post_frames": 10,
+    "end_confirmed": true,
+    "source": "Data\\TopView\\TRIAL_Color_black_Size_2cm_20261118_180126_120971",
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\20\\new_recrop_backup_20261119\\20261118_180314"
+  },
+  "artificial_time_scaling": {
+    "speed_factor": 0.8,
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\Song20_slow08_backup_20261119\\20261118_180314",
+    "video_timing": "Original video retained"
+  }
+}

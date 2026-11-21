@@ -14,7 +14,7 @@
   "frames": 56,
   "pre_action_frames": 16,
   "post_closure_frames": 10,
-  "duration_s": 1.8233592510223389,
+  "duration_s": 1.5194661617279053,
   "distance_column": "index_mcp_object_distance_mm",
   "aperture_column": "finger_width_mm",
   "unit": "mm",
@@ -28,5 +28,12 @@
     "decoded_video_frames": 56,
     "original_fields_preserved": true,
     "image_bytes_preserved": true
-  }
+  },
+  "artificial_time_scaling_history": [
+    {
+      "speed_factor": 1.2,
+      "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\Song30_time_scaling60_backup_20261119_163849\\20261116_183851",
+      "video_timing": "Original video retained"
+    }
+  ]
 }

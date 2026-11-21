@@ -1,0 +1,37 @@
+{
+  "segment": 4,
+  "start_row": 264,
+  "end_row": 297,
+  "onset_row": 280,
+  "peak_row": 285,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    288,
+    297
+  ],
+  "source_start_frame": 264,
+  "source_end_frame": 297,
+  "frames": 34,
+  "pre_action_frames": 16,
+  "post_closure_frames": null,
+  "duration_s": 1.3118972778320312,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+    "Pre-action 10-frame rest not confirmed; retained for review",
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "trial_name": "20261120_122703",
+  "relative_folder": "review_segments/20261120_122703",
+  "validation": {
+    "csv_rows": 34,
+    "image_frames": 34,
+    "decoded_video_frames": 34,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}
