@@ -1,0 +1,68 @@
+{
+  "reference": "User green boxes on original D1 v2 figure; not the newly reselected figure",
+  "locked_examples": [
+    {
+      "participant": "D1",
+      "size_mm": "20",
+      "duration_group": "Short",
+      "trial": "20261103_163547",
+      "duration_s": "1.8590126037597656",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_05\\Test\\2cm\\20261103_163547.csv",
+      "selection": "Illustrative low-LSTM-error short trial; selected by performance, not representative sampling"
+    },
+    {
+      "participant": "D1",
+      "size_mm": "20",
+      "duration_group": "Medium",
+      "trial": "20261103_163406",
+      "duration_s": "2.23508358001709",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_01\\Test\\2cm\\20261103_163406.csv",
+      "selection": "Same trial as previous figure; predictions replaced with latest held-out LinearFit5 fold output"
+    },
+    {
+      "participant": "D1",
+      "size_mm": "30",
+      "duration_group": "Short",
+      "trial": "20261103_143738",
+      "duration_s": "1.9291155338287354",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_01\\Test\\3cm\\20261103_143738.csv",
+      "selection": "Same trial as previous figure; predictions replaced with latest held-out LinearFit5 fold output"
+    },
+    {
+      "participant": "D1",
+      "size_mm": "40",
+      "duration_group": "Short",
+      "trial": "20261103_184108",
+      "duration_s": "2.1357972621917725",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_02\\Test\\4cm\\20261103_184108.csv",
+      "selection": "Same trial as previous figure; predictions replaced with latest held-out LinearFit5 fold output"
+    },
+    {
+      "participant": "D1",
+      "size_mm": "40",
+      "duration_group": "Medium",
+      "trial": "20261103_140217",
+      "duration_s": "2.4643077850341797",
+      "source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_02\\Test\\4cm\\20261103_140217.csv",
+      "selection": "Same trial as previous figure; predictions replaced with latest held-out LinearFit5 fold output"
+    }
+  ],
+  "remaining_positions": [
+    {
+      "size_mm": 30,
+      "duration_group": "Medium"
+    },
+    {
+      "size_mm": 20,
+      "duration_group": "Long"
+    },
+    {
+      "size_mm": 30,
+      "duration_group": "Long"
+    },
+    {
+      "size_mm": 40,
+      "duration_group": "Long"
+    }
+  ]
+}

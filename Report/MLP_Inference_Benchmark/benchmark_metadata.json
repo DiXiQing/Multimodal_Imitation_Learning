@@ -1,0 +1,10 @@
+{
+  "checkpoint": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_01\\mlp5.pth",
+  "real_input_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D_PreAction15\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153838\\fold_01\\Test\\2cm\\20261101_195518.csv",
+  "threads": 1,
+  "device": "cpu",
+  "warmup_per_mode": 200,
+  "timing_scope": "feature tensor construction, forward pass, reduction, output unscaling; excludes camera/detection; dropout mode switch excluded",
+  "torch_version": "2.6.0+cu124",
+  "note": "Other training jobs may affect timings; rerun when idle. Training weights unchanged; not a no-dropout-trained model."
+}

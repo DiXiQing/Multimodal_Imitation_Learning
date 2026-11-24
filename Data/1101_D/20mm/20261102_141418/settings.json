@@ -71,7 +71,7 @@
     "distance_column": "index_mcp_object_distance",
     "method": "Least-squares slope over trailing 5 consecutive valid distance/time samples",
     "window_frames": 5,
-    "max_gap_s": 0.1,
+    "max_gap_s": 0.25,
     "units": "px/s",
     "velocity_sign": "Distance derivative; negative approaching",
     "approach_speed_sign": "Negative distance derivative; positive approaching"

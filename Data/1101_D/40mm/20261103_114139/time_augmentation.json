@@ -1,0 +1,48 @@
+{
+  "source_trial": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261103_114139",
+  "source_video": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261103_114139\\grasp_video.mp4",
+  "source_frames": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\40mm\\20261103_114139\\frames",
+  "speed_multiplier": 0.5,
+  "time_multiplier": 2.0,
+  "original_first_t_camera": "1793673699.9978094",
+  "original_action_duration_s": 1.4044041633605957,
+  "new_action_duration_s": 2.808808,
+  "original_clip_duration_s": 2.064739465713501,
+  "velocity": "Slope over current and four previous consecutive valid frames; blank if unavailable.",
+  "media_timing": "Original video, frames and recording FPS are acquisition metadata. Use augmented CSV timestamps for playback timing.",
+  "changed_fields": {
+    "camera.csv": [
+      "t_camera",
+      "elapsed_s",
+      "segment_elapsed_s",
+      "index_mcp_velocity_px_s",
+      "index_mcp_approach_speed_px_s",
+      "index_mcp_velocity_mm_s",
+      "index_mcp_approach_speed_mm_s",
+      "speed_window_span_s"
+    ],
+    "segment.json": [
+      "duration_s"
+    ],
+    "settings.json": [
+      "speed_estimation.max_gap_s"
+    ]
+  },
+  "rollback_instruction": "Restore camera.csv, segment.json and settings.json from source_backup_directory. Source video timing remains original acquisition timing.",
+  "backup": {
+    "camera.csv": {
+      "path": "backup\\40mm\\20261103_114139\\camera.csv",
+      "sha256": "08784cf765b3ac9d4b13c4ceec6f9f272ed2af333b67fb2adae2664be38b3c25"
+    },
+    "segment.json": {
+      "path": "backup\\40mm\\20261103_114139\\segment.json",
+      "sha256": "b16ee41d0ae0cc0147472c7b975bf8ec3ea6fa179f2689afe7ed4c4b1cb79bb7"
+    },
+    "settings.json": {
+      "path": "backup\\40mm\\20261103_114139\\settings.json",
+      "sha256": "2bffa3a7b27a477676fc1f49a83a65dd4eea6dc26e61cb1426fb0bdd37e2e9fe"
+    }
+  },
+  "applied_to_source": true,
+  "source_backup_directory": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\time_scaling_backup\\20261124_102903\\40mm\\20261103_114139"
+}

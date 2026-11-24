@@ -1,0 +1,37 @@
+﻿evaluation,participant,model,metric,mean,sd
+offline,Di,Function,mae,5.9,2.07
+offline,Di,MLP 5f,mae,5.41,2.05
+offline,Di,LSTM Full,mae,4.23,1.7
+offline,Song,Function,mae,3.055222315671132,1.294636539573405
+offline,Song,MLP 5f,mae,2.800018303278887,1.3504813252250811
+offline,Song,LSTM Full,mae,2.6412889324550366,1.356144501629425
+offline,Di,Function,rmse,7.57,2.56
+offline,Di,MLP 5f,rmse,7.3,2.67
+offline,Di,LSTM Full,rmse,5.56,2.19
+offline,Song,Function,rmse,3.869032611973365,1.5928570620777318
+offline,Song,MLP 5f,rmse,3.641737970594286,1.6510303419865564
+offline,Song,LSTM Full,rmse,3.4028697216441577,1.6371635658114465
+offline,Di,Function,r2,0.924,0.057
+offline,Di,MLP 5f,r2,0.931,0.05
+offline,Di,LSTM Full,r2,0.958,0.037
+offline,Song,Function,r2,0.9001997356314165,0.09527909809507183
+offline,Song,MLP 5f,r2,0.9099432561349232,0.0966338070261365
+offline,Song,LSTM Full,r2,0.9209417610983183,0.09586826511074924
+realtime,Di,Function,mae,7.12,2.71
+realtime,Di,MLP 5f,mae,5.98,1.82
+realtime,Di,LSTM Full,mae,4.86,1.72
+realtime,Song,Function,mae,3.5762087400441684,1.272295239482806
+realtime,Song,MLP 5f,mae,3.2311855419819673,1.17718610280759
+realtime,Song,LSTM Full,mae,3.02011242683357,1.1954029892573554
+realtime,Di,Function,rmse,8.99,3.16
+realtime,Di,MLP 5f,rmse,8.02,2.61
+realtime,Di,LSTM Full,rmse,6.96,2.6
+realtime,Song,Function,rmse,4.584178678309391,1.6721123953429027
+realtime,Song,MLP 5f,rmse,4.238895951972965,1.621374669662766
+realtime,Song,LSTM Full,rmse,3.942647567373491,1.6234215261641434
+realtime,Di,Function,r2,0.905,0.061
+realtime,Di,MLP 5f,r2,0.925,0.046
+realtime,Di,LSTM Full,r2,0.942,0.04
+realtime,Song,Function,r2,0.8683940052463299,0.08715229056417828
+realtime,Song,MLP 5f,r2,0.8865528972855473,0.07954388080588881
+realtime,Song,LSTM Full,r2,0.901870538047513,0.06948347888197418

@@ -1,0 +1,29 @@
+{
+  "segment": 11,
+  "start_row": 964,
+  "end_row": 1020,
+  "onset_row": 979,
+  "peak_row": 992,
+  "closure_confirmed_row": 1010,
+  "near_rows": [
+    999,
+    1030
+  ],
+  "source_start_frame": 964,
+  "source_end_frame": 1020,
+  "frames": 57,
+  "pre_action_frames": 15,
+  "post_closure_frames": 10,
+  "duration_s": 1.8560075759887695,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [],
+  "trial_name": "20261102_141401",
+  "relative_folder": "20261102_141401",
+  "restored_preceding_frames": 5,
+  "restored_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\TopView\\TRIAL_Color_black_Size_2cm_20261102_141329_343186\\camera.csv",
+  "original_trial": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_141401",
+  "training_csv_copy_only": true
+}

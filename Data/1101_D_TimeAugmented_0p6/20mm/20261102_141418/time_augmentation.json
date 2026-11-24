@@ -1,0 +1,46 @@
+{
+  "source_trial": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_141418",
+  "source_video": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_141418\\grasp_video.mp4",
+  "source_frames": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1101_D\\20mm\\20261102_141418\\frames",
+  "speed_multiplier": 0.6,
+  "time_multiplier": 1.6666666666666667,
+  "original_first_t_camera": "1793596458.7542157",
+  "original_action_duration_s": 1.1363461017608643,
+  "new_action_duration_s": 1.89391,
+  "original_clip_duration_s": 1.802506446838379,
+  "velocity": "Slope over current and four previous consecutive valid frames; blank if unavailable.",
+  "media_timing": "Original video, frames and recording FPS are acquisition metadata. Use augmented CSV timestamps for playback timing.",
+  "changed_fields": {
+    "camera.csv": [
+      "t_camera",
+      "elapsed_s",
+      "segment_elapsed_s",
+      "index_mcp_velocity_px_s",
+      "index_mcp_approach_speed_px_s",
+      "index_mcp_velocity_mm_s",
+      "index_mcp_approach_speed_mm_s",
+      "speed_window_span_s"
+    ],
+    "segment.json": [
+      "duration_s"
+    ],
+    "settings.json": [
+      "speed_estimation.max_gap_s"
+    ]
+  },
+  "rollback_instruction": "Use source_trial, or restore original filenames from the backup paths below.",
+  "backup": {
+    "camera.csv": {
+      "path": "backup\\20mm\\20261102_141418\\camera.csv",
+      "sha256": "0905786a38bfab88f516ba68c9d93b93a8a28c2f107e462f5407c687a49b2d61"
+    },
+    "segment.json": {
+      "path": "backup\\20mm\\20261102_141418\\segment.json",
+      "sha256": "0009594283957cfa69c6d9d8378107d9642f9bf8a235dc468a43af36c33e2cd8"
+    },
+    "settings.json": {
+      "path": "backup\\20mm\\20261102_141418\\settings.json",
+      "sha256": "df4fc84e1401db65529b2588a96305a0637d84989f4d8bd451a0c2905bbddb75"
+    }
+  }
+}

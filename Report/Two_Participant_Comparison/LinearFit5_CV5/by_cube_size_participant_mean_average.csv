@@ -1,0 +1,10 @@
+﻿Cube size,Model,MAE [mm],RMSE [mm],R²
+20 mm,Function Approximation,4.37,5.61,0.904
+20 mm,MLP (5 Frames),3.86,5.08,0.916
+20 mm,LSTM (Full),3.19,4.14,0.934
+30 mm,Function Approximation,4.30,5.55,0.929
+30 mm,MLP (5 Frames),3.75,5.16,0.938
+30 mm,LSTM (Full),3.25,4.33,0.951
+40 mm,Function Approximation,4.09,5.30,0.951
+40 mm,MLP (5 Frames),3.68,5.02,0.956
+40 mm,LSTM (Full),3.23,4.27,0.965
