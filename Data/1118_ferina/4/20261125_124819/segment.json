@@ -29,7 +29,21 @@
     "csv_rows": 61,
     "image_frames": 61,
     "decoded_video_frames": 61,
-    "original_fields_preserved": true,
+    "original_fields_preserved": false,
     "image_bytes_preserved": true
+  },
+  "aperture_correction": {
+    "pivot_frame": 8253,
+    "adjusted_frames": [
+      8247,
+      8252
+    ],
+    "removed_slope_mm_s": -39.62208321880331,
+    "method": "Fixed-pivot linear detrending",
+    "fields": [
+      "finger_width",
+      "finger_width_mm"
+    ],
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\aperture_20261125_165644\\original"
   }
 }

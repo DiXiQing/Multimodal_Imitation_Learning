@@ -1,6 +1,6 @@
 {
   "segment": 44,
-  "start_row": 5220,
+  "start_row": 5224,
   "end_row": 5264,
   "onset_row": 5230,
   "peak_row": 5244,
@@ -9,12 +9,12 @@
     5245,
     5282
   ],
-  "source_start_frame": 5220,
+  "source_start_frame": 5224,
   "source_end_frame": 5264,
-  "frames": 45,
-  "pre_action_frames": 10,
+  "frames": 41,
+  "pre_action_frames": 6,
   "post_closure_frames": 10,
-  "duration_s": 1.5202598571777344,
+  "duration_s": 1.374263048171997,
   "distance_column": "index_mcp_object_distance_mm",
   "aperture_column": "finger_width_mm",
   "unit": "mm",
@@ -23,12 +23,20 @@
     "Pre-action 10-frame rest not confirmed; retained for review"
   ],
   "trial_name": "20261125_124637",
-  "relative_folder": "review_segments/20261125_124637",
+  "relative_folder": "20261125_124637",
   "validation": {
-    "csv_rows": 45,
-    "image_frames": 45,
-    "decoded_video_frames": 45,
+    "csv_rows": 41,
+    "image_frames": 41,
+    "decoded_video_frames": 41,
     "original_fields_preserved": true,
     "image_bytes_preserved": true
+  },
+  "manual_crop": {
+    "original_time_range": [
+      0.1459968090057373,
+      1.5202598571777344
+    ],
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\manual_crop_20261125_165351\\20261125_124637",
+    "note": "User screenshot selection; original acquisition measurements unchanged; onset/closure annotations inherited and may require review."
   }
 }

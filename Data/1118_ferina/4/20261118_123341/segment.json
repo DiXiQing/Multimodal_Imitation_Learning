@@ -26,7 +26,18 @@
     "csv_rows": 56,
     "image_frames": 56,
     "decoded_video_frames": 56,
-    "original_fields_preserved": true,
+    "original_fields_preserved": false,
     "image_bytes_preserved": true
+  },
+  "aperture_correction": {
+    "pivot_frame": 2501,
+    "flattened_end_frame": 2504,
+    "tail_offset_mm": -4.85621057303419,
+    "method": "Remove endpoint slope with fixed frame times, then translate the remainder vertically",
+    "fields": [
+      "finger_width",
+      "finger_width_mm"
+    ],
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4\\backup\\aperture_20261125_165036\\20261118_123341"
   }
 }
