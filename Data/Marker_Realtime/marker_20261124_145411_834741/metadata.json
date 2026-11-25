@@ -1,0 +1,80 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153753\\fold_01",
+  "participant_model": "song",
+  "size_cm": 3,
+  "velocity_method": "LinearFit5",
+  "mlp_samples": 1,
+  "mlp_dropout_at_inference": false,
+  "mm_per_px": 1.2,
+  "calibration_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\30\\20261115_154018\\settings.json",
+  "camera": 1,
+  "camera_resolution": [
+    640,
+    480
+  ],
+  "crop_margins": {
+    "left": 500,
+    "top": 100,
+    "right": 200,
+    "bottom": 50
+  },
+  "target_center_px": [
+    174.5,
+    282.5
+  ],
+  "marker_hsv": [
+    [
+      40,
+      70,
+      40
+    ],
+    [
+      95,
+      255,
+      255
+    ]
+  ],
+  "detector_width": 800,
+  "chart_refresh_fps": 8,
+  "marker_color": "green",
+  "marker_roi": null,
+  "target_distance_mm": 300,
+  "target_movement_s": 2,
+  "overlay": "schematic finger placement; only aperture is predicted, fingertip geometry is not learned",
+  "measurements": "Marker center replaces index MCP; target auto-detected and locked at recording start, or manually overridden; no aperture ground truth measured",
+  "video_timing": "Timestamp-resampled constant FPS using preceding captured frame; output 1920x1080 MJPEG AVI and native-resolution camera overlay AVI",
+  "weights": "existing fold_01 checkpoint by default, trained on 480 trials; not a full-600 fitted model",
+  "object_detection": "automatic HSV largest filled contour",
+  "object_color": "blue",
+  "object_center_manual": false,
+  "calibration_two_points": null,
+  "capture_requested": [
+    640,
+    480
+  ],
+  "native_cropped_size": [
+    406,
+    414
+  ],
+  "annotated_camera_size": [
+    812,
+    828
+  ],
+  "overlay_supersampling": 2,
+  "crop_reference_resolution": [
+    1920,
+    1080
+  ],
+  "actual_crop_margins": {
+    "left": 167,
+    "top": 44,
+    "right": 67,
+    "bottom": 22
+  },
+  "export_size": [
+    1920,
+    1080
+  ],
+  "export_codec": "MJPEG AVI",
+  "finger_length_mm": 30
+}

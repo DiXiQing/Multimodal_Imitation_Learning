@@ -1,0 +1,14 @@
+{
+  "metric": "Shape agreement, not predictive cross-validation R2",
+  "grid": [
+    0.15,
+    1,
+    300
+  ],
+  "reference": "Pointwise mean across all current direct trials from both folders; includes each scored trial",
+  "excluded": "backup folders",
+  "distance": "index_mcp_object_distance_mm normalized by first sample",
+  "aperture": "finger_width_mm; unchanged",
+  "duplicates": "Average aperture at identical normalized distances; sort distance before interpolation",
+  "coverage": "Observed overlap only, at least30gridpoints"
+}

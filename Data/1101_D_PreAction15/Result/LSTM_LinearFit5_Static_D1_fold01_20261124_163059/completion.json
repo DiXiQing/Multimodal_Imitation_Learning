@@ -1,0 +1,7 @@
+{
+  "complete": true,
+  "epochs": 250,
+  "test_trials": 120,
+  "static_tests": "30 s constant and small distance-noise input, three sizes",
+  "note": "Inspect static_stability_summary.csv before deployment. No output clamping/gating or hidden state resets were used to hide drift."
+}

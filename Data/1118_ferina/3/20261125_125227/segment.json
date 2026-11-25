@@ -1,0 +1,42 @@
+{
+  "segment": 21,
+  "start_row": 2049,
+  "end_row": 2086,
+  "onset_row": 2059,
+  "peak_row": 2069,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    2073,
+    2092
+  ],
+  "source_start_frame": 2049,
+  "source_end_frame": 2086,
+  "frames": 38,
+  "pre_action_frames": 10,
+  "post_closure_frames": null,
+  "duration_s": 1.2330811023712158,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "trial_name": "20261125_125227",
+  "relative_folder": "20261125_125227",
+  "validation": {
+    "csv_rows": 38,
+    "image_frames": 38,
+    "decoded_video_frames": 38,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_crop": {
+    "original_time_range": [
+      0.0,
+      1.2330811023712158
+    ],
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\3\\backup\\manual_crop_20261125_150440\\20261125_125227",
+    "note": "User screenshot selection; original acquisition measurements unchanged; onset/closure annotations inherited and may require review."
+  }
+}

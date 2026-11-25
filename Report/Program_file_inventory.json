@@ -1,0 +1,325 @@
+[
+  {
+    "name": "Audit_D1_Backup_ModelR2.py",
+    "lines": 67,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": "Audit backup candidates with all five fixed LinearFit5 folds; no dataset mutation."
+  },
+  {
+    "name": "Benchmark_MLP_Single_vs_MC128.py",
+    "lines": 51,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": "Benchmark deterministic single-pass MLP versus MC Dropout x128 on saved real inputs."
+  },
+  {
+    "name": "Build_Realtime_Slide_Mockups.py",
+    "lines": 80,
+    "imports": [],
+    "doc": ""
+  },
+  {
+    "name": "Compare_LinearFit5_7_Two_Datasets.py",
+    "lines": 134,
+    "imports": [],
+    "doc": "Compare causal five/seven-frame velocity using matched 70/30 trial splits."
+  },
+  {
+    "name": "Find_D1_Rise_Matched_Examples.py",
+    "lines": 66,
+    "imports": [
+      "Replace_D1_Two_Long_Examples"
+    ],
+    "doc": ""
+  },
+  {
+    "name": "Generate_Grasp_Animation.py",
+    "lines": 208,
+    "imports": [],
+    "doc": "Draw the grasp animation from mathematical parameters, then play the MP4.\n\nRun with Python. Dependencies: numpy, Pillow and opencv-python.\nNo input vi"
+  },
+  {
+    "name": "Generate_Grasp_Demo_Video.py",
+    "lines": 153,
+    "imports": [],
+    "doc": "Generate the English reference animation, then open the video player.\n\nRequires the original 视频1.mp4. Run --help for input/output options."
+  },
+  {
+    "name": "Generate_Three_Trial_Grasp_Animation.py",
+    "lines": 153,
+    "imports": [],
+    "doc": "Render a straight-on grasp schematic and smoothed distance–aperture curves."
+  },
+  {
+    "name": "marker_hd_support.py",
+    "lines": 97,
+    "imports": [
+      "Realtime_Joint_Three_Models_LinearFit7"
+    ],
+    "doc": "Rendering, automatic cube detection and timestamp-aligned recording helpers."
+  },
+  {
+    "name": "Overlay_Three_Sizes.py",
+    "lines": 76,
+    "imports": [],
+    "doc": "Scatter plot of trial duration vs initial MCP distance; raw data read-only."
+  },
+  {
+    "name": "Plot_Current_D1_Nine_Examples.py",
+    "lines": 73,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": ""
+  },
+  {
+    "name": "Plot_LinearFit5_7_Velocity.py",
+    "lines": 102,
+    "imports": [],
+    "doc": "Plot raw backward-difference, Linear Fit 5 and Linear Fit 7 velocities."
+  },
+  {
+    "name": "Plot_Model_Comparison_Three_Sizes.py",
+    "lines": 53,
+    "imports": [],
+    "doc": "Three-size model comparison from saved out-of-fold trial metrics; no training."
+  },
+  {
+    "name": "Prepare_D1_All_PreAction15.py",
+    "lines": 45,
+    "imports": [],
+    "doc": "Restore five authentic pre-roll rows for all active D1 trials, without changing originals."
+  },
+  {
+    "name": "Realtime_40mm_Static_LSTM.py",
+    "lines": 447,
+    "imports": [],
+    "doc": "Live 40 mm LSTM with synthetic-static-prefix training."
+  },
+  {
+    "name": "Realtime_Green_Marker_LinearFit5.py",
+    "lines": 183,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": "Green-marker live aperture estimation. N start, S stop, click target, Q quit.\nUses current + four past frames (LinearFit5); no hand-landmark measureme"
+  },
+  {
+    "name": "Realtime_Green_Marker_LinearFit5_UI.py",
+    "lines": 332,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5",
+      "marker_hd_support"
+    ],
+    "doc": "Green-marker live aperture estimation with the previous three-window control UI. N start, S stop, click target, Q quit.\nUses current + four past frame"
+  },
+  {
+    "name": "Realtime_Green_Marker_LinearFit5_UI_before_overlay_fix.py",
+    "lines": 318,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5",
+      "marker_hd_support"
+    ],
+    "doc": "Green-marker live aperture estimation with the previous three-window control UI. N start, S stop, click target, Q quit.\nUses current + four past frame"
+  },
+  {
+    "name": "Realtime_Green_Marker_LinearFit5_UI_before_performance_fix.py",
+    "lines": 285,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5",
+      "marker_hd_support"
+    ],
+    "doc": "Green-marker live aperture estimation with the previous three-window control UI. N start, S stop, click target, Q quit.\nUses current + four past frame"
+  },
+  {
+    "name": "Realtime_Green_Marker_LinearFit5_UI_v1.py",
+    "lines": 242,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": "Green-marker live aperture estimation with the previous three-window control UI. N start, S stop, click target, Q quit.\nUses current + four past frame"
+  },
+  {
+    "name": "Realtime_Joint_Three_Models.py",
+    "lines": 528,
+    "imports": [],
+    "doc": "Live comparison of the three joint size-conditioned models."
+  },
+  {
+    "name": "Realtime_Joint_Three_Models_BackwardDiff_Mean4.py",
+    "lines": 624,
+    "imports": [],
+    "doc": "Live comparison of the three joint models with the causal backward-difference velocity."
+  },
+  {
+    "name": "Realtime_Joint_Three_Models_LinearFit7.py",
+    "lines": 691,
+    "imports": [],
+    "doc": "Live comparison of the three joint models with the causal seven-frame linear-fit velocity."
+  },
+  {
+    "name": "Realtime_Joint_Three_Models_Velocity.py",
+    "lines": 615,
+    "imports": [],
+    "doc": "Live comparison of the three joint models with the offline SG5 velocity feature."
+  },
+  {
+    "name": "Realtime_Velocity_Comparison.py",
+    "lines": 476,
+    "imports": [],
+    "doc": "Compare causal radial velocity estimates with a live overhead camera."
+  },
+  {
+    "name": "Realtime_Yellow_Marker_LinearFit5.py",
+    "lines": 180,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": "Yellow-marker live aperture estimation. N start, S stop, click target, Q quit.\nUses current + four past frames (LinearFit5); no hand-landmark measurem"
+  },
+  {
+    "name": "Record.py",
+    "lines": 901,
+    "imports": [],
+    "doc": "Camera-only adaptation of Record_mediapipe_continuous.py (Tk continuous trials)."
+  },
+  {
+    "name": "Replace_D1_Two_Long_Examples.py",
+    "lines": 67,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": ""
+  },
+  {
+    "name": "Replace_D1_Two_More_Examples.py",
+    "lines": 67,
+    "imports": [
+      "Train_D1_Joint_Three_Models_LinearFit5_CV5"
+    ],
+    "doc": ""
+  },
+  {
+    "name": "Replay_D1_Nine_Examples_Pre15.py",
+    "lines": 72,
+    "imports": [],
+    "doc": "Restore five authentic preceding frames and replay the original held-out fold models."
+  },
+  {
+    "name": "Replay_Three_Models_LinearFit7.py",
+    "lines": 339,
+    "imports": [],
+    "doc": "Live comparison of the three joint models with the causal seven-frame linear-fit velocity."
+  },
+  {
+    "name": "Review.py",
+    "lines": 283,
+    "imports": [],
+    "doc": "Manual review of 1101 timestamp trials: three linked overlays, retained / backup. No training or smoothing."
+  },
+  {
+    "name": "Review_RT.py",
+    "lines": 286,
+    "imports": [],
+    "doc": "Manual review of real-time trials: three linked overlays, retained / backup. No training or smoothing."
+  },
+  {
+    "name": "Scatter_Plot.py",
+    "lines": 94,
+    "imports": [],
+    "doc": "Scatter plot of trial duration vs initial MCP distance; raw data read-only."
+  },
+  {
+    "name": "Scatter_Plot_Three_Sizes.py",
+    "lines": 74,
+    "imports": [],
+    "doc": "Scatter plot of trial duration vs initial MCP distance; raw data read-only."
+  },
+  {
+    "name": "Train_D1_Joint_Three_Models_LinearFit5_CV5.py",
+    "lines": 529,
+    "imports": [],
+    "doc": "D1 joint three-model five-fold validation using causal trailing five-frame linear-fit velocity."
+  },
+  {
+    "name": "Train_Joint_Three_Models_BackwardDiff_Mean4_CV5.py",
+    "lines": 550,
+    "imports": [],
+    "doc": "Standalone joint three-model five-fold validation with causal backward differences and a trailing four-velocity mean."
+  },
+  {
+    "name": "Train_Joint_Three_Models_LinearFit7_70_30.py",
+    "lines": 541,
+    "imports": [],
+    "doc": "Train three joint grasp models with causal 7-frame velocity and a trial-level 70/30 holdout."
+  },
+  {
+    "name": "Train_Joint_Three_Models_No_Velocity_70_30.py",
+    "lines": 65,
+    "imports": [
+      "Train_Joint_Three_Models_BackwardDiff_Mean4_CV5"
+    ],
+    "doc": "Quick joint three-model comparison without velocity, using one 70/30 split."
+  },
+  {
+    "name": "Train_LSTM_BackwardDiff_Mean4_Static.py",
+    "lines": 135,
+    "imports": [
+      "Train_Joint_Three_Models_BackwardDiff_Mean4_CV5"
+    ],
+    "doc": "Train an LSTM with synthetic stationary frames before each training trial."
+  },
+  {
+    "name": "Train_Song20_R2_gt_0p7_Three_Models_LinearFit7.py",
+    "lines": 530,
+    "imports": [],
+    "doc": "Train three grasp models on the current retained Song 20 mm trials."
+  },
+  {
+    "name": "Train_Song20_Retained_Three_Models_LinearFit7_127_55.py",
+    "lines": 530,
+    "imports": [],
+    "doc": "Train three grasp models on the current retained Song 20 mm trials."
+  },
+  {
+    "name": "Train_Song20_TimeRedistributed_Three_Models_LinearFit7_127_55.py",
+    "lines": 538,
+    "imports": [],
+    "doc": "Train Song 20 mm models on redistributed trials and evaluate on the original holdout."
+  },
+  {
+    "name": "Train_Song40mm_Three_Models_LinearFit7_70_30.py",
+    "lines": 516,
+    "imports": [],
+    "doc": "Train three joint grasp models with causal 7-frame velocity and a trial-level 70/30 holdout."
+  },
+  {
+    "name": "Train_Song_Joint_Three_Models_LinearFit5_CV5.py",
+    "lines": 529,
+    "imports": [],
+    "doc": "Song joint three-model five-fold validation using causal trailing five-frame linear-fit velocity."
+  },
+  {
+    "name": "Train_Song_Joint_Three_Models_LinearFit7_70_30.py",
+    "lines": 523,
+    "imports": [],
+    "doc": "Train three joint grasp models with causal 7-frame velocity and a trial-level 70/30 holdout."
+  },
+  {
+    "name": "Train_Song_Joint_Three_Models_LinearFit7_CV5.py",
+    "lines": 91,
+    "imports": [
+      "Train_Song_Joint_Three_Models_LinearFit7_70_30"
+    ],
+    "doc": "Song trial-level, size-stratified five-fold CV using the existing LinearFit7 models."
+  },
+  {
+    "name": "Train_Song_R2_gt_0p7_All_Sizes_LinearFit7_70_30.py",
+    "lines": 523,
+    "imports": [],
+    "doc": "Train three joint grasp models with causal 7-frame velocity and a trial-level 70/30 holdout."
+  }
+]

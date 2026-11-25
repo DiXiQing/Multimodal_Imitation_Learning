@@ -1,0 +1,8 @@
+本目录保存旧版本和已完成的一次性脚本。
+Realtime_Old_Versions：5个旧实时版本。
+Completed_One_Off_Tasks：8个已完成的数据准备、审核或挑图脚本。
+Legacy_Training：3个旧筛选数据集训练入口。
+
+文件内容未改动，也未删除；原位置和校验值见 archive_manifest.json。
+这些脚本包含基于文件位置的相对路径及彼此导入。不要在归档目录直接运行。
+需要重用时，请先按清单恢复到原 Program 路径，必要时连同同目录依赖一起恢复。

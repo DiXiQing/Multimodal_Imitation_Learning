@@ -1,0 +1,44 @@
+{
+  "segment": 65,
+  "start_row": 7750,
+  "end_row": 7802,
+  "onset_row": 7760,
+  "peak_row": 7785,
+  "closure_confirmed_row": null,
+  "near_rows": [
+    7786,
+    7810
+  ],
+  "source_start_frame": 7750,
+  "source_end_frame": 7802,
+  "frames": 53,
+  "pre_action_frames": 10,
+  "post_closure_frames": null,
+  "duration_s": 1.7275917530059814,
+  "distance_column": "index_mcp_object_distance_mm",
+  "aperture_column": "finger_width_mm",
+  "unit": "mm",
+  "mm_per_px": 1.2,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 10-frame rest not confirmed; retained for review",
+    "No confirmed closure plus 10-frame hold; retained for review"
+  ],
+  "trial_name": "20261125_124802",
+  "relative_folder": "20261125_124802",
+  "validation": {
+    "csv_rows": 53,
+    "image_frames": 53,
+    "decoded_video_frames": 53,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  },
+  "manual_crop": {
+    "original_time_range": [
+      0.0,
+      1.7275917530059814
+    ],
+    "backup": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1118_ferina\\4_2\\backup\\manual_crop_20261125_135308\\20261125_124802",
+    "note": "User screenshot selection; original acquisition measurements unchanged; onset/closure annotations inherited and may require review."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "models": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\Result\\Joint_Three_Models_LinearFit5_CurrentV_CV5_20261123_153753\\fold_01",
+  "participant_model": "song",
+  "size_cm": 3,
+  "velocity_method": "LinearFit5",
+  "mlp_samples": 1,
+  "mlp_dropout_at_inference": false,
+  "mm_per_px": 1.2,
+  "calibration_source": "C:\\MineApp\\Code\\Multimodal_Imitation_Learning\\Data\\1115_Song\\30\\20261115_154018\\settings.json",
+  "camera": 1,
+  "camera_resolution": [
+    640,
+    480
+  ],
+  "crop_margins": {
+    "left": 150,
+    "top": 100,
+    "right": 0,
+    "bottom": 0
+  },
+  "target_center_px": [
+    200.0,
+    256.0
+  ],
+  "marker_hsv": [
+    [
+      40,
+      70,
+      40
+    ],
+    [
+      95,
+      255,
+      255
+    ]
+  ],
+  "marker_color": "green",
+  "marker_roi": null,
+  "overlay": "schematic finger placement; only aperture is predicted, fingertip geometry is not learned",
+  "measurements": "Marker center replaces index MCP; target center locked manually; no aperture ground truth measured",
+  "video_timing": "Nominal FPS preview recording, not wall-clock synchronized playback. Use CSV timestamps for timing.",
+  "weights": "existing fold_01 checkpoint by default, trained on 480 trials; not a full-600 fitted model"
+}

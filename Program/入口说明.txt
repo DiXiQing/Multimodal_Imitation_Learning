@@ -1,0 +1,38 @@
+当前常用入口
+
+绿色 Marker 实时检测、预测和录像：
+  Realtime_Green_Marker_LinearFit5_UI.py
+  默认 D1 LinearFit5；MLP 单次推理，Dropout 关闭。
+
+当前实时脚本必须保留的依赖：
+  marker_hd_support.py
+  Train_D1_Joint_Three_Models_LinearFit5_CV5.py
+  Realtime_Joint_Three_Models_LinearFit7.py
+
+离线五折训练：
+  Train_D1_Joint_Three_Models_LinearFit5_CV5.py
+  Train_Song_Joint_Three_Models_LinearFit5_CV5.py
+  --without-velocity 可运行对应无速度版本。
+  D1 默认读取 Data/1101_D_PreAction15，不是已修改的 Data/1101_D。
+  两个训练脚本的评估默认仍采用 MLP MC Dropout 128次取中位数。
+
+数据录制与检查：
+  Record.py
+  Review.py：普通离线数据。
+  Review_RT.py：实时记录。
+
+模型推理耗时测试：
+  Benchmark_MLP_Single_vs_MC128.py
+
+绘图：
+  Scatter_Plot_Three_Sizes.py：三尺寸合并散点图。
+  Overlay_Three_Sizes.py：三尺寸叠加图。
+
+归档位置：项目根目录 Program_Archive。
+本次归档16个文件，没有删除。archive_manifest.json记录原路径和SHA256。
+旧文件按原内容保存；如需运行，先恢复到清单中的原始 Program 路径。
+
+D1 静止增强 LSTM 训练：
+  Train_D1_LSTM_LinearFit5_Static.py
+  默认沿用当前 D1 fold_01 的480/120划分，只重训LSTM；静止前缀和静止专用序列只用于训练。
+  完成后查看 static_stability_summary.csv，再决定是否替换实时模型。
