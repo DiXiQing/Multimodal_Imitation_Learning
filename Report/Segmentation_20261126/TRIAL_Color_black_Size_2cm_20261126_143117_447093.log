@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\MineApp\Code\Multimodal_Imitation_Learning\tool\segment_black_20261102_143906.py", line 198, in <module>
+    if __name__=='__main__':main()
+  File "C:\MineApp\Code\Multimodal_Imitation_Learning\tool\segment_black_20261102_143906.py", line 124, in main
+    if any(Path(x['relative_folder']).name==trial_name for x in entries):raise ValueError('Two candidates start in the same second; review boundaries before export, no suffix added')
+ValueError: Two candidates start in the same second; review boundaries before export, no suffix added

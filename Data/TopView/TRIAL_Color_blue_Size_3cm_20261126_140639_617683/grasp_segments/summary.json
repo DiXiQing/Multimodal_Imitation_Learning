@@ -1,0 +1,2009 @@
+[
+  {
+    "segment": 1,
+    "start_row": 127,
+    "end_row": 185,
+    "onset_row": 137,
+    "peak_row": 163,
+    "closure_confirmed_row": 175,
+    "near_rows": [
+      166,
+      189
+    ],
+    "source_start_frame": 127,
+    "source_end_frame": 185,
+    "frames": 59,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.9284017086029053,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140644",
+    "relative_folder": "20261126_140644",
+    "validation": {
+      "csv_rows": 59,
+      "image_frames": 59,
+      "decoded_video_frames": 59,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 2,
+    "start_row": 219,
+    "end_row": 268,
+    "onset_row": 229,
+    "peak_row": 248,
+    "closure_confirmed_row": 258,
+    "near_rows": [
+      249,
+      278
+    ],
+    "source_start_frame": 219,
+    "source_end_frame": 268,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6321179866790771,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140647",
+    "relative_folder": "review_segments/20261126_140647",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 3,
+    "start_row": 310,
+    "end_row": 367,
+    "onset_row": 320,
+    "peak_row": 345,
+    "closure_confirmed_row": 357,
+    "near_rows": [
+      348,
+      374
+    ],
+    "source_start_frame": 310,
+    "source_end_frame": 367,
+    "frames": 58,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.9041543006896973,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140650",
+    "relative_folder": "20261126_140650",
+    "validation": {
+      "csv_rows": 58,
+      "image_frames": 58,
+      "decoded_video_frames": 58,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 4,
+    "start_row": 404,
+    "end_row": 457,
+    "onset_row": 414,
+    "peak_row": 435,
+    "closure_confirmed_row": 447,
+    "near_rows": [
+      438,
+      463
+    ],
+    "source_start_frame": 404,
+    "source_end_frame": 457,
+    "frames": 54,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7601604461669922,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140653",
+    "relative_folder": "review_segments/20261126_140653",
+    "validation": {
+      "csv_rows": 54,
+      "image_frames": 54,
+      "decoded_video_frames": 54,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 5,
+    "start_row": 498,
+    "end_row": 554,
+    "onset_row": 508,
+    "peak_row": 534,
+    "closure_confirmed_row": 544,
+    "near_rows": [
+      535,
+      565
+    ],
+    "source_start_frame": 498,
+    "source_end_frame": 554,
+    "frames": 57,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.8564345836639404,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review"
+    ],
+    "trial_name": "20261126_140656",
+    "relative_folder": "review_segments/20261126_140656",
+    "validation": {
+      "csv_rows": 57,
+      "image_frames": 57,
+      "decoded_video_frames": 57,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 6,
+    "start_row": 600,
+    "end_row": 655,
+    "onset_row": 610,
+    "peak_row": 631,
+    "closure_confirmed_row": 645,
+    "near_rows": [
+      635,
+      661
+    ],
+    "source_start_frame": 600,
+    "source_end_frame": 655,
+    "frames": 56,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.838557481765747,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140659",
+    "relative_folder": "review_segments/20261126_140659",
+    "validation": {
+      "csv_rows": 56,
+      "image_frames": 56,
+      "decoded_video_frames": 56,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 7,
+    "start_row": 693,
+    "end_row": 743,
+    "onset_row": 703,
+    "peak_row": 723,
+    "closure_confirmed_row": 733,
+    "near_rows": [
+      724,
+      751
+    ],
+    "source_start_frame": 693,
+    "source_end_frame": 743,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6635234355926514,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140703",
+    "relative_folder": "review_segments/20261126_140703",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 8,
+    "start_row": 778,
+    "end_row": 840,
+    "onset_row": 788,
+    "peak_row": 817,
+    "closure_confirmed_row": 830,
+    "near_rows": [
+      818,
+      851
+    ],
+    "source_start_frame": 778,
+    "source_end_frame": 840,
+    "frames": 63,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.0580105781555176,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140705",
+    "relative_folder": "20261126_140705",
+    "validation": {
+      "csv_rows": 63,
+      "image_frames": 63,
+      "decoded_video_frames": 63,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 9,
+    "start_row": 878,
+    "end_row": 934,
+    "onset_row": 888,
+    "peak_row": 914,
+    "closure_confirmed_row": 924,
+    "near_rows": [
+      914,
+      945
+    ],
+    "source_start_frame": 878,
+    "source_end_frame": 934,
+    "frames": 57,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.872809886932373,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140709",
+    "relative_folder": "review_segments/20261126_140709",
+    "validation": {
+      "csv_rows": 57,
+      "image_frames": 57,
+      "decoded_video_frames": 57,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 10,
+    "start_row": 967,
+    "end_row": 1025,
+    "onset_row": 977,
+    "peak_row": 1002,
+    "closure_confirmed_row": 1015,
+    "near_rows": [
+      1004,
+      1034
+    ],
+    "source_start_frame": 967,
+    "source_end_frame": 1025,
+    "frames": 59,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.936288833618164,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140712",
+    "relative_folder": "20261126_140712",
+    "validation": {
+      "csv_rows": 59,
+      "image_frames": 59,
+      "decoded_video_frames": 59,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 11,
+    "start_row": 1060,
+    "end_row": 1122,
+    "onset_row": 1070,
+    "peak_row": 1099,
+    "closure_confirmed_row": 1112,
+    "near_rows": [
+      1103,
+      1131
+    ],
+    "source_start_frame": 1060,
+    "source_end_frame": 1122,
+    "frames": 63,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.079012155532837,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140715",
+    "relative_folder": "20261126_140715",
+    "validation": {
+      "csv_rows": 63,
+      "image_frames": 63,
+      "decoded_video_frames": 63,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 12,
+    "start_row": 1157,
+    "end_row": 1219,
+    "onset_row": 1167,
+    "peak_row": 1199,
+    "closure_confirmed_row": 1209,
+    "near_rows": [
+      1199,
+      1228
+    ],
+    "source_start_frame": 1157,
+    "source_end_frame": 1219,
+    "frames": 63,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.064666271209717,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140718",
+    "relative_folder": "20261126_140718",
+    "validation": {
+      "csv_rows": 63,
+      "image_frames": 63,
+      "decoded_video_frames": 63,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 13,
+    "start_row": 1261,
+    "end_row": 1321,
+    "onset_row": 1271,
+    "peak_row": 1293,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      1293,
+      1321
+    ],
+    "source_start_frame": 1261,
+    "source_end_frame": 1321,
+    "frames": 61,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.9990007877349854,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_140721",
+    "relative_folder": "review_segments/20261126_140721",
+    "validation": {
+      "csv_rows": 61,
+      "image_frames": 61,
+      "decoded_video_frames": 61,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 14,
+    "start_row": 1355,
+    "end_row": 1405,
+    "onset_row": 1365,
+    "peak_row": 1384,
+    "closure_confirmed_row": 1395,
+    "near_rows": [
+      1385,
+      1412
+    ],
+    "source_start_frame": 1355,
+    "source_end_frame": 1405,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.663069248199463,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140725",
+    "relative_folder": "review_segments/20261126_140725",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 15,
+    "start_row": 1457,
+    "end_row": 1517,
+    "onset_row": 1467,
+    "peak_row": 1496,
+    "closure_confirmed_row": 1507,
+    "near_rows": [
+      1496,
+      1533
+    ],
+    "source_start_frame": 1457,
+    "source_end_frame": 1517,
+    "frames": 61,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.0000174045562744,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140728",
+    "relative_folder": "review_segments/20261126_140728",
+    "validation": {
+      "csv_rows": 61,
+      "image_frames": 61,
+      "decoded_video_frames": 61,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 16,
+    "start_row": 1567,
+    "end_row": 1628,
+    "onset_row": 1577,
+    "peak_row": 1606,
+    "closure_confirmed_row": 1618,
+    "near_rows": [
+      1606,
+      1647
+    ],
+    "source_start_frame": 1567,
+    "source_end_frame": 1628,
+    "frames": 62,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.032095432281494,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140732",
+    "relative_folder": "review_segments/20261126_140732",
+    "validation": {
+      "csv_rows": 62,
+      "image_frames": 62,
+      "decoded_video_frames": 62,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 17,
+    "start_row": 1700,
+    "end_row": 1757,
+    "onset_row": 1710,
+    "peak_row": 1736,
+    "closure_confirmed_row": 1747,
+    "near_rows": [
+      1736,
+      1774
+    ],
+    "source_start_frame": 1700,
+    "source_end_frame": 1757,
+    "frames": 58,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.9034557342529297,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140736",
+    "relative_folder": "review_segments/20261126_140736",
+    "validation": {
+      "csv_rows": 58,
+      "image_frames": 58,
+      "decoded_video_frames": 58,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 18,
+    "start_row": 1815,
+    "end_row": 1871,
+    "onset_row": 1825,
+    "peak_row": 1850,
+    "closure_confirmed_row": 1861,
+    "near_rows": [
+      1852,
+      1892
+    ],
+    "source_start_frame": 1815,
+    "source_end_frame": 1871,
+    "frames": 57,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.8703439235687256,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140740",
+    "relative_folder": "review_segments/20261126_140740",
+    "validation": {
+      "csv_rows": 57,
+      "image_frames": 57,
+      "decoded_video_frames": 57,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 19,
+    "start_row": 1925,
+    "end_row": 1975,
+    "onset_row": 1935,
+    "peak_row": 1955,
+    "closure_confirmed_row": 1965,
+    "near_rows": [
+      1955,
+      1992
+    ],
+    "source_start_frame": 1925,
+    "source_end_frame": 1975,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6643822193145752,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140744",
+    "relative_folder": "review_segments/20261126_140744",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 20,
+    "start_row": 2025,
+    "end_row": 2089,
+    "onset_row": 2035,
+    "peak_row": 2064,
+    "closure_confirmed_row": 2079,
+    "near_rows": [
+      2068,
+      2107
+    ],
+    "source_start_frame": 2025,
+    "source_end_frame": 2089,
+    "frames": 65,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 2.128852367401123,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140747",
+    "relative_folder": "20261126_140747",
+    "validation": {
+      "csv_rows": 65,
+      "image_frames": 65,
+      "decoded_video_frames": 65,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 21,
+    "start_row": 2280,
+    "end_row": 2327,
+    "onset_row": 2290,
+    "peak_row": 2302,
+    "closure_confirmed_row": 2317,
+    "near_rows": [
+      2309,
+      2338
+    ],
+    "source_start_frame": 2280,
+    "source_end_frame": 2327,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5917096138000488,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review"
+    ],
+    "trial_name": "20261126_140755",
+    "relative_folder": "review_segments/20261126_140755",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 22,
+    "start_row": 2360,
+    "end_row": 2407,
+    "onset_row": 2370,
+    "peak_row": 2386,
+    "closure_confirmed_row": 2397,
+    "near_rows": [
+      2389,
+      2419
+    ],
+    "source_start_frame": 2360,
+    "source_end_frame": 2407,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5819580554962158,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140758",
+    "relative_folder": "20261126_140758",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 23,
+    "start_row": 2442,
+    "end_row": 2491,
+    "onset_row": 2452,
+    "peak_row": 2471,
+    "closure_confirmed_row": 2481,
+    "near_rows": [
+      2473,
+      2503
+    ],
+    "source_start_frame": 2442,
+    "source_end_frame": 2491,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.627117395401001,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140801",
+    "relative_folder": "review_segments/20261126_140801",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 24,
+    "start_row": 2525,
+    "end_row": 2566,
+    "onset_row": 2535,
+    "peak_row": 2546,
+    "closure_confirmed_row": 2556,
+    "near_rows": [
+      2547,
+      2577
+    ],
+    "source_start_frame": 2525,
+    "source_end_frame": 2566,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3646397590637207,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140804",
+    "relative_folder": "review_segments/20261126_140804",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 25,
+    "start_row": 2603,
+    "end_row": 2652,
+    "onset_row": 2613,
+    "peak_row": 2631,
+    "closure_confirmed_row": 2642,
+    "near_rows": [
+      2632,
+      2659
+    ],
+    "source_start_frame": 2603,
+    "source_end_frame": 2652,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6547694206237793,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140806",
+    "relative_folder": "review_segments/20261126_140806",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 26,
+    "start_row": 2681,
+    "end_row": 2728,
+    "onset_row": 2691,
+    "peak_row": 2709,
+    "closure_confirmed_row": 2718,
+    "near_rows": [
+      2710,
+      2737
+    ],
+    "source_start_frame": 2681,
+    "source_end_frame": 2728,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5732660293579102,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140809",
+    "relative_folder": "20261126_140809",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 27,
+    "start_row": 2758,
+    "end_row": 2804,
+    "onset_row": 2768,
+    "peak_row": 2784,
+    "closure_confirmed_row": 2794,
+    "near_rows": [
+      2785,
+      2819
+    ],
+    "source_start_frame": 2758,
+    "source_end_frame": 2804,
+    "frames": 47,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5280461311340332,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140811",
+    "relative_folder": "20261126_140811",
+    "validation": {
+      "csv_rows": 47,
+      "image_frames": 47,
+      "decoded_video_frames": 47,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 28,
+    "start_row": 2844,
+    "end_row": 2896,
+    "onset_row": 2854,
+    "peak_row": 2875,
+    "closure_confirmed_row": 2886,
+    "near_rows": [
+      2876,
+      2901
+    ],
+    "source_start_frame": 2844,
+    "source_end_frame": 2896,
+    "frames": 53,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7587876319885254,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140814",
+    "relative_folder": "20261126_140814",
+    "validation": {
+      "csv_rows": 53,
+      "image_frames": 53,
+      "decoded_video_frames": 53,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 29,
+    "start_row": 2925,
+    "end_row": 2968,
+    "onset_row": 2935,
+    "peak_row": 2947,
+    "closure_confirmed_row": 2958,
+    "near_rows": [
+      2948,
+      2987
+    ],
+    "source_start_frame": 2925,
+    "source_end_frame": 2968,
+    "frames": 44,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4420061111450195,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140817",
+    "relative_folder": "review_segments/20261126_140817",
+    "validation": {
+      "csv_rows": 44,
+      "image_frames": 44,
+      "decoded_video_frames": 44,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 30,
+    "start_row": 3014,
+    "end_row": 3057,
+    "onset_row": 3024,
+    "peak_row": 3038,
+    "closure_confirmed_row": 3047,
+    "near_rows": [
+      3038,
+      3074
+    ],
+    "source_start_frame": 3014,
+    "source_end_frame": 3057,
+    "frames": 44,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4276940822601318,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140820",
+    "relative_folder": "review_segments/20261126_140820",
+    "validation": {
+      "csv_rows": 44,
+      "image_frames": 44,
+      "decoded_video_frames": 44,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 31,
+    "start_row": 3098,
+    "end_row": 3144,
+    "onset_row": 3108,
+    "peak_row": 3125,
+    "closure_confirmed_row": 3134,
+    "near_rows": [
+      3126,
+      3162
+    ],
+    "source_start_frame": 3098,
+    "source_end_frame": 3144,
+    "frames": 47,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5468473434448242,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140823",
+    "relative_folder": "review_segments/20261126_140823",
+    "validation": {
+      "csv_rows": 47,
+      "image_frames": 47,
+      "decoded_video_frames": 47,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 32,
+    "start_row": 3183,
+    "end_row": 3231,
+    "onset_row": 3193,
+    "peak_row": 3210,
+    "closure_confirmed_row": 3221,
+    "near_rows": [
+      3211,
+      3247
+    ],
+    "source_start_frame": 3183,
+    "source_end_frame": 3231,
+    "frames": 49,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5876874923706055,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140826",
+    "relative_folder": "20261126_140826",
+    "validation": {
+      "csv_rows": 49,
+      "image_frames": 49,
+      "decoded_video_frames": 49,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 33,
+    "start_row": 3271,
+    "end_row": 3318,
+    "onset_row": 3281,
+    "peak_row": 3298,
+    "closure_confirmed_row": 3308,
+    "near_rows": [
+      3299,
+      3334
+    ],
+    "source_start_frame": 3271,
+    "source_end_frame": 3318,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5643284320831299,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140829",
+    "relative_folder": "20261126_140829",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 34,
+    "start_row": 3365,
+    "end_row": 3415,
+    "onset_row": 3375,
+    "peak_row": 3396,
+    "closure_confirmed_row": 3405,
+    "near_rows": [
+      3396,
+      3429
+    ],
+    "source_start_frame": 3365,
+    "source_end_frame": 3415,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6628661155700684,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140832",
+    "relative_folder": "20261126_140832",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 35,
+    "start_row": 3459,
+    "end_row": 3510,
+    "onset_row": 3469,
+    "peak_row": 3492,
+    "closure_confirmed_row": 3500,
+    "near_rows": [
+      3492,
+      3523
+    ],
+    "source_start_frame": 3459,
+    "source_end_frame": 3510,
+    "frames": 52,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7212905883789062,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140835",
+    "relative_folder": "20261126_140835",
+    "validation": {
+      "csv_rows": 52,
+      "image_frames": 52,
+      "decoded_video_frames": 52,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 36,
+    "start_row": 3557,
+    "end_row": 3599,
+    "onset_row": 3567,
+    "peak_row": 3580,
+    "closure_confirmed_row": 3589,
+    "near_rows": [
+      3580,
+      3613
+    ],
+    "source_start_frame": 3557,
+    "source_end_frame": 3599,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4033803939819336,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140838",
+    "relative_folder": "review_segments/20261126_140838",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 37,
+    "start_row": 3640,
+    "end_row": 3686,
+    "onset_row": 3650,
+    "peak_row": 3667,
+    "closure_confirmed_row": 3676,
+    "near_rows": [
+      3667,
+      3700
+    ],
+    "source_start_frame": 3640,
+    "source_end_frame": 3686,
+    "frames": 47,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5216686725616455,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140841",
+    "relative_folder": "review_segments/20261126_140841",
+    "validation": {
+      "csv_rows": 47,
+      "image_frames": 47,
+      "decoded_video_frames": 47,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 38,
+    "start_row": 3735,
+    "end_row": 3785,
+    "onset_row": 3745,
+    "peak_row": 3765,
+    "closure_confirmed_row": 3775,
+    "near_rows": [
+      3765,
+      3798
+    ],
+    "source_start_frame": 3735,
+    "source_end_frame": 3785,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6882553100585938,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review"
+    ],
+    "trial_name": "20261126_140844",
+    "relative_folder": "review_segments/20261126_140844",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 39,
+    "start_row": 3828,
+    "end_row": 3882,
+    "onset_row": 3838,
+    "peak_row": 3863,
+    "closure_confirmed_row": 3872,
+    "near_rows": [
+      3863,
+      3895
+    ],
+    "source_start_frame": 3828,
+    "source_end_frame": 3882,
+    "frames": 55,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7852916717529297,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140847",
+    "relative_folder": "20261126_140847",
+    "validation": {
+      "csv_rows": 55,
+      "image_frames": 55,
+      "decoded_video_frames": 55,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 40,
+    "start_row": 3916,
+    "end_row": 3966,
+    "onset_row": 3926,
+    "peak_row": 3944,
+    "closure_confirmed_row": 3956,
+    "near_rows": [
+      3946,
+      3979
+    ],
+    "source_start_frame": 3916,
+    "source_end_frame": 3966,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.660165786743164,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140850",
+    "relative_folder": "20261126_140850",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 41,
+    "start_row": 4124,
+    "end_row": 4165,
+    "onset_row": 4134,
+    "peak_row": 4146,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4146,
+      4165
+    ],
+    "source_start_frame": 4124,
+    "source_end_frame": 4165,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.360581874847412,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_140857",
+    "relative_folder": "review_segments/20261126_140857",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 42,
+    "start_row": 4180,
+    "end_row": 4216,
+    "onset_row": 4190,
+    "peak_row": 4196,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4197,
+      4216
+    ],
+    "source_start_frame": 4180,
+    "source_end_frame": 4216,
+    "frames": 37,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.2000417709350586,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_140859",
+    "relative_folder": "review_segments/20261126_140859",
+    "validation": {
+      "csv_rows": 37,
+      "image_frames": 37,
+      "decoded_video_frames": 37,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 43,
+    "start_row": 4231,
+    "end_row": 4271,
+    "onset_row": 4241,
+    "peak_row": 4252,
+    "closure_confirmed_row": 4261,
+    "near_rows": [
+      4252,
+      4278
+    ],
+    "source_start_frame": 4231,
+    "source_end_frame": 4271,
+    "frames": 41,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3454923629760742,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140901",
+    "relative_folder": "20261126_140901",
+    "validation": {
+      "csv_rows": 41,
+      "image_frames": 41,
+      "decoded_video_frames": 41,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 44,
+    "start_row": 4292,
+    "end_row": 4334,
+    "onset_row": 4302,
+    "peak_row": 4310,
+    "closure_confirmed_row": 4324,
+    "near_rows": [
+      4312,
+      4339
+    ],
+    "source_start_frame": 4292,
+    "source_end_frame": 4334,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.393596887588501,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140903",
+    "relative_folder": "review_segments/20261126_140903",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 45,
+    "start_row": 4354,
+    "end_row": 4395,
+    "onset_row": 4364,
+    "peak_row": 4376,
+    "closure_confirmed_row": 4385,
+    "near_rows": [
+      4376,
+      4404
+    ],
+    "source_start_frame": 4354,
+    "source_end_frame": 4395,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.375171422958374,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140905",
+    "relative_folder": "20261126_140905",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 46,
+    "start_row": 4422,
+    "end_row": 4460,
+    "onset_row": 4432,
+    "peak_row": 4439,
+    "closure_confirmed_row": 4450,
+    "near_rows": [
+      4440,
+      4471
+    ],
+    "source_start_frame": 4422,
+    "source_end_frame": 4460,
+    "frames": 39,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.2647366523742676,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140907",
+    "relative_folder": "review_segments/20261126_140907",
+    "validation": {
+      "csv_rows": 39,
+      "image_frames": 39,
+      "decoded_video_frames": 39,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 47,
+    "start_row": 4485,
+    "end_row": 4527,
+    "onset_row": 4495,
+    "peak_row": 4506,
+    "closure_confirmed_row": 4517,
+    "near_rows": [
+      4506,
+      4545
+    ],
+    "source_start_frame": 4485,
+    "source_end_frame": 4527,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.392909288406372,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140909",
+    "relative_folder": "20261126_140909",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 48,
+    "start_row": 4564,
+    "end_row": 4606,
+    "onset_row": 4574,
+    "peak_row": 4587,
+    "closure_confirmed_row": 4596,
+    "near_rows": [
+      4587,
+      4619
+    ],
+    "source_start_frame": 4564,
+    "source_end_frame": 4606,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4152703285217285,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140912",
+    "relative_folder": "20261126_140912",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 49,
+    "start_row": 4636,
+    "end_row": 4680,
+    "onset_row": 4646,
+    "peak_row": 4658,
+    "closure_confirmed_row": 4670,
+    "near_rows": [
+      4658,
+      4688
+    ],
+    "source_start_frame": 4636,
+    "source_end_frame": 4680,
+    "frames": 45,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4694795608520508,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140914",
+    "relative_folder": "20261126_140914",
+    "validation": {
+      "csv_rows": 45,
+      "image_frames": 45,
+      "decoded_video_frames": 45,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 50,
+    "start_row": 4703,
+    "end_row": 4744,
+    "onset_row": 4713,
+    "peak_row": 4723,
+    "closure_confirmed_row": 4734,
+    "near_rows": [
+      4724,
+      4754
+    ],
+    "source_start_frame": 4703,
+    "source_end_frame": 4744,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3648478984832764,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140916",
+    "relative_folder": "review_segments/20261126_140916",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 51,
+    "start_row": 4771,
+    "end_row": 4812,
+    "onset_row": 4781,
+    "peak_row": 4793,
+    "closure_confirmed_row": 4802,
+    "near_rows": [
+      4793,
+      4830
+    ],
+    "source_start_frame": 4771,
+    "source_end_frame": 4812,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3841168880462646,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140919",
+    "relative_folder": "review_segments/20261126_140919",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 52,
+    "start_row": 4851,
+    "end_row": 4887,
+    "onset_row": 4861,
+    "peak_row": 4868,
+    "closure_confirmed_row": 4877,
+    "near_rows": [
+      4868,
+      4902
+    ],
+    "source_start_frame": 4851,
+    "source_end_frame": 4887,
+    "frames": 37,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.1923420429229736,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140921",
+    "relative_folder": "review_segments/20261126_140921",
+    "validation": {
+      "csv_rows": 37,
+      "image_frames": 37,
+      "decoded_video_frames": 37,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 53,
+    "start_row": 4918,
+    "end_row": 4962,
+    "onset_row": 4928,
+    "peak_row": 4941,
+    "closure_confirmed_row": 4952,
+    "near_rows": [
+      4941,
+      4975
+    ],
+    "source_start_frame": 4918,
+    "source_end_frame": 4962,
+    "frames": 45,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4635145664215088,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140924",
+    "relative_folder": "20261126_140924",
+    "validation": {
+      "csv_rows": 45,
+      "image_frames": 45,
+      "decoded_video_frames": 45,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 54,
+    "start_row": 4993,
+    "end_row": 5035,
+    "onset_row": 5003,
+    "peak_row": 5016,
+    "closure_confirmed_row": 5025,
+    "near_rows": [
+      5016,
+      5046
+    ],
+    "source_start_frame": 4993,
+    "source_end_frame": 5035,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4082787036895752,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140926",
+    "relative_folder": "20261126_140926",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 55,
+    "start_row": 5066,
+    "end_row": 5107,
+    "onset_row": 5076,
+    "peak_row": 5090,
+    "closure_confirmed_row": 5097,
+    "near_rows": [
+      5090,
+      5121
+    ],
+    "source_start_frame": 5066,
+    "source_end_frame": 5107,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3729369640350342,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140929",
+    "relative_folder": "20261126_140929",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 56,
+    "start_row": 5144,
+    "end_row": 5184,
+    "onset_row": 5154,
+    "peak_row": 5167,
+    "closure_confirmed_row": 5174,
+    "near_rows": [
+      5167,
+      5196
+    ],
+    "source_start_frame": 5144,
+    "source_end_frame": 5184,
+    "frames": 41,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3298735618591309,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140931",
+    "relative_folder": "20261126_140931",
+    "validation": {
+      "csv_rows": 41,
+      "image_frames": 41,
+      "decoded_video_frames": 41,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 57,
+    "start_row": 5197,
+    "end_row": 5255,
+    "onset_row": 5207,
+    "peak_row": 5236,
+    "closure_confirmed_row": 5245,
+    "near_rows": [
+      5237,
+      5270
+    ],
+    "source_start_frame": 5197,
+    "source_end_frame": 5255,
+    "frames": 59,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.9363703727722168,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_140933",
+    "relative_folder": "review_segments/20261126_140933",
+    "validation": {
+      "csv_rows": 59,
+      "image_frames": 59,
+      "decoded_video_frames": 59,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 58,
+    "start_row": 5288,
+    "end_row": 5329,
+    "onset_row": 5298,
+    "peak_row": 5311,
+    "closure_confirmed_row": 5319,
+    "near_rows": [
+      5312,
+      5342
+    ],
+    "source_start_frame": 5288,
+    "source_end_frame": 5329,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3605701923370361,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140936",
+    "relative_folder": "20261126_140936",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 59,
+    "start_row": 5361,
+    "end_row": 5402,
+    "onset_row": 5371,
+    "peak_row": 5384,
+    "closure_confirmed_row": 5392,
+    "near_rows": [
+      5384,
+      5428
+    ],
+    "source_start_frame": 5361,
+    "source_end_frame": 5402,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.369405746459961,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140938",
+    "relative_folder": "20261126_140938",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 60,
+    "start_row": 5448,
+    "end_row": 5492,
+    "onset_row": 5458,
+    "peak_row": 5474,
+    "closure_confirmed_row": 5482,
+    "near_rows": [
+      5474,
+      5528
+    ],
+    "source_start_frame": 5448,
+    "source_end_frame": 5492,
+    "frames": 45,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4808626174926758,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_140941",
+    "relative_folder": "20261126_140941",
+    "validation": {
+      "csv_rows": 45,
+      "image_frames": 45,
+      "decoded_video_frames": 45,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  }
+]

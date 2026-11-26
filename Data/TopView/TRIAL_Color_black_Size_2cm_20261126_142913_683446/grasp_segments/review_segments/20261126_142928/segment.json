@@ -1,0 +1,35 @@
+{
+  "segment": 5,
+  "start_row": 431,
+  "end_row": 477,
+  "onset_row": 441,
+  "peak_row": 456,
+  "closure_confirmed_row": 467,
+  "near_rows": [
+    456,
+    490
+  ],
+  "source_start_frame": 431,
+  "source_end_frame": 477,
+  "frames": 47,
+  "pre_action_frames": 10,
+  "post_closure_frames": 10,
+  "duration_s": 1.5241668224334717,
+  "distance_column": "index_mcp_object_distance",
+  "aperture_column": "finger_width",
+  "unit": "px",
+  "mm_per_px": null,
+  "review_flags": [
+    "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+    "Pre-action 10-frame rest not confirmed; retained for review"
+  ],
+  "trial_name": "20261126_142928",
+  "relative_folder": "review_segments/20261126_142928",
+  "validation": {
+    "csv_rows": 47,
+    "image_frames": 47,
+    "decoded_video_frames": 47,
+    "original_fields_preserved": true,
+    "image_bytes_preserved": true
+  }
+}

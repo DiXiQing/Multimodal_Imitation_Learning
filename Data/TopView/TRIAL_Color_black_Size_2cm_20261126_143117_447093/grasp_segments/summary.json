@@ -1,0 +1,1619 @@
+[
+  {
+    "segment": 1,
+    "start_row": 270,
+    "end_row": 322,
+    "onset_row": 280,
+    "peak_row": 297,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      297,
+      322
+    ],
+    "source_start_frame": 270,
+    "source_end_frame": 322,
+    "frames": 53,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.7283504009246826,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143126",
+    "relative_folder": "review_segments/20261126_143126",
+    "validation": {
+      "csv_rows": 53,
+      "image_frames": 53,
+      "decoded_video_frames": 53,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 2,
+    "start_row": 337,
+    "end_row": 382,
+    "onset_row": 347,
+    "peak_row": 363,
+    "closure_confirmed_row": 372,
+    "near_rows": [
+      363,
+      388
+    ],
+    "source_start_frame": 337,
+    "source_end_frame": 382,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5070829391479492,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143128",
+    "relative_folder": "review_segments/20261126_143128",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 3,
+    "start_row": 404,
+    "end_row": 449,
+    "onset_row": 414,
+    "peak_row": 428,
+    "closure_confirmed_row": 439,
+    "near_rows": [
+      429,
+      457
+    ],
+    "source_start_frame": 404,
+    "source_end_frame": 449,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5067570209503174,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143130",
+    "relative_folder": "review_segments/20261126_143130",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 4,
+    "start_row": 473,
+    "end_row": 520,
+    "onset_row": 483,
+    "peak_row": 499,
+    "closure_confirmed_row": 510,
+    "near_rows": [
+      499,
+      528
+    ],
+    "source_start_frame": 473,
+    "source_end_frame": 520,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.558201551437378,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143133",
+    "relative_folder": "20261126_143133",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 5,
+    "start_row": 545,
+    "end_row": 588,
+    "onset_row": 555,
+    "peak_row": 569,
+    "closure_confirmed_row": 578,
+    "near_rows": [
+      570,
+      594
+    ],
+    "source_start_frame": 545,
+    "source_end_frame": 588,
+    "frames": 44,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.422971487045288,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143135",
+    "relative_folder": "20261126_143135",
+    "validation": {
+      "csv_rows": 44,
+      "image_frames": 44,
+      "decoded_video_frames": 44,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 6,
+    "start_row": 615,
+    "end_row": 653,
+    "onset_row": 625,
+    "peak_row": 633,
+    "closure_confirmed_row": 643,
+    "near_rows": [
+      634,
+      660
+    ],
+    "source_start_frame": 615,
+    "source_end_frame": 653,
+    "frames": 39,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3117530345916748,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143138",
+    "relative_folder": "review_segments/20261126_143138",
+    "validation": {
+      "csv_rows": 39,
+      "image_frames": 39,
+      "decoded_video_frames": 39,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 7,
+    "start_row": 677,
+    "end_row": 721,
+    "onset_row": 687,
+    "peak_row": 701,
+    "closure_confirmed_row": 711,
+    "near_rows": [
+      702,
+      731
+    ],
+    "source_start_frame": 677,
+    "source_end_frame": 721,
+    "frames": 45,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.483933925628662,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143140",
+    "relative_folder": "20261126_143140",
+    "validation": {
+      "csv_rows": 45,
+      "image_frames": 45,
+      "decoded_video_frames": 45,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 8,
+    "start_row": 747,
+    "end_row": 791,
+    "onset_row": 757,
+    "peak_row": 771,
+    "closure_confirmed_row": 781,
+    "near_rows": [
+      771,
+      798
+    ],
+    "source_start_frame": 747,
+    "source_end_frame": 791,
+    "frames": 45,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4499695301055908,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143142",
+    "relative_folder": "review_segments/20261126_143142",
+    "validation": {
+      "csv_rows": 45,
+      "image_frames": 45,
+      "decoded_video_frames": 45,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 9,
+    "start_row": 816,
+    "end_row": 859,
+    "onset_row": 826,
+    "peak_row": 841,
+    "closure_confirmed_row": 849,
+    "near_rows": [
+      841,
+      866
+    ],
+    "source_start_frame": 816,
+    "source_end_frame": 859,
+    "frames": 44,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4507684707641602,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143144",
+    "relative_folder": "20261126_143144",
+    "validation": {
+      "csv_rows": 44,
+      "image_frames": 44,
+      "decoded_video_frames": 44,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 10,
+    "start_row": 885,
+    "end_row": 930,
+    "onset_row": 895,
+    "peak_row": 910,
+    "closure_confirmed_row": 920,
+    "near_rows": [
+      911,
+      941
+    ],
+    "source_start_frame": 885,
+    "source_end_frame": 930,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4946630001068115,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143147",
+    "relative_folder": "20261126_143147",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 11,
+    "start_row": 960,
+    "end_row": 1006,
+    "onset_row": 970,
+    "peak_row": 985,
+    "closure_confirmed_row": 996,
+    "near_rows": [
+      986,
+      1015
+    ],
+    "source_start_frame": 960,
+    "source_end_frame": 1006,
+    "frames": 47,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5685243606567383,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143149",
+    "relative_folder": "20261126_143149",
+    "validation": {
+      "csv_rows": 47,
+      "image_frames": 47,
+      "decoded_video_frames": 47,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 12,
+    "start_row": 1034,
+    "end_row": 1079,
+    "onset_row": 1044,
+    "peak_row": 1060,
+    "closure_confirmed_row": 1069,
+    "near_rows": [
+      1061,
+      1086
+    ],
+    "source_start_frame": 1034,
+    "source_end_frame": 1079,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4955620765686035,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143152",
+    "relative_folder": "20261126_143152",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 13,
+    "start_row": 1108,
+    "end_row": 1148,
+    "onset_row": 1118,
+    "peak_row": 1128,
+    "closure_confirmed_row": 1138,
+    "near_rows": [
+      1129,
+      1154
+    ],
+    "source_start_frame": 1108,
+    "source_end_frame": 1148,
+    "frames": 41,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3253889083862305,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143154",
+    "relative_folder": "review_segments/20261126_143154",
+    "validation": {
+      "csv_rows": 41,
+      "image_frames": 41,
+      "decoded_video_frames": 41,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 14,
+    "start_row": 1169,
+    "end_row": 1220,
+    "onset_row": 1179,
+    "peak_row": 1195,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      1195,
+      1220
+    ],
+    "source_start_frame": 1169,
+    "source_end_frame": 1220,
+    "frames": 52,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.7277295589447021,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143156",
+    "relative_folder": "review_segments/20261126_143156",
+    "validation": {
+      "csv_rows": 52,
+      "image_frames": 52,
+      "decoded_video_frames": 52,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 15,
+    "start_row": 1237,
+    "end_row": 1282,
+    "onset_row": 1247,
+    "peak_row": 1262,
+    "closure_confirmed_row": 1272,
+    "near_rows": [
+      1263,
+      1290
+    ],
+    "source_start_frame": 1237,
+    "source_end_frame": 1282,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.508352518081665,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143158",
+    "relative_folder": "review_segments/20261126_143158",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 16,
+    "start_row": 1313,
+    "end_row": 1355,
+    "onset_row": 1323,
+    "peak_row": 1334,
+    "closure_confirmed_row": 1345,
+    "near_rows": [
+      1335,
+      1360
+    ],
+    "source_start_frame": 1313,
+    "source_end_frame": 1355,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.3913702964782715,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143201",
+    "relative_folder": "review_segments/20261126_143201",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 17,
+    "start_row": 1374,
+    "end_row": 1424,
+    "onset_row": 1384,
+    "peak_row": 1403,
+    "closure_confirmed_row": 1414,
+    "near_rows": [
+      1404,
+      1434
+    ],
+    "source_start_frame": 1374,
+    "source_end_frame": 1424,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6674070358276367,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143203",
+    "relative_folder": "review_segments/20261126_143203",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 18,
+    "start_row": 1451,
+    "end_row": 1508,
+    "onset_row": 1461,
+    "peak_row": 1480,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      1481,
+      1508
+    ],
+    "source_start_frame": 1451,
+    "source_end_frame": 1508,
+    "frames": 58,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.897017478942871,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143206",
+    "relative_folder": "review_segments/20261126_143206",
+    "validation": {
+      "csv_rows": 58,
+      "image_frames": 58,
+      "decoded_video_frames": 58,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 19,
+    "start_row": 1526,
+    "end_row": 1577,
+    "onset_row": 1536,
+    "peak_row": 1556,
+    "closure_confirmed_row": 1567,
+    "near_rows": [
+      1557,
+      1585
+    ],
+    "source_start_frame": 1526,
+    "source_end_frame": 1577,
+    "frames": 52,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7107033729553223,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143208",
+    "relative_folder": "review_segments/20261126_143208",
+    "validation": {
+      "csv_rows": 52,
+      "image_frames": 52,
+      "decoded_video_frames": 52,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 20,
+    "start_row": 1604,
+    "end_row": 1654,
+    "onset_row": 1614,
+    "peak_row": 1631,
+    "closure_confirmed_row": 1644,
+    "near_rows": [
+      1634,
+      1662
+    ],
+    "source_start_frame": 1604,
+    "source_end_frame": 1654,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6952204704284668,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143211",
+    "relative_folder": "20261126_143211",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 21,
+    "start_row": 1683,
+    "end_row": 1732,
+    "onset_row": 1693,
+    "peak_row": 1707,
+    "closure_confirmed_row": 1722,
+    "near_rows": [
+      1713,
+      1742
+    ],
+    "source_start_frame": 1683,
+    "source_end_frame": 1732,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6292202472686768,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143213",
+    "relative_folder": "20261126_143213",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 22,
+    "start_row": 1763,
+    "end_row": 1814,
+    "onset_row": 1773,
+    "peak_row": 1791,
+    "closure_confirmed_row": 1804,
+    "near_rows": [
+      1793,
+      1822
+    ],
+    "source_start_frame": 1763,
+    "source_end_frame": 1814,
+    "frames": 52,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6929666996002197,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143216",
+    "relative_folder": "20261126_143216",
+    "validation": {
+      "csv_rows": 52,
+      "image_frames": 52,
+      "decoded_video_frames": 52,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 23,
+    "start_row": 1838,
+    "end_row": 1892,
+    "onset_row": 1848,
+    "peak_row": 1871,
+    "closure_confirmed_row": 1882,
+    "near_rows": [
+      1871,
+      1900
+    ],
+    "source_start_frame": 1838,
+    "source_end_frame": 1892,
+    "frames": 55,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7889678478240967,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143219",
+    "relative_folder": "review_segments/20261126_143219",
+    "validation": {
+      "csv_rows": 55,
+      "image_frames": 55,
+      "decoded_video_frames": 55,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 24,
+    "start_row": 1917,
+    "end_row": 1966,
+    "onset_row": 1927,
+    "peak_row": 1945,
+    "closure_confirmed_row": 1956,
+    "near_rows": [
+      1947,
+      1972
+    ],
+    "source_start_frame": 1917,
+    "source_end_frame": 1966,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6312453746795654,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143221",
+    "relative_folder": "review_segments/20261126_143221",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 25,
+    "start_row": 1990,
+    "end_row": 2040,
+    "onset_row": 2000,
+    "peak_row": 2015,
+    "closure_confirmed_row": 2030,
+    "near_rows": [
+      2019,
+      2046
+    ],
+    "source_start_frame": 1990,
+    "source_end_frame": 2040,
+    "frames": 51,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6713573932647705,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143224",
+    "relative_folder": "20261126_143224",
+    "validation": {
+      "csv_rows": 51,
+      "image_frames": 51,
+      "decoded_video_frames": 51,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 26,
+    "start_row": 2063,
+    "end_row": 2118,
+    "onset_row": 2073,
+    "peak_row": 2090,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      2093,
+      2118
+    ],
+    "source_start_frame": 2063,
+    "source_end_frame": 2118,
+    "frames": 56,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 2.0283730030059814,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143226",
+    "relative_folder": "review_segments/20261126_143226",
+    "validation": {
+      "csv_rows": 56,
+      "image_frames": 56,
+      "decoded_video_frames": 56,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 27,
+    "start_row": 2138,
+    "end_row": 2179,
+    "onset_row": 2148,
+    "peak_row": 2159,
+    "closure_confirmed_row": 2169,
+    "near_rows": [
+      2159,
+      2186
+    ],
+    "source_start_frame": 2138,
+    "source_end_frame": 2179,
+    "frames": 42,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5538973808288574,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143229",
+    "relative_folder": "review_segments/20261126_143229",
+    "validation": {
+      "csv_rows": 42,
+      "image_frames": 42,
+      "decoded_video_frames": 42,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 28,
+    "start_row": 2204,
+    "end_row": 2257,
+    "onset_row": 2214,
+    "peak_row": 2234,
+    "closure_confirmed_row": 2247,
+    "near_rows": [
+      2235,
+      2266
+    ],
+    "source_start_frame": 2204,
+    "source_end_frame": 2257,
+    "frames": 54,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.7820343971252441,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143231",
+    "relative_folder": "review_segments/20261126_143231",
+    "validation": {
+      "csv_rows": 54,
+      "image_frames": 54,
+      "decoded_video_frames": 54,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 29,
+    "start_row": 2282,
+    "end_row": 2338,
+    "onset_row": 2292,
+    "peak_row": 2310,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      2313,
+      2338
+    ],
+    "source_start_frame": 2282,
+    "source_end_frame": 2338,
+    "frames": 57,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.900744915008545,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143234",
+    "relative_folder": "review_segments/20261126_143234",
+    "validation": {
+      "csv_rows": 57,
+      "image_frames": 57,
+      "decoded_video_frames": 57,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 30,
+    "start_row": 2355,
+    "end_row": 2404,
+    "onset_row": 2365,
+    "peak_row": 2383,
+    "closure_confirmed_row": 2394,
+    "near_rows": [
+      2384,
+      2419
+    ],
+    "source_start_frame": 2355,
+    "source_end_frame": 2404,
+    "frames": 50,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.6315994262695312,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143236",
+    "relative_folder": "review_segments/20261126_143236",
+    "validation": {
+      "csv_rows": 50,
+      "image_frames": 50,
+      "decoded_video_frames": 50,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 31,
+    "start_row": 3228,
+    "end_row": 3275,
+    "onset_row": 3238,
+    "peak_row": 3249,
+    "closure_confirmed_row": 3265,
+    "near_rows": [
+      3254,
+      3289
+    ],
+    "source_start_frame": 3228,
+    "source_end_frame": 3275,
+    "frames": 48,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.5681443214416504,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review"
+    ],
+    "trial_name": "20261126_143306",
+    "relative_folder": "review_segments/20261126_143306",
+    "validation": {
+      "csv_rows": 48,
+      "image_frames": 48,
+      "decoded_video_frames": 48,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 32,
+    "start_row": 3292,
+    "end_row": 3343,
+    "onset_row": 3302,
+    "peak_row": 3332,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      3332,
+      3343
+    ],
+    "source_start_frame": 3292,
+    "source_end_frame": 3343,
+    "frames": 52,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.7063469886779785,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143308",
+    "relative_folder": "review_segments/20261126_143308",
+    "validation": {
+      "csv_rows": 52,
+      "image_frames": 52,
+      "decoded_video_frames": 52,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 33,
+    "start_row": 3344,
+    "end_row": 3383,
+    "onset_row": 3345,
+    "peak_row": 3375,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      3375,
+      3383
+    ],
+    "source_start_frame": 3344,
+    "source_end_frame": 3383,
+    "frames": 40,
+    "pre_action_frames": 1,
+    "post_closure_frames": null,
+    "duration_s": 1.2962372303009033,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143310",
+    "relative_folder": "review_segments/20261126_143310",
+    "validation": {
+      "csv_rows": 40,
+      "image_frames": 40,
+      "decoded_video_frames": 40,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 34,
+    "start_row": 3389,
+    "end_row": 3418,
+    "onset_row": 3399,
+    "peak_row": 3410,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      3410,
+      3418
+    ],
+    "source_start_frame": 3389,
+    "source_end_frame": 3418,
+    "frames": 30,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 0.9734139442443848,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact"
+    ],
+    "trial_name": "20261126_143311",
+    "relative_folder": "review_segments/20261126_143311",
+    "validation": {
+      "csv_rows": 30,
+      "image_frames": 30,
+      "decoded_video_frames": 30,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 35,
+    "start_row": 3568,
+    "end_row": 3613,
+    "onset_row": 3578,
+    "peak_row": 3593,
+    "closure_confirmed_row": 3603,
+    "near_rows": [
+      3593,
+      3622
+    ],
+    "source_start_frame": 3568,
+    "source_end_frame": 3613,
+    "frames": 46,
+    "pre_action_frames": 10,
+    "post_closure_frames": 10,
+    "duration_s": 1.4878013134002686,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [],
+    "trial_name": "20261126_143317",
+    "relative_folder": "20261126_143317",
+    "validation": {
+      "csv_rows": 46,
+      "image_frames": 46,
+      "decoded_video_frames": 46,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 36,
+    "start_row": 3623,
+    "end_row": 3676,
+    "onset_row": 3629,
+    "peak_row": 3659,
+    "closure_confirmed_row": 3666,
+    "near_rows": [
+      3659,
+      3684
+    ],
+    "source_start_frame": 3623,
+    "source_end_frame": 3676,
+    "frames": 54,
+    "pre_action_frames": 6,
+    "post_closure_frames": 10,
+    "duration_s": 1.8250088691711426,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143319",
+    "relative_folder": "review_segments/20261126_143319",
+    "validation": {
+      "csv_rows": 54,
+      "image_frames": 54,
+      "decoded_video_frames": 54,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 37,
+    "start_row": 3685,
+    "end_row": 3753,
+    "onset_row": 3691,
+    "peak_row": 3721,
+    "closure_confirmed_row": 3743,
+    "near_rows": [
+      3721,
+      3783
+    ],
+    "source_start_frame": 3685,
+    "source_end_frame": 3753,
+    "frames": 69,
+    "pre_action_frames": 6,
+    "post_closure_frames": 10,
+    "duration_s": 2.284245252609253,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143321",
+    "relative_folder": "review_segments/20261126_143321",
+    "validation": {
+      "csv_rows": 69,
+      "image_frames": 69,
+      "decoded_video_frames": 69,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 38,
+    "start_row": 4152,
+    "end_row": 4294,
+    "onset_row": 4162,
+    "peak_row": 4267,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4267,
+      4294
+    ],
+    "source_start_frame": 4152,
+    "source_end_frame": 4294,
+    "frames": 143,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 4.768787860870361,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Quiet pause between detected departure and main opening; onset requires review",
+      "No confirmed closure plus 10-frame hold; retained for review"
+    ],
+    "trial_name": "20261126_143337",
+    "relative_folder": "review_segments/20261126_143337",
+    "validation": {
+      "csv_rows": 143,
+      "image_frames": 143,
+      "decoded_video_frames": 143,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 39,
+    "start_row": 4323,
+    "end_row": 4365,
+    "onset_row": 4333,
+    "peak_row": 4344,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4349,
+      4365
+    ],
+    "source_start_frame": 4323,
+    "source_end_frame": 4365,
+    "frames": 43,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.413219928741455,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact"
+    ],
+    "trial_name": "20261126_143343",
+    "relative_folder": "review_segments/20261126_143343",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 40,
+    "start_row": 4366,
+    "end_row": 4408,
+    "onset_row": 4369,
+    "peak_row": 4399,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4399,
+      4408
+    ],
+    "source_start_frame": 4366,
+    "source_end_frame": 4408,
+    "frames": 43,
+    "pre_action_frames": 3,
+    "post_closure_frames": null,
+    "duration_s": 1.4876012802124023,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143344",
+    "relative_folder": "review_segments/20261126_143344",
+    "validation": {
+      "csv_rows": 43,
+      "image_frames": 43,
+      "decoded_video_frames": 43,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 41,
+    "start_row": 4643,
+    "end_row": 4689,
+    "onset_row": 4653,
+    "peak_row": 4683,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4683,
+      4689
+    ],
+    "source_start_frame": 4643,
+    "source_end_frame": 4689,
+    "frames": 47,
+    "pre_action_frames": 10,
+    "post_closure_frames": null,
+    "duration_s": 1.577225685119629,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact"
+    ],
+    "trial_name": "20261126_143353",
+    "relative_folder": "review_segments/20261126_143353",
+    "validation": {
+      "csv_rows": 47,
+      "image_frames": 47,
+      "decoded_video_frames": 47,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 42,
+    "start_row": 4690,
+    "end_row": 4700,
+    "onset_row": 4690,
+    "peak_row": 4691,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4697,
+      4700
+    ],
+    "source_start_frame": 4690,
+    "source_end_frame": 4700,
+    "frames": 11,
+    "pre_action_frames": 0,
+    "post_closure_frames": null,
+    "duration_s": 0.3352541923522949,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143355",
+    "relative_folder": "review_segments/20261126_143355",
+    "validation": {
+      "csv_rows": 11,
+      "image_frames": 11,
+      "decoded_video_frames": 11,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 43,
+    "start_row": 4701,
+    "end_row": 4717,
+    "onset_row": 4701,
+    "peak_row": 4701,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4717,
+      4717
+    ],
+    "source_start_frame": 4701,
+    "source_end_frame": 4717,
+    "frames": 17,
+    "pre_action_frames": 0,
+    "post_closure_frames": null,
+    "duration_s": 0.5309765338897705,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin",
+      "Distance jump >45 px/frame",
+      "Multiple candidates within one second; inspect fragmentation"
+    ],
+    "trial_name": "20261126_143355_frame4701",
+    "relative_folder": "review_segments/20261126_143355_frame4701",
+    "validation": {
+      "csv_rows": 17,
+      "image_frames": 17,
+      "decoded_video_frames": 17,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 44,
+    "start_row": 4718,
+    "end_row": 4752,
+    "onset_row": 4718,
+    "peak_row": 4723,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4734,
+      4752
+    ],
+    "source_start_frame": 4718,
+    "source_end_frame": 4752,
+    "frames": 35,
+    "pre_action_frames": 0,
+    "post_closure_frames": null,
+    "duration_s": 1.121408462524414,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin"
+    ],
+    "trial_name": "20261126_143356",
+    "relative_folder": "review_segments/20261126_143356",
+    "validation": {
+      "csv_rows": 35,
+      "image_frames": 35,
+      "decoded_video_frames": 35,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 45,
+    "start_row": 4753,
+    "end_row": 4762,
+    "onset_row": 4753,
+    "peak_row": 4759,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4761,
+      4762
+    ],
+    "source_start_frame": 4753,
+    "source_end_frame": 4762,
+    "frames": 10,
+    "pre_action_frames": 0,
+    "post_closure_frames": null,
+    "duration_s": 0.2884049415588379,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Near-object interval shorter than closure+hold confirmation; possible detection artifact or incomplete grasp",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin",
+      "Distance jump >45 px/frame"
+    ],
+    "trial_name": "20261126_143357",
+    "relative_folder": "review_segments/20261126_143357",
+    "validation": {
+      "csv_rows": 10,
+      "image_frames": 10,
+      "decoded_video_frames": 10,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  },
+  {
+    "segment": 46,
+    "start_row": 4763,
+    "end_row": 4829,
+    "onset_row": 4763,
+    "peak_row": 4779,
+    "closure_confirmed_row": null,
+    "near_rows": [
+      4779,
+      4829
+    ],
+    "source_start_frame": 4763,
+    "source_end_frame": 4829,
+    "frames": 67,
+    "pre_action_frames": 0,
+    "post_closure_frames": null,
+    "duration_s": 2.215400457382202,
+    "distance_column": "index_mcp_object_distance_mm",
+    "aperture_column": "finger_width_mm",
+    "unit": "mm",
+    "mm_per_px": 1.2,
+    "review_flags": [
+      "Persistent departure from a quiet 10-frame baseline not confirmed; onset requires review",
+      "No confirmed distant closed rest before action",
+      "Pre-action 10-frame rest not confirmed; retained for review",
+      "No confirmed closure plus 10-frame hold; retained for review",
+      "Insufficient aperture excursion; incomplete action or detection artifact",
+      "Insufficient pre-action margin",
+      "Multiple candidates within one second; inspect fragmentation"
+    ],
+    "trial_name": "20261126_143357_frame4763",
+    "relative_folder": "review_segments/20261126_143357_frame4763",
+    "validation": {
+      "csv_rows": 67,
+      "image_frames": 67,
+      "decoded_video_frames": 67,
+      "original_fields_preserved": true,
+      "image_bytes_preserved": true
+    }
+  }
+]
